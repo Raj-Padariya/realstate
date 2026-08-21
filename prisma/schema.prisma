@@ -1,0 +1,44 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Property {
+  id               String          @id @default(cuid())
+  listingCategory  String?         @default("Buy")
+  title            String
+  price            String
+  pricePerSqFt     String?
+  address          String
+  bhk              String
+  areaSqFt         String
+  carpetArea       String?
+  floorInfo        String?
+  facing           String?
+  furnishing       String?
+  age              String?
+  possessionStatus String?
+  parking          String?
+  balconies        String?
+  bathrooms        String?
+  badgeText        String          @default("Owner verified")
+  description      String?
+  ownerName        String?
+  ownerPhone       String?
+  ownerRole        String?         @default("Individual Owner")
+  image            String
+  photos           PropertyPhoto[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+model PropertyPhoto {
+  id         String   @id @default(cuid())
+  url        String
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+}

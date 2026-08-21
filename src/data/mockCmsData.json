@@ -1,0 +1,734 @@
+{
+  "siteMetadata": {
+    "title": "GujjuProperty — Buy, Rent & Sell Property Across India Without Brokerage",
+    "description": "Owner-listed flats, houses, plots and shops across India. Browse by state, talk to owners directly. Zero brokerage, RERA registered projects."
+  },
+  "topBar": {
+    "text": "100% owner properties | Zero brokerage | 28 states, 380+ cities",
+    "highlightText": "100% owner properties"
+  },
+  "header": {
+    "logoMark": "GP",
+    "logoPrefix": "Gujju",
+    "logoSuffix": "Property",
+    "loginBtnText": "Log in",
+    "postBtnText": "Post property",
+    "postBadgeText": "FREE",
+    "menuItems": [
+      {
+        "id": "buy",
+        "label": "Buy",
+        "type": "mega",
+        "categories": [
+          {
+            "title": "Property type",
+            "links": [
+              { "label": "Flats & apartments", "href": "/buy/flats" },
+              { "label": "Independent houses", "href": "/buy/houses" },
+              { "label": "Villas", "href": "/buy/villas" },
+              { "label": "Builder floors", "href": "/buy/builder-floors" },
+              { "label": "Plots & land", "href": "/buy/plots" },
+              { "label": "Farmhouses", "href": "/buy/farmhouses" }
+            ]
+          },
+          {
+            "title": "By budget",
+            "links": [
+              { "label": "Under ₹25 Lakh", "href": "/buy/under-25-lakh" },
+              { "label": "₹25 – 50 Lakh", "href": "/buy/25-50-lakh" },
+              { "label": "₹50 Lakh – 1 Cr", "href": "/buy/50-lakh-1-cr" },
+              { "label": "₹1 – 2 Cr", "href": "/buy/1-2-cr" },
+              { "label": "Above ₹2 Cr", "href": "/buy/above-2-cr" }
+            ]
+          },
+          {
+            "title": "Top cities",
+            "links": [
+              { "label": "Mumbai", "href": "/mumbai" },
+              { "label": "Bengaluru", "href": "/bengaluru" },
+              { "label": "Delhi NCR", "href": "/delhi-ncr" },
+              { "label": "Hyderabad", "href": "/hyderabad" },
+              { "label": "Pune", "href": "/pune" },
+              { "label": "Ahmedabad", "href": "/ahmedabad" },
+              { "label": "All states →", "href": "/states" }
+            ]
+          }
+        ],
+        "promo": {
+          "badge": "Investment",
+          "title": "Dholera SIR plots",
+          "description": "NA + NOC done, clear title, starting ₹11 L.",
+          "ctaText": "Explore plots →",
+          "ctaHref": "/dholera-sir"
+        }
+      },
+      {
+        "id": "rent",
+        "label": "Rent",
+        "type": "mega",
+        "categories": [
+          {
+            "title": "Property type",
+            "links": [
+              { "label": "Flats & apartments", "href": "/rent/flats" },
+              { "label": "Independent houses", "href": "/rent/houses" },
+              { "label": "Builder floors", "href": "/rent/builder-floors" },
+              { "label": "PG & hostels", "href": "/rent/pg" },
+              { "label": "Flatmates", "href": "/rent/flatmates" }
+            ]
+          },
+          {
+            "title": "By budget",
+            "links": [
+              { "label": "Under ₹10,000", "href": "/rent/under-10000" },
+              { "label": "₹10,000 – 15,000", "href": "/rent/10000-15000" },
+              { "label": "₹15,000 – 25,000", "href": "/rent/15000-25000" },
+              { "label": "₹25,000 – 50,000", "href": "/rent/25000-50000" },
+              { "label": "Above ₹50,000", "href": "/rent/above-50000" }
+            ]
+          },
+          {
+            "title": "Top cities",
+            "links": [
+              { "label": "Mumbai", "href": "/mumbai" },
+              { "label": "Bengaluru", "href": "/bengaluru" },
+              { "label": "Delhi NCR", "href": "/delhi-ncr" },
+              { "label": "Hyderabad", "href": "/hyderabad" },
+              { "label": "Pune", "href": "/pune" },
+              { "label": "Ahmedabad", "href": "/ahmedabad" },
+              { "label": "All states →", "href": "/states" }
+            ]
+          }
+        ],
+        "promo": {
+          "badge": "Included",
+          "title": "Free rent agreement",
+          "description": "E-stamped and delivered home with the Relax plan.",
+          "ctaText": "See plans →",
+          "ctaHref": "/plans"
+        }
+      },
+      {
+        "id": "commercial",
+        "label": "Commercial",
+        "type": "mega",
+        "categories": [
+          {
+            "title": "Buy",
+            "links": [
+              { "label": "Office space", "href": "/commercial/buy/office" },
+              { "label": "Shops & showrooms", "href": "/commercial/buy/shops" },
+              { "label": "Warehouses", "href": "/commercial/buy/warehouse" },
+              { "label": "Industrial land", "href": "/commercial/buy/industrial-land" }
+            ]
+          },
+          {
+            "title": "Rent",
+            "links": [
+              { "label": "Office space", "href": "/commercial/rent/office" },
+              { "label": "Shops & showrooms", "href": "/commercial/rent/shops" },
+              { "label": "Warehouses", "href": "/commercial/rent/warehouse" },
+              { "label": "Coworking desks", "href": "/commercial/rent/coworking" }
+            ]
+          },
+          {
+            "title": "Business hubs",
+            "links": [
+              { "label": "BKC, Mumbai", "href": "/commercial/bkc-mumbai" },
+              { "label": "Cyber City, Gurugram", "href": "/commercial/cyber-city" },
+              { "label": "Outer Ring Road, Bengaluru", "href": "/commercial/orr-bengaluru" },
+              { "label": "HITEC City, Hyderabad", "href": "/commercial/hitec-city" },
+              { "label": "SG Highway, Ahmedabad", "href": "/commercial/sg-highway" }
+            ]
+          }
+        ],
+        "promo": {
+          "badge": "Owners",
+          "title": "List commercial space",
+          "description": "Shops, offices and godowns — no brokerage, no listing fee.",
+          "ctaText": "Post free →",
+          "ctaHref": "/post"
+        }
+      },
+      {
+        "id": "new-projects",
+        "label": "New Projects",
+        "type": "mega",
+        "categories": [
+          {
+            "title": "By stage",
+            "links": [
+              { "label": "Ready to move", "href": "/projects/ready-to-move" },
+              { "label": "Under construction", "href": "/projects/under-construction" },
+              { "label": "Launching soon", "href": "/projects/launching-soon" },
+              { "label": "Open plots", "href": "/projects/plots" }
+            ]
+          },
+          {
+            "title": "By type",
+            "links": [
+              { "label": "Apartments", "href": "/projects/apartments" },
+              { "label": "Villas & rowhouses", "href": "/projects/villas" },
+              { "label": "Plotted development", "href": "/projects/plotted" },
+              { "label": "Commercial projects", "href": "/projects/commercial" }
+            ]
+          },
+          {
+            "title": "Before you buy",
+            "links": [
+              { "label": "RERA registered only", "href": "/projects/rera" },
+              { "label": "Browse by builder", "href": "/projects/builders" },
+              { "label": "Price trends by locality", "href": "/insights/price-trends" },
+              { "label": "Possession timelines", "href": "/insights/possession" }
+            ]
+          }
+        ],
+        "promo": {
+          "badge": "Now open",
+          "title": "Dholera Greens",
+          "description": "Activation Area plots, 150–450 sq.yd, from ₹11 L.",
+          "ctaText": "View project →",
+          "ctaHref": "/projects/dholera-greens"
+        }
+      },
+      {
+        "id": "services",
+        "label": "Services",
+        "type": "mega",
+        "categories": [
+          {
+            "title": "Paperwork",
+            "links": [
+              { "label": "Rent agreement", "href": "/services/rent-agreement" },
+              { "label": "Title & 7/12 check", "href": "/services/title-check" },
+              { "label": "Registration help", "href": "/services/registration" },
+              { "label": "Plot survey", "href": "/services/plot-survey" }
+            ]
+          },
+          {
+            "title": "Money",
+            "links": [
+              { "label": "Home loan", "href": "/services/home-loan" },
+              { "label": "Loan against property", "href": "/services/lap" },
+              { "label": "Property valuation", "href": "/services/valuation" }
+            ]
+          },
+          {
+            "title": "Moving & care",
+            "links": [
+              { "label": "Packers & movers", "href": "/services/packers-movers" },
+              { "label": "Move-in cleaning", "href": "/services/cleaning" },
+              { "label": "Property management", "href": "/services/property-management" },
+              { "label": "Tenant verification", "href": "/services/tenant-verification" }
+            ]
+          }
+        ],
+        "promo": {
+          "badge": "Optional",
+          "title": "Assisted plans",
+          "description": "Free · Relax ₹2,499 · NRI Assist ₹7,999. Searching stays free.",
+          "ctaText": "Compare plans →",
+          "ctaHref": "/plans"
+        }
+      },
+      {
+        "id": "for-owners",
+        "label": "For Owners",
+        "type": "dropdown",
+        "dropdownLinks": [
+          { "label": "Post property", "href": "/post" },
+          { "label": "Owner dashboard", "href": "/owner" },
+          { "label": "Property management", "href": "/services/property-management" },
+          { "label": "Tenant verification", "href": "/services/tenant-verification" },
+          { "label": "NRI desk", "href": "/nri" },
+          { "label": "Owner plans", "href": "/plans" }
+        ]
+      }
+    ]
+  },
+  "hero": {
+    "newBadgeText": "NEW",
+    "newBadgeMessage": "Now live in 28 states across India",
+    "headingPrefix": "Buy, rent or sell anywhere in India — ",
+    "headingHighlight": "without paying brokerage",
+    "headingSuffix": "",
+    "subtitle": "Every listing comes straight from the owner. Pick your state, get their number, deal directly — nobody takes a cut.",
+    "ratingStars": "★★★★★",
+    "ratingScore": "4.6",
+    "ratingCount": "from 12,400 reviews",
+    "ratingOwnerCount": "38,000 owners listed this year",
+    "heroCard": {
+      "chipAText": "0% brokerage",
+      "chipBText": "Owner verified",
+      "price": "₹78 L",
+      "title": "3 BHK Flat in Shivalik Shilp",
+      "location": "Bopal, Ahmedabad",
+      "specs": ["1,485 sq.ft", "Semi-furnished", "Ready to move"]
+    }
+  },
+  "searchBar": {
+    "tabs": [
+      { "id": "buy", "label": "Buy" },
+      { "id": "rent", "label": "Rent" },
+      { "id": "plots", "label": "Plots & Land" },
+      { "id": "commercial", "label": "Commercial" },
+      { "id": "pg", "label": "PG & Hostel" }
+    ],
+    "stateLabel": "State",
+    "stateDefaultOption": "All India",
+    "locationLabel": "City, locality or project",
+    "locationPlaceholder": "e.g. Powai Mumbai, Whitefield, Bopal",
+    "budgetLabel": "Budget",
+    "budgetOptions": [
+      { "label": "Any budget", "value": "any" },
+      { "label": "Under ₹25 Lakh", "value": "under-25l" },
+      { "label": "₹25 – 50 Lakh", "value": "25-50l" },
+      { "label": "₹50 Lakh – 1 Cr", "value": "50l-1cr" },
+      { "label": "₹1 – 2 Cr", "value": "1-2cr" },
+      { "label": "Above ₹2 Cr", "value": "above-2cr" }
+    ],
+    "searchBtnText": "Search",
+    "quickChips": [
+      "2 BHK in Powai",
+      "Plots in Dholera SIR",
+      "Office space in Gurugram",
+      "Rent under ₹15,000",
+      "Ready to move in Bengaluru"
+    ]
+  },
+  "trust": [
+    {
+      "id": "zero-brokerage",
+      "title": "Zero brokerage",
+      "description": "No commission on any deal",
+      "svgPath": "M8 6h8M8 9.6h8M13 6c2 0 3.2 1.4 3.2 3s-1.2 3-3.2 3H8l6.4 5.8 M4.2 20.2 19.8 4.6"
+    },
+    {
+      "id": "verified-owners",
+      "title": "Verified owners",
+      "description": "Checked before it goes live",
+      "svgPath": "M12 3l7.4 2.9v5.4c0 4.6-3.1 8-7.4 9.6-4.3-1.6-7.4-5-7.4-9.6V5.9z M8.9 12.1l2.2 2.2 4.2-4.5"
+    },
+    {
+      "id": "direct-contact",
+      "title": "Direct contact",
+      "description": "Owner's number, not a call centre",
+      "svgPath": "M15.6 20.8A15.4 15.4 0 0 1 3.2 8.4V6.1a1.6 1.6 0 0 1 1.6-1.6h2.6a1 1 0 0 1 1 .8l.7 2.9a1 1 0 0 1-.4 1L7.2 10.5a12.6 12.6 0 0 0 6.3 6.3l1.3-1.5a1 1 0 0 1 1-.4l2.9.7a1 1 0 0 1 .8 1v2.6a1.6 1.6 0 0 1-1.6 1.6z"
+    },
+    {
+      "id": "pan-india",
+      "title": "Pan-India coverage",
+      "description": "28 states, 380+ cities",
+      "svgPath": "M12 21.2s7-6.2 7-11.2a7 7 0 1 0-14 0c0 5 7 11.2 7 11.2z"
+    }
+  ],
+  "statesSection": {
+    "eyebrow": "Top states",
+    "title": "Explore real estate across Indian states",
+    "description": "Our four busiest markets right now. Pick a state to narrow your search.",
+    "moreText": "View all states →",
+    "moreHref": "/states",
+    "toggleExpandText": "Show all 16 states",
+    "toggleCollapseText": "Show top 4 states only",
+    "popularCount": 4,
+    "states": [
+      { "name": "Maharashtra", "code": "MH", "propertyCount": "68,400", "citiesText": "Mumbai · Pune · Nagpur", "svgContent": "<rect x=\"16\" y=\"46\" width=\"68\" height=\"34\" fill=\"#522AB0\"/><path d=\"M36 80V62a14 14 0 0128 0v18z\" fill=\"#EFE9FB\"/><rect x=\"14\" y=\"38\" width=\"11\" height=\"9\" fill=\"#522AB0\"/><rect x=\"75\" y=\"38\" width=\"11\" height=\"9\" fill=\"#522AB0\"/><circle cx=\"19.5\" cy=\"34\" r=\"4\" fill=\"#FEDC00\"/><circle cx=\"80.5\" cy=\"34\" r=\"4\" fill=\"#FEDC00\"/>" },
+      { "name": "Karnataka", "code": "KA", "propertyCount": "52,100", "citiesText": "Bengaluru · Mysuru · Mangaluru", "svgContent": "<circle cx=\"22\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M50 28a13 13 0 0113 13H37a13 13 0 0113-13z\" fill=\"#522AB0\"/><rect x=\"47\" y=\"18\" width=\"6\" height=\"9\" rx=\"3\" fill=\"#522AB0\"/><rect x=\"36\" y=\"41\" width=\"28\" height=\"13\" fill=\"#522AB0\"/><rect x=\"20\" y=\"54\" width=\"60\" height=\"26\" fill=\"#522AB0\"/><g fill=\"#EFE9FB\"><rect x=\"27\" y=\"60\" width=\"5\" height=\"20\"/><rect x=\"39\" y=\"60\" width=\"5\" height=\"20\"/><rect x=\"51\" y=\"60\" width=\"5\" height=\"20\"/><rect x=\"63\" y=\"60\" width=\"5\" height=\"20\"/></g>" },
+      { "name": "Gujarat", "code": "GJ", "propertyCount": "42,600", "citiesText": "Ahmedabad · Surat · Dholera", "svgContent": "<circle cx=\"22\" cy=\"26\" r=\"8\" fill=\"#FEDC00\"/><rect x=\"30\" y=\"68\" width=\"40\" height=\"12\" fill=\"#522AB0\"/><path d=\"M50 20c4.5 0 8 3.5 8 8 0 3-2 5-2 7l4 33H40l4-33c0-2-2-4-2-7 0-4.5 3.5-8 8-8z\" fill=\"#522AB0\"/>" },
+      { "name": "Tamil Nadu", "code": "TN", "propertyCount": "38,900", "citiesText": "Chennai · Coimbatore · Madurai", "svgContent": "<circle cx=\"80\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M32 80 40 30h20l8 50z\" fill=\"#522AB0\"/><g fill=\"#EFE9FB\"><rect x=\"40\" y=\"42\" width=\"20\" height=\"3\"/><rect x=\"38\" y=\"52\" width=\"24\" height=\"3\"/><rect x=\"36\" y=\"62\" width=\"28\" height=\"3\"/></g><rect x=\"18\" y=\"72\" width=\"64\" height=\"10\" fill=\"#522AB0\"/>" },
+      { "name": "Telangana", "code": "TS", "propertyCount": "31,200", "citiesText": "Hyderabad · Warangal · Karimnagar", "svgContent": "<rect x=\"27\" y=\"48\" width=\"46\" height=\"32\" fill=\"#522AB0\"/><path d=\"M42 80V64a8 8 0 0116 0v16z\" fill=\"#EFE9FB\"/><rect x=\"19\" y=\"30\" width=\"8\" height=\"50\" fill=\"#522AB0\"/><rect x=\"73\" y=\"30\" width=\"8\" height=\"50\" fill=\"#522AB0\"/><circle cx=\"23\" cy=\"26\" r=\"4.5\" fill=\"#FEDC00\"/><circle cx=\"77\" cy=\"26\" r=\"4.5\" fill=\"#FEDC00\"/>" },
+      { "name": "Uttar Pradesh", "code": "UP", "propertyCount": "27,800", "citiesText": "Noida · Lucknow · Ghaziabad", "svgContent": "<rect x=\"17\" y=\"36\" width=\"6\" height=\"44\" fill=\"#522AB0\"/><rect x=\"77\" y=\"36\" width=\"6\" height=\"44\" fill=\"#522AB0\"/><rect x=\"30\" y=\"58\" width=\"40\" height=\"22\" fill=\"#522AB0\"/><path d=\"M50 26c9 0 16 8 16 18 0 6-3 11-6 14H40c-3-3-6-8-6-14 0-10 7-18 16-18z\" fill=\"#522AB0\"/><circle cx=\"50\" cy=\"21\" r=\"4\" fill=\"#FEDC00\"/>" },
+      { "name": "Delhi NCR", "code": "DL", "propertyCount": "26,400", "citiesText": "New Delhi · Dwarka · Rohini", "svgContent": "<circle cx=\"19\" cy=\"22\" r=\"7\" fill=\"#FEDC00\"/><path d=\"M28 80V34h44v46z\" fill=\"#522AB0\"/><path d=\"M41 80V54a9 9 0 0118 0v26z\" fill=\"#EFE9FB\"/><rect x=\"22\" y=\"26\" width=\"56\" height=\"9\" fill=\"#522AB0\"/>" },
+      { "name": "Haryana", "code": "HR", "propertyCount": "21,500", "citiesText": "Gurugram · Faridabad · Panipat", "svgContent": "<circle cx=\"80\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><rect x=\"19\" y=\"46\" width=\"18\" height=\"34\" fill=\"#522AB0\"/><rect x=\"41\" y=\"30\" width=\"17\" height=\"50\" fill=\"#522AB0\"/><rect x=\"62\" y=\"54\" width=\"18\" height=\"26\" fill=\"#522AB0\"/><g fill=\"#EFE9FB\"><rect x=\"23\" y=\"52\" width=\"4\" height=\"4\"/><rect x=\"30\" y=\"52\" width=\"4\" height=\"4\"/><rect x=\"45\" y=\"38\" width=\"4\" height=\"4\"/><rect x=\"52\" y=\"38\" width=\"4\" height=\"4\"/><rect x=\"66\" y=\"60\" width=\"4\" height=\"4\"/><rect x=\"73\" y=\"60\" width=\"4\" height=\"4\"/></g>" },
+      { "name": "West Bengal", "code": "WB", "propertyCount": "18,300", "citiesText": "Kolkata · Howrah · Siliguri", "svgContent": "<circle cx=\"20\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M18 62 32 34h36l14 28\" fill=\"none\" stroke=\"#522AB0\" stroke-width=\"5\"/><path d=\"M32 34v28M50 30v32M68 34v28\" stroke=\"#522AB0\" stroke-width=\"4\"/><rect x=\"10\" y=\"62\" width=\"80\" height=\"7\" fill=\"#522AB0\"/>" },
+      { "name": "Rajasthan", "code": "RJ", "propertyCount": "14,700", "citiesText": "Jaipur · Jodhpur · Udaipur", "svgContent": "<circle cx=\"80\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M22 80V42l28-16 28 16v38z\" fill=\"#522AB0\"/><g fill=\"#EFE9FB\"><circle cx=\"35\" cy=\"52\" r=\"5\"/><circle cx=\"50\" cy=\"47\" r=\"5\"/><circle cx=\"65\" cy=\"52\" r=\"5\"/><path d=\"M44 80V68a6 6 0 0112 0v12z\"/></g>" },
+      { "name": "Madhya Pradesh", "code": "MP", "propertyCount": "12,900", "citiesText": "Indore · Bhopal · Gwalior", "svgContent": "<circle cx=\"80\" cy=\"26\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M24 70a26 26 0 0152 0z\" fill=\"#522AB0\"/><rect x=\"17\" y=\"70\" width=\"66\" height=\"10\" fill=\"#522AB0\"/><rect x=\"46\" y=\"28\" width=\"8\" height=\"12\" fill=\"#522AB0\"/><rect x=\"39\" y=\"25\" width=\"22\" height=\"4\" fill=\"#522AB0\"/>" },
+      { "name": "Kerala", "code": "KL", "propertyCount": "11,600", "citiesText": "Kochi · Thiruvananthapuram · Kozhikode", "svgContent": "<circle cx=\"24\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M14 64h52l-7 14H21z\" fill=\"#522AB0\"/><path d=\"M20 64V51h40v13z\" fill=\"#522AB0\"/><path d=\"M78 78V46\" stroke=\"#522AB0\" stroke-width=\"4\"/><path d=\"M78 46c-9-7-16-4-18 3 7-3 12 0 18 3zM78 46c9-7 16-4 18 3-7-3-12 0-18 3z\" fill=\"#522AB0\"/>" },
+      { "name": "Punjab", "code": "PB", "propertyCount": "9,400", "citiesText": "Ludhiana · Mohali · Amritsar", "svgContent": "<circle cx=\"21\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M33 80V46a17 17 0 0134 0v34z\" fill=\"#522AB0\"/><path d=\"M42 80V62a8 8 0 0116 0v18z\" fill=\"#EFE9FB\"/><rect x=\"25\" y=\"72\" width=\"50\" height=\"8\" fill=\"#522AB0\"/><path d=\"M84 80V52\" stroke=\"#522AB0\" stroke-width=\"3\"/><path d=\"M84 52l-7 6M84 60l-7 6M84 52l7 6M84 60l7 6\" stroke=\"#522AB0\" stroke-width=\"3\"/>" },
+      { "name": "Andhra Pradesh", "code": "AP", "propertyCount": "8,800", "citiesText": "Visakhapatnam · Vijayawada · Guntur", "svgContent": "<circle cx=\"24\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M55 68 59 30h9l4 38z\" fill=\"#522AB0\"/><rect x=\"56\" y=\"40\" width=\"15\" height=\"6\" fill=\"#FEDC00\"/><path d=\"M6 74c8-5 14-5 22 0s14 5 22 0 14-5 22 0 14 5 22 0\" fill=\"none\" stroke=\"#522AB0\" stroke-width=\"4\"/><path d=\"M6 84c8-5 14-5 22 0s14 5 22 0 14-5 22 0 14 5 22 0\" fill=\"none\" stroke=\"#522AB0\" stroke-width=\"4\" opacity=\".5\"/>" },
+      { "name": "Bihar", "code": "BR", "propertyCount": "6,200", "citiesText": "Patna · Gaya · Muzaffarpur", "svgContent": "<circle cx=\"80\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><rect x=\"45\" y=\"36\" width=\"10\" height=\"44\" fill=\"#522AB0\"/><circle cx=\"50\" cy=\"30\" r=\"9\" fill=\"#522AB0\"/><path d=\"M22 80V58\" stroke=\"#522AB0\" stroke-width=\"5\"/><circle cx=\"22\" cy=\"49\" r=\"13\" fill=\"#522AB0\"/>" },
+      { "name": "Odisha", "code": "OD", "propertyCount": "5,700", "citiesText": "Bhubaneswar · Cuttack · Puri", "svgContent": "<circle cx=\"22\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M50 80 55 36 67 22 79 36 84 80z\" fill=\"#522AB0\"/><circle cx=\"27\" cy=\"60\" r=\"16\" fill=\"none\" stroke=\"#522AB0\" stroke-width=\"5\"/><path d=\"M27 44v32M11 60h32M16 49l22 22M38 49 16 71\" stroke=\"#522AB0\" stroke-width=\"2.5\"/>" }
+    ]
+  },
+  "featuredProperties": {
+    "title": "Featured owner properties",
+    "description": "Fresh listings added this week, straight from owners.",
+    "seeAllText": "See all 3,96,500 listings →",
+    "seeAllHref": "/properties",
+    "ownerListedText": "Listed by owner",
+    "ctaText": "Get Owner Number",
+    "listings": [
+      {
+        "id": "prop-1",
+        "price": "₹1.45 Cr",
+        "title": "3 BHK Flat in Hiranandani Gardens",
+        "location": "Powai, Mumbai",
+        "specs": ["1,420 sq.ft", "Semi-furnished", "Ready to move"],
+        "badgeText": "Owner Verified",
+        "bgColor": "#7a2b2e"
+      },
+      {
+        "id": "prop-2",
+        "price": "₹28,000",
+        "period": "/month",
+        "title": "2 BHK with covered parking",
+        "location": "Whitefield, Bengaluru",
+        "specs": ["1,150 sq.ft", "Furnished", "Immediately"],
+        "badgeText": "Owner Verified",
+        "bgColor": "#2f4a6d"
+      },
+      {
+        "id": "prop-3",
+        "price": "₹14.5 L",
+        "title": "Residential Plot, 220 sq.yd",
+        "location": "TP-5 Sangasar, Dholera SIR",
+        "specs": ["NA + NOC done", "Corner plot", "Clear title"],
+        "badgeText": "Title Checked",
+        "isAmberBadge": true,
+        "bgColor": "#2c6350"
+      },
+      {
+        "id": "prop-4",
+        "price": "₹78 L",
+        "title": "3 BHK Flat in Shivalik Shilp",
+        "location": "Bopal, Ahmedabad",
+        "specs": ["1,485 sq.ft", "Semi-furnished", "Ready to move"],
+        "badgeText": "Owner Verified",
+        "bgColor": "#6b5220"
+      },
+      {
+        "id": "prop-5",
+        "price": "₹45,000",
+        "period": "/month",
+        "title": "Ground floor shop, main road",
+        "location": "Sector 29, Gurugram",
+        "specs": ["640 sq.ft", "Shutter + loft", "Commercial"],
+        "badgeText": "Owner Verified",
+        "bgColor": "#4a3a63"
+      },
+      {
+        "id": "prop-6",
+        "price": "₹62 L",
+        "title": "2 BHK in gated township",
+        "location": "Gachibowli, Hyderabad",
+        "specs": ["1,080 sq.ft", "Semi-furnished", "Dec 2026"],
+        "badgeText": "Under Construction",
+        "isAmberBadge": true,
+        "bgColor": "#5c3a2e"
+      }
+    ]
+  },
+  "ownerBanner": {
+    "title": "Own a property in India? List it in 4 minutes.",
+    "description": "Add photos, set your price, share your number. We verify it and send you only serious buyers and tenants.",
+    "bullets": [
+      "No listing fee",
+      "No broker calls",
+      "You choose who gets your number"
+    ],
+    "buttonText": "Post property",
+    "badgeText": "FREE"
+  },
+  "servicesSection": {
+    "title": "Services after the deal",
+    "description": "Everything between \"we agreed\" and \"we moved in\" — handled locally.",
+    "allServicesText": "All services →",
+    "allServicesHref": "/services",
+    "services": [
+      { "id": "svc-1", "icon": "📄", "title": "Rent Agreement", "description": "E-stamped, delivered home in 48 hours" },
+      { "id": "svc-2", "icon": "🔍", "title": "Title & 7/12 Check", "description": "Advocate-verified before you pay" },
+      { "id": "svc-3", "icon": "🏛️", "title": "Registration Help", "description": "Sub-registrar booking and stamp duty" },
+      { "id": "svc-4", "icon": "🚚", "title": "Packers & Movers", "description": "Fixed quotes, no loading-day surprises" },
+      { "id": "svc-5", "icon": "🏦", "title": "Home Loan", "description": "Compare offers from 14 banks and NBFCs" },
+      { "id": "svc-6", "icon": "🧹", "title": "Move-in Cleaning", "description": "Deep clean and pest control before shifting" },
+      { "id": "svc-7", "icon": "🗝️", "title": "Property Management", "description": "For owners living outside Gujarat" },
+      { "id": "svc-8", "icon": "📐", "title": "Plot Survey", "description": "Measurement and boundary check on site" }
+    ]
+  },
+  "pricingPlansSection": {
+    "title": "Assisted plans",
+    "description": "Optional. Searching listings and contacting owners stays free, always.",
+    "plans": [
+      {
+        "id": "free",
+        "title": "Free",
+        "description": "Do it yourself. Everything you need to find a place and reach the owner.",
+        "amount": "₹0",
+        "features": [
+          "Search every listing",
+          "Unlimited owner contacts",
+          "Saved searches and alerts",
+          "Shortlist and compare",
+          "No card, no expiry"
+        ],
+        "buttonText": "Start searching",
+        "buttonVariant": "line",
+        "finePrint": "Free forever",
+        "iconSvgPath": "M11 4a7 7 0 100 14 7 7 0 000-14zM20 20l-4-4"
+      },
+      {
+        "id": "relax",
+        "title": "Relax",
+        "description": "We do the running around. An expert works your shortlist until you move in.",
+        "amount": "₹2,499",
+        "billingPeriod": "one time",
+        "isHot": true,
+        "hotBadgeText": "Most chosen",
+        "features": [
+          "A property expert works your shortlist",
+          "Visits scheduled for you",
+          "Rent negotiation support",
+          "Free rent agreement",
+          "Home in 30 days or money back"
+        ],
+        "buttonText": "Choose Relax",
+        "buttonVariant": "primary",
+        "finePrint": "Refund if we don't find you a home",
+        "iconSvgPath": "M12 3l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.2l5.9-.8z"
+      },
+      {
+        "id": "nri-assist",
+        "title": "NRI Assist",
+        "description": "Buying from abroad. We inspect, verify and register on your behalf.",
+        "amount": "₹7,999",
+        "billingPeriod": "one time",
+        "features": [
+          "Video walkthrough of every shortlist",
+          "Title and 7/12 verification",
+          "Registration on your behalf",
+          "Tenant placement and rent collection",
+          "Timezone-matched calls"
+        ],
+        "buttonText": "Talk to NRI desk",
+        "buttonVariant": "line",
+        "finePrint": "Used by owners in 34 countries",
+        "iconSvgPath": "M12 3a9 9 0 100 18 9 9 0 000-18zM3 12h18M12 3c2.4 2.6 3.6 5.6 3.6 9S14.4 18.4 12 21c-2.4-2.6-3.6-5.6-3.6-9S9.6 5.6 12 3z"
+      }
+    ]
+  },
+  "projectsSection": {
+    "eyebrow": "Builder projects",
+    "title": "New projects across India",
+    "description": "RERA registered, listed with real launch prices — no inflated \"starting from\".",
+    "allProjectsText": "All projects →",
+    "allProjectsHref": "/projects",
+    "viewProjectText": "View project →",
+    "projects": [
+      {
+        "id": "proj-1",
+        "name": "Amara Heights",
+        "builder": "Kalpataru Group",
+        "location": "Thane West, Mumbai",
+        "priceRange": "₹95 L – 1.8 Cr",
+        "priceNote": "all inclusive",
+        "config": "2, 3 & 4 BHK · 1,050–2,240 sq.ft",
+        "stage": "Launching soon",
+        "reraText": "RERA",
+        "sitePlanSvg": "<rect width=\"260\" height=\"128\" fill=\"#EFE9FB\"/><rect y=\"52\" width=\"260\" height=\"22\" fill=\"#D6C9F2\"/><path d=\"M0 63h260\" stroke=\"#FEDC00\" stroke-width=\"2.5\" stroke-dasharray=\"14 12\"/><g fill=\"#522AB0\" opacity=\".75\"><rect x=\"14\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"54\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"94\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"134\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"174\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"214\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/></g><g fill=\"#41208C\" opacity=\".55\"><rect x=\"14\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"54\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"94\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"134\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"174\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"214\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/></g>"
+      },
+      {
+        "id": "proj-2",
+        "name": "Lakeside Habitat",
+        "builder": "Prestige Group",
+        "location": "Whitefield, Bengaluru",
+        "priceRange": "₹1.2 – 2.6 Cr",
+        "priceNote": "all inclusive",
+        "config": "3 & 4 BHK · 1,480–2,610 sq.ft",
+        "stage": "Under construction",
+        "reraText": "RERA",
+        "sitePlanSvg": "<rect width=\"260\" height=\"128\" fill=\"#EFE9FB\"/><rect y=\"54\" width=\"260\" height=\"20\" fill=\"#D6C9F2\"/><rect x=\"118\" width=\"24\" height=\"128\" fill=\"#D6C9F2\"/><g fill=\"#522AB0\" opacity=\".75\"><rect x=\"20\" y=\"14\" width=\"80\" height=\"32\" rx=\"4\"/><rect x=\"160\" y=\"14\" width=\"80\" height=\"32\" rx=\"4\"/></g><g fill=\"#41208C\" opacity=\".55\"><rect x=\"20\" y=\"82\" width=\"80\" height=\"32\" rx=\"4\"/><rect x=\"160\" y=\"82\" width=\"80\" height=\"32\" rx=\"4\"/></g><circle cx=\"130\" cy=\"64\" r=\"9\" fill=\"#FEDC00\"/>"
+      },
+      {
+        "id": "proj-3",
+        "name": "Shilp Riverfront",
+        "builder": "Shilp Group",
+        "location": "Ashram Road, Ahmedabad",
+        "priceRange": "₹92 L – 1.6 Cr",
+        "priceNote": "all inclusive",
+        "config": "3 & 4 BHK · 1,390–2,180 sq.ft",
+        "stage": "Ready to move",
+        "reraText": "RERA",
+        "sitePlanSvg": "<rect width=\"260\" height=\"128\" fill=\"#EFE9FB\"/><path d=\"M-4 108c60-6 96-34 134-34s76 20 134 22\" stroke=\"#D6C9F2\" stroke-width=\"20\" fill=\"none\"/><g fill=\"#522AB0\" opacity=\".8\"><rect x=\"30\" y=\"34\" width=\"30\" height=\"52\" rx=\"3\"/><rect x=\"74\" y=\"20\" width=\"30\" height=\"66\" rx=\"3\"/><rect x=\"118\" y=\"30\" width=\"30\" height=\"44\" rx=\"3\"/><rect x=\"162\" y=\"16\" width=\"30\" height=\"58\" rx=\"3\"/><rect x=\"206\" y=\"36\" width=\"26\" height=\"42\" rx=\"3\"/></g><g fill=\"#EFE9FB\"><rect x=\"38\" y=\"44\" width=\"6\" height=\"6\"/><rect x=\"50\" y=\"44\" width=\"6\" height=\"6\"/><rect x=\"82\" y=\"32\" width=\"6\" height=\"6\"/><rect x=\"94\" y=\"32\" width=\"6\" height=\"6\"/><rect x=\"170\" y=\"28\" width=\"6\" height=\"6\"/><rect x=\"182\" y=\"28\" width=\"6\" height=\"6\"/></g>"
+      },
+      {
+        "id": "proj-4",
+        "name": "Dholera Greens",
+        "builder": "Vraj Infra",
+        "location": "Activation Area, Dholera",
+        "priceRange": "₹11 – 28 L",
+        "priceNote": "all inclusive",
+        "config": "Plots · 150–450 sq.yd",
+        "stage": "Open plots",
+        "reraText": "RERA",
+        "sitePlanSvg": "<rect width=\"260\" height=\"128\" fill=\"#EFE9FB\"/><rect x=\"14\" y=\"12\" width=\"232\" height=\"104\" rx=\"10\" fill=\"none\" stroke=\"#D6C9F2\" stroke-width=\"16\"/><rect x=\"96\" y=\"44\" width=\"68\" height=\"40\" rx=\"8\" fill=\"#FEDC00\" opacity=\".85\"/><g fill=\"#522AB0\" opacity=\".75\"><rect x=\"34\" y=\"30\" width=\"34\" height=\"24\" rx=\"3\"/><rect x=\"34\" y=\"74\" width=\"34\" height=\"24\" rx=\"3\"/><rect x=\"192\" y=\"30\" width=\"34\" height=\"24\" rx=\"3\"/><rect x=\"192\" y=\"74\" width=\"34\" height=\"24\" rx=\"3\"/></g><g fill=\"#41208C\" opacity=\".5\"><rect x=\"104\" y=\"16\" width=\"24\" height=\"18\" rx=\"3\"/><rect x=\"136\" y=\"16\" width=\"24\" height=\"18\" rx=\"3\"/><rect x=\"104\" y=\"94\" width=\"24\" height=\"18\" rx=\"3\"/><rect x=\"136\" y=\"94\" width=\"24\" height=\"18\" rx=\"3\"/></g>"
+      }
+    ]
+  },
+  "stepsSection": {
+    "eyebrow": "How it works",
+    "title": "From search to keys, in three steps",
+    "description": "No middleman in any of them — and nothing to pay us along the way.",
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Search your locality",
+        "description": "Filter by area, budget, furnishing and possession. Every result is an owner listing.",
+        "tip": "Free, no sign-up",
+        "iconSvgPath": "M10.5 4a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM20 20l-4.5-4.5"
+      },
+      {
+        "stepNumber": 2,
+        "title": "Call the owner directly",
+        "description": "The number on the listing belongs to the owner. Ask your questions, fix a visit time.",
+        "tip": "No call centre",
+        "iconSvgPath": "M15.6 20.8A15.4 15.4 0 0 1 3.2 8.4V6.1a1.6 1.6 0 0 1 1.6-1.6h2.6a1 1 0 0 1 1 .8l.7 2.9a1 1 0 0 1-.4 1L7.2 10.5a12.6 12.6 0 0 0 6.3 6.3l1.3-1.5a1 1 0 0 1 1-.4l2.9.7a1 1 0 0 1 .8 1v2.6a1.6 1.6 0 0 1-1.6 1.6z"
+      },
+      {
+        "stepNumber": 3,
+        "title": "Close it and get the papers done",
+        "description": "Agreement, registration, loan and shifting — add them only if you need them.",
+        "tip": "Add-ons, never bundled",
+        "iconSvgPath": "M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z M14 3v5h5 M8.8 14.4l2.2 2.2 4-4.3"
+      }
+    ],
+    "ctaTitle": "Ready to skip the broker?",
+    "ctaSubtitle": "Browsing needs no sign-up. 3,140 owners listed a property this month.",
+    "ctaSearchBtnText": "Start searching",
+    "ctaListBtnText": "List your property",
+    "ctaListBadgeText": "FREE"
+  },
+  "testimonialsSection": {
+    "title": "What our users say",
+    "testimonials": [
+      {
+        "id": "quote-1",
+        "stars": "★★★★★",
+        "quote": "Three brokers wanted a month's rent each for the same flat in Baner. Here I called the owner on Sunday and moved in on Thursday.",
+        "authorName": "Rohit M.",
+        "authorRole": "Tenant, Pune",
+        "avatarInitial": "R"
+      },
+      {
+        "id": "quote-2",
+        "stars": "★★★★★",
+        "quote": "I live in New Jersey and my plot near Dholera needed papers checked. The NRI desk sent me the 7/12 and a site video the same week.",
+        "authorName": "Falguni S.",
+        "authorRole": "Plot owner, Dholera SIR",
+        "avatarInitial": "F"
+      },
+      {
+        "id": "quote-3",
+        "stars": "★★★★☆",
+        "quote": "Listed my Rajkot house on a Tuesday. Nine calls by Friday, and not one of them was a broker fishing for a listing.",
+        "authorName": "Mehul D.",
+        "authorRole": "Owner, Rajkot",
+        "avatarInitial": "M"
+      }
+    ]
+  },
+  "appDownload": {
+    "title": "Get alerts the minute something opens up nearby",
+    "description": "Set your locality and budget once. The app pings you when a matching owner listing goes live.",
+    "appStoreSubtitle": "Download on the",
+    "appStoreTitle": "App Store",
+    "appStoreHref": "#",
+    "googlePlaySubtitle": "Get it on",
+    "googlePlayTitle": "Google Play",
+    "googlePlayHref": "#",
+    "qrTextLine1": "Scan to install",
+    "qrTextLine2": "gujjuproperty.com/app"
+  },
+  "seoFooter": {
+    "categories": [
+      {
+        "key": "buy",
+        "label": "Property for Sale",
+        "templates": [
+          "Flats for sale in {city}",
+          "Houses for sale in {city}",
+          "Villas for sale in {city}",
+          "Property under ₹50 Lakh in {city}"
+        ]
+      },
+      {
+        "key": "rent",
+        "label": "Flats for Rent",
+        "templates": [
+          "Flats for rent in {city}",
+          "2 BHK for rent in {city}",
+          "Furnished flats in {city}",
+          "Rent under ₹15,000 in {city}"
+        ]
+      },
+      {
+        "key": "plot",
+        "label": "Plots & Land",
+        "templates": [
+          "Plots in {city}",
+          "NA plots in {city}",
+          "Farmland near {city}",
+          "Investment plots in {city}"
+        ]
+      },
+      {
+        "key": "comm",
+        "label": "Commercial",
+        "templates": [
+          "Shops in {city}",
+          "Offices in {city}",
+          "Showrooms in {city}",
+          "Warehouses near {city}"
+        ]
+      },
+      {
+        "key": "pg",
+        "label": "PG & Hostels",
+        "templates": [
+          "PG in {city}",
+          "Girls PG in {city}",
+          "Boys hostel in {city}",
+          "Flatmates in {city}"
+        ]
+      }
+    ],
+    "cities": [
+      "Mumbai", "Delhi NCR", "Bengaluru", "Hyderabad",
+      "Pune", "Chennai", "Ahmedabad", "Kolkata",
+      "Gurugram", "Noida", "Jaipur", "Surat"
+    ]
+  },
+  "footer": {
+    "brandDescription": "India's owner-to-owner property portal. Mumbai to Kochi, Delhi NCR to Dholera — no brokerage anywhere in between.",
+    "columns": [
+      {
+        "title": "Buy",
+        "links": [
+          { "label": "Flats in Mumbai", "href": "/buy/mumbai" },
+          { "label": "Flats in Bengaluru", "href": "/buy/bengaluru" },
+          { "label": "Plots in Dholera SIR", "href": "/buy/dholera" },
+          { "label": "Villas in Hyderabad", "href": "/buy/hyderabad" }
+        ]
+      },
+      {
+        "title": "For Owners",
+        "links": [
+          { "label": "Post a property", "href": "/post" },
+          { "label": "Owner plans", "href": "/plans" },
+          { "label": "Property management", "href": "/services/property-management" },
+          { "label": "NRI desk", "href": "/nri" }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          { "label": "About us", "href": "/about" },
+          { "label": "Contact", "href": "/contact" },
+          { "label": "Terms", "href": "/terms" },
+          { "label": "Privacy policy", "href": "/privacy" }
+        ]
+      }
+    ],
+    "copyrightText": "© 2026 GujjuProperty. All listings are owner-submitted and independently verified.",
+    "servedCitiesText": "Mumbai · Delhi NCR · Bengaluru · Hyderabad · Pune · Chennai · Ahmedabad · Kolkata"
+  }
+}

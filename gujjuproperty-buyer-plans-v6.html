@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buyer Plans — Save Lakhs on Brokerage | GujjuProperty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#522AB0; --purple-dark:#41208C; --purple-tint:#EFE9FB;
+    --teal:#1A8F82; --teal-dark:#136F65;
+    --yellow:#FEDC00; --yellow-dark:#E3C500;
+    --ink:#1c1f23; --body:#4a5158; --line:#e3e6ea; --bg:#f6f7f9; --green:#0f9d58; --white:#fff;
+    --red:#e0393f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Open Sans',sans-serif; color:var(--ink); background:var(--bg); line-height:1.5;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  svg{display:block;}
+  ul{list-style:none;}
+
+  /* ===================== HEADER ===================== */
+  .topbar{background:var(--purple-dark); color:#fff;}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; padding:7px 20px; font-size:12.5px; font-weight:600;}
+  .topbar .tb-left{display:flex; align-items:center; gap:8px;}
+  .topbar .tb-left svg{width:13px; height:13px; stroke:var(--yellow); fill:none; stroke-width:2.4;}
+  .topbar .tb-right{display:flex; align-items:center; gap:18px;}
+  .topbar .tb-right a:hover{color:var(--yellow);}
+
+  header.site-head{position:sticky; top:0; z-index:200; background:#fff; border-bottom:1px solid var(--line); box-shadow:0 1px 0 rgba(28,31,35,.02);}
+  .head-row{display:flex; align-items:center; gap:28px; padding:13px 20px; height:64px;}
+  .logo{display:flex; align-items:center; gap:8px; font-size:21px; font-weight:800; color:var(--purple-dark); flex:none;}
+  .logo .mark{width:32px; height:32px; border-radius:8px; background:var(--purple); display:flex; align-items:center; justify-content:center; flex:none;}
+  .logo .mark svg{width:18px; height:18px; stroke:#fff; fill:none; stroke-width:2.2;}
+  .logo b{color:var(--yellow-dark);}
+
+  nav.mainnav{display:flex; align-items:center; gap:2px; flex:1;}
+  nav.mainnav > .navitem{position:relative;}
+  nav.mainnav > .navitem > a{display:flex; align-items:center; gap:5px; padding:10px 14px; border-radius:8px; font-size:14.5px; font-weight:600; color:var(--ink);}
+  nav.mainnav > .navitem > a:hover{background:var(--purple-tint); color:var(--purple-dark);}
+  nav.mainnav > .navitem > a svg{width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2.4; transition:.15s;}
+  nav.mainnav > .navitem:hover > a svg{transform:rotate(180deg);}
+
+  .megapanel{position:absolute; top:calc(100% + 10px); left:0; width:600px; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:0 20px 44px rgba(28,31,35,.14); padding:22px; display:none; grid-template-columns:1fr 1fr 1fr; gap:20px;}
+  nav.mainnav > .navitem:hover .megapanel{display:grid;}
+  .megapanel .mcol h4{font-size:12px; font-weight:700; color:var(--body); text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px;}
+  .megapanel .mcol a{display:block; font-size:13.5px; color:var(--ink); padding:6px 0; font-weight:500;}
+  .megapanel .mcol a:hover{color:var(--purple); text-decoration:underline;}
+  .megapanel .mpromo{background:var(--purple-tint); border-radius:10px; padding:16px; grid-column:3;}
+  .megapanel .mpromo .pt{font-size:13px; font-weight:700; color:var(--purple-dark); margin-bottom:6px;}
+  .megapanel .mpromo .ps{font-size:12px; color:var(--body); margin-bottom:10px;}
+  .megapanel .mpromo .pill{display:inline-block; background:var(--yellow); color:var(--purple-dark); font-weight:700; font-size:11.5px; padding:4px 10px; border-radius:999px;}
+
+  .head-actions{display:flex; align-items:center; gap:14px; flex:none;}
+  .btn-post{background:var(--purple); color:#fff; font-size:14px; font-weight:700; padding:10px 18px; border-radius:9px; white-space:nowrap;}
+  .btn-post:hover{background:var(--purple-dark);}
+  .icon-btn{width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--body); position:relative; flex:none;}
+  .icon-btn:hover{background:var(--purple-tint); color:var(--purple);}
+  .icon-btn svg{width:19px; height:19px; stroke:currentColor; fill:none; stroke-width:2;}
+  .icon-btn .dot{position:absolute; top:6px; right:7px; width:7px; height:7px; border-radius:50%; background:var(--yellow-dark); border:1.5px solid #fff;}
+  .hamburger{display:none;}
+
+  .drawer-backdrop{position:fixed; inset:0; background:rgba(28,31,35,.45); z-index:299; display:none;}
+  .drawer{position:fixed; top:0; right:-320px; width:300px; height:100%; background:#fff; z-index:300; box-shadow:-8px 0 30px rgba(0,0,0,.15); transition:right .2s; overflow-y:auto;}
+  .drawer.open{right:0;}
+  .drawer-backdrop.show{display:block;}
+  .drawer-head{display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--line);}
+  .drawer-head .logo{font-size:17px;}
+  .drawer-close{width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center;}
+  .drawer-close:hover{background:var(--bg);}
+  .drawer-close svg{width:18px; height:18px; stroke:var(--ink); fill:none; stroke-width:2.2;}
+  .drawer-list a{display:flex; align-items:center; justify-content:space-between; padding:14px 18px; font-size:14.5px; font-weight:600; border-bottom:1px solid var(--line);}
+  .drawer-list a:active{background:var(--purple-tint);}
+  .drawer-cta{margin:18px;}
+
+  @media (max-width:1080px){
+    nav.mainnav{display:none;} .hamburger{display:flex;} .btn-post{display:none;} .topbar .tb-left span{display:none;}
+  }
+  @media (max-width:560px){
+    .logo span.wordmark{font-size:18px;} .head-row{gap:14px;}
+  }
+
+  /* ===================== PLANS ===================== */
+  .top{text-align:center; padding:44px 20px 8px;}
+  .top h1{font-size:27px; font-weight:700; color:var(--ink);}
+  .top h1 span{color:var(--red); font-weight:800;}
+  .top .sub{margin-top:8px; font-size:14.5px; color:var(--body); font-weight:600;}
+  .top .sub a{color:var(--purple); font-weight:700;}
+  .top .sub a:hover{text-decoration:underline;}
+
+  .plans-section{padding:26px 0 10px;}
+  .plans-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:start;}
+  .plan-card{background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden; box-shadow:0 4px 16px rgba(28,31,35,.06); display:flex; flex-direction:column; height:100%;}
+  .plan-header{padding:20px 22px; color:#fff; display:flex; flex-direction:column; gap:14px;}
+  .plan-header.h-power{background:var(--teal);}
+  .plan-header.h-expert{background:var(--purple-dark);}
+  .plan-header.h-moneyback{background:var(--purple);}
+  .plan-header .htop{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .plan-header .pname{font-size:17px; font-weight:700;}
+  .plan-header .price{text-align:right;}
+  .plan-header .price .amt{font-size:22px; font-weight:800;}
+  .plan-header .price .gst{display:block; font-size:11px; font-weight:600; opacity:.85; margin-top:2px;}
+  .plan-header .gst u{text-decoration:underline;}
+  .plan-tagline{font-size:13px; font-weight:600; line-height:1.4;}
+
+  .plan-body{padding:20px 22px 24px; display:flex; flex-direction:column; gap:16px; flex:1;}
+  .expert-row{display:flex; gap:12px;}
+  .expert-avatar{width:52px; height:52px; border-radius:50%; background:var(--purple-tint); flex:none; display:flex; align-items:center; justify-content:center; border:1px solid var(--line);}
+  .expert-avatar svg{width:26px; height:26px; stroke:var(--purple); fill:none; stroke-width:1.8;}
+  .expert-col .et{font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:6px;}
+  .expert-col ul{display:flex; flex-direction:column; gap:5px;}
+  .expert-col li{font-size:12.5px; color:var(--body); padding-left:13px; position:relative;}
+  .expert-col li::before{content:"•"; position:absolute; left:0; color:var(--purple); font-weight:700;}
+
+  .feat-list{display:flex; flex-direction:column;}
+  .feat-row{display:flex; align-items:center; justify-content:space-between; padding:9px 0; border-top:1px solid var(--line); font-size:13.5px;}
+  .feat-row:first-child{border-top:none;}
+  .feat-row .label{color:var(--ink); font-weight:600;}
+  .feat-row .val{color:var(--body); font-weight:600; font-size:13px;}
+  .feat-row .check svg{width:16px; height:16px; stroke:var(--green); stroke-width:2.6; fill:none;}
+
+  .plan-cta{margin-top:auto; padding-top:6px; text-align:center;}
+  .btn{display:inline-block; min-width:150px; text-align:center; padding:11px 26px; border-radius:6px; font-size:14.5px; font-weight:700; color:#fff; transition:.15s;}
+  .btn.b-power{background:var(--teal);} .btn.b-power:hover{background:var(--teal-dark);}
+  .btn.b-expert{background:var(--purple-dark);} .btn.b-expert:hover{background:#331868;}
+  .btn.b-moneyback{background:var(--purple);} .btn.b-moneyback:hover{background:var(--purple-dark);}
+  .cashback-note{text-align:center; font-size:11.5px; color:var(--purple); font-weight:700; margin-top:9px; cursor:pointer;}
+  .cashback-note:hover{text-decoration:underline;}
+
+  .bottom{text-align:center; padding:30px 0 10px; font-size:13.5px; color:var(--body);}
+  .bottom .tnc{font-weight:600;}
+  .bottom .seller-link{display:block; margin-top:10px; color:var(--purple); font-weight:700; cursor:pointer;}
+  .bottom .seller-link:hover{text-decoration:underline;}
+
+  @media (max-width:900px){
+    .plans-grid{grid-template-columns:1fr; max-width:440px; margin:0 auto;}
+    .top h1{font-size:22px;}
+  }
+
+  /* ===================== HOW ASSISTED PLANS WORK (v6 — matches reference: full-width dividers, edge avatars) ===================== */
+  .howwork{padding:56px 0 40px;}
+  .howwork .sectitle{text-align:center; font-size:13px; font-weight:800; letter-spacing:.06em; color:var(--purple-dark); text-transform:uppercase;}
+
+  .rail{position:relative; max-width:1180px; margin:0 auto; padding:0 120px;}
+  .rzone{position:relative; text-align:center; padding:26px 0;}
+  .rzone .kick{font-size:12px; font-weight:800; letter-spacing:.03em; color:var(--red); text-transform:uppercase;}
+  .rzone .sub{font-size:12.5px; color:var(--body); margin-top:4px;}
+  .rzone .lead{font-size:12.5px; color:var(--body);}
+  .rzone .strong{display:block; font-size:13.5px; font-weight:800; color:var(--purple-dark); margin-top:2px; letter-spacing:.01em;}
+
+  .rdivider{height:0; border-top:2px dashed var(--line); width:100%;}
+  .rdivider.c-red{border-top-color:var(--red);}
+  .rdivider.c-gray{border-top-color:#b9bcc2;}
+
+  .ravatar{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:78px; height:78px; border-radius:50%; background:#fff;
+    box-shadow:0 8px 20px rgba(28,31,35,.1); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; z-index:3;
+  }
+  .ravatar.at-left{left:0;}
+  .ravatar.at-right{right:0;}
+  .ravatar .ring{
+    width:100%; height:100%; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  }
+  .ravatar svg{width:30px; height:30px; stroke:#fff; fill:none; stroke-width:2;}
+  .ravatar .badge{
+    position:absolute; top:-4px; right:-4px; width:22px; height:22px; border-radius:50%;
+    background:var(--yellow); border:2px solid #fff; display:flex; align-items:center; justify-content:center;
+  }
+  .ravatar .badge svg{width:10px; height:10px; stroke:var(--purple-dark); stroke-width:3;}
+
+  @media (max-width:820px){
+    .rail{padding:0 20px;}
+    .ravatar{width:56px; height:56px; position:static; transform:none; margin:0 auto 10px;}
+    .ravatar svg{width:22px; height:22px;}
+    .rzone{padding:22px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="tb-left">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>India's zero-brokerage property platform</span>
+    </div>
+    <div class="tb-right">
+      <a href="#" onclick="demo();return false;">Download App</a>
+      <a href="tel:+918905552444">+91-89-055-524-44</a>
+      <a href="#" onclick="demo();return false;">Help</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap head-row">
+    <a href="#" class="logo" onclick="demo();return false;">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l9-8 9 8M5 10v10h14V10" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="wordmark">Gujju<b>Property</b></span>
+    </a>
+
+    <nav class="mainnav">
+      <div class="navitem">
+        <a href="#" onclick="return false;">Buy <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="megapanel">
+          <div class="mcol">
+            <h4>By Type</h4>
+            <a href="/buy/flats" onclick="demo();return false;">Flats / Apartments</a>
+            <a href="/buy/villas" onclick="demo();return false;">Villas &amp; Bungalows</a>
+            <a href="/buy/plots" onclick="demo();return false;">Plots &amp; Land</a>
+          </div>
+          <div class="mcol">
+            <h4>Top Cities</h4>
+            <a href="/buy/pune" onclick="demo();return false;">Pune</a>
+            <a href="/buy/ahmedabad" onclick="demo();return false;">Ahmedabad</a>
+            <a href="/buy/bengaluru" onclick="demo();return false;">Bengaluru</a>
+          </div>
+          <div class="mpromo">
+            <div class="pt">Dholera SIR Plots</div>
+            <div class="ps">Govt-planned smart city — early-mover pricing.</div>
+            <span class="pill">Explore →</span>
+          </div>
+        </div>
+      </div>
+      <div class="navitem"><a href="#" onclick="demo();return false;">Rent</a></div>
+      <div class="navitem"><a href="#" onclick="demo();return false;">Commercial</a></div>
+      <div class="navitem"><a href="#" onclick="demo();return false;">New Projects</a></div>
+      <div class="navitem"><a href="#" onclick="demo();return false;">Services</a></div>
+      <div class="navitem"><a href="#" onclick="demo();return false;">For Owners</a></div>
+    </nav>
+
+    <div class="head-actions">
+      <a class="btn-post" href="#" onclick="demo();return false;">Post Your Property</a>
+      <button class="icon-btn" onclick="demo()" aria-label="Notifications">
+        <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="dot"></span>
+      </button>
+      <button class="hamburger icon-btn" onclick="openDrawer()" aria-label="Menu">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-backdrop" id="drawerBg" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <span class="logo wordmark">Gujju<b>Property</b></span>
+    <button class="drawer-close" onclick="closeDrawer()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="drawer-list">
+    <a href="#" onclick="demo();return false;">Buy</a>
+    <a href="#" onclick="demo();return false;">Rent</a>
+    <a href="#" onclick="demo();return false;">Commercial</a>
+    <a href="#" onclick="demo();return false;">New Projects</a>
+    <a href="#" onclick="demo();return false;">Services</a>
+    <a href="#" onclick="demo();return false;">For Owners</a>
+  </div>
+  <div class="drawer-cta">
+    <a class="btn-post" style="display:block;" href="#" onclick="demo();return false;">Post Your Property</a>
+  </div>
+</div>
+
+<div class="top">
+  <h1>Choose a Buyer Plan and <span>SAVE LAKHS</span> on brokerage.</h1>
+  <div class="sub">For assistance call us at : <a href="tel:+918905552444">+91-89-055-524-44</a></div>
+</div>
+
+<section class="plans-section">
+  <div class="wrap">
+    <div class="plans-grid" id="plansGrid"></div>
+    <div class="bottom">
+      <div class="tnc">All plans are valid for 3 months. <a href="#" onclick="demo();return false;" style="color:var(--purple);font-weight:700;">T&amp;C apply.</a></div>
+      <span class="seller-link" onclick="demo()">Click here for Seller Plans</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW ASSISTED PLANS WORK ===================== -->
+<section class="howwork">
+  <div class="wrap"><div class="sectitle">How Assisted Plans Work</div></div>
+  <div class="rail" id="rail"></div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="faq">
+  <div class="wrap">
+    <div class="sectitle">Frequently Asked Questions</div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<style>
+  .faq{padding:54px 0 70px;}
+  .faq .sectitle{text-align:center; font-size:20px; font-weight:700; color:var(--purple-dark);}
+  .faq-list{max-width:900px; margin:28px auto 0; border-top:1px solid var(--line);}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:17px 6px; font-size:14px; font-weight:600; color:var(--ink); width:100%; text-align:left;}
+  .faq-q:hover{color:var(--purple);}
+  .faq-q .plusicon{flex:none; width:20px; height:20px; position:relative;}
+  .faq-q .plusicon::before, .faq-q .plusicon::after{content:""; position:absolute; background:var(--purple); border-radius:2px; transition:.2s;}
+  .faq-q .plusicon::before{left:0; top:50%; width:100%; height:2px; transform:translateY(-50%);}
+  .faq-q .plusicon::after{top:0; left:50%; width:2px; height:100%; transform:translateX(-50%);}
+  .faq-item.open .plusicon::after{transform:translateX(-50%) rotate(90deg); opacity:0;}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .2s ease;}
+  .faq-a p{padding:0 6px 18px; font-size:13.5px; color:var(--body); max-width:800px;}
+  @media (max-width:560px){ .faq .sectitle{font-size:17px;} }
+</style>
+
+<script>
+function demo(){ alert("Sample content — this page is not wired to a live payment system yet."); }
+function openDrawer(){ document.getElementById("drawer").classList.add("open"); document.getElementById("drawerBg").classList.add("show"); }
+function closeDrawer(){ document.getElementById("drawer").classList.remove("open"); document.getElementById("drawerBg").classList.remove("show"); }
+
+const ICONS = {
+  headset:'<path d="M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" stroke-linecap="round" stroke-linejoin="round"/>',
+  check:'<path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>',
+  compass:'<circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z" stroke-linecap="round" stroke-linejoin="round"/>',
+  handshake:'<path d="M2 12h5l3-3 4 4 3-3h5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 12l3 6 4-2-2-4" stroke-linecap="round" stroke-linejoin="round"/>',
+  home:'<path d="M3 11l9-8 9 8M5 10v10h14V10" stroke-linecap="round" stroke-linejoin="round"/>',
+  suitcase:'<rect x="2" y="7" width="20" height="14" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-linecap="round" stroke-linejoin="round"/>'
+};
+
+const PLANS = [
+  { key:"power", name:"Power Plan", tag:"Choose your dream home from lots of options!", price:"1,899", header:"h-power", btn:"b-power", expert:null,
+    feats:[["Number of Contacts","upto 25"],["Complimentary legal consultation with experts","check"],["Loan Assistance","check"],["On-Demand Support","check"]], note:null },
+  { key:"expert", name:"Property Expert Plan", tag:"Get FREE Loan Assistance + 100% Cashback on plan amount* + Property Expert", price:"1,999", header:"h-expert", btn:"b-expert",
+    expert:["Negotiates to get you the BEST PRICE for the property","FREE Loan Assistance","Finds you the BEST PROPERTY and schedules property visits","FREE Interior Consultation and Design Inspection after you finalise your property"],
+    feats:[["Number of Contacts","upto 50"],["Complimentary legal consultation with experts","check"],["FREE Loan Assistance","check"],["FREE Interior Design Consultation","check"]], note:"*100% Cashback T&C" },
+  { key:"moneyback", name:"Property Expert MoneyBack Plan", tag:"Get Guaranteed property or 100% Refund", price:"4,999", header:"h-moneyback", btn:"b-moneyback",
+    expert:["Negotiates to get you the BEST PRICE for the property","FREE Loan Assistance","Finds you the BEST PROPERTY and schedules property visits","FREE Interior Consultation and Design Inspection after you finalise your property"],
+    feats:[["Number of Contacts","upto 50"],["Complimentary legal consultation with experts","check"],["FREE Loan Assistance","check"],["FREE Interior Design Consultation","check"]], note:null }
+];
+
+function renderPlans(){
+  const grid = document.getElementById("plansGrid");
+  grid.innerHTML = PLANS.map(p => `
+    <div class="plan-card">
+      <div class="plan-header ${p.header}">
+        <div class="htop">
+          <div class="pname">${p.name}</div>
+          <div class="price"><span class="amt">₹ ${p.price}</span><span class="gst">+18% <u>GST</u></span></div>
+        </div>
+        <div class="plan-tagline">${p.tag}</div>
+      </div>
+      <div class="plan-body">
+        ${p.expert ? `
+        <div class="expert-row">
+          <div class="expert-avatar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">${ICONS.headset}</svg></div>
+          <div class="expert-col">
+            <div class="et">Dedicated Property Expert</div>
+            <ul>${p.expert.map(e=>`<li>${e}</li>`).join("")}</ul>
+          </div>
+        </div>` : ""}
+        <div class="feat-list">
+          ${p.feats.map(([label,val]) => `
+            <div class="feat-row">
+              <span class="label">${label}</span>
+              ${val==="check"
+                ? `<span class="check"><svg viewBox="0 0 24 24" fill="none">${ICONS.check}</svg></span>`
+                : `<span class="val">${val}</span>`}
+            </div>`).join("")}
+        </div>
+        <div class="plan-cta">
+          <button class="btn ${p.btn}" onclick="demo()">Subscribe</button>
+          ${p.note ? `<div class="cashback-note" onclick="demo()">${p.note}</div>` : ""}
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+renderPlans();
+
+/* ===== How Assisted Plans Work — full-width alternating dividers + edge avatars ===== */
+const ZONES = [
+  { type:"intro", kick:"LOOKING FOR A HOUSE?", sub:"Just get one of our Assisted Plans and make your house hunt simpler." },
+  { type:"step", lead:"Say HELLO to your", strong:"HOUSE-HUNT ASSISTANT", avatar:{side:"right", icon:"headset", color:"var(--teal)"} },
+  { type:"step", lead:"Who gathers all your requirements and gives you", strong:"CITY LEVEL EXPERTISE", avatar:{side:"left", icon:"compass", color:"var(--purple)"} },
+  { type:"step", lead:"Contacts owners, schedules property visits, and", strong:"negotiates the best price", avatar:{side:"right", icon:"handshake", color:"var(--purple-dark)"} },
+  { type:"step", lead:"Helping you find the best", strong:"HOUSE FOR YOUR NEEDS", avatar:{side:"left", icon:"home", color:"var(--red)"} }
+];
+const DIVIDERS = ["c-gray","c-red","c-gray","c-red"]; // between the 5 zones
+
+function renderRail(){
+  const rail = document.getElementById("rail");
+  let html = "";
+  // decorative first avatar, top-left, overlapping the intro zone
+  html += `<div class="ravatar at-left" style="top:14px;"><div class="ring" style="background:var(--teal);"><svg viewBox="0 0 24 24" fill="none">${ICONS.suitcase}</svg></div></div>`;
+
+  ZONES.forEach((z,i) => {
+    if(z.type === "intro"){
+      html += `<div class="rzone"><div class="kick">${z.kick}</div><div class="sub">${z.sub}</div></div>`;
+    } else {
+      html += `<div class="rzone">
+        <div class="lead">${z.lead}<span class="strong">${z.strong}</span></div>
+        <div class="ravatar at-${z.avatar.side}">
+          <div class="ring" style="background:${z.avatar.color};">
+            <svg viewBox="0 0 24 24" fill="none">${ICONS[z.avatar.icon]}</svg>
+          </div>
+          <div class="badge"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>`;
+    }
+    if(i < ZONES.length-1){
+      html += `<div class="rdivider ${DIVIDERS[i]}"></div>`;
+    }
+  });
+  rail.innerHTML = html;
+}
+renderRail();
+
+/* ===== FAQ accordion ===== */
+const FAQS = [
+  ["What does a Property Expert do?","Your Property Expert understands your requirements, shortlists matching homes, contacts owners on your behalf, schedules visits and helps negotiate the price — so you don't have to chase leads yourself."],
+  ["How does the Property Expert Plan work?","Once you subscribe, a dedicated expert is assigned to you within 24 hours. They stay with you through the search, from shortlisting to closing the deal."],
+  ["What if I don't find a house after subscribing to the Expert Plan?","Your plan stays active for the full 3-month validity, and your expert keeps sending fresh matches. The MoneyBack Plan additionally guarantees a property or a 100% refund."],
+  ["What services do you provide after I subscribe to the Expert Plan?","Verified contacts, a dedicated expert, free loan assistance, scheduled property visits, and a free interior consultation once you finalise a property."],
+  ["How soon will I get house options after I subscribe?","You'll typically start receiving matched options within 24–48 hours of your expert reviewing your requirements."],
+  ["Will someone accompany me to see the house if I'm an Expert Plan customer?","Yes — your expert helps schedule and coordinate visits, and can accompany you where available in your city."],
+  ["Will you help me negotiate the price?","Yes, negotiating the best possible price with the owner is a core part of what your Property Expert does."],
+  ["Can you get me a house in a specific society?","Yes — share the society or locality preference with your expert and they'll prioritise matching options there."],
+  ["How do I share my requirements for the type of house I'm looking for?","Your expert will call you after subscription to note down budget, locality, BHK, and any must-haves. You can update these anytime."],
+  ["Are there any hidden charges in the subscription plans?","No. The listed plan price plus 18% GST is the full cost — there's no brokerage or additional fee for the services included in your plan."],
+  ["Can I pay for the Expert Plan only after I find the house?","No, the Expert Plan is a subscription paid upfront to unlock the dedicated expert and included services. The MoneyBack Plan is the option built around a guarantee if a property isn't found."]
+];
+function renderFaq(){
+  const list = document.getElementById("faqList");
+  list.innerHTML = FAQS.map((f,i) => `
+    <div class="faq-item" data-i="${i}">
+      <button class="faq-q" onclick="toggleFaq(${i})">
+        <span>${f[0]}</span>
+        <span class="plusicon"></span>
+      </button>
+      <div class="faq-a"><p>${f[1]}</p></div>
+    </div>
+  `).join("");
+}
+function toggleFaq(i){
+  const item = document.querySelector(`.faq-item[data-i="${i}"]`);
+  const ans = item.querySelector(".faq-a");
+  const isOpen = item.classList.contains("open");
+  document.querySelectorAll(".faq-item.open").forEach(el=>{
+    el.classList.remove("open");
+    el.querySelector(".faq-a").style.maxHeight = null;
+  });
+  if(!isOpen){
+    item.classList.add("open");
+    ans.style.maxHeight = ans.scrollHeight + "px";
+  }
+}
+renderFaq();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,950 @@
+{
+  "siteMetadata": {
+    "title": "GujjuProperty — Buy, Rent & Sell Property Across India Without Brokerage",
+    "description": "India's zero-brokerage property portal. Connect directly with verified property owners in Pune, Mumbai, Delhi NCR, Bengaluru, Hyderabad and 380+ cities."
+  },
+  "topBar": {
+    "highlightText": "ZERO BROKERAGE PLATFORM",
+    "middleText": "Connect directly with verified property owners across India.",
+    "endText": "Post property FREE →"
+  },
+  "header": {
+    "logoMark": "GP",
+    "logoPrefix": "Gujju",
+    "logoSuffix": "Property",
+    "buyMenu": {
+      "columns": [
+        {
+          "title": "By city",
+          "links": [
+            { "title": "Flats for sale in Pune", "href": "/properties?city=pune" },
+            { "title": "Flats for sale in Mumbai", "href": "/properties?city=mumbai" },
+            { "title": "Flats for sale in Bengaluru", "href": "/properties?city=bengaluru" },
+            { "title": "Flats for sale in Hyderabad", "href": "/properties?city=hyderabad" },
+            { "title": "Flats for sale in Delhi NCR", "href": "/properties?city=delhi" },
+            { "title": "Plots in Dholera SIR", "href": "/properties?city=dholera" }
+          ]
+        },
+        {
+          "title": "By budget",
+          "links": [
+            { "title": "Under ₹50 Lakh", "href": "/properties?budget=50l" },
+            { "title": "₹50 Lakh – ₹1 Crore", "href": "/properties?budget=1cr" },
+            { "title": "₹1 Crore – ₹2 Crore", "href": "/properties?budget=2cr" },
+            { "title": "Above ₹2 Crore", "href": "/properties?budget=above2cr" }
+          ]
+        },
+        {
+          "title": "By BHK",
+          "links": [
+            { "title": "1 BHK flats", "href": "/properties?bhk=1bhk" },
+            { "title": "2 BHK flats", "href": "/properties?bhk=2bhk" },
+            { "title": "3 BHK flats", "href": "/properties?bhk=3bhk" },
+            { "title": "4+ BHK luxury homes", "href": "/properties?bhk=4bhk" }
+          ]
+        }
+      ],
+      "promo": {
+        "badge": "No Commission",
+        "title": "Buy direct from owners",
+        "description": "Talk directly to verified title owners. Save ₹1.5L to ₹4L in brokerage fees.",
+        "ctaText": "Browse Pune flats →",
+        "ctaHref": "/properties?city=pune"
+      }
+    },
+    "rentMenu": {
+      "columns": [
+        {
+          "title": "Top locations",
+          "links": [
+            { "title": "Houses for rent in Baner", "href": "/properties?rent=baner" },
+            { "title": "Flats for rent in Hinjewadi", "href": "/properties?rent=hinjewadi" },
+            { "title": "Flats for rent in Wakad", "href": "/properties?rent=wakad" },
+            { "title": "Flats for rent in Kothrud", "href": "/properties?rent=kothrud" }
+          ]
+        },
+        {
+          "title": "By occupant",
+          "links": [
+            { "title": "For family", "href": "/properties?tenant=family" },
+            { "title": "For bachelors", "href": "/properties?tenant=bachelor" },
+            { "title": "Fully furnished", "href": "/properties?furnish=full" }
+          ]
+        }
+      ],
+      "promo": {
+        "badge": "Instant Agreement",
+        "title": "E-Stamp Rent Agreement",
+        "description": "Government approved online agreement delivered to your doorstep in 24 hours.",
+        "ctaText": "Draft agreement →",
+        "ctaHref": "/rent-agreement"
+      }
+    },
+    "commercialMenu": {
+      "columns": [
+        {
+          "title": "Commercial",
+          "links": [
+            { "title": "Shops for sale", "href": "/properties?type=shop" },
+            { "title": "Offices for rent", "href": "/properties?type=office" },
+            { "title": "Showrooms", "href": "/properties?type=showroom" }
+          ]
+        }
+      ],
+      "promo": {
+        "badge": "Prime Locations",
+        "title": "Commercial Spaces",
+        "description": "High footfall retail and Grade A office spaces direct from owners.",
+        "ctaText": "Explore commercial →",
+        "ctaHref": "/properties?type=commercial"
+      }
+    },
+    "newProjectsMenu": {
+      "columns": [
+        {
+          "title": "New Projects",
+          "links": [
+            { "title": "Projects in Baner", "href": "/projects/baner" },
+            { "title": "Projects in Balewadi", "href": "/projects/balewadi" },
+            { "title": "RERA Approved Projects", "href": "/projects/rera" }
+          ]
+        }
+      ],
+      "promo": {
+        "badge": "RERA Verified",
+        "title": "New Builder Launch",
+        "description": "Exclusive pre-launch discounts on top RERA registered developments.",
+        "ctaText": "View launch offers →",
+        "ctaHref": "/projects/new-launches"
+      }
+    },
+    "servicesMenu": {
+      "columns": [
+        {
+          "title": "Services",
+          "links": [
+            { "title": "Rent Agreement", "href": "/rent-agreement" },
+            { "title": "Tenant Plans", "href": "/tenant-plans" },
+            { "title": "Buyer Plans", "href": "/buyer-plans" },
+            { "title": "Owner Plans", "href": "/tenant-plans?tab=owner" },
+            { "title": "Seller Plans", "href": "/buyer-plans?tab=seller" },
+            { "title": "Title Search", "href": "/services/title-check" },
+            { "title": "Packers & Movers", "href": "/services/packers-movers" },
+            { "title": "Home Loan Approval", "href": "/services/home-loan" }
+          ]
+        }
+      ],
+      "promo": {
+        "badge": "Legal Assistance",
+        "title": "Title Check Expert",
+        "description": "Advocate verified legal paperwork check before token payment.",
+        "ctaText": "Book legal check →",
+        "ctaHref": "/services/title-check"
+      }
+    },
+    "forOwnersLinks": [
+      { "title": "Post property FREE", "href": "/post-property" },
+      { "title": "Owner Plans", "href": "/tenant-plans?tab=owner" },
+      { "title": "Tenant Plans", "href": "/tenant-plans" },
+      { "title": "Rental Agreement", "href": "/rent-agreement" },
+      { "title": "Tenant Verification", "href": "/services/tenant-verification" }
+    ],
+    "loginBtnText": "Log in",
+    "postPropertyBtnText": "Post property",
+    "postPropertyBadgeText": "FREE"
+  },
+  "hero": {
+    "newBadgeText": "New",
+    "newBadgeMessage": "No brokerage in 380+ cities across India",
+    "headingPrefix": "Buy, rent or sell property ",
+    "headingHighlight": "without a broker",
+    "headingSuffix": "",
+    "subtitle": "Direct connection between owners, buyers and tenants. Clear title listings, zero commission fees.",
+    "ratingScore": "4.8",
+    "ratingCount": "(12.4k reviews)",
+    "ratingOwnerCount": "3,140 owners listed this month",
+    "ratingStars": "★★★★★",
+    "heroCard": {
+      "chipAText": "Owner listed · ₹0 brokerage",
+      "price": "₹1.28 Cr",
+      "title": "3 BHK Flat in Rohan Abhilasha",
+      "location": "Baner Road, Baner, Pune",
+      "specs": ["1,420 sq.ft", "3 BHK · 2 Bath", "Ready to move"],
+      "chipBText": "Verified listing"
+    }
+  },
+  "searchBar": {
+    "tabs": [
+      { "id": "buy", "label": "Buy" },
+      { "id": "rent", "label": "Rent" },
+      { "id": "commercial", "label": "Commercial" },
+      { "id": "plots", "label": "Plots & Land" },
+      { "id": "projects", "label": "New Projects" }
+    ],
+    "stateLabel": "State / City",
+    "stateDefaultOption": "Maharashtra (Pune, Mumbai)",
+    "locationLabel": "Locality or Project",
+    "locationPlaceholder": "e.g. Baner, Wakad, Kharadi, Kothrud",
+    "budgetLabel": "Max Budget",
+    "budgetOptions": [
+      { "label": "Up to ₹50 Lakh", "value": "50l" },
+      { "label": "Up to ₹1 Crore", "value": "1cr" },
+      { "label": "Up to ₹2 Crore", "value": "2cr" },
+      { "label": "Up to ₹5 Crore", "value": "5cr" }
+    ],
+    "searchBtnText": "Search Properties",
+    "quickChips": ["Baner", "Wakad", "Hinjewadi", "Kharadi", "Balewadi High St"]
+  },
+  "trust": [
+    {
+      "id": "t1",
+      "title": "100% Direct Owners",
+      "description": "Zero broker intervention. Connect directly via verified call.",
+      "svgPath": "M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"
+    },
+    {
+      "id": "t2",
+      "title": "Zero Commission",
+      "description": "Save ₹1 Lakh to ₹5 Lakh on every deal.",
+      "svgPath": "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+    },
+    {
+      "id": "t3",
+      "title": "Title & 7/12 Verified",
+      "description": "Legal documents checked by registered property advocates.",
+      "svgPath": "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+    },
+    {
+      "id": "t4",
+      "title": "Quick Possession",
+      "description": "90%+ ready to move flats ready for immediate handover.",
+      "svgPath": "M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+    }
+  ],
+  "statesSection": {
+    "eyebrow": "NATIONWIDE PRESENCE",
+    "title": "Explore Properties Across Top States & Cities",
+    "description": "Over 50,000+ active verified owner listings in major IT hubs, tier-1 metropolitan cities and emerging smart cities.",
+    "moreText": "View all 28 states →",
+    "moreHref": "/properties",
+    "popularCount": 4,
+    "toggleExpandText": "View all states",
+    "toggleCollapseText": "Show less",
+    "states": [
+      {
+        "code": "MH",
+        "name": "Maharashtra",
+        "cityCountText": "14 Cities",
+        "propertyCountText": "18,420 Listings",
+        "popularCitiesText": "Pune, Mumbai, Thane, Navi Mumbai, Nagpur",
+        "svgContent": "<rect x=\"16\" y=\"46\" width=\"68\" height=\"34\" fill=\"#522AB0\"/><path d=\"M36 80V62a14 14 0 0128 0v18z\" fill=\"#EFE9FB\"/><rect x=\"14\" y=\"38\" width=\"11\" height=\"9\" fill=\"#522AB0\"/><rect x=\"75\" y=\"38\" width=\"11\" height=\"9\" fill=\"#522AB0\"/><circle cx=\"19.5\" cy=\"34\" r=\"4\" fill=\"#FEDC00\"/><circle cx=\"80.5\" cy=\"34\" r=\"4\" fill=\"#FEDC00\"/>"
+      },
+      {
+        "code": "KA",
+        "name": "Karnataka",
+        "cityCountText": "8 Cities",
+        "propertyCountText": "12,180 Listings",
+        "popularCitiesText": "Bengaluru, Mysuru, Mangaluru, Hubballi",
+        "svgContent": "<circle cx=\"22\" cy=\"24\" r=\"8\" fill=\"#FEDC00\"/><path d=\"M50 28a13 13 0 0113 13H37a13 13 0 0113-13z\" fill=\"#522AB0\"/><rect x=\"47\" y=\"18\" width=\"6\" height=\"9\" rx=\"3\" fill=\"#522AB0\"/><rect x=\"36\" y=\"41\" width=\"28\" height=\"13\" fill=\"#522AB0\"/><rect x=\"20\" y=\"54\" width=\"60\" height=\"26\" fill=\"#522AB0\"/><g fill=\"#EFE9FB\"><rect x=\"27\" y=\"60\" width=\"5\" height=\"20\"/><rect x=\"39\" y=\"60\" width=\"5\" height=\"20\"/><rect x=\"51\" y=\"60\" width=\"5\" height=\"20\"/><rect x=\"63\" y=\"60\" width=\"5\" height=\"20\"/></g>"
+      },
+      {
+        "code": "TS",
+        "name": "Telangana",
+        "cityCountText": "6 Cities",
+        "propertyCountText": "9,340 Listings",
+        "popularCitiesText": "Hyderabad, Secunderabad, Warangal",
+        "svgContent": "<rect x=\"27\" y=\"48\" width=\"46\" height=\"32\" fill=\"#522AB0\"/><path d=\"M42 80V64a8 8 0 0116 0v16z\" fill=\"#EFE9FB\"/><rect x=\"19\" y=\"30\" width=\"8\" height=\"50\" fill=\"#522AB0\"/><rect x=\"73\" y=\"30\" width=\"8\" height=\"50\" fill=\"#522AB0\"/><circle cx=\"23\" cy=\"26\" r=\"4.5\" fill=\"#FEDC00\"/><circle cx=\"77\" cy=\"26\" r=\"4.5\" fill=\"#FEDC00\"/>"
+      },
+      {
+        "code": "GJ",
+        "name": "Gujarat",
+        "cityCountText": "12 Cities",
+        "propertyCountText": "8,920 Listings",
+        "popularCitiesText": "Ahmedabad, Surat, Vadodara, Dholera SIR",
+        "svgContent": "<circle cx=\"22\" cy=\"26\" r=\"8\" fill=\"#FEDC00\"/><rect x=\"30\" y=\"68\" width=\"40\" height=\"12\" fill=\"#522AB0\"/><path d=\"M50 20c4.5 0 8 3.5 8 8 0 3-2 5-2 7l4 33H40l4-33c0-2-2-4-2-7 0-4.5 3.5-8 8-8z\" fill=\"#522AB0\"/>"
+      }
+    ]
+  },
+  "featuredProperties": {
+    "title": "Featured Owner Properties in Pune",
+    "description": "Handpicked verified owner properties with unblocked views, premium amenities and immediate possession.",
+    "seeAllText": "See all 248 listings →",
+    "seeAllHref": "/properties",
+    "ownerListedText": "Owner Verified · ₹0 Brokerage",
+    "ctaText": "Get Owner Details",
+    "listings": [
+      {
+        "id": "prop-1",
+        "price": "₹1.28 Cr",
+        "pricePerSqFt": "₹9,010 / sq.ft",
+        "title": "3 BHK Flat in Rohan Abhilasha",
+        "address": "Baner Road, Baner, Pune 411045",
+        "bhk": "3 BHK",
+        "areaSqFt": "1,420 sq.ft",
+        "floorInfo": "7th / 14",
+        "facing": "East",
+        "chips": ["Semi-furnished", "Ready to move", "2 covered parkings", "Lift · Power backup", "5 yrs old"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 2 days ago by owner",
+        "photoCount": 8,
+        "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-2",
+        "price": "₹94 L",
+        "pricePerSqFt": "₹8,420 / sq.ft",
+        "title": "2 BHK Flat in Nyati Elysia",
+        "address": "Pashan-Sus Road, Baner, Pune 411021",
+        "bhk": "2 BHK",
+        "areaSqFt": "1,116 sq.ft",
+        "floorInfo": "3rd / 11",
+        "facing": "North-East",
+        "chips": ["Unfurnished", "Ready to move", "1 covered parking", "Gym · Clubhouse", "Corner unit"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 5 days ago by owner",
+        "photoCount": 5,
+        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-3",
+        "price": "₹2.15 Cr",
+        "pricePerSqFt": "₹8,180 / sq.ft",
+        "title": "4 BHK Rowhouse with private terrace",
+        "address": "Veerbhadra Nagar, Baner, Pune 411045",
+        "bhk": "4 BHK",
+        "areaSqFt": "2,630 sq.ft",
+        "floorInfo": "G + 2",
+        "facing": "West",
+        "chips": ["Furnished", "Ready to move", "3 parkings", "Private garden", "Gated society"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 1 week ago by owner",
+        "photoCount": 12,
+        "image": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "ownerBanner": {
+    "title": "Selling or Renting Your Property?",
+    "description": "List your apartment, villa or commercial space on India's #1 owner portal. Zero broker calls guaranteed.",
+    "bullets": [
+      "Direct calls from genuine buyers & tenants",
+      "Zero commission or hidden charges",
+      "Free title check badge on document upload",
+      "Instant WhatsApp lead alerts"
+    ],
+    "badgeText": "FREE LISTING",
+    "buttonText": "Post Property FREE →"
+  },
+  "servicesSection": {
+    "title": "End-to-End Home Buying & Renting Services",
+    "description": "Optional value-added services to make your property deal smooth, legal and hassle-free.",
+    "allServicesText": "View all services →",
+    "allServicesHref": "/services",
+    "services": [
+      {
+        "id": "s1",
+        "icon": "📄",
+        "title": "Online Rent Agreement",
+        "description": "E-Stamp legal draft, biometric verification and door delivery in 24 hrs."
+      },
+      {
+        "id": "s2",
+        "icon": "🔍",
+        "title": "Title Search & 7/12 Check",
+        "description": "Advocate report on property ownership history and Encumbrance Certificate."
+      },
+      {
+        "id": "s3",
+        "icon": "🚚",
+        "title": "Packers & Movers",
+        "description": "Pre-screened reliable movers with zero damage guarantee."
+      },
+      {
+        "id": "s4",
+        "icon": "🏦",
+        "title": "Lowest EMI Home Loans",
+        "description": "Instant pre-approval from SBI, HDFC, ICICI & Axis at lowest interest rates."
+      }
+    ]
+  },
+  "pricingPlansSection": {
+    "title": "Simple Transparent Owner Plans",
+    "description": "Posting is 100% Free forever. Choose an optional assisted plan if you want us to manage site visits.",
+    "plans": [
+      {
+        "id": "free",
+        "title": "Free Forever",
+        "description": "For owners who manage buyer calls & visits directly.",
+        "amount": "₹0",
+        "billingPeriod": "Lifetime free",
+        "features": [
+          "Direct calls & WhatsApp leads",
+          "Property listing valid till sold/rented",
+          "Upload up to 15 photos",
+          "Zero brokerage fees"
+        ],
+        "buttonText": "Post Property FREE",
+        "finePrint": "Ideal for self-managed owners"
+      },
+      {
+        "id": "relax",
+        "title": "Relax Plan",
+        "description": "Our relationship manager handles buyer site visits & negotiations for you.",
+        "amount": "₹2,499",
+        "billingPeriod": "One time fee",
+        "isHot": true,
+        "hotBadgeText": "Most Chosen",
+        "features": [
+          "Dedicated Relationship Manager",
+          "Accompanied site visits with prospective buyers",
+          "High resolution video walkthrough shoot",
+          "Negotiation & deal closure assistance"
+        ],
+        "buttonText": "Get Relax Plan",
+        "finePrint": "Pay once · No percentage commission"
+      },
+      {
+        "id": "nri",
+        "title": "NRI Assist",
+        "description": "Full key handling and legal assistance for NRI property owners.",
+        "amount": "₹7,999",
+        "billingPeriod": "One time fee",
+        "features": [
+          "Key holding & property inspection",
+          "Advocate title check & Power of Attorney guidance",
+          "Tenant background check & police verification",
+          "Rent collection & society maintenance management"
+        ],
+        "buttonText": "Book NRI Assist",
+        "finePrint": "Designed specifically for NRIs"
+      }
+    ]
+  },
+  "projectsSection": {
+    "eyebrow": "NEW DEVELOPMENTS",
+    "title": "Top RERA Registered Projects in Pune",
+    "description": "Verified builder projects with pre-launch offers, sample flat photos and possession dates.",
+    "allProjectsText": "View all projects →",
+    "allProjectsHref": "/properties",
+    "viewProjectText": "View Project Details →",
+    "projects": [
+      {
+        "id": "p1",
+        "name": "Rohan Abhilasha Phase 2",
+        "builder": "Rohan Builders",
+        "location": "Baner Road, Pune",
+        "config": "2 & 3 BHK Apartments",
+        "priceRange": "₹88 L - ₹1.45 Cr",
+        "priceNote": "Government taxes extra",
+        "stage": "Under Construction",
+        "reraText": "RERA P52100018420",
+        "sitePlanSvg": "<rect width=\"260\" height=\"128\" fill=\"#EFE9FB\"/><rect y=\"52\" width=\"260\" height=\"22\" fill=\"#D6C9F2\"/><path d=\"M0 63h260\" stroke=\"#FEDC00\" stroke-width=\"2.5\" stroke-dasharray=\"14 12\"/><g fill=\"#522AB0\" opacity=\".75\"><rect x=\"14\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"54\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"94\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"134\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"174\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"214\" y=\"18\" width=\"28\" height=\"26\" rx=\"3\"/></g><g fill=\"#41208C\" opacity=\".55\"><rect x=\"14\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"54\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"94\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"134\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"174\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/><rect x=\"214\" y=\"82\" width=\"28\" height=\"26\" rx=\"3\"/></g>"
+      },
+      {
+        "id": "p2",
+        "name": "Nyati Elysia Tower B",
+        "builder": "Nyati Group",
+        "location": "Pashan-Sus Road, Pune",
+        "config": "2, 3 & 4 BHK Luxury Flats",
+        "priceRange": "₹92 L - ₹2.10 Cr",
+        "priceNote": "Possession Dec 2026",
+        "stage": "New Launch",
+        "reraText": "RERA P52100022390",
+        "sitePlanSvg": "<rect width=\"260\" height=\"128\" fill=\"#EFE9FB\"/><rect y=\"54\" width=\"260\" height=\"20\" fill=\"#D6C9F2\"/><rect x=\"118\" width=\"24\" height=\"128\" fill=\"#D6C9F2\"/><g fill=\"#522AB0\" opacity=\".75\"><rect x=\"20\" y=\"14\" width=\"80\" height=\"32\" rx=\"4\"/><rect x=\"160\" y=\"14\" width=\"80\" height=\"32\" rx=\"4\"/></g><g fill=\"#41208C\" opacity=\".55\"><rect x=\"20\" y=\"82\" width=\"80\" height=\"32\" rx=\"4\"/><rect x=\"160\" y=\"82\" width=\"80\" height=\"32\" rx=\"4\"/></g><circle cx=\"130\" cy=\"64\" r=\"9\" fill=\"#FEDC00\"/>"
+      }
+    ]
+  },
+  "stepsSection": {
+    "eyebrow": "SIMPLE 3-STEP PROCESS",
+    "title": "How GujjuProperty Works for Buyers & Owners",
+    "description": "Fast, direct and transparent property transactions without middleman delays.",
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Search Verified Listings",
+        "description": "Filter by BHK, budget, locality, and ready-to-move status.",
+        "tip": "100% verified owners",
+        "iconSvgPath": "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      },
+      {
+        "stepNumber": 2,
+        "title": "Connect Directly",
+        "description": "Call or WhatsApp the owner directly to schedule a convenient visit.",
+        "tip": "Zero broker spam",
+        "iconSvgPath": "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+      },
+      {
+        "stepNumber": 3,
+        "title": "Close & Save Lakhs",
+        "description": "Finalize terms directly and get legal title check done before token payment.",
+        "tip": "Save ₹1L - ₹5L",
+        "iconSvgPath": "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+      }
+    ],
+    "ctaTitle": "Ready to find your dream home in Pune?",
+    "ctaSubtitle": "Over 248 owner listed flats waiting for direct buyers.",
+    "ctaSearchBtnText": "Search Properties Now",
+    "ctaListBtnText": "Post Property",
+    "ctaListBadgeText": "FREE"
+  },
+  "testimonialsSection": {
+    "title": "Trusted by Thousands of Buyers & Owners",
+    "testimonials": [
+      {
+        "id": "tm1",
+        "stars": "★★★★★",
+        "quote": "Bought my 3 BHK flat in Baner directly from Mr. Sandeep. Saved ₹2.8 Lakhs in brokerage fees and completed registration in 10 days!",
+        "avatarInitial": "R",
+        "authorName": "Rajesh Sharma",
+        "authorRole": "Software Engineer, Pune"
+      },
+      {
+        "id": "tm2",
+        "stars": "★★★★★",
+        "quote": "Rented out my flat in Nyati Elysia within 48 hours of posting on GujjuProperty. Zero broker spam calls, only genuine tenant inquiries.",
+        "avatarInitial": "P",
+        "authorName": "Pooja Mehta",
+        "authorRole": "Property Owner, Baner"
+      },
+      {
+        "id": "tm3",
+        "stars": "★★★★★",
+        "quote": "The Title Check service was phenomenal. Advocate verified all 7/12 extracts and builder NAs before I paid any token amount.",
+        "avatarInitial": "A",
+        "authorName": "Amit Patel",
+        "authorRole": "Business Owner, Ahmedabad"
+      }
+    ]
+  },
+  "appDownload": {
+    "title": "Download the GujjuProperty App",
+    "description": "Get real-time instant WhatsApp & Push notifications when new owner properties match your saved search criteria.",
+    "appStoreSubtitle": "Download on the",
+    "appStoreTitle": "App Store",
+    "appStoreHref": "https://apple.com",
+    "googlePlaySubtitle": "GET IT ON",
+    "googlePlayTitle": "Google Play",
+    "googlePlayHref": "https://google.com",
+    "qrTextLine1": "Scan QR to install app",
+    "qrTextLine2": "iOS & Android"
+  },
+  "seoFooter": {
+    "categories": [
+      {
+        "key": "buy",
+        "label": "Flats for Sale",
+        "templates": [
+          "Flats for sale in Baner",
+          "Flats for sale in Wakad",
+          "Flats for sale in Hinjewadi",
+          "Flats for sale in Kharadi",
+          "Flats for sale in Kothrud"
+        ]
+      },
+      {
+        "key": "rent",
+        "label": "Flats for Rent",
+        "templates": [
+          "Flats for rent in Baner",
+          "Flats for rent in Wakad",
+          "Flats for rent in Hinjewadi",
+          "Flats for rent in Aundh"
+        ]
+      }
+    ],
+    "cities": ["Pune", "Mumbai", "Bengaluru", "Hyderabad", "Delhi NCR", "Ahmedabad"]
+  },
+  "footer": {
+    "brandDescription": "India's premier zero-brokerage owner property portal. Direct connections between buyers, sellers, and tenants across 380+ cities.",
+    "columns": [
+      {
+        "title": "Buy Property",
+        "links": [
+          { "label": "Flats in Pune", "href": "/properties?city=pune" },
+          { "label": "Flats in Mumbai", "href": "/properties?city=mumbai" },
+          { "label": "Flats in Bengaluru", "href": "/properties?city=bengaluru" },
+          { "label": "Plots in Dholera SIR", "href": "/properties?city=dholera" }
+        ]
+      },
+      {
+        "title": "For Owners",
+        "links": [
+          { "label": "Post a Property FREE", "href": "/post-property" },
+          { "label": "Owner Plans & Pricing", "href": "/plans" },
+          { "label": "Tenant Verification", "href": "/services/tenant-verification" },
+          { "label": "NRI Desk", "href": "/nri" }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          { "label": "About Us", "href": "/about" },
+          { "label": "Contact", "href": "/contact" },
+          { "label": "Terms of Service", "href": "/terms" },
+          { "label": "Privacy Policy", "href": "/privacy" }
+        ]
+      }
+    ],
+    "copyrightText": "© 2026 GujjuProperty. All listings are owner-submitted and independently verified.",
+    "servedCitiesText": "Mumbai · Delhi NCR · Bengaluru · Hyderabad · Pune · Chennai · Ahmedabad · Kolkata"
+  },
+  "listingPage": {
+    "breadcrumb": [
+      { "label": "Home", "href": "/" },
+      { "label": "Maharashtra", "href": "/maharashtra" },
+      { "label": "Pune", "href": "/pune" }
+    ],
+    "searchTag": "Baner, Pune",
+    "searchPlaceholder": "Add another locality or project...",
+    "totalResultsCount": 248,
+    "resultsSubTitle": "owner properties · within 2 km · updated today",
+    "bhkTypes": ["1 RK", "1 BHK", "2 BHK", "3 BHK", "4 BHK", "4+ BHK"],
+    "priceRange": { "min": 0, "max": 15000000, "label": "₹0 – ₹1.5 Cr" },
+    "propertyStatusOptions": ["Under construction", "Ready to move"],
+    "furnishingOptions": ["Full", "Semi-furnished", "Unfurnished"],
+    "propertyTypes": [
+      { "name": "Apartment", "count": 186 },
+      { "name": "Independent house / Villa", "count": 34 },
+      { "name": "Gated community villa", "count": 12 },
+      { "name": "Builder floor", "count": 9 },
+      { "name": "Plot", "count": 7 }
+    ],
+    "quickLinkCards": [
+      {
+        "title": "Quick links",
+        "sections": [
+          {
+            "title": "People also searched for",
+            "links": [
+              { "label": "Flats in Balewadi for sale", "href": "/properties?q=balewadi" },
+              { "label": "Flats in Wakad for sale", "href": "/properties?q=wakad" },
+              { "label": "Flats in Aundh for sale", "href": "/properties?q=aundh" },
+              { "label": "Flats in Pashan for sale", "href": "/properties?q=pashan" }
+            ]
+          }
+        ]
+      }
+    ],
+    "listings": [
+      {
+        "id": "prop-1",
+        "price": "₹1.28 Cr",
+        "pricePerSqFt": "₹9,010 / sq.ft",
+        "title": "3 BHK Flat in Rohan Abhilasha",
+        "address": "Baner Road, Baner, Pune 411045",
+        "bhk": "3 BHK",
+        "areaSqFt": "1,420 sq.ft",
+        "floorInfo": "7th / 14",
+        "facing": "East",
+        "chips": ["Semi-furnished", "Ready to move", "2 covered parkings", "Lift · Power backup", "5 yrs old"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 2 days ago by owner",
+        "photoCount": 8,
+        "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-2",
+        "price": "₹94 L",
+        "pricePerSqFt": "₹8,420 / sq.ft",
+        "title": "2 BHK Flat in Nyati Elysia",
+        "address": "Pashan-Sus Road, Baner, Pune 411021",
+        "bhk": "2 BHK",
+        "areaSqFt": "1,116 sq.ft",
+        "floorInfo": "3rd / 11",
+        "facing": "North-East",
+        "chips": ["Unfurnished", "Ready to move", "1 covered parking", "Gym · Clubhouse", "Corner unit"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 5 days ago by owner",
+        "photoCount": 5,
+        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-3",
+        "price": "₹2.15 Cr",
+        "pricePerSqFt": "₹8,180 / sq.ft",
+        "title": "4 BHK Rowhouse with private terrace",
+        "address": "Veerbhadra Nagar, Baner, Pune 411045",
+        "bhk": "4 BHK",
+        "areaSqFt": "2,630 sq.ft",
+        "floorInfo": "G + 2",
+        "facing": "West",
+        "chips": ["Full", "Ready to move", "3 parkings", "Private garden", "Gated society"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 1 week ago by owner",
+        "photoCount": 12,
+        "image": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-4",
+        "price": "₹1.42 Cr",
+        "pricePerSqFt": "₹9,340 / sq.ft",
+        "title": "3 BHK Flat in Kolte Patil Life Republic",
+        "address": "Balewadi Phata, Baner, Pune 411045",
+        "bhk": "3 BHK",
+        "areaSqFt": "1,520 sq.ft",
+        "floorInfo": "12th / 22",
+        "facing": "South",
+        "chips": ["Semi-furnished", "Dec 2026", "2 parkings", "Pool · Kids play area"],
+        "badgeText": "Under construction",
+        "isAmberBadge": true,
+        "postedTime": "Posted 3 days ago by owner",
+        "photoCount": 6,
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-5",
+        "price": "₹86 L",
+        "pricePerSqFt": "₹19,100 / sq.yd",
+        "title": "Residential plot, 450 sq.yd",
+        "address": "Sus Gaon, near Baner, Pune 411021",
+        "bhk": "1 RK",
+        "areaSqFt": "450 sq.yd",
+        "floorInfo": "Plot",
+        "facing": "East",
+        "chips": ["Clear title", "Boundary walled", "Water + electricity", "Immediate registry"],
+        "badgeText": "Title checked",
+        "isAmberBadge": true,
+        "postedTime": "Posted 4 days ago by owner",
+        "photoCount": 4,
+        "image": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-6",
+        "price": "₹1.06 Cr",
+        "pricePerSqFt": "₹8,760 / sq.ft",
+        "title": "3 BHK Flat with covered parking",
+        "address": "Laxman Nagar, Baner, Pune 411045",
+        "bhk": "3 BHK",
+        "areaSqFt": "1,210 sq.ft",
+        "floorInfo": "5th / 9",
+        "facing": "North",
+        "chips": ["Semi-furnished", "Ready to move", "1 covered parking", "Lift · Security", "8 yrs old"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 6 days ago by owner",
+        "photoCount": 7,
+        "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-7",
+        "price": "₹1.85 Cr",
+        "pricePerSqFt": "₹24,300 / sq.ft",
+        "title": "Ground floor shop on main road",
+        "address": "Baner Road, opposite Balewadi, Pune 411045",
+        "bhk": "1 RK",
+        "areaSqFt": "760 sq.ft",
+        "floorInfo": "Ground",
+        "facing": "North",
+        "chips": ["Commercial", "Ready to move", "Loft included", "High footfall"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 1 week ago by owner",
+        "photoCount": 5,
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-8",
+        "price": "₹78 L",
+        "pricePerSqFt": "₹8,860 / sq.ft",
+        "title": "2 BHK Flat in Mont Vert Belair",
+        "address": "Pashan Link Road, Baner, Pune 411021",
+        "bhk": "2 BHK",
+        "areaSqFt": "880 sq.ft",
+        "floorInfo": "2nd / 7",
+        "facing": "East",
+        "chips": ["Unfurnished", "Ready to move", "Open parking", "Quiet lane", "12 yrs old"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 9 days ago by owner",
+        "photoCount": 6,
+        "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-amd-1",
+        "price": "₹95 L",
+        "pricePerSqFt": "₹5,750 / sq.ft",
+        "title": "3 BHK Flat in Shivalik Highstreet",
+        "address": "Prahlad Nagar, SG Highway, Ahmedabad, Gujarat 380015",
+        "societyName": "Shivalik Highstreet",
+        "buildingName": "Shivalik Highstreet",
+        "bhk": "3 BHK",
+        "areaSqFt": "1,650 sq.ft",
+        "floorInfo": "5th / 12",
+        "facing": "East",
+        "chips": ["Semi-furnished", "Ready to move", "Covered parking", "Gated security"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 1 day ago by owner",
+        "photoCount": 8,
+        "listingCategory": "Buy",
+        "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-amd-2",
+        "price": "₹50,000/mo",
+        "pricePerSqFt": "₹35 / sq.ft",
+        "title": "2 BHK Apartment in Magnet Lavish",
+        "address": "Magnet Lavish, Vaishno Devi Circle, Ahmedabad, Gujarat 382481",
+        "societyName": "Magnet Lavish",
+        "buildingName": "Magnet Lavish",
+        "bhk": "2 BHK",
+        "areaSqFt": "1,425 sq.ft",
+        "floorInfo": "8th / 14",
+        "facing": "North-East",
+        "chips": ["Full", "Ready to move", "1 covered parking", "Gym · Clubhouse"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 3 days ago by owner",
+        "photoCount": 6,
+        "listingCategory": "Rent",
+        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-amd-3",
+        "price": "₹1.85 Cr",
+        "pricePerSqFt": "₹6,600 / sq.ft",
+        "title": "4 BHK Independent Villa in Bopal",
+        "address": "South Bopal, Ahmedabad, Gujarat 380058",
+        "societyName": "Savvy Swaraaj",
+        "buildingName": "Savvy Swaraaj",
+        "bhk": "4 BHK",
+        "areaSqFt": "2,800 sq.ft",
+        "floorInfo": "G + 2",
+        "facing": "West",
+        "chips": ["Full", "Ready to move", "Private garden", "3 parkings"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 4 days ago by owner",
+        "photoCount": 10,
+        "listingCategory": "Buy",
+        "image": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-amd-4",
+        "price": "₹65 L",
+        "pricePerSqFt": "₹5,200 / sq.ft",
+        "title": "2 BHK Flat in Godrej Garden City",
+        "address": "Godrej Garden City, Jagatpur, Ahmedabad, Gujarat 382470",
+        "societyName": "Godrej Garden City",
+        "buildingName": "Godrej Garden City",
+        "bhk": "2 BHK",
+        "areaSqFt": "1,250 sq.ft",
+        "floorInfo": "6th / 14",
+        "facing": "East",
+        "chips": ["Semi-furnished", "Ready to move", "Clubhouse", "Park facing"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 5 days ago by owner",
+        "photoCount": 7,
+        "listingCategory": "Buy",
+        "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "id": "prop-amd-5",
+        "price": "₹1.20 Cr",
+        "pricePerSqFt": "₹24,000 / sq.yd",
+        "title": "Commercial Office / Plot on SG Highway",
+        "address": "SG Highway, Satellite, Ahmedabad, Gujarat 380015",
+        "societyName": "Adani Shantigram",
+        "buildingName": "Adani Shantigram",
+        "bhk": "1 RK",
+        "areaSqFt": "500 sq.yd",
+        "floorInfo": "Plot",
+        "facing": "North",
+        "chips": ["Clear title", "Main road facing", "Boundary wall"],
+        "badgeText": "Title checked",
+        "postedTime": "Posted 1 week ago by owner",
+        "photoCount": 4,
+        "listingCategory": "Commercial",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "propertyDetail": {
+    "id": "prop-1",
+    "title": "3 BHK Flat in Rohan Abhilasha",
+    "address": "Baner Road, Baner, Pune 411045",
+    "price": "₹1.28 Cr",
+    "pricePerSqFt": "₹9,010 / sq.ft",
+    "estimatedEmi": "₹98,400 / mo",
+    "builtUpArea": "1,420 sq.ft",
+    "isResale": true,
+    "ownerVerified": true,
+    "photos": [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+    ],
+    "nearbyHighlights": [
+      "Balewadi High Street",
+      "Symbiosis School",
+      "Jupiter Hospital",
+      "Baner bus stop",
+      "D-Mart Baner"
+    ],
+    "overview": [
+      { "label": "Super built-up area", "value": "1,420 sq.ft" },
+      { "label": "Carpet area", "value": "1,080 sq.ft" },
+      { "label": "Bedrooms", "value": "3 BHK" },
+      { "label": "Bathrooms", "value": "2 Bath" },
+      { "label": "Balconies", "value": "2 Balconies" },
+      { "label": "Floor", "value": "7th / 14 Floors" },
+      { "label": "Facing", "value": "East facing" },
+      { "label": "Property age", "value": "5 years old" },
+      { "label": "Possession", "value": "Immediate" },
+      { "label": "Parking", "value": "2 Covered" }
+    ],
+    "amenities": [
+      "Lift",
+      "Power backup",
+      "Covered parking",
+      "Gated security",
+      "24×7 water",
+      "Clubhouse",
+      "Gym",
+      "Swimming pool",
+      "Kids' play area",
+      "Landscaped garden",
+      "Jogging track",
+      "Indoor games"
+    ],
+    "description": "Well-maintained 3 BHK apartment in Rohan Abhilasha, Baner Road. Comes with 2 covered car parkings, modular kitchen, wooden flooring in master bedroom, and clear unblocked views towards the green hills. Direct deal with owner, zero brokerage.",
+    "specs": [
+      { "key": "No. of bedrooms", "value": "3 BHK", "icon": "bed" },
+      { "key": "Posted on", "value": "26 Jul 2026", "icon": "cal" },
+      { "key": "No. of bathrooms", "value": "2 Bath", "icon": "bath" },
+      { "key": "Possession", "value": "Ready to move", "icon": "key" },
+      { "key": "Balcony", "value": "2", "icon": "balcony" },
+      { "key": "Built-up area", "value": "1,420 sq.ft", "icon": "area" },
+      { "key": "Parking", "value": "Bike and car", "icon": "car" },
+      { "key": "Power backup", "value": "Full backup", "icon": "power" },
+      { "key": "Floor", "value": "7th / 14", "icon": "floor" },
+      { "key": "Facing", "value": "East", "icon": "facing" },
+      { "key": "Furnishing", "value": "Semi-furnished", "icon": "sofa" },
+      { "key": "Age of property", "value": "5 years old", "icon": "clock" }
+    ],
+    "ownerInfo": {
+      "name": "Sandeep K.",
+      "role": "Owner · lives in the same society",
+      "avatarInitial": "S",
+      "phone": "+91 98XXX XXXXX",
+      "isVerified": true,
+      "note": "You are contacting the owner directly. GujjuProperty charges no brokerage on this or any listing."
+    },
+    "reportOptions": [
+      "Listed by broker",
+      "Sold out",
+      "Wrong info",
+      "Owner not reachable"
+    ],
+    "similarProperties": [
+      {
+        "id": "prop-2",
+        "price": "₹94 L",
+        "pricePerSqFt": "₹8,420 / sq.ft",
+        "title": "2 BHK Flat in Nyati Elysia",
+        "address": "Pashan-Sus Road, Baner, Pune 411021",
+        "bhk": "2 BHK",
+        "areaSqFt": "1,116 sq.ft",
+        "chips": ["Unfurnished", "Ready to move"],
+        "badgeText": "Owner verified",
+        "postedTime": "Posted 5 days ago",
+        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  }
+}

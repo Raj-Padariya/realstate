@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Post your property — property details | GujjuProperty</title>
+<meta name="description" content="Add your property details, locality, rent, amenities, photos and visit schedule. Free to list on GujjuProperty, no brokerage.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#522AB0; --brand-dk:#41208C; --brand-lt:#EFE9FB;
+  --yellow:#FEDC00; --yellow-dk:#E3C500;
+  --ink:#1c1f23; --body:#4a5158; --muted:#79818a;
+  --line:#e3e6ea; --bg:#f6f7f9; --white:#fff;
+  --green:#0f9d58; --amber:#f0a500;
+  --r:8px; --sh:0 1px 3px rgba(0,0,0,.06),0 6px 18px rgba(0,0,0,.06);
+  --maxw:1200px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{font-family:"Open Sans",Arial,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;font-weight:700;line-height:1.25;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+section{padding:52px 0}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:3px}
+
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(21px,2.6vw,28px)}
+.sec-head p{margin:6px 0 0;color:var(--muted);font-size:14.5px;max-width:60ch}
+.eyebrow{font-size:11.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--brand);margin-bottom:6px}
+.morerow{display:flex;justify-content:center;margin-top:22px}
+.more{color:var(--brand);font-weight:600;font-size:14px;white-space:nowrap}
+.more:hover{text-decoration:underline}
+
+.btn{border:0;cursor:pointer;border-radius:6px;padding:11px 20px;font-weight:600;font-size:14.5px;background:var(--brand);color:#fff;font-family:inherit;transition:background .15s}
+.btn:hover{background:var(--brand-dk)}
+.btn:disabled{background:var(--brand);opacity:.45;cursor:not-allowed;pointer-events:none}
+.btn.line{background:#fff;color:var(--brand);border:1.5px solid var(--brand)}
+.btn.line:hover{background:var(--brand-lt)}
+.btn.yellow{background:var(--yellow);color:var(--ink)}
+.btn.yellow:hover{background:var(--yellow-dk)}
+.btn.grey{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.grey:hover{background:var(--bg)}
+.btn.sm{padding:8px 14px;font-size:13.5px}
+.tagfree{display:inline-block;background:var(--yellow);color:var(--ink);font-size:10.5px;font-weight:800;letter-spacing:.07em;line-height:1.45;padding:1px 6px;border-radius:4px;margin-left:7px;vertical-align:1px}
+.tagfree.inv{background:var(--brand);color:#fff}
+
+/* header */
+.topbar{background:var(--brand-dk);color:#D5C9F0;font-size:12.5px}
+.topbar .wrap{display:flex;align-items:center;justify-content:center;height:32px;text-align:center}
+.topbar b{color:var(--yellow);font-weight:700}
+header{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:12px;height:62px}
+.logo{display:flex;align-items:center;gap:9px;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.mark{width:32px;height:32px;border-radius:6px;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700;flex:none}
+.logo em{font-style:normal;color:var(--brand)}
+.menu{display:flex;gap:4px;list-style:none;margin:0 0 0 22px;padding:0;font-size:14.5px;font-weight:600}
+.menu>li{position:static}
+.menu>li.has-dd{position:relative}
+.mtrig{background:none;border:0;font:inherit;font-weight:600;cursor:pointer;padding:20px 10px;display:inline-flex;align-items:center;gap:5px;color:var(--ink);white-space:nowrap}
+.mtrig .chev{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s;opacity:.55}
+.menu>li:hover .mtrig,.menu>li.open .mtrig{color:var(--brand)}
+.menu>li:hover .chev,.menu>li.open .chev{transform:rotate(180deg);opacity:1}
+
+.mega,.dd{opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .16s,transform .16s,visibility .16s;z-index:70}
+.mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 20px 44px rgba(82,42,176,.13)}
+.dd{position:absolute;top:100%;left:0;min-width:236px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 44px rgba(82,42,176,.13);padding:8px;margin-top:-4px}
+.menu>li:hover>.mega,.menu>li:hover>.dd,.menu>li.open>.mega,.menu>li.open>.dd{opacity:1;visibility:visible;transform:none}
+.megagrid{display:grid;grid-template-columns:1fr 1fr 1fr 278px;gap:30px;padding:26px 20px 30px}
+.megagrid>*{min-width:0}
+.mcol h4{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--brand);font-weight:800;margin:0 0 9px}
+.mcol a,.dd a{display:block;padding:6px 0;font-size:13.5px;font-weight:500;color:var(--body);border-radius:6px}
+.dd a{padding:8px 12px}
+.mcol a:hover{color:var(--brand)}
+.dd a:hover{color:var(--brand);background:var(--brand-lt)}
+.mpromo{background:linear-gradient(150deg,var(--brand-lt),#fff 78%);border:1px solid #E2D9F6;border-radius:12px;padding:18px}
+.mpromo .mk{display:inline-block;background:var(--yellow);color:var(--ink);font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-bottom:9px}
+.mpromo b{display:block;font-size:15px}
+.mpromo p{margin:5px 0 12px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.mcta{font-size:13px;font-weight:700;color:var(--brand)}
+
+.grow{flex:1}
+.nav .btn{white-space:nowrap}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:40px;height:38px;cursor:pointer;align-items:center;justify-content:center;flex:none}
+.burger svg{width:20px;height:20px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round}
+
+/* mobile drawer */
+.scrim{position:fixed;inset:0;background:rgba(28,31,35,.5);z-index:190;opacity:0;visibility:hidden;transition:.2s}
+.scrim.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(89vw,370px);background:#fff;z-index:200;transform:translateX(102%);transition:transform .24s ease;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.drawer.open{transform:none}
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff}
+.dclose{background:none;border:0;font-size:24px;line-height:1;cursor:pointer;color:var(--muted);padding:4px 8px}
+.dbody{padding:6px 0 26px}
+.acc>button{width:100%;background:none;border:0;border-bottom:1px solid var(--line);font:inherit;font-weight:700;font-size:15px;text-align:left;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.acc>button .chev{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s}
+.acc.open>button{color:var(--brand)}
+.acc.open>button .chev{transform:rotate(180deg)}
+.apanel{display:none;padding:6px 18px 16px;background:var(--bg);border-bottom:1px solid var(--line)}
+.acc.open .apanel{display:block}
+.apanel h4{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--brand);font-weight:800;margin:12px 0 4px}
+.apanel a{display:block;padding:7px 0;font-size:14px;color:var(--body);font-weight:500}
+.apanel .mpromo{display:none}
+.dfoot{padding:18px}
+.dfoot .btn{width:100%;justify-content:center;margin-bottom:10px}
+
+@media(max-width:1080px){.menu,.nav .grey{display:none}.burger{display:inline-flex}}
+@media(max-width:380px){header .logo .wm{display:none}}
+@media(max-width:430px){
+  .logo{font-size:17px;gap:7px}
+  .mark{width:29px;height:29px;font-size:13px}
+  .nav .btn.sm{padding:8px 11px;font-size:12.5px}
+  .tagfree{margin-left:5px;font-size:10px;padding:1px 5px}
+}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);padding:46px 0 42px;
+  background:
+    radial-gradient(820px 460px at 88% -18%, rgba(82,42,176,.15), transparent 62%),
+    radial-gradient(520px 340px at -6% 108%, rgba(254,220,0,.26), transparent 62%),
+    var(--bg);}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(82,42,176,.13) 1px, transparent 1px);
+  background-size:22px 22px;
+  -webkit-mask-image:linear-gradient(to bottom right, #000, transparent 62%);
+  mask-image:linear-gradient(to bottom right, #000, transparent 62%);opacity:.55}
+.hero .wrap{position:relative}
+.herotop{display:grid;grid-template-columns:1.12fr .88fr;gap:44px;align-items:center;margin-bottom:26px}
+.herotop>*{min-width:0}
+.hpill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 13px 5px 6px;font-size:12.5px;font-weight:600;color:var(--body);margin-bottom:16px}
+.hpill i{font-style:normal;background:var(--brand);color:#fff;font-size:10px;font-weight:800;letter-spacing:.06em;padding:2px 8px;border-radius:999px}
+.hero h1{font-size:clamp(26px,3.9vw,40px);max-width:18ch}
+.hero h1 em{font-style:normal;color:var(--brand);position:relative;
+  background-image:linear-gradient(var(--yellow),var(--yellow));
+  background-repeat:no-repeat;background-size:100% .32em;background-position:0 88%;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .06em;border-radius:2px}
+.hero .sub{color:var(--body);font-size:16.5px;margin:14px 0 0;max-width:46ch}
+/* hero visual */
+.herovis{padding:6px 0}
+.hstack{position:relative;max-width:330px;margin-left:auto}
+.hcard{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 20px 44px rgba(82,42,176,.18);overflow:hidden}
+.hcard .pic{height:152px;background:var(--brand-lt);display:grid;place-items:center}
+.hcard .pic svg{width:86%;height:auto;display:block}
+.hcard .hb{padding:14px 16px 16px}
+.hcard .hp{font-size:19px;font-weight:800}
+.hcard .ht{font-size:13.5px;font-weight:600;margin-top:2px}
+.hcard .ha{font-size:12.5px;color:var(--muted)}
+.hcard .hm{display:flex;gap:12px;margin-top:11px;padding-top:11px;border-top:1px solid var(--line);font-size:11.5px;color:var(--body)}
+.hchip{position:absolute;display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:999px;box-shadow:0 8px 20px rgba(82,42,176,.18);font-size:12px;font-weight:700;padding:7px 13px;white-space:nowrap}
+.hchip.a{top:-15px;left:-30px;background:var(--yellow);color:var(--ink)}
+.hchip.b{bottom:18px;left:-34px;color:var(--brand)}
+.hchip svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.hnote{display:flex;align-items:center;gap:9px;margin-top:16px;font-size:13px;color:var(--body)}
+.hnote b{font-weight:700;color:var(--ink)}
+.hnote .st{color:var(--yellow-dk);letter-spacing:1px;font-size:13px}
+@media(max-width:900px){.herotop{grid-template-columns:1fr;gap:0}.herovis{display:none}.hero h1{max-width:22ch}.hero .sub{margin-bottom:24px}}
+.searchbox{background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh);overflow:hidden;max-width:940px}
+.tabs{display:flex;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:transparent;border:0;cursor:pointer;padding:13px 18px;font-weight:600;font-size:14px;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;font-family:inherit}
+.tab[aria-selected="true"]{color:var(--brand);border-bottom-color:var(--brand)}
+.srow{display:grid;grid-template-columns:1fr 1.7fr 1fr auto}
+.fld{padding:11px 16px;border-right:1px solid var(--line);min-width:0}
+.fld:nth-of-type(3){border-right:0}
+.fld label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:1px}
+.fld input,.fld select{width:100%;border:0;background:transparent;padding:2px 0;font-size:14.5px;font-weight:600;outline:none;min-width:0}
+.gobox{padding:10px;display:flex}
+.gobox .btn{width:100%;padding:0 30px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--body)}
+.chip:hover{border-color:var(--brand);color:var(--brand)}
+@media(max-width:780px){.srow{grid-template-columns:1fr 1fr}.fld{border-bottom:1px solid var(--line)}.fld:nth-of-type(2){border-right:0}.gobox{grid-column:1/-1}}
+
+/* trust strip */
+.trust{background:var(--bg);border-bottom:1px solid var(--line);padding:22px 0}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:stretch}
+.tr{display:flex;gap:13px;align-items:center;min-width:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;transition:border-color .15s,box-shadow .15s}
+.tr:hover{border-color:var(--brand);box-shadow:var(--sh)}
+.tr .ic{width:42px;height:42px;border-radius:10px;background:var(--brand-lt);color:var(--brand);display:grid;place-items:center;flex:none}
+.tr .ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block}
+.tr .tx{min-width:0}
+.tr b{display:block;font-size:14.5px;line-height:1.3}
+.tr span{display:block;font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:1px}
+@media(max-width:960px){.trust .wrap{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.trust .wrap{grid-template-columns:1fr}}
+
+/* cities */
+.citygrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.citygrid>*{min-width:0}
+.citycard{border:1px solid var(--line);border-radius:10px;padding:14px;text-align:left;cursor:pointer;background:#fff;transition:.15s;font-family:inherit;display:flex;gap:14px;align-items:center}
+.citycard:hover{border-color:var(--brand);box-shadow:var(--sh)}
+.citycard.is-hidden{display:none}
+.citycard .thumb{width:84px;height:84px;border-radius:8px;overflow:hidden;flex:none;background:var(--brand-lt);position:relative}
+.citycard .thumb svg{width:100%;height:100%;display:block}
+.citycard .code{position:absolute;left:6px;top:6px;background:rgba(255,255,255,.9);color:var(--brand);font-size:9.5px;font-weight:800;letter-spacing:.04em;padding:1px 5px;border-radius:4px}
+.citycard .txt{min-width:0;flex:1}
+.citycard .cities{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.citycard:hover{border-color:var(--brand);box-shadow:var(--sh)}
+.citycard b{display:block;font-size:15.5px;margin-bottom:2px}
+.citycard .cnt{display:block;font-size:13px;color:var(--brand);font-weight:700}
+@media(max-width:980px){.citygrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.citygrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.citygrid{grid-template-columns:1fr}}
+
+/* listing cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cards>*{min-width:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s}
+.card:hover{box-shadow:var(--sh)}
+.ph{height:158px;position:relative;display:grid;place-items:center;color:rgba(255,255,255,.75);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.badge{position:absolute;top:10px;left:10px;background:#fff;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:4px;color:var(--green)}
+.badge.amber{color:#8a5f00}
+.fav{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.92);border:0;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:14px;line-height:1}
+.cb{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column}
+.price{font-size:20px;font-weight:800}
+.price small{font-weight:600;font-size:13px;color:var(--muted)}
+.card h3{font-size:15px;margin:4px 0 2px}
+.card .addr{font-size:13.5px;color:var(--muted)}
+.meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--body)}
+.cta-row{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cta-row span{font-size:12.5px;color:var(--muted)}
+@media(max-width:940px){.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+
+/* owner band */
+.band{background:var(--brand);color:#fff;border-radius:10px;padding:32px;display:grid;grid-template-columns:1.5fr auto;gap:26px;align-items:center}
+.band>*{min-width:0}
+.band h2{font-size:clamp(20px,2.6vw,27px)}
+.band p{color:#DCD0F5;margin:9px 0 0}
+.band ul{list-style:none;margin:16px 0 0;padding:0;display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:#F0EAFC}
+.band li::before{content:"✓";color:var(--ink);background:var(--yellow);border-radius:50%;width:17px;height:17px;display:inline-grid;place-items:center;font-size:11px;font-weight:700;margin-right:8px;vertical-align:-2px}
+@media(max-width:820px){.band{grid-template-columns:1fr;padding:26px}}
+
+/* services */
+.svcs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.svcs>*{min-width:0}
+.svc{border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;background:#fff;transition:.15s}
+.svc:hover{border-color:var(--brand);box-shadow:var(--sh)}
+.svc .ic{width:38px;height:38px;border-radius:8px;background:var(--brand-lt);display:grid;place-items:center;font-size:18px;margin-bottom:10px}
+.svc h3{font-size:14.5px}
+.svc p{margin:3px 0 0;font-size:13px;color:var(--muted)}
+@media(max-width:920px){.svcs{grid-template-columns:1fr 1fr}}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;padding-top:14px}
+.plans>*{min-width:0}
+.plan{border:1px solid var(--line);border-radius:12px;padding:26px 24px;background:#fff;display:flex;flex-direction:column;position:relative;transition:box-shadow .18s,border-color .18s}
+.plan:hover{border-color:var(--brand);box-shadow:0 10px 28px rgba(82,42,176,.10)}
+.plan.hot{border:2px solid var(--brand);box-shadow:0 18px 44px rgba(82,42,176,.18);transform:translateY(-14px)}
+.plan.hot::after{content:"Most chosen";position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--yellow);color:var(--ink);font-size:11.5px;font-weight:800;letter-spacing:.03em;padding:4px 14px;border-radius:999px;white-space:nowrap;box-shadow:0 4px 12px rgba(82,42,176,.18)}
+.picon{width:42px;height:42px;border-radius:10px;background:var(--brand-lt);color:var(--brand);display:grid;place-items:center;margin-bottom:14px}
+.plan.hot .picon{background:var(--brand);color:#fff}
+.picon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block}
+.plan h3{font-size:18px}
+.plan .pdesc{font-size:13px;color:var(--muted);margin-top:3px;min-height:36px}
+.plan .amt{font-size:31px;font-weight:800;margin:10px 0 0;letter-spacing:-.02em}
+.plan .amt small{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0}
+.plan ul{list-style:none;padding:0;margin:18px 0 22px;font-size:14px;color:var(--body);flex:1;border-top:1px dashed var(--line)}
+.plan li{padding:8px 0 8px 25px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:12px;width:15px;height:15px;border-radius:50%;background:var(--brand-lt);
+  background-image:linear-gradient(var(--brand),var(--brand));background-size:7px 2px;background-position:center;background-repeat:no-repeat}
+.plan.hot li::before{background-color:var(--yellow)}
+.plan .fine{font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px}
+@media(max-width:880px){.plans{grid-template-columns:1fr}.plan.hot{transform:none}}
+
+/* projects */
+.projs{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.projs>*{min-width:0}
+.proj{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;transition:transform .18s,box-shadow .18s,border-color .18s;display:flex;flex-direction:column}
+.proj:hover{transform:translateY(-4px);border-color:var(--brand);box-shadow:0 14px 32px rgba(82,42,176,.14)}
+.proj .ph{height:128px;background:var(--brand-lt);position:relative;display:block;padding:0}
+.proj .ph svg{width:100%;height:100%;display:block}
+.proj .stage{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.94);color:var(--brand);font-size:10.5px;font-weight:800;letter-spacing:.04em;padding:3px 9px;border-radius:999px}
+.pb{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column}
+.proj h3{font-size:15px}
+.proj .by{font-size:12.5px;color:var(--muted);margin-top:2px}
+.proj .cfg{font-size:12.5px;color:var(--body);margin-top:9px;padding-top:9px;border-top:1px solid var(--line)}
+.proj .pr{font-size:16px;font-weight:800;margin-top:6px}
+.proj .pr small{font-size:11.5px;font-weight:600;color:var(--muted)}
+.proj .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:11px}
+.rera{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;color:var(--green);background:#e8f6ee;border-radius:999px;padding:4px 9px}
+.rera svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.proj .go{color:var(--brand);font-size:12.5px;font-weight:700}
+@media(max-width:940px){.projs{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.projs{grid-template-columns:1fr}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;position:relative;margin-top:30px}
+.steps>*{min-width:0}
+/* dashed rail that the step numbers sit on */
+.steps::before{content:"";position:absolute;top:0;left:16.6%;right:16.6%;border-top:2px dashed #C6B6E9;z-index:0}
+.step{position:relative;z-index:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:30px 24px 24px;transition:border-color .18s,box-shadow .18s,transform .18s}
+.step:hover{border-color:var(--brand);box-shadow:0 14px 32px rgba(82,42,176,.12);transform:translateY(-3px)}
+.step .n{position:absolute;top:-17px;left:50%;transform:translateX(-50%);width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;box-shadow:0 0 0 5px var(--bg)}
+.step .sic{width:48px;height:48px;border-radius:12px;background:var(--brand-lt);color:var(--brand);display:grid;place-items:center;margin:4px 0 14px}
+.step .sic svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block}
+.step h3{font-size:17px;margin-bottom:6px}
+.step p{margin:0;color:var(--muted);font-size:14.5px}
+.step .tip{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:var(--brand);background:var(--brand-lt);border-radius:999px;padding:4px 11px}
+.stepcta{margin-top:36px;border:1px solid #E2D9F6;border-radius:14px;padding:22px 26px;
+  background:linear-gradient(104deg,var(--brand-lt) 0%,#fff 62%);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden}
+.stepcta::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--yellow)}
+.stepcta .ct{min-width:0}
+.stepcta .ct b{display:block;font-size:17px;line-height:1.3}
+.stepcta .ct span{display:block;font-size:13.5px;color:var(--muted);margin-top:3px}
+.stepcta .acts{display:flex;gap:10px;flex-wrap:wrap;flex:none}
+.stepcta .btn{padding:12px 22px}
+@media(max-width:620px){.stepcta{padding:20px}.stepcta .acts{width:100%}.stepcta .acts .btn{flex:1;justify-content:center}}
+@media(max-width:820px){.steps{grid-template-columns:1fr;gap:34px;margin-top:26px}.steps::before{display:none}}
+
+/* testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.quotes>*{min-width:0}
+.quote{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.stars{color:var(--yellow);font-size:15px;letter-spacing:2px;margin-bottom:8px;-webkit-text-stroke:.4px var(--yellow-dk)}
+.quote p{margin:0 0 14px;font-size:14.5px}
+.who{display:flex;align-items:center;gap:10px}
+.av{width:36px;height:36px;border-radius:50%;background:var(--brand-lt);color:var(--brand);display:grid;place-items:center;font-weight:700;font-size:14px;flex:none}
+.who b{display:block;font-size:14px}
+.who span{font-size:12.5px;color:var(--muted)}
+@media(max-width:880px){.quotes{grid-template-columns:1fr}}
+
+/* app */
+.app{background:var(--brand-dk);color:#fff;border-radius:10px;padding:32px;display:grid;grid-template-columns:1.4fr auto;gap:26px;align-items:center}
+.app>*{min-width:0}
+.app h2{font-size:clamp(20px,2.5vw,26px)}
+.app p{color:rgba(255,255,255,.88);margin:9px 0 18px}
+.store{display:flex;gap:10px;flex-wrap:wrap}
+.store a{display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--yellow);color:var(--yellow);border-radius:8px;padding:8px 16px;text-align:left;transition:background .15s,color .15s}
+.store a svg{width:23px;height:23px;fill:currentColor;flex:none;display:block}
+.store a small{display:block;font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;line-height:1.3;opacity:.88}
+.store a b{display:block;font-size:15px;font-weight:800;line-height:1.25;letter-spacing:-.01em}
+.store a:hover{background:var(--yellow);color:var(--ink)}
+.store a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.qr{background:rgba(255,255,255,.10);border:1px dashed var(--yellow);border-radius:8px;padding:20px 24px;text-align:center;font-size:12.5px;font-weight:600;color:var(--yellow)}
+@media(max-width:820px){.app{grid-template-columns:1fr;padding:26px}}
+
+/* seo */
+.seo{background:var(--bg);border-top:1px solid var(--line);padding:44px 0}
+.seotabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.seotab{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--body)}
+.seotab[aria-selected="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+.seolist{columns:4;column-gap:26px;font-size:13.5px}
+.seolist a{display:block;color:var(--body);padding:4px 0;break-inside:avoid}
+.seolist a:hover{color:var(--brand)}
+@media(max-width:940px){.seolist{columns:2}}
+@media(max-width:540px){.seolist{columns:1}}
+
+/* footer */
+footer{background:var(--brand-dk);color:#C4B5E8;padding:44px 0 24px;font-size:14px}
+.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:28px}
+.fgrid>*{min-width:0}
+footer h4{color:#fff;font-size:14px;margin-bottom:12px}
+footer ul{list-style:none;padding:0;margin:0}
+footer li{padding:4px 0}
+footer a:hover{color:#fff}
+footer .logo{color:#fff;margin-bottom:10px}
+footer .logo em{color:#fff}
+.fnote{margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#B5A6E0}
+@media(max-width:840px){.fgrid{grid-template-columns:1fr 1fr}}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ================= POST PROPERTY WIZARD ================= */
+.wrap{max-width:1300px}
+body{background:var(--bg)}
+
+/* progress bar */
+.wizbar{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:62px;z-index:50}
+.wizbar .wrap{display:flex;align-items:center;gap:18px;padding-top:12px;padding-bottom:12px}
+.wizhome{width:40px;height:40px;border-radius:10px;background:var(--brand-lt);color:var(--brand);display:grid;place-items:center;flex:none}
+.wizhome svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.wiztitle{font-size:14.5px;font-weight:700;flex:none}
+.wiztitle span{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.wiztrack{flex:1;height:8px;background:var(--line);border-radius:999px;overflow:hidden;min-width:80px}
+.wizfill{height:100%;width:0;background:linear-gradient(90deg,var(--brand),#7A52D8);border-radius:999px;transition:width .3s}
+.wizpct{font-size:13.5px;font-weight:800;color:var(--brand);flex:none;min-width:66px;text-align:right}
+
+/* layout */
+.wizgrid{display:grid;grid-template-columns:236px minmax(0,1fr) 268px;gap:0;align-items:start;
+  background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:20px 0 26px}
+.wizgrid>*{min-width:0}
+
+/* step nav */
+.wiznav{border-right:1px solid var(--line);background:#fff;padding:10px 0}
+.wizstep{width:100%;display:flex;align-items:center;gap:12px;background:none;border:0;border-left:4px solid transparent;
+  padding:15px 16px;font:inherit;font-size:14px;font-weight:700;color:var(--body);cursor:pointer;text-align:left}
+.wizstep .si{width:26px;height:26px;flex:none;color:var(--muted)}
+.wizstep .si svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block}
+.wizstep:hover{background:var(--bg)}
+.wizstep.on{border-left-color:var(--brand);color:var(--brand);background:var(--brand-lt)}
+.wizstep.on .si{color:var(--brand)}
+.wizstep .tick{margin-left:auto;width:18px;height:18px;border-radius:50%;background:var(--green);color:#fff;display:none;place-items:center;flex:none}
+.wizstep.done .tick{display:grid}
+.wizstep .tick svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+/* panel */
+.wizmain{padding:24px 30px 30px;border-right:1px solid var(--line)}
+.wizmain h2{font-size:19px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.wizpanel{display:none}
+.wizpanel.on{display:block}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px;margin-bottom:18px}
+.frow.one{grid-template-columns:1fr}
+.fld2{min-width:0}
+.fld2 label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}
+.fld2 label i{font-style:normal;color:var(--brand)}
+.inp,.sel{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:12px 14px;font-size:14.5px;font-weight:600;background:#fff;font-family:inherit;color:var(--ink)}
+.sel{cursor:pointer;appearance:none;padding-right:38px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6B87' stroke-width='2.2' stroke-linecap='round'><path d='M6 9.5l6 6 6-6'/></svg>");
+  background-repeat:no-repeat;background-position:right 13px center;background-size:17px}
+.inp::placeholder{color:#9AA3AF;font-weight:500}
+.inp:focus,.sel:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-lt)}
+.inp.err,.sel.err{border-color:#D63B3B}
+.suffix{position:relative}
+.suffix .inp{padding-right:60px}
+.suffix span{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--muted)}
+
+.prefix{position:relative}
+.prefix .inp,.prefix .sel{padding-left:38px}
+.prefix svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;fill:none;stroke:var(--brand);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.uselocation{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--brand);margin-top:9px;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
+.uselocation svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.uselocation:hover{color:var(--brand-dk)}
+
+.maphead{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;margin:24px 0 2px;color:var(--ink)}
+.maphead svg{width:16px;height:16px;fill:none;stroke:var(--brand);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.maphint{font-size:12.5px;color:var(--muted);margin:0 0 12px}
+.mapbox{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;height:250px;background:#E8F0E6}
+.mapbox svg{width:100%;height:100%;display:block}
+.mapsearch{position:absolute;top:12px;left:12px;right:76px;background:#fff;border-radius:9px;box-shadow:0 3px 12px rgba(28,31,35,.14);padding:10px 13px;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden}
+.mapsearch span{overflow:hidden;text-overflow:ellipsis}
+.mapsearch svg{width:15px;height:15px;fill:none;stroke:var(--brand);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+@media(max-width:480px){.mapsearch{right:12px;top:10px;padding:8px 10px}.mapctrls{bottom:8px;right:8px}.maplocate{bottom:8px;left:8px}}
+.mapctrls{position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;gap:6px}
+.mapctrls button{width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(28,31,35,.1);font-size:17px;font-weight:700;color:var(--ink);cursor:pointer;font-family:inherit;line-height:1}
+.maplocate{position:absolute;left:12px;bottom:12px;width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(28,31,35,.1);display:grid;place-items:center;cursor:pointer}
+.maplocate svg{width:16px;height:16px;fill:none;stroke:var(--brand);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+textarea.inp{min-height:96px;resize:vertical;line-height:1.55}
+.chipset{display:flex;flex-wrap:wrap;gap:8px}
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--body);cursor:pointer;margin-top:10px}
+.amtfix{position:relative}
+.amtfix .rs{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--muted);font-size:14px;pointer-events:none}
+.amtfix input{padding-left:30px}
+.amtfix .permo{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--muted)}
+.amtfix.hasmo input{padding-right:56px}
+.tagrow{display:flex;align-items:center;gap:12px;margin-top:12px}
+.tagrow .inp{flex:1}
+.tagadd{background:none;border:0;color:var(--brand);font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;font-family:inherit}
+.tagchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tagchips .chip2{padding:8px 12px 8px 14px;display:inline-flex;align-items:center;gap:8px}
+.tagchips .chip2 b{cursor:pointer;font-weight:400;opacity:.6}
+.newtag{background:#E0295A;color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.04em;padding:2px 7px;border-radius:999px;text-transform:uppercase}
+.dirtip{display:flex;align-items:flex-start;gap:9px;background:var(--brand-lt);border-radius:9px;padding:11px 13px;margin-bottom:10px;font-size:12.5px;color:var(--body);font-weight:600}
+.dirtip svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--brand);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+.dirtip span{flex:1}
+.dirtip button{background:none;border:0;cursor:pointer;padding:2px;color:var(--muted);flex:none}
+.dirtip button svg{width:13px;height:13px;stroke:var(--muted)}
+.clearwrap{position:relative}
+.clearwrap input{padding-right:34px}
+.clearwrap .clx{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;color:var(--muted);padding:4px;line-height:0}
+.clearwrap .clx svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.chk input{width:16px;height:16px;accent-color:var(--brand);flex:none;margin:0}
+.stepper{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;width:128px}
+.stepper button{width:38px;height:42px;border:0;background:#fff;font-size:19px;font-weight:700;color:var(--brand);cursor:pointer;font-family:inherit;line-height:1}
+.stepper button:hover{background:var(--brand-lt)}
+.stepper span{flex:1;text-align:center;font-weight:700;font-size:14.5px;color:var(--ink)}
+.chip2.sm{padding:9px 18px}
+.telrow{display:flex;gap:8px}
+.telrow .cc{width:58px;flex:none;text-align:center;font-weight:700;padding:0}
+
+/* gallery */
+.galhead{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.galhead .btn{display:inline-flex;align-items:center;gap:8px}
+.galhead .btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.galcard{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:40px 20px;text-align:center}
+.galcard svg{width:32px;height:32px;stroke:var(--muted);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:14px}
+.galcard b{display:block;font-size:15px;margin-bottom:3px}
+.galcard span{display:block;font-size:13px;color:var(--muted);margin-bottom:18px}
+.galor{display:flex;align-items:center;gap:14px;margin:26px 0 18px;color:var(--muted);font-size:11.5px;font-weight:700;letter-spacing:.06em}
+.galor::before,.galor::after{content:"";flex:1;height:1px;background:var(--line)}
+.galor b{width:26px;height:26px;border-radius:50%;background:var(--muted);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800;flex:none}
+.galhint{text-align:center;font-size:13.5px;font-weight:700;margin-bottom:16px}
+.galcontact{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+.galcontact .cc2{border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.galcontact .ci{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:none;color:#fff}
+.galcontact .ci svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.galcontact .ci.wa{background:#25D366}
+.galcontact .ci.em{background:var(--brand)}
+.galcontact small{display:block;font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.galcontact strong{display:block;font-size:13.5px;margin-top:1px}
+@media(max-width:620px){.galcontact{grid-template-columns:1fr}}
+
+/* schedule */
+.svcgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.svccard{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;align-items:stretch;background:#fff}
+.svctxt{padding:18px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:9px;min-width:0}
+.svctxt h4{font-size:14px;line-height:1.4;font-weight:700;color:var(--body)}
+.svctxt h4 b{color:var(--brand)}
+.svctxt p{font-size:12.5px;color:var(--muted)}
+.svcart{width:112px;flex:none;background:var(--brand-lt);display:flex;align-items:center;justify-content:center}
+.svcart svg{width:64px;height:64px}
+.svcbtns{display:flex;gap:8px;margin-top:2px;flex-wrap:wrap}
+.svcbtns .btn{padding:9px 16px;font-size:12.5px}
+.svcbtns .btn.ghost{background:var(--bg);color:var(--body);border:1px solid var(--line)}
+@media(max-width:700px){.svcgrid{grid-template-columns:1fr}.svccard{flex-direction:column}.svcart{width:100%;height:100px}}
+
+.availchip{border:1.5px solid var(--line);border-radius:9px;padding:10px 18px;text-align:center;background:#fff;cursor:pointer;font-family:inherit}
+.availchip b{display:block;font-size:13.5px;font-weight:700;color:var(--body)}
+.availchip small{display:block;font-size:10.5px;color:var(--muted);font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:.03em}
+.availchip.on{border-color:var(--brand);background:var(--brand-lt)}
+.availchip.on b{color:var(--brand)}
+.timeprefix{position:relative}
+.timeprefix svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.timeprefix input{padding-left:36px}
+.chip2{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:9px 14px;font:inherit;font-size:13.5px;font-weight:700;color:var(--body);cursor:pointer}
+.chip2:hover{border-color:var(--brand);color:var(--brand)}
+.chip2.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.amgrid2{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.amchk{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:9px;padding:11px 13px;font-size:13.5px;font-weight:600;cursor:pointer;min-width:0}
+.amchk input{width:16px;height:16px;accent-color:var(--brand);flex:none;margin:0}
+.amchk:hover{border-color:var(--brand)}
+
+/* upload */
+.drop{border:2px dashed #C6B6E9;border-radius:12px;background:var(--brand-lt);padding:34px 20px;text-align:center;cursor:pointer}
+.drop svg{width:38px;height:38px;fill:none;stroke:var(--brand);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-bottom:10px}
+.drop b{display:block;font-size:15px}
+.drop span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.shot{aspect-ratio:4/3;border-radius:9px;background:var(--brand-lt);border:1px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--brand)}
+
+/* schedule */
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
+.day{border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:11px 4px;font:inherit;font-size:12.5px;font-weight:700;color:var(--body);cursor:pointer;text-align:center}
+.day.on{background:var(--brand);border-color:var(--brand);color:#fff}
+
+
+/* right rail */
+.wizrail{padding:18px 16px;display:flex;flex-direction:column;gap:14px;background:var(--bg)}
+.rcard2{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+.rcard2 h4{font-size:14.5px}
+.rcard2 .sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.rcard2 .art{margin:12px 0;border-radius:10px;background:var(--brand-lt);overflow:hidden}
+.rcard2 .art svg{width:100%;height:auto;display:block}
+.rcard2 p{margin:0 0 12px;font-size:12.5px;color:var(--muted);line-height:1.55}
+.rcard2 .btn{width:100%;justify-content:center;padding:11px}
+.perks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 14px}
+.perk{font-size:11.5px;font-weight:700;color:var(--body)}
+.perk .pi{width:38px;height:38px;border-radius:10px;background:var(--brand-lt);color:var(--brand);display:grid;place-items:center;margin:0 auto 6px}
+.perk .pi svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;display:block}
+
+/* footer action — sits right below this step's fields */
+.wizfoot{margin:26px -30px -30px;padding:18px 30px;background:#fff;border-top:1px solid var(--line)}
+.wizfoot .wrap{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap}
+.wizfoot .left{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:var(--body)}
+.wizfoot .left svg{width:19px;height:19px;fill:none;stroke:#1EA672;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;background:#E4F7EE;border-radius:50%;padding:2px;box-sizing:content-box}
+.wizfoot .acts{display:flex;gap:10px;margin-left:auto}
+.wizfoot .btn{padding:13px 30px}
+@media(max-width:620px){.wizfoot{margin:22px -20px -20px;padding:16px 20px}.wizfoot .left{display:none}.wizfoot .wrap{justify-content:center}.wizfoot .acts{width:100%;margin-left:0}.wizfoot .btn{flex:1;justify-content:center;padding:13px 10px}}
+
+@media(max-width:1100px){
+  .wizgrid{grid-template-columns:214px minmax(0,1fr)}
+  .wizrail{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;border-top:1px solid var(--line)}
+  .wizrail>*{flex:1;min-width:250px}
+  .wizmain{border-right:0}
+}
+@media(max-width:820px){
+  .wizgrid{grid-template-columns:1fr}
+  .wiznav{border-right:0;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;padding:0;scrollbar-width:none}
+  .wiznav::-webkit-scrollbar{display:none}
+  .wizstep{width:auto;white-space:nowrap;border-left:0;border-bottom:4px solid transparent;padding:14px 15px}
+  .wizstep.on{border-left-color:transparent;border-bottom-color:var(--brand)}
+  .wizstep .si,.wizstep .tick{display:none}
+  .wizstep.done .tick{display:none}
+  .wizmain{padding:20px}
+  .amgrid2{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .frow{grid-template-columns:1fr}
+  .shots{grid-template-columns:1fr 1fr}
+  .days{grid-template-columns:repeat(4,1fr)}
+  .amgrid2{grid-template-columns:1fr}
+  .wizfoot .acts{width:100%}
+  .wizfoot .btn{flex:1;justify-content:center;padding:13px 12px}
+}
+
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap"><span><b>100% owner properties</b> &nbsp;|&nbsp; Zero brokerage &nbsp;|&nbsp; 28 states, 380+ cities</span></div></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><span class="mark">GP</span><span class="wm">Gujju<em>Property</em></span></a>
+    <ul class="menu" id="menu"><li class="has-mega"><button class="mtrig" type="button" aria-expanded="false" aria-haspopup="true">Buy<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button><div class="mega"><div class="wrap megagrid"><div class="mcol"><h4>Property type</h4><a href="/buy/flats" onclick="demo();return false">Flats &amp; apartments</a><a href="/buy/houses" onclick="demo();return false">Independent houses</a><a href="/buy/villas" onclick="demo();return false">Villas</a><a href="/buy/builder-floors" onclick="demo();return false">Builder floors</a><a href="/buy/plots" onclick="demo();return false">Plots &amp; land</a><a href="/buy/farmhouses" onclick="demo();return false">Farmhouses</a></div><div class="mcol"><h4>By budget</h4><a href="/buy/under-25-lakh" onclick="demo();return false">Under ₹25 Lakh</a><a href="/buy/25-50-lakh" onclick="demo();return false">₹25 – 50 Lakh</a><a href="/buy/50-lakh-1-cr" onclick="demo();return false">₹50 Lakh – 1 Cr</a><a href="/buy/1-2-cr" onclick="demo();return false">₹1 – 2 Cr</a><a href="/buy/above-2-cr" onclick="demo();return false">Above ₹2 Cr</a></div><div class="mcol"><h4>Top cities</h4><a href="/mumbai" onclick="demo();return false">Mumbai</a><a href="/bengaluru" onclick="demo();return false">Bengaluru</a><a href="/delhi-ncr" onclick="demo();return false">Delhi NCR</a><a href="/hyderabad" onclick="demo();return false">Hyderabad</a><a href="/pune" onclick="demo();return false">Pune</a><a href="/ahmedabad" onclick="demo();return false">Ahmedabad</a><a href="/states" onclick="demo();return false">All states →</a></div><div class="mpromo"><span class="mk">Investment</span><b>Dholera SIR plots</b><p>NA + NOC done, clear title, starting ₹11 L.</p><a href="/dholera-sir" onclick="demo();return false" class="mcta">Explore plots →</a></div></div></div></li><li class="has-mega"><button class="mtrig" type="button" aria-expanded="false" aria-haspopup="true">Rent<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button><div class="mega"><div class="wrap megagrid"><div class="mcol"><h4>Property type</h4><a href="/rent/flats" onclick="demo();return false">Flats &amp; apartments</a><a href="/rent/houses" onclick="demo();return false">Independent houses</a><a href="/rent/builder-floors" onclick="demo();return false">Builder floors</a><a href="/rent/pg" onclick="demo();return false">PG &amp; hostels</a><a href="/rent/flatmates" onclick="demo();return false">Flatmates</a></div><div class="mcol"><h4>By budget</h4><a href="/rent/under-10000" onclick="demo();return false">Under ₹10,000</a><a href="/rent/10000-15000" onclick="demo();return false">₹10,000 – 15,000</a><a href="/rent/15000-25000" onclick="demo();return false">₹15,000 – 25,000</a><a href="/rent/25000-50000" onclick="demo();return false">₹25,000 – 50,000</a><a href="/rent/above-50000" onclick="demo();return false">Above ₹50,000</a></div><div class="mcol"><h4>Top cities</h4><a href="/mumbai" onclick="demo();return false">Mumbai</a><a href="/bengaluru" onclick="demo();return false">Bengaluru</a><a href="/delhi-ncr" onclick="demo();return false">Delhi NCR</a><a href="/hyderabad" onclick="demo();return false">Hyderabad</a><a href="/pune" onclick="demo();return false">Pune</a><a href="/ahmedabad" onclick="demo();return false">Ahmedabad</a><a href="/states" onclick="demo();return false">All states →</a></div><div class="mpromo"><span class="mk">Included</span><b>Free rent agreement</b><p>E-stamped and delivered home with the Relax plan.</p><a href="/plans" onclick="demo();return false" class="mcta">See plans →</a></div></div></div></li><li class="has-mega"><button class="mtrig" type="button" aria-expanded="false" aria-haspopup="true">Commercial<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button><div class="mega"><div class="wrap megagrid"><div class="mcol"><h4>Buy</h4><a href="/commercial/buy/office" onclick="demo();return false">Office space</a><a href="/commercial/buy/shops" onclick="demo();return false">Shops &amp; showrooms</a><a href="/commercial/buy/warehouse" onclick="demo();return false">Warehouses</a><a href="/commercial/buy/industrial-land" onclick="demo();return false">Industrial land</a></div><div class="mcol"><h4>Rent</h4><a href="/commercial/rent/office" onclick="demo();return false">Office space</a><a href="/commercial/rent/shops" onclick="demo();return false">Shops &amp; showrooms</a><a href="/commercial/rent/warehouse" onclick="demo();return false">Warehouses</a><a href="/commercial/rent/coworking" onclick="demo();return false">Coworking desks</a></div><div class="mcol"><h4>Business hubs</h4><a href="/commercial/bkc-mumbai" onclick="demo();return false">BKC, Mumbai</a><a href="/commercial/cyber-city" onclick="demo();return false">Cyber City, Gurugram</a><a href="/commercial/orr-bengaluru" onclick="demo();return false">Outer Ring Road, Bengaluru</a><a href="/commercial/hitec-city" onclick="demo();return false">HITEC City, Hyderabad</a><a href="/commercial/sg-highway" onclick="demo();return false">SG Highway, Ahmedabad</a></div><div class="mpromo"><span class="mk">Owners</span><b>List commercial space</b><p>Shops, offices and godowns — no brokerage, no listing fee.</p><a href="/post" onclick="demo();return false" class="mcta">Post free →</a></div></div></div></li><li class="has-mega"><button class="mtrig" type="button" aria-expanded="false" aria-haspopup="true">New Projects<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button><div class="mega"><div class="wrap megagrid"><div class="mcol"><h4>By stage</h4><a href="/projects/ready-to-move" onclick="demo();return false">Ready to move</a><a href="/projects/under-construction" onclick="demo();return false">Under construction</a><a href="/projects/launching-soon" onclick="demo();return false">Launching soon</a><a href="/projects/plots" onclick="demo();return false">Open plots</a></div><div class="mcol"><h4>By type</h4><a href="/projects/apartments" onclick="demo();return false">Apartments</a><a href="/projects/villas" onclick="demo();return false">Villas &amp; rowhouses</a><a href="/projects/plotted" onclick="demo();return false">Plotted development</a><a href="/projects/commercial" onclick="demo();return false">Commercial projects</a></div><div class="mcol"><h4>Before you buy</h4><a href="/projects/rera" onclick="demo();return false">RERA registered only</a><a href="/projects/builders" onclick="demo();return false">Browse by builder</a><a href="/insights/price-trends" onclick="demo();return false">Price trends by locality</a><a href="/insights/possession" onclick="demo();return false">Possession timelines</a></div><div class="mpromo"><span class="mk">Now open</span><b>Dholera Greens</b><p>Activation Area plots, 150–450 sq.yd, from ₹11 L.</p><a href="/projects/dholera-greens" onclick="demo();return false" class="mcta">View project →</a></div></div></div></li><li class="has-mega"><button class="mtrig" type="button" aria-expanded="false" aria-haspopup="true">Services<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button><div class="mega"><div class="wrap megagrid"><div class="mcol"><h4>Paperwork</h4><a href="/services/rent-agreement" onclick="demo();return false">Rent agreement</a><a href="/services/title-check" onclick="demo();return false">Title &amp; 7/12 check</a><a href="/services/registration" onclick="demo();return false">Registration help</a><a href="/services/plot-survey" onclick="demo();return false">Plot survey</a></div><div class="mcol"><h4>Money</h4><a href="/services/home-loan" onclick="demo();return false">Home loan</a><a href="/services/lap" onclick="demo();return false">Loan against property</a><a href="/services/valuation" onclick="demo();return false">Property valuation</a></div><div class="mcol"><h4>Moving &amp; care</h4><a href="/services/packers-movers" onclick="demo();return false">Packers &amp; movers</a><a href="/services/cleaning" onclick="demo();return false">Move-in cleaning</a><a href="/services/property-management" onclick="demo();return false">Property management</a><a href="/services/tenant-verification" onclick="demo();return false">Tenant verification</a></div><div class="mpromo"><span class="mk">Optional</span><b>Assisted plans</b><p>Free · Relax ₹2,499 · NRI Assist ₹7,999. Searching stays free.</p><a href="/plans" onclick="demo();return false" class="mcta">Compare plans →</a></div></div></div></li><li class="has-dd"><button class="mtrig" type="button" aria-expanded="false" aria-haspopup="true">For Owners<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button><div class="dd"><a href="/post" onclick="demo();return false">Post property</a><a href="/owner" onclick="demo();return false">Owner dashboard</a><a href="/services/property-management" onclick="demo();return false">Property management</a><a href="/services/tenant-verification" onclick="demo();return false">Tenant verification</a><a href="/nri" onclick="demo();return false">NRI desk</a><a href="/plans" onclick="demo();return false">Owner plans</a></div></li></ul>
+    <span class="grow"></span>
+    <button class="btn grey sm" onclick="demo()">Log in</button>
+    <button class="btn sm" onclick="demo()">Post property <span class="tagfree">FREE</span></button>
+    <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" onclick="openDrawer()">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer" aria-label="Menu">
+  <div class="dhead">
+    <span class="logo"><span class="mark">GP</span><span class="wm">Gujju<em>Property</em></span></span>
+    <button class="dclose" type="button" aria-label="Close menu" onclick="closeDrawer()">&times;</button>
+  </div>
+  <div class="dbody" id="dbody"></div>
+  <div class="dfoot">
+    <button class="btn" onclick="demo()">Post property <span class="tagfree">FREE</span></button>
+    <button class="btn grey" onclick="demo()">Log in</button>
+  </div>
+</aside>
+
+<!-- HERO -->
+<div class="wizbar">
+  <div class="wrap">
+    <span class="wizhome"><svg viewBox="0 0 24 24"><path d="M4 20V9.5l8-5.5 8 5.5V20z M9.5 20v-5.5h5V20"/></svg></span>
+    <span class="wiztitle">Post your property<span>3 BHK · Rent · Pune</span></span>
+    <span class="wiztrack"><span class="wizfill" id="wizfill"></span></span>
+    <span class="wizpct" id="wizpct">0% done</span>
+    <button class="btn grey sm" type="button" onclick="demo()">Preview</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="wizgrid">
+    <nav class="wiznav" id="wiznav" aria-label="Listing steps"></nav>
+
+    <div class="wizmain">
+      <!-- 1 PROPERTY DETAILS -->
+      <section class="wizpanel on" data-step="0">
+        <h2>Property details</h2>
+        <div class="frow">
+          <div class="fld2"><label for="f_apt">Property type <i>*</i></label>
+            <select class="sel req" id="f_apt" onchange="onCommPtype()"><option value="">Select</option>
+              <option>Office space</option><option>Co-working</option><option>Shop</option><option>Showroom</option>
+              <option>Godown/Warehouse</option><option>Industrial shed</option><option>Industrial building</option>
+              <option>Restaurant/Cafe</option><option>Other business</option></select></div>
+          <div class="fld2"><label for="f_btype">Building type <i>*</i></label>
+            <div class="prefix"><svg viewBox="0 0 24 24"><path d="M5 21V5.5a1.5 1.5 0 0 1 1.5-1.5h11A1.5 1.5 0 0 1 19 5.5V21"/><path d="M9 8h1.5M13.5 8H15M9 12h1.5M13.5 12H15M9 16h1.5M13.5 16H15"/><path d="M3 21h18"/></svg>
+              <select class="sel req" id="f_btype"><option value="">Select</option></select></div></div>
+        </div>
+        <div class="frow one">
+          <div class="fld2"><label for="f_age">Age of property <i>*</i></label>
+            <select class="sel req" id="f_age"><option value="">Select</option>
+              <option>Under construction</option><option>Less than a year</option><option>1-3 years</option>
+              <option>3-5 years</option><option>5-10 years</option><option>10+ years</option></select></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_floor">Floor <i>*</i></label>
+            <select class="sel req" id="f_floor"><option value="">Select</option>
+              <option>Ground</option><option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6</option><option>7+</option></select></div>
+          <div class="fld2"><label for="f_tfloor">Total floor <i>*</i></label>
+            <select class="sel req" id="f_tfloor"><option value="">Select</option>
+              <option>1</option><option>2</option><option>4</option><option>7</option>
+              <option>11</option><option>14</option><option>20+</option></select></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_built">Super built up area <i>*</i></label>
+            <div class="suffix"><input class="inp req" id="f_built" inputmode="numeric" placeholder="Super built up area"><span>sq.ft</span></div></div>
+          <div class="fld2"><label for="f_furnish0">Furnishing <i>*</i></label>
+            <select class="sel req" id="f_furnish0"><option value="">Select</option>
+              <option>Fully furnished</option><option>Semi furnished</option><option>Unfurnished</option></select></div>
+        </div>
+        <div class="frow one">
+          <div class="fld2"><label>Other features</label>
+            <div class="chipset">
+              <button class="chip2" type="button" onclick="pick(this)">On main road</button>
+              <button class="chip2" type="button" onclick="pick(this)">Corner property</button>
+            </div></div>
+        </div>
+      </section>
+
+      <!-- 2 LOCALITY -->
+      <section class="wizpanel" data-step="1">
+        <h2>Location details</h2>
+        <div class="frow">
+          <div class="fld2"><label for="f_city">City <i>*</i></label>
+            <select class="sel req" id="f_city"><option value="">Select</option>
+              <option>Mumbai</option><option>Pune</option><option>Bengaluru</option><option>Hyderabad</option>
+              <option>Delhi NCR</option><option>Ahmedabad</option><option>Dholera SIR</option></select></div>
+          <div class="fld2"><label for="f_loc">Locality <i>*</i></label>
+            <div class="prefix clearwrap"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>
+              <input class="inp req" id="f_loc" placeholder="Enter locality or society name">
+              <button type="button" class="clx" onclick="document.getElementById('f_loc').value=''"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+            <button class="uselocation" type="button" onclick="demo()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>Use current location</button></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_street">Street / Area <i>*</i></label>
+            <div class="clearwrap"><input class="inp req" id="f_street" placeholder="e.g. Evergreen street">
+              <button type="button" class="clx" onclick="document.getElementById('f_street').value=''"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div>
+          <div class="fld2"><label for="f_landmark">Landmark <span style="text-transform:none;font-weight:600;color:var(--muted)">(optional)</span></label>
+            <div class="clearwrap"><input class="inp" id="f_landmark" placeholder="Popular landmark nearby">
+              <button type="button" class="clx" onclick="document.getElementById('f_landmark').value=''"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div>
+        </div>
+
+        <div class="maphead"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Mark locality on map</div>
+        <p class="maphint">Set the property location using the search box or by moving the map</p>
+        <div class="mapbox">
+          <svg viewBox="0 0 600 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="600" height="250" fill="#E8F0E6"/>
+            <path d="M0 40 Q150 10 300 55 T600 30V0H0z" fill="#DCEBDC"/>
+            <path d="M0 250 Q120 190 260 220 T600 200V250z" fill="#D8E9E4"/>
+            <path d="M60 250C90 190 70 140 130 120S220 150 260 100 380 60 420 110 500 130 560 90" stroke="#BFDCE8" stroke-width="16" fill="none" stroke-linecap="round" opacity=".8"/>
+            <g stroke="#CBD3D6" stroke-width="3" fill="none">
+              <path d="M0 90h600"/><path d="M0 170h600"/><path d="M120 0v250"/><path d="M420 0v250"/>
+              <path d="M0 130h250"/><path d="M340 250V150h260"/>
+            </g>
+            <g stroke="#B8C2C6" stroke-width="1.4" fill="none" opacity=".7">
+              <path d="M0 60h600"/><path d="M0 210h600"/><path d="M200 0v250"/><path d="M500 0v250"/>
+            </g>
+            <circle cx="300" cy="125" r="70" fill="none" stroke="#522AB0" stroke-width="1.6" stroke-dasharray="5 6" opacity=".55"/>
+            <g transform="translate(300,110)">
+              <ellipse cx="0" cy="26" rx="9" ry="3" fill="#1C1F23" opacity=".18"/>
+              <path d="M0 0C-11 0-20 9-20 20c0 15 20 32 20 32s20-17 20-32C20 9 11 0 0 0z" fill="#522AB0"/>
+              <circle cx="0" cy="19" r="7.5" fill="#fff"/>
+            </g>
+          </svg>
+          <div class="mapsearch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search your society or nearest landmark</span></div>
+          <div class="maplocate" title="Use current location"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
+          <div class="mapctrls"><button type="button" aria-label="Zoom in">+</button><button type="button" aria-label="Zoom out">&minus;</button></div>
+        </div>
+
+        <div class="frow one" style="margin-top:18px">
+          <div class="fld2"><label for="f_soc">Project or society <span style="text-transform:none;font-weight:600;color:var(--muted)">(optional)</span></label>
+            <input class="inp" id="f_soc" placeholder="e.g. Rohan Abhilasha"></div>
+        </div>
+      </section>
+
+      <!-- 3 RENTAL -->
+      <section class="wizpanel" data-step="2">
+        <h2>Provide rental details about your property</h2>
+        <div class="frow">
+          <div class="fld2"><label for="f_rent">Expected rent <i>*</i></label>
+            <div class="amtfix hasmo"><span class="rs">₹</span><input class="inp req" id="f_rent" inputmode="numeric" placeholder="Enter amount"><span class="permo">/ Month</span></div>
+            <label class="chk" style="margin-top:9px"><input type="checkbox" id="f_neg">Rent negotiable</label></div>
+          <div class="fld2"><label style="visibility:hidden">Maintenance</label>
+            <label class="chk" style="margin-top:12px"><input type="checkbox" id="f_maintextra">Maintenance extra</label></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_dep">Deposit <i>*</i></label>
+            <div class="amtfix"><span class="rs">₹</span><input class="inp req" id="f_dep" inputmode="numeric" placeholder="Enter amount"></div>
+            <label class="chk" style="margin-top:9px"><input type="checkbox" id="f_depneg">Deposit negotiable</label></div>
+          <div class="fld2"><label for="f_lease">Lease duration (years)</label>
+            <select class="sel" id="f_lease"><option value="">Lease duration</option>
+              <option>1</option><option>2</option><option>3</option><option>5</option><option>9</option></select></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_avail">Available from <i>*</i></label>
+            <input class="inp req" id="f_avail" type="date"></div>
+          <div class="fld2"><label for="f_lockin">Lockin period (years)</label>
+            <select class="sel" id="f_lockin"><option value="">Lockin period</option>
+              <option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+        </div>
+        <div class="frow one">
+          <div class="fld2"><label>Ideal for</label>
+            <div class="chipset">
+              <button class="chip2" type="button" onclick="pick(this)">Bank</button>
+              <button class="chip2" type="button" onclick="pick(this)">Service center</button>
+              <button class="chip2" type="button" onclick="pick(this)">Show room</button>
+              <button class="chip2" type="button" onclick="pick(this)">ATM</button>
+              <button class="chip2" type="button" onclick="pick(this)">Retail</button>
+            </div>
+            <div class="tagrow"><input class="inp" id="f_othertag" placeholder="Add other tags"><button type="button" class="tagadd" onclick="addTag()">create new tag</button></div>
+            <div class="tagchips" id="tagchips"></div></div>
+        </div>
+      </section>
+
+      <!-- 4 AMENITIES -->
+      <section class="wizpanel" data-step="3">
+        <h2>Amenities</h2>
+        <div class="frow">
+          <div class="fld2"><label for="f_backup">Power backup <i>*</i></label>
+            <select class="sel req" id="f_backup"><option value="">Select</option>
+              <option>None</option><option>Partial</option><option>Full</option></select></div>
+          <div class="fld2"><label for="f_lift">Lift <i>*</i></label>
+            <select class="sel req" id="f_lift"><option value="">Select</option>
+              <option>Yes</option><option>No</option></select></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_park">Parking <i>*</i></label>
+            <select class="sel req" id="f_park"><option value="">Select</option>
+              <option>None</option><option>Bike</option><option>Car</option><option>Bike and car</option></select></div>
+          <div class="fld2"><label for="f_wash">Washroom(s) <i>*</i></label>
+            <select class="sel req" id="f_wash"><option value="">Select</option>
+              <option>Attached</option><option>Common</option><option>Both</option></select></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_water">Water storage facility</label>
+            <select class="sel" id="f_water"><option value="">Select</option>
+              <option>Corporation</option><option>Borewell</option><option>Both</option></select></div>
+          <div class="fld2"><label for="f_secy">Security</label>
+            <select class="sel" id="f_secy"><option value="">Select</option>
+              <option>Yes</option><option>No</option></select></div>
+        </div>
+        <div class="frow one">
+          <div class="fld2"><label for="f_wifi">Wifi</label>
+            <select class="sel" id="f_wifi"><option value="">Select</option>
+              <option>Yes</option><option>No</option></select></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_cond">Current property condition?</label>
+            <select class="sel" id="f_cond"><option value="">Select</option>
+              <option>Vacant</option><option>Tenant on notice period</option><option>New property</option><option>Need help to manage</option></select></div>
+          <div class="fld2"><label for="f_biz">What business is currently running?</label>
+            <select class="sel" id="f_biz"><option value="">Select</option>
+              <option>None (vacant)</option><option>Office</option><option>Retail store</option><option>Restaurant/Cafe</option><option>Bank</option><option>Other</option></select></div>
+        </div>
+        <div class="frow one">
+          <div class="fld2"><label>More similar units/properties available? <span style="text-transform:none;font-weight:600;color:var(--muted)">(optional)</span></label>
+            <div class="chipset yn"><button class="chip2 sm" type="button" onclick="yn(this,'f_similar','No')">No</button><button class="chip2 sm" type="button" onclick="yn(this,'f_similar','Yes')">Yes</button></div>
+            <input type="hidden" id="f_similar"></div>
+        </div>
+        <div class="frow one">
+          <div class="fld2"><label style="display:flex;align-items:center;gap:8px">Add directions tip for your tenants <span class="newtag">New</span></label>
+            <div class="dirtip" id="dirtip">
+              <svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>
+              <span>Don't want calls asking location? Add directions to reach using landmarks</span>
+              <button type="button" aria-label="Dismiss" onclick="document.getElementById('dirtip').remove()"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+            </div>
+            <textarea class="inp" id="f_dir" placeholder="Eg. Take the road opposite to Amrita College, take right after 300m…"></textarea></div>
+        </div>
+      </section>
+
+      <!-- 5 GALLERY -->
+      <section class="wizpanel" data-step="4">
+        <div class="galhead">
+          <h2 style="border:0;margin:0;padding:0">Upload photos &amp; videos</h2>
+          <button class="btn" type="button" onclick="demo()"><svg viewBox="0 0 24 24"><path d="M12 16V4M8 8l4-4 4 4"/><path d="M4 14v4.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V14"/></svg>Upload through phone</button>
+        </div>
+
+        <div class="galcard">
+          <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M8 6l1.6-2.4A1.5 1.5 0 0 1 10.9 3h2.2a1.5 1.5 0 0 1 1.3.7L16 6"/><circle cx="12" cy="13" r="3.4"/></svg>
+          <b>Add photos to get 5x more responses</b>
+          <span>Tenants are far more likely to enquire on listings with clear photos</span>
+          <button class="btn" type="button" onclick="demo()">Add photos</button>
+        </div>
+
+        <div class="galor"><b>OR</b>WE CAN UPLOAD ON YOUR BEHALF</div>
+        <p class="galhint">We can upload photos on your behalf</p>
+        <div class="galcontact">
+          <div class="cc2"><span class="ci wa"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8.6 19z"/></svg></span>
+            <div><small>WhatsApp us on</small><strong>+91 98765 43210</strong></div></div>
+          <div class="cc2"><span class="ci em"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+            <div><small>Email to</small><strong>photos@gujjuproperty.com</strong></div></div>
+        </div>
+
+        <div class="galcard">
+          <svg viewBox="0 0 24 24"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10.5l4-2.3v7.6l-4-2.3"/></svg>
+          <b>Add videos to get 5x more responses</b>
+          <span>A short walkthrough answers most questions before the first call</span>
+          <button class="btn" type="button" onclick="demo()">Add videos</button>
+        </div>
+
+        <div class="shots" style="margin-top:22px">
+          <div class="shot">Living room</div><div class="shot">Bedroom</div>
+          <div class="shot">Kitchen</div><div class="shot">Balcony</div>
+        </div>
+      </section>
+
+      <!-- 6 ADDITIONAL INFORMATION -->
+      <section class="wizpanel" data-step="5">
+        <h2>Additional information</h2>
+        <div class="frow one">
+          <div class="fld2"><label for="f_pdesc">Property description</label>
+            <textarea class="inp" id="f_pdesc" placeholder="Provide any specific description you want to add about your property like furnishing and other amenities…"></textarea></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_prevocc">Previous occupancy</label>
+            <select class="sel" id="f_prevocc"><option value="">Select</option>
+              <option>First time renting</option><option>Currently rented</option><option>Previously rented</option></select></div>
+          <div class="fld2"><label for="f_showby">Who will show the property? <i>*</i></label>
+            <div class="prefix"><svg viewBox="0 0 24 24"><path d="M15 7a4 4 0 1 1-4-4"/><path d="M11 3l7 7-1.5 1.5L9 4"/><circle cx="7" cy="17" r="3"/></svg>
+              <select class="sel req" id="f_showby"><option value="">Select</option>
+                <option>Need help</option><option>I will show</option><option>Neighbours</option>
+                <option>Friends/Relatives</option><option>Security</option><option>Tenants</option><option>Others</option></select></div></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_paint">I want to get my property painted</label>
+            <select class="sel" id="f_paint"><option value="">Select</option>
+              <option>Yes, contact me</option><option>Not now</option></select></div>
+          <div class="fld2"><label for="f_clean">I want to get my property cleaned</label>
+            <select class="sel" id="f_clean"><option value="">Select</option>
+              <option>Yes, contact me</option><option>Not now</option></select></div>
+        </div>
+        <div class="frow one">
+          <div class="fld2"><label for="f_alt">Secondary number <span style="text-transform:none;font-weight:600;color:var(--muted)">(optional)</span></label>
+            <div class="telrow"><input class="inp cc" value="+91" readonly><input class="inp" id="f_alt" inputmode="tel" placeholder="Secondary number"></div></div>
+        </div>
+      </section>
+
+      <!-- 7 SCHEDULE -->
+      <section class="wizpanel" data-step="6">
+        <h2>Make house visits hassle-free — share your availability</h2>
+
+        <div class="svcgrid">
+          <div class="svccard">
+            <div class="svctxt">
+              <h4>Freshly painted homes get rented out <b>73% faster</b></h4>
+              <p>Professional painting services at the best prices</p>
+              <div class="svcbtns"><button class="btn" type="button" onclick="demo()">Book now</button></div>
+            </div>
+            <div class="svcart"><svg viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="8" y="10" width="30" height="14" rx="3" fill="#fff" stroke="#522AB0" stroke-width="2.4"/>
+              <rect x="12" y="14" width="22" height="6" rx="1.5" fill="#FEDC00"/>
+              <rect x="20" y="24" width="6" height="20" rx="2" fill="#522AB0"/>
+              <path d="M23 44v9" stroke="#522AB0" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="46" cy="40" r="12" fill="#fff" stroke="#522AB0" stroke-width="2"/>
+              <path d="M46 33v14M39 40h14" stroke="#EFE9FB" stroke-width="2"/>
+            </svg></div>
+          </div>
+          <div class="svccard">
+            <div class="svctxt">
+              <h4>Get your home tenant-ready with <b>deep cleaning</b></h4>
+              <p>Trusted by thousands of owners across India</p>
+              <div class="svcbtns"><button class="btn" type="button" onclick="demo()">Book now</button><button class="btn ghost" type="button" onclick="demo()">Not now</button></div>
+            </div>
+            <div class="svcart"><svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 10c9 10 14 18 14 25a14 14 0 0 1-28 0c0-7 5-15 14-25z" fill="#fff" stroke="#522AB0" stroke-width="2.4"/>
+              <circle cx="32" cy="37" r="6" fill="#EFE9FB"/>
+              <path d="M18 44c2 6 8 10 14 10" stroke="#522AB0" stroke-width="2" stroke-linecap="round" fill="none"/>
+            </svg></div>
+          </div>
+        </div>
+
+        <div class="frow one">
+          <div class="fld2"><label>Availability</label>
+            <div class="chipset single" id="f_availset">
+              <button class="availchip on" type="button" onclick="pickOne(this)"><b>Everyday</b><small>Mon&ndash;Sun</small></button>
+              <button class="availchip" type="button" onclick="pickOne(this)"><b>Weekday</b><small>Mon&ndash;Fri</small></button>
+              <button class="availchip" type="button" onclick="pickOne(this)"><b>Weekend</b><small>Sat, Sun</small></button>
+            </div></div>
+        </div>
+        <div class="frow">
+          <div class="fld2"><label for="f_from">Start time</label>
+            <div class="timeprefix"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><input class="inp" id="f_from" type="time" value="10:00"></div></div>
+          <div class="fld2"><label for="f_to">End time</label>
+            <div class="timeprefix"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><input class="inp" id="f_to" type="time" value="19:00"></div></div>
+        </div>
+        <div class="frow one">
+          <div class="fld2"><label class="chk" style="margin-top:0"><input type="checkbox" id="f_allday">Available all day</label></div>
+        </div>
+
+        <div class="frow one">
+          <div class="fld2"><label>Who will show the property?</label>
+            <div class="chipset">
+              <button class="chip2" type="button" onclick="pick(this)">I will</button>
+              <button class="chip2" type="button" onclick="pick(this)">A family member</button>
+              <button class="chip2" type="button" onclick="pick(this)">Society security</button>
+            </div></div>
+        </div>
+      </section>
+
+      <div class="wizfoot">
+        <div class="wrap">
+          <span class="left" id="wizleft"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Saved automatically. You can close this and come back.</span>
+          <span class="acts">
+            <button class="btn grey" type="button" id="wizback" onclick="goStep(cur-1)">Back</button>
+            <button class="btn" type="button" id="wiznext" onclick="nextStep()">Save &amp; continue</button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="wizrail">
+      <div class="rcard2">
+        <h4>Rent agreement</h4>
+        <div class="sub">E-stamped, delivered home</div>
+        <div class="art"><svg viewBox="0 0 240 130" aria-hidden="true">
+          <rect width="240" height="130" fill="#EFE9FB"/>
+          <rect x="86" y="34" width="68" height="62" rx="5" fill="#fff" stroke="#522AB0" stroke-width="3"/>
+          <g stroke="#C9B9EE" stroke-width="4" stroke-linecap="round"><path d="M98 50h44M98 62h44M98 74h28"/></g>
+          <circle cx="140" cy="86" r="9" fill="#FEDC00"/>
+          <g fill="#522AB0"><circle cx="46" cy="52" r="11"/><path d="M32 96c0-9 6-15 14-15s14 6 14 15z"/></g>
+          <g fill="#41208C"><circle cx="194" cy="52" r="11"/><path d="M180 96c0-9 6-15 14-15s14 6 14 15z"/></g>
+        </svg></div>
+        <p>No visit to the sub-registrar office. Signed and delivered in 48 hours.</p>
+        <button class="btn" type="button" onclick="demo()">Get it now</button>
+      </div>
+
+      <div class="rcard2">
+        <h4>Find tenants faster</h4>
+        <div class="sub">Owner plans</div>
+        <div class="perks">
+          <div class="perk"><span class="pi"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg></span>Privacy</div>
+          <div class="perk"><span class="pi"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg></span>Promoted</div>
+          <div class="perk"><span class="pi"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 1 8 8H4z"/><path d="M8.5 11h7M8.5 14.5h4"/></svg></span>Social reach</div>
+          <div class="perk"><span class="pi"><svg viewBox="0 0 24 24"><path d="M4 19V8M10 19V5M16 19v-7M4 19h16"/></svg></span>Price advice</div>
+        </div>
+        <button class="btn line" type="button" onclick="demo()">See owner plans</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="#"><span class="mark">GP</span><span class="wm">Gujju<em>Property</em></span></a>
+        <p style="max-width:36ch;margin:0">India's owner-to-owner property portal. Mumbai to Kochi, Delhi NCR to Dholera — no brokerage anywhere in between.</p>
+      </div>
+      <div><h4>Buy</h4><ul>
+        <li><a href="#">Flats in Mumbai</a></li><li><a href="#">Flats in Bengaluru</a></li>
+        <li><a href="#">Plots in Dholera SIR</a></li><li><a href="#">Villas in Hyderabad</a></li></ul></div>
+      <div><h4>For Owners</h4><ul>
+        <li><a href="#">Post a property</a></li><li><a href="#">Owner plans</a></li>
+        <li><a href="#">Property management</a></li><li><a href="#">NRI desk</a></li></ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="#">About us</a></li><li><a href="#">Contact</a></li>
+        <li><a href="#">Terms</a></li><li><a href="#">Privacy policy</a></li></ul></div>
+    </div>
+    <div class="fnote">
+      <span>© 2026 GujjuProperty. All listings are owner-submitted and independently verified.</span>
+      <span>Mumbai · Delhi NCR · Bengaluru · Hyderabad · Pune · Chennai · Ahmedabad · Kolkata</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* sample data only — nothing is wired to a backend */
+/* ---------------- navigation ---------------- */
+(function(){
+  const menu = document.getElementById('menu');
+
+  /* click / keyboard toggle (hover handles plain desktop pointing) */
+  menu.querySelectorAll('.mtrig').forEach(t=>{
+    t.addEventListener('click', e=>{
+      e.stopPropagation();
+      const li = t.parentElement, wasOpen = li.classList.contains('open');
+      closeAll();
+      if(!wasOpen){ li.classList.add('open'); t.setAttribute('aria-expanded','true'); }
+    });
+  });
+  function closeAll(){
+    menu.querySelectorAll('li.open').forEach(li=>{
+      li.classList.remove('open');
+      li.querySelector('.mtrig').setAttribute('aria-expanded','false');
+    });
+  }
+  document.addEventListener('click', closeAll);
+  document.addEventListener('keydown', e=>{
+    if(e.key === 'Escape'){ closeAll(); closeDrawer(); }
+  });
+
+  /* build the mobile drawer by cloning the desktop menu — one source of truth */
+  const body = document.getElementById('dbody');
+  menu.querySelectorAll(':scope > li').forEach(li=>{
+    const label = li.querySelector('.mtrig').firstChild.textContent.trim();
+    const panel = li.querySelector('.mega .megagrid') || li.querySelector('.dd');
+    const acc = document.createElement('div');
+    acc.className = 'acc';
+    acc.innerHTML = '<button type="button" aria-expanded="false">' + label +
+      '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button>' +
+      '<div class="apanel"></div>';
+    acc.querySelector('.apanel').appendChild(panel.cloneNode(true));
+    acc.querySelector('button').addEventListener('click', function(){
+      const on = acc.classList.toggle('open');
+      this.setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+    body.appendChild(acc);
+  });
+})();
+
+function openDrawer(){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('scrim').classList.add('open');
+  document.querySelector('.burger').setAttribute('aria-expanded','true');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('scrim').classList.remove('open');
+  document.querySelector('.burger').setAttribute('aria-expanded','false');
+  document.body.style.overflow = '';
+}
+
+function demo(){alert('Demo page — search and forms are not connected to a backend yet.');}
+
+/* ================= POST PROPERTY WIZARD ================= */
+const STEPS = [
+  ['Property details', 'M4 20V9.5l8-5.5 8 5.5V20z M9.5 20v-5.5h5V20'],
+  ['Locality details', 'M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z M12 12.4a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8z'],
+  ['Rental details',   'M5 21V6.5l7-3.5 7 3.5V21M9 21v-4.5h6V21M8.5 9.5h2M13.5 9.5h2M8.5 13h2M13.5 13h2'],
+  ['Amenities',        'M3.5 20.5V11a8.5 8.5 0 0 1 17 0v9.5z M3.5 15.5h17M8.5 11v9.5M15.5 11v9.5'],
+  ['Gallery',          'M3.5 7.5h4l2-3h5l2 3h4v12h-17z M12 16.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8z'],
+  ['Additional information', 'M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z M12 9v3.2l2.2 2.2'],
+  ['Schedule',         'M4.5 6.5h15v13h-15z M4.5 10.5h15M8.5 3.5v4M15.5 3.5v4M9 14.5h2M13 14.5h2'],
+];
+const AMEN_LIST = ['Lift','Power backup','Gym','Swimming pool','Clubhouse','Kids play area',
+  'Jogging track','Landscaped garden','Indoor games','Intercom','CCTV','Fire safety',
+  'Rainwater harvesting','Visitor parking','Sewage treatment','Air conditioner','Servant room',
+  'Gas pipeline','House keeping','Internet services','Shopping center','Park'];
+let cur = 0;
+
+/* step nav */
+document.getElementById('wiznav').innerHTML = STEPS.map(([label,d],i)=>
+  `<button class="wizstep${i===0?' on':''}" type="button" data-i="${i}" onclick="goStep(${i})">
+     <span class="si"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"/></svg></span>${label}
+     <span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+   </button>`).join('');
+
+const amgrid2El = document.getElementById('amgrid2');
+if(amgrid2El) amgrid2El.innerHTML = AMEN_LIST.map(a=>
+  `<label class="amchk"><input type="checkbox">${a}</label>`).join('');
+
+function goStep(i){
+  if(i<0 || i>=STEPS.length) return;
+  cur = i;
+  document.querySelectorAll('.wizpanel').forEach(p=>p.classList.toggle('on', +p.dataset.step===i));
+  document.querySelectorAll('.wizstep').forEach(b=>b.classList.toggle('on', +b.dataset.i===i));
+  document.getElementById('wizback').style.visibility = i===0 ? 'hidden' : 'visible';
+  document.getElementById('wiznext').textContent = i===STEPS.length-1 ? 'Publish listing' : 'Save & continue';
+  window.scrollTo({top:0,behavior:'smooth'});
+  markDone();
+  refreshNextBtn();
+}
+
+/* Save & continue only lights up once this step's required fields are filled */
+function refreshNextBtn(){
+  const panel = document.querySelector(`.wizpanel[data-step="${cur}"]`);
+  const req = [...panel.querySelectorAll('.req')];
+  const filled = req.every(f=>f.value.trim()!=='');
+  document.getElementById('wiznext').disabled = req.length>0 && !filled;
+}
+
+/* progress = required fields actually filled, across every step */
+function progress(){
+  const req = [...document.querySelectorAll('.req')];
+  const done = req.filter(f=>f.value.trim()!=='').length;
+  return req.length ? Math.round(done/req.length*100) : 0;
+}
+function markDone(){
+  document.querySelectorAll('.wizstep').forEach(b=>{
+    const i = +b.dataset.i;
+    const panel = document.querySelector(`.wizpanel[data-step="${i}"]`);
+    const req = [...panel.querySelectorAll('.req')];
+    b.classList.toggle('done', req.length>0 && req.every(f=>f.value.trim()!==''));
+  });
+}
+function refresh(){
+  const p = progress();
+  document.getElementById('wizfill').style.width = p + '%';
+  document.getElementById('wizpct').textContent = p + '% done';
+  markDone();
+}
+document.addEventListener('input', e=>{ if(e.target.classList.contains('req')) { e.target.classList.remove('err'); refresh(); refreshNextBtn(); } });
+document.addEventListener('change', e=>{ if(e.target.classList.contains('req')) { e.target.classList.remove('err'); refresh(); refreshNextBtn(); } });
+
+function nextStep(){
+  const panel = document.querySelector(`.wizpanel[data-step="${cur}"]`);
+  const missing = [...panel.querySelectorAll('.req')].filter(f=>f.value.trim()==='');
+  if(missing.length){
+    missing.forEach(f=>f.classList.add('err'));
+    missing[0].focus();
+    document.getElementById('wizleft').textContent =
+      missing.length + (missing.length===1 ? ' field still needs an answer' : ' fields still need answers');
+    return;
+  }
+  document.getElementById('wizleft').textContent = 'Saved automatically. You can close this and come back.';
+  if(cur === STEPS.length-1){ demo(); return; }
+  goStep(cur+1);
+}
+/* Building type options change with Property type — merge matrix, one entry per confirmed type so far */
+const BTYPE_MAP = {
+  'Office space':        ['Independent house','Business park','Mall','Standalone building','Independent shop'],
+  'Godown/Warehouse':    ['Standalone building'],
+  'Industrial shed':     ['Standalone building'],
+  'Industrial building': ['Standalone building'],
+};
+const BTYPE_DEFAULT = BTYPE_MAP['Office space'];
+function onCommPtype(){
+  const val = document.getElementById('f_apt').value;
+  const opts = BTYPE_MAP[val] || BTYPE_DEFAULT;
+  const sel = document.getElementById('f_btype');
+  sel.innerHTML = '<option value="">Select</option>' + opts.map(o=>`<option>${o}</option>`).join('');
+  refresh(); refreshNextBtn();
+}
+onCommPtype();
+
+function pick(btn){ btn.classList.toggle('on'); }
+function addTag(){
+  const inp = document.getElementById('f_othertag');
+  const val = inp.value.trim();
+  if(!val) return;
+  const chip = document.createElement('span');
+  chip.className = 'chip2 on';
+  chip.innerHTML = val + ' <b onclick="this.parentElement.remove()">&times;</b>';
+  document.getElementById('tagchips').appendChild(chip);
+  inp.value = '';
+}
+function pickOne(btn){ [...btn.parentElement.children].forEach(c=>c.classList.remove('on')); btn.classList.add('on'); }
+function stepChange(id, delta){
+  const hidden = document.getElementById(id);
+  const disp = document.getElementById(id+'_disp');
+  let v = Math.max(0, (parseInt(hidden.value)||0) + delta);
+  hidden.value = v; disp.textContent = v;
+  hidden.dispatchEvent(new Event('input', {bubbles:true}));
+}
+function yn(btn, id, val){
+  [...btn.parentElement.children].forEach(c=>c.classList.remove('on'));
+  btn.classList.add('on');
+  const hidden = document.getElementById(id);
+  hidden.value = val;
+  hidden.dispatchEvent(new Event('input', {bubbles:true}));
+}
+
+goStep(0);
+refresh();
+refreshNextBtn();
+
+</script>
+</body>
+</html>

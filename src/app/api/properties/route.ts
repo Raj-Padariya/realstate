@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { NO_PHOTO_PLACEHOLDER } from '@/shared/utils/photoPlaceholder';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const properties = await prisma.property.findMany({

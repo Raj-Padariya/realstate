@@ -317,7 +317,9 @@ export default function OwnerDashboardPage() {
         {/* TAB 3: BOOST & OWNER PLANS */}
         {activeTab === 'plans' && (
           <div style={{ marginTop: '10px' }}>
-            <MasterPlansComponent defaultTab="owner" />
+            <React.Suspense fallback={<div style={{ padding: '40px', textAlign: 'center' }}>Loading plans...</div>}>
+              <MasterPlansComponent defaultTab="owner" />
+            </React.Suspense>
           </div>
         )}
 

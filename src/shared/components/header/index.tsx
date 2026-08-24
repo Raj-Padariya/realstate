@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { HeaderData, TopBarData } from '@/shared/types/cms';
 import Button from '@/shared/ui/button';
 import HeaderMobile from './header-mobile';
@@ -15,6 +16,7 @@ export function Header({ topBarData, headerData }: HeaderProps) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   const toggleMenu = (menuKey: string) => {
     setOpenMenu((prev) => (prev === menuKey ? null : menuKey));
@@ -48,6 +50,26 @@ export function Header({ topBarData, headerData }: HeaderProps) {
     { key: 'services', label: 'Services', data: headerData.servicesMenu, isMega: true },
   ];
 
+  const isMenuRouteActive = (key: string) => {
+    if (!pathname) return false;
+    if (key === 'buy') {
+      return pathname.startsWith('/properties') && !pathname.includes('category=Services') && !pathname.includes('commercial');
+    }
+    if (key === 'rent') {
+      return pathname.startsWith('/rent-agreement') || pathname.startsWith('/tenant-plans');
+    }
+    if (key === 'commercial') {
+      return pathname.includes('/commercial');
+    }
+    if (key === 'newProjects') {
+      return pathname.startsWith('/projects');
+    }
+    if (key === 'services') {
+      return pathname.startsWith('/services') || pathname.includes('category=Services');
+    }
+    return false;
+  };
+
   return (
     <>
       <div className="topbar">
@@ -79,13 +101,18 @@ export function Header({ topBarData, headerData }: HeaderProps) {
               
               {/* HOME LINK */}
               <li>
-                <Link href="/" className="mtrig" style={{ fontWeight: 700, color: 'var(--ink)' }}>
+                <Link 
+                  href="/" 
+                  className={`mtrig ${pathname === '/' ? 'active-nav-link' : ''}`}
+                  style={{ fontWeight: 700, color: 'var(--ink)' }}
+                >
                   Home
                 </Link>
               </li>
 
               {navMenus.map((menu) => {
                 const isOpen = openMenu === menu.key;
+                const isActive = isMenuRouteActive(menu.key);
                 return (
                   <li
                     key={menu.key}
@@ -94,7 +121,7 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                     onMouseLeave={() => setOpenMenu(null)}
                   >
                     <button
-                      className="mtrig"
+                      className={`mtrig ${isActive ? 'active-nav-link' : ''}`}
                       type="button"
                       aria-expanded={isOpen}
                       onClick={() => toggleMenu(menu.key)}
@@ -154,7 +181,7 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                 onMouseLeave={() => setOpenMenu(null)}
               >
                 <button
-                  className="mtrig"
+                  className={`mtrig ${pathname === '/owner' ? 'active-nav-link' : ''}`}
                   type="button"
                   aria-expanded={openMenu === 'owners'}
                   onClick={() => toggleMenu('owners')}
@@ -195,7 +222,7 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                 style={{ marginLeft: '4px' }}
               >
                 <button
-                  className="dholera-nav-highlight"
+                  className={`dholera-nav-highlight ${pathname?.startsWith('/dholera-sir') ? 'active-nav-link' : ''}`}
                   type="button"
                   aria-expanded={openMenu === 'dholera'}
                   onClick={() => toggleMenu('dholera')}

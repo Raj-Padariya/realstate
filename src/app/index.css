@@ -892,4 +892,11 @@ textarea.inp{min-height:96px;resize:vertical;line-height:1.55}
   opacity: 1 !important;
 }
 
+/* Active navigation link indicator */
+.active-nav-link {
+  color: var(--brand) !important;
+  border-bottom: 3px solid var(--brand) !important;
+}
+
+
 

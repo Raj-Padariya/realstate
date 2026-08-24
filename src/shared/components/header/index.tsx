@@ -195,22 +195,14 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                 style={{ marginLeft: '4px' }}
               >
                 <button
-                  className="mtrig dholera-nav-item"
+                  className="dholera-nav-highlight"
                   type="button"
                   aria-expanded={openMenu === 'dholera'}
                   onClick={() => toggleMenu('dholera')}
-                  style={{
-                    fontWeight: 800,
-                    borderBottom: '2.5px solid currentColor',
-                    paddingBottom: '4px',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    lineHeight: 1.2
-                  }}
                 >
+                  <span className="pulse-green-dot" style={{ marginRight: '4px' }} />
                   <span>Dholera SIR</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true" style={{ width: '14px', height: '14px', marginLeft: '2px' }}>
                     <path d="M6 9.5l6 6 6-6" />
                   </svg>
                 </button>

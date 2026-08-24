@@ -214,18 +214,6 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                   }}
                 >
                   <span>Dholera SIR</span>
-                  <span style={{
-                    background: '#F59E0B',
-                    color: '#0F172A',
-                    fontSize: '9.5px',
-                    fontWeight: 900,
-                    padding: '2px 6px',
-                    borderRadius: '10px',
-                    letterSpacing: '0.04em',
-                    lineHeight: 1
-                  }}>
-                    🔥 HOT
-                  </span>
                   <svg className="chev" viewBox="0 0 24 24" aria-hidden="true" style={{ opacity: 1, stroke: '#FFFFFF' }}>
                     <path d="M6 9.5l6 6 6-6" />
                   </svg>

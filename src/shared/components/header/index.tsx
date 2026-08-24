@@ -200,21 +200,18 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                   aria-expanded={openMenu === 'dholera'}
                   onClick={() => toggleMenu('dholera')}
                   style={{
-                    background: 'linear-gradient(135deg, #6D28D9 0%, #4C1D95 100%)',
-                    color: '#FFFFFF',
-                    padding: '6px 14px',
-                    borderRadius: '20px',
-                    fontWeight: 700,
-                    boxShadow: '0 3px 12px rgba(109, 40, 217, 0.35)',
+                    color: '#6D28D9',
+                    fontWeight: 800,
+                    borderBottom: '2.5px solid #6D28D9',
+                    paddingBottom: '4px',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '6px',
-                    margin: '12px 0',
+                    gap: '4px',
                     lineHeight: 1.2
                   }}
                 >
-                  <span>Dholera SIR</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true" style={{ opacity: 1, stroke: '#FFFFFF' }}>
+                  <span>✨ Dholera SIR</span>
+                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true" style={{ opacity: 1, stroke: '#6D28D9' }}>
                     <path d="M6 9.5l6 6 6-6" />
                   </svg>
                 </button>

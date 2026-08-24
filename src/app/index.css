@@ -848,3 +848,21 @@ textarea.inp{min-height:96px;resize:vertical;line-height:1.55}
   .wizstep.on{border-left-color:transparent;border-bottom-color:var(--brand)}
   .wizmain{padding:20px}
 }
+
+/* Dholera SIR Animated Rainbow Accent */
+@keyframes dholera-rainbow {
+  0% { border-color: #6D28D9; color: #6D28D9; }
+  25% { border-color: #EC4899; color: #EC4899; }
+  50% { border-color: #3B82F6; color: #3B82F6; }
+  75% { border-color: #10B981; color: #10B981; }
+  100% { border-color: #6D28D9; color: #6D28D9; }
+}
+
+.dholera-nav-item {
+  animation: dholera-rainbow 6s linear infinite !important;
+}
+.dholera-nav-item svg.chev {
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}
+

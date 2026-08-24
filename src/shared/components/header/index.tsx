@@ -195,14 +195,13 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                 style={{ marginLeft: '4px' }}
               >
                 <button
-                  className="mtrig"
+                  className="mtrig dholera-nav-item"
                   type="button"
                   aria-expanded={openMenu === 'dholera'}
                   onClick={() => toggleMenu('dholera')}
                   style={{
-                    color: '#6D28D9',
                     fontWeight: 800,
-                    borderBottom: '2.5px solid #6D28D9',
+                    borderBottom: '2.5px solid currentColor',
                     paddingBottom: '4px',
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -210,8 +209,8 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                     lineHeight: 1.2
                   }}
                 >
-                  <span>✨ Dholera SIR</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true" style={{ opacity: 1, stroke: '#6D28D9' }}>
+                  <span>Dholera SIR</span>
+                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6 9.5l6 6 6-6" />
                   </svg>
                 </button>

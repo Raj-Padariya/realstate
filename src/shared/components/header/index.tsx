@@ -173,19 +173,19 @@ export function Header({ topBarData, headerData }: HeaderProps) {
               </div>
             </li>
 
-            {/* BLOGS & NEWS DROPDOWN */}
+            {/* DHOLERA SIR DROPDOWN */}
             <li
-              className={`has-dd ${openMenu === 'blogs' ? 'open' : ''}`}
-              onMouseEnter={() => setOpenMenu('blogs')}
+              className={`has-dd ${openMenu === 'dholera' ? 'open' : ''}`}
+              onMouseEnter={() => setOpenMenu('dholera')}
               onMouseLeave={() => setOpenMenu(null)}
             >
               <button
                 className="mtrig"
                 type="button"
-                aria-expanded={openMenu === 'blogs'}
-                onClick={() => toggleMenu('blogs')}
+                aria-expanded={openMenu === 'dholera'}
+                onClick={() => toggleMenu('dholera')}
               >
-                Blogs &amp; News
+                Dholera SIR
                 <svg className="chev" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M6 9.5l6 6 6-6" />
                 </svg>
@@ -194,7 +194,7 @@ export function Header({ topBarData, headerData }: HeaderProps) {
               <div
                 className="dd"
                 style={
-                  openMenu === 'blogs'
+                  openMenu === 'dholera'
                     ? {
                         display: 'block',
                         opacity: 1,
@@ -205,20 +205,20 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                     : undefined
                 }
               >
-                <Link href="/blogs" onClick={() => setOpenMenu(null)}>
-                  📑 All Articles &amp; Guides
+                <Link href="/dholera-sir" onClick={() => setOpenMenu(null)}>
+                  🏙️ Dholera SIR Overview
                 </Link>
-                <Link href="/blogs" onClick={() => setOpenMenu(null)}>
-                  📈 Market Insights 2026
+                <Link href="/dholera-sir#plots" onClick={() => setOpenMenu(null)}>
+                  📐 Residential &amp; Commercial Plots
                 </Link>
-                <Link href="/blogs" onClick={() => setOpenMenu(null)}>
-                  ⚖️ Legal &amp; 7/12 Extract Advice
+                <Link href="/dholera-sir#infra" onClick={() => setOpenMenu(null)}>
+                  🏭 Semiconductor &amp; Smart Infrastructure
                 </Link>
-                <Link href="/blogs" onClick={() => setOpenMenu(null)}>
-                  🔑 Rental Tips &amp; Direct Deals
+                <Link href="/properties?search=Dholera" onClick={() => setOpenMenu(null)}>
+                  🔍 View Dholera Listings
                 </Link>
-                <Link href="/blogs" onClick={() => setOpenMenu(null)}>
-                  💡 First-Time Buyer Checklist
+                <Link href="/contact?subject=Dholera+SIR+Visit" onClick={() => setOpenMenu(null)}>
+                  📅 Book Dholera Site Visit
                 </Link>
               </div>
             </li>

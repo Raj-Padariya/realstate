@@ -31,6 +31,18 @@ export function HeaderMobile({ headerData, isOpen, onClose }: HeaderMobileProps)
     { title: 'Buyer Plans', href: '/buyer-plans' },
     { title: 'Seller Plans', href: '/buyer-plans?tab=seller' },
     {
+      title: 'Dholera SIR Smart City',
+      key: 'dholera',
+      hasDropdown: true,
+      subLinks: [
+        { title: '🏙️ Dholera SIR Overview', href: '/dholera-sir' },
+        { title: '📐 Residential & Commercial Plots', href: '/dholera-sir#plots' },
+        { title: '🏭 Semiconductor & Infrastructure', href: '/dholera-sir#infra' },
+        { title: '🔍 View Dholera Listings', href: '/properties?search=Dholera' },
+        { title: '📅 Book Dholera Site Visit', href: '/contact?subject=Dholera+SIR+Visit' },
+      ],
+    },
+    {
       title: 'Real Estate Blogs & News',
       key: 'blogs',
       hasDropdown: true,

@@ -73,9 +73,17 @@ export function Header({ topBarData, headerData }: HeaderProps) {
             </Link>
           </div>
 
-          {/* MENU - CENTER ALIGNED */}
+          {/* MENU - CENTER ALIGNED WITH HOME & HIGHLIGHTED DHOLERA SIR */}
           <div className="header-nav-center" style={{ flex: '1 1 auto', display: 'flex', justifyContent: 'center' }}>
-            <ul className="menu" id="menu" style={{ margin: 0, justifyContent: 'center' }}>
+            <ul className="menu" id="menu" style={{ margin: 0, justifyContent: 'center', alignItems: 'center' }}>
+              
+              {/* HOME LINK */}
+              <li>
+                <Link href="/" className="mtrig" style={{ fontWeight: 700, color: 'var(--ink)' }}>
+                  Home
+                </Link>
+              </li>
+
               {navMenus.map((menu) => {
                 const isOpen = openMenu === menu.key;
                 return (
@@ -179,20 +187,46 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                 </div>
               </li>
 
-              {/* DHOLERA SIR DROPDOWN */}
+              {/* DHOLERA SIR HIGHLIGHTED DROPDOWN BUTTON */}
               <li
                 className={`has-dd ${openMenu === 'dholera' ? 'open' : ''}`}
                 onMouseEnter={() => setOpenMenu('dholera')}
                 onMouseLeave={() => setOpenMenu(null)}
+                style={{ marginLeft: '4px' }}
               >
                 <button
                   className="mtrig"
                   type="button"
                   aria-expanded={openMenu === 'dholera'}
                   onClick={() => toggleMenu('dholera')}
+                  style={{
+                    background: 'linear-gradient(135deg, #6D28D9 0%, #4C1D95 100%)',
+                    color: '#FFFFFF',
+                    padding: '6px 14px',
+                    borderRadius: '20px',
+                    fontWeight: 700,
+                    boxShadow: '0 3px 12px rgba(109, 40, 217, 0.35)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    margin: '12px 0',
+                    lineHeight: 1.2
+                  }}
                 >
-                  Dholera SIR
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true">
+                  <span>Dholera SIR</span>
+                  <span style={{
+                    background: '#F59E0B',
+                    color: '#0F172A',
+                    fontSize: '9.5px',
+                    fontWeight: 900,
+                    padding: '2px 6px',
+                    borderRadius: '10px',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1
+                  }}>
+                    🔥 HOT
+                  </span>
+                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true" style={{ opacity: 1, stroke: '#FFFFFF' }}>
                     <path d="M6 9.5l6 6 6-6" />
                   </svg>
                 </button>

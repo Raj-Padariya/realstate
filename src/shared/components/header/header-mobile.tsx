@@ -66,7 +66,6 @@ export function HeaderMobile({ headerData, isOpen, onClose }: HeaderMobileProps)
         { title: 'Shop & Showroom', href: '/properties?type=Shop+%26+Showroom' },
       ],
     },
-    { title: 'Contact Us', href: '/contact' },
     { title: 'Careers', href: '/careers' },
   ];
 

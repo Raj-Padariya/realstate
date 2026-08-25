@@ -1127,7 +1127,8 @@ header {
 }
 
 .ph {
-  height: 158px;
+  height: 215px;
+  aspect-ratio: 16/10;
   position: relative;
   display: grid;
   place-items: center;
@@ -1136,6 +1137,7 @@ header {
   letter-spacing: .14em;
   text-transform: uppercase;
   font-weight: 600;
+  overflow: hidden;
 }
 
 .badge {

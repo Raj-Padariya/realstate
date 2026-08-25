@@ -1189,6 +1189,32 @@ textarea.inp{min-height:96px;resize:vertical;line-height:1.55}
   }
 }
 
+/* Standard 16:10 Aspect Ratio for Featured Property Cards */
+.card .ph {
+  height: 215px !important;
+  min-height: 215px !important;
+  aspect-ratio: 16/10 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 12px 12px 0 0 !important;
+  background: #f3f4f6 !important;
+}
+
+.card .ph img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  position: absolute !important;
+  inset: 0 !important;
+  transition: transform 0.4s ease !important;
+}
+
+.card .ph img:hover {
+  transform: scale(1.05) !important;
+}
+
+
 
 
 

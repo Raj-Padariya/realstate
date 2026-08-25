@@ -4,6 +4,7 @@ import cmsDataRaw from '@/shared/data/mockCmsData.json';
 import { CmsData } from '@/shared/types/cms';
 import HeroSection from '@/shared/components/home-page/hero-section';
 import OffersSection from '@/shared/components/home-page/offers-section';
+import PopularCategoriesShowcase from '@/shared/components/home-page/popular-categories-showcase';
 import TrustSection from '@/shared/components/home-page/trust-section';
 import StatesSection from '@/shared/components/home-page/states-section';
 import FeaturedProperties from '@/shared/components/home-page/featured-properties';
@@ -35,6 +36,7 @@ export default function HomePage() {
         states={cmsData.statesSection.states}
       />
       <OffersSection />
+      <PopularCategoriesShowcase />
       <TrustSection items={cmsData.trust} />
       <StatesSection statesData={cmsData.statesSection} />
       <FeaturedProperties data={cmsData.featuredProperties} />

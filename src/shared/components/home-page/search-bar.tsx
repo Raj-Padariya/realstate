@@ -46,7 +46,10 @@ export function SearchBar({ searchBarData, states }: SearchBarProps) {
   };
 
   return (
-    <div className="redbus-search-card">
+    <div className="redbus-search-card glass-search-card" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Top Ambient Glow Line */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'linear-gradient(90deg, #522AB0 0%, #6D28D9 50%, #FEDC00 100%)' }} />
+
       {/* Tab Navigation */}
       <div className="redbus-tabs-nav" role="tablist">
         {searchBarData.tabs.map((tab) => {

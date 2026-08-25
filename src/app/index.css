@@ -1097,15 +1097,78 @@ textarea.inp{min-height:96px;resize:vertical;line-height:1.55}
 .redbus-offer-badge {
   display: inline-block !important;
   background: rgba(254, 220, 0, 0.25) !important;
-  color: #92400E !important;
-  font-size: 11px !important;
-  font-weight: 800 !important;
-  padding: 4px 10px !important;
-  border-radius: 6px !important;
-  text-transform: uppercase !important;
-  width: fit-content !important;
   margin-bottom: 12px !important;
 }
+
+/* ==========================================================================
+   GLASSMORPHISM & CREATIVE MICRO-DETAILS UTILITIES
+   ========================================================================== */
+
+@keyframes orb-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.08);
+    opacity: 0.4;
+  }
+}
+
+.glowing-orb-purple {
+  position: absolute !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, rgba(0, 0, 0, 0) 70%) !important;
+  filter: blur(30px) !important;
+  animation: orb-float 8s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+.glowing-orb-gold {
+  position: absolute !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(254, 220, 0, 0.25) 0%, rgba(0, 0, 0, 0) 70%) !important;
+  filter: blur(30px) !important;
+  animation: orb-float 10s ease-in-out infinite reverse !important;
+  pointer-events: none !important;
+}
+
+/* Frosted Glass Card (Dark Background Variant) */
+.glass-card-dark {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35) !important;
+  border-radius: 20px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.glass-card-dark:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: #FEDC00 !important;
+  transform: translateY(-6px) scale(1.01) !important;
+  box-shadow: 0 22px 48px rgba(124, 58, 237, 0.35), 0 0 20px rgba(254, 220, 0, 0.2) !important;
+}
+
+/* Frosted Glass Search Card (Light/Hero Variant) */
+.glass-search-card {
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 20px 48px rgba(82, 42, 176, 0.18), 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+  border-radius: 22px !important;
+}
+
+/* Shimmer Gold Gradient Text */
+.shimmer-gold-text {
+  background: linear-gradient(90deg, #FEDC00 0%, #F59E0B 50%, #FEDC00 100%) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
 
 
 

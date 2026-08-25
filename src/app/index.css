@@ -1169,6 +1169,27 @@ textarea.inp{min-height:96px;resize:vertical;line-height:1.55}
   -webkit-text-fill-color: transparent !important;
 }
 
+/* 3-Column Balanced Projects Grid */
+.projects-grid-3col {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+  width: 100% !important;
+}
+
+@media (max-width: 1100px) {
+  .projects-grid-3col {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .projects-grid-3col {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
 
 
 

@@ -444,6 +444,20 @@
       },
       {
         "id": "p2",
+        "name": "Adani Shantigram Waterlily",
+        "builder": "Adani Realty",
+        "location": "Vaishnodevi Circle, Ahmedabad",
+        "city": "Ahmedabad",
+        "config": "3 & 4 BHK Golf Facing Flats",
+        "priceRange": "₹1.25 Cr - ₹3.10 Cr",
+        "priceNote": "Ready to Move",
+        "stage": "Ready to Move",
+        "reraText": "RERA PR/GJ/AHMEDABAD/84102",
+        "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
+        "sitePlanSvg": ""
+      },
+      {
+        "id": "p3",
         "name": "Dholera Greens Smart Plots",
         "builder": "Dholera SIR Infra Group",
         "location": "TP 2 Activation Area, Dholera SIR",
@@ -457,7 +471,21 @@
         "sitePlanSvg": ""
       },
       {
-        "id": "p3",
+        "id": "p4",
+        "name": "Smart City Residency Phase 1",
+        "builder": "Dholera Smart Infra",
+        "location": "Expressway Junction, Dholera SIR",
+        "city": "Dholera",
+        "config": "Gated Villa & Bungalow Plots",
+        "priceRange": "₹14 L - ₹58 L",
+        "priceNote": "100% Legal Clearance",
+        "stage": "New Launch",
+        "reraText": "RERA PR/GJ/DHOLERA/77219",
+        "imageUrl": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=80",
+        "sitePlanSvg": ""
+      },
+      {
+        "id": "p5",
         "name": "GIFT City Horizon Towers",
         "builder": "Sobha & Brigade Realty",
         "location": "Special Economic Zone, GIFT City",
@@ -471,7 +499,21 @@
         "sitePlanSvg": ""
       },
       {
-        "id": "p4",
+        "id": "p6",
+        "name": "Sobha Dream Acres GIFT",
+        "builder": "Sobha Developers",
+        "location": "Fintech Zone, GIFT City",
+        "city": "Gandhinagar",
+        "config": "2 & 3 BHK Tech Residences",
+        "priceRange": "₹89 L - ₹1.75 Cr",
+        "priceNote": "Possession Dec 2026",
+        "stage": "Under Construction",
+        "reraText": "RERA PR/GJ/GANDHINAGAR/61094",
+        "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+        "sitePlanSvg": ""
+      },
+      {
+        "id": "p7",
         "name": "Rohan Abhilasha Phase 2",
         "builder": "Rohan Builders",
         "location": "Baner Road, Pune",
@@ -482,6 +524,20 @@
         "stage": "Under Construction",
         "reraText": "RERA P52100018420",
         "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
+        "sitePlanSvg": ""
+      },
+      {
+        "id": "p8",
+        "name": "Nyati Elysia Tower B",
+        "builder": "Nyati Group",
+        "location": "Pashan-Sus Road, Pune",
+        "city": "Pune",
+        "config": "2, 3 & 4 BHK Luxury Flats",
+        "priceRange": "₹92 L - ₹2.10 Cr",
+        "priceNote": "Possession Dec 2026",
+        "stage": "New Launch",
+        "reraText": "RERA P52100022390",
+        "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80",
         "sitePlanSvg": ""
       }
     ]

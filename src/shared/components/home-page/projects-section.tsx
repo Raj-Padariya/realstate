@@ -157,12 +157,13 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
           </div>
         </div>
 
-        {/* 4-Card Responsive Grid */}
+        {/* Responsive Grid with fixed maximum card width */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 340px))',
             gap: '24px',
+            justifyContent: 'start',
           }}
         >
           {filteredProjects.map((proj) => (

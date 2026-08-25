@@ -188,12 +188,14 @@ export interface BuilderProjectItem {
   name: string;
   builder: string;
   location: string;
+  city?: string;
   priceRange: string;
   priceNote: string;
   config: string;
   stage: string;
   reraText: string;
   sitePlanSvg: string;
+  imageUrl?: string;
 }
 
 export interface ProjectsSectionData {

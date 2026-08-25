@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { MapPin } from 'lucide-react';
 
 export interface LocationSuggestion {
   name: string;
@@ -282,7 +283,10 @@ export default function LocationSearchInput({
               justifyContent: 'space-between',
             }}
           >
-            <span>📍 Location Suggestions</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <MapPin className="w-3.5 h-3.5 text-[#6D28D9]" />
+              <span>Location Suggestions</span>
+            </span>
             {loading && <span style={{ color: '#522ab0' }}>Searching India map…</span>}
           </div>
 

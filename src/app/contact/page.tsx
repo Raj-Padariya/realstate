@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { MessageCircle, Home, Gem, FileText, PhoneCall, KeyRound, Mail, Clock, Building2, Building, ChevronDown, Send, CheckCircle2 } from 'lucide-react';
+import { MessageCircle, Home, Gem, FileText, PhoneCall, KeyRound, Mail, Clock, Building2, Building, ChevronDown, Send, CheckCircle2, Zap, MapPin, Phone } from 'lucide-react';
 
 export default function ContactUsPage() {
   const [formData, setFormData] = useState({
@@ -111,7 +111,7 @@ export default function ContactUsPage() {
           >
             <div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', fontSize: '11.5px', fontWeight: 800, padding: '4px 12px', borderRadius: '999px', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '18px' }}>
-                ⚡ Fast Callback Service
+                <Zap className="w-3.5 h-3.5 text-[#FEDC00]" /> Fast Callback Service
               </div>
 
               <h1 style={{ fontSize: '28px', fontWeight: 800, margin: '0 0 12px', lineHeight: 1.25 }}>
@@ -363,14 +363,19 @@ export default function ContactUsPage() {
                 <Building2 className="w-7 h-7 text-[#522AB0]" />
               </div>
 
-              <p style={{ fontSize: '13.5px', color: 'var(--body)', lineHeight: 1.6, margin: '0 0 16px' }}>
-                📍 GujjuProperty Towers, 4th Floor, SG Highway, near Iscon Cross Road, Satellite, Ahmedabad, Gujarat 380015
+              <p style={{ fontSize: '13.5px', color: 'var(--body)', lineHeight: 1.6, margin: '0 0 16px', display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                <MapPin className="w-4 h-4 text-[#522AB0] flex-shrink-0 mt-0.5" />
+                <span>GujjuProperty Towers, 4th Floor, SG Highway, near Iscon Cross Road, Satellite, Ahmedabad, Gujarat 380015</span>
               </p>
 
-              <div style={{ display: 'flex', gap: '12px', fontSize: '13px', color: '#522AB0', fontWeight: 700 }}>
-                <span>📞 +91 79 XXXX XXXX</span>
+              <div style={{ display: 'flex', gap: '12px', fontSize: '13px', color: '#522AB0', fontWeight: 700, alignItems: 'center' }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                  <Phone className="w-3.5 h-3.5" /> +91 79 XXXX XXXX
+                </span>
                 <span>•</span>
-                <span>✉️ ahmedabad@gujjuproperty.com</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                  <Mail className="w-3.5 h-3.5" /> ahmedabad@gujjuproperty.com
+                </span>
               </div>
             </div>
 
@@ -388,14 +393,19 @@ export default function ContactUsPage() {
                 <Building className="w-7 h-7 text-[#522AB0]" />
               </div>
 
-              <p style={{ fontSize: '13.5px', color: 'var(--body)', lineHeight: 1.6, margin: '0 0 16px' }}>
-                📍 Opus Heights, 2nd Floor, Balewadi High Street, Baner, Pune, Maharashtra 411045
+              <p style={{ fontSize: '13.5px', color: 'var(--body)', lineHeight: 1.6, margin: '0 0 16px', display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                <MapPin className="w-4 h-4 text-[#522AB0] flex-shrink-0 mt-0.5" />
+                <span>Opus Heights, 2nd Floor, Balewadi High Street, Baner, Pune, Maharashtra 411045</span>
               </p>
 
-              <div style={{ display: 'flex', gap: '12px', fontSize: '13px', color: '#522AB0', fontWeight: 700 }}>
-                <span>📞 +91 20 XXXX XXXX</span>
+              <div style={{ display: 'flex', gap: '12px', fontSize: '13px', color: '#522AB0', fontWeight: 700, alignItems: 'center' }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                  <Phone className="w-3.5 h-3.5" /> +91 20 XXXX XXXX
+                </span>
                 <span>•</span>
-                <span>✉️ pune@gujjuproperty.com</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                  <Mail className="w-3.5 h-3.5" /> pune@gujjuproperty.com
+                </span>
               </div>
             </div>
 

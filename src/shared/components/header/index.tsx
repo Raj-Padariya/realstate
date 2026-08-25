@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { HeaderData, TopBarData } from '@/shared/types/cms';
 import Button from '@/shared/ui/button';
 import HeaderMobile from './header-mobile';
+import { Building2, Ruler, Factory, Search, Calendar, ChevronDown } from 'lucide-react';
 
 export interface HeaderProps {
   topBarData: TopBarData;
@@ -248,20 +249,25 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                       : undefined
                   }
                 >
-                  <Link href="/dholera-sir" onClick={() => setOpenMenu(null)}>
-                    🏙️ Dholera SIR Overview
+                  <Link href="/dholera-sir" onClick={() => setOpenMenu(null)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Building2 className="w-4 h-4 text-[#522AB0]" />
+                    <span>Dholera SIR Overview</span>
                   </Link>
-                  <Link href="/dholera-sir#plots" onClick={() => setOpenMenu(null)}>
-                    📐 Residential &amp; Commercial Plots
+                  <Link href="/dholera-sir#plots" onClick={() => setOpenMenu(null)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Ruler className="w-4 h-4 text-[#522AB0]" />
+                    <span>Residential &amp; Commercial Plots</span>
                   </Link>
-                  <Link href="/dholera-sir#infra" onClick={() => setOpenMenu(null)}>
-                    🏭 Semiconductor &amp; Smart Infrastructure
+                  <Link href="/dholera-sir#infra" onClick={() => setOpenMenu(null)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Factory className="w-4 h-4 text-[#522AB0]" />
+                    <span>Semiconductor &amp; Smart Infrastructure</span>
                   </Link>
-                  <Link href="/properties?search=Dholera" onClick={() => setOpenMenu(null)}>
-                    🔍 View Dholera Listings
+                  <Link href="/properties?search=Dholera" onClick={() => setOpenMenu(null)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Search className="w-4 h-4 text-[#522AB0]" />
+                    <span>View Dholera Listings</span>
                   </Link>
-                  <Link href="/contact?subject=Dholera+SIR+Visit" onClick={() => setOpenMenu(null)}>
-                    📅 Book Dholera Site Visit
+                  <Link href="/contact?subject=Dholera+SIR+Visit" onClick={() => setOpenMenu(null)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Calendar className="w-4 h-4 text-[#522AB0]" />
+                    <span>Book Dholera Site Visit</span>
                   </Link>
                 </div>
               </li>

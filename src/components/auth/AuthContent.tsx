@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Zap, ShieldCheck, Coins, Home, Key, Building2, CheckCircle2 } from 'lucide-react';
 
 export default function AuthContent({ defaultMode }: { defaultMode?: 'login' | 'signup' }) {
   const router = useRouter();
@@ -189,20 +190,20 @@ export default function AuthContent({ defaultMode }: { defaultMode?: 'login' | '
             {/* Highlights List */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
               <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-                <span style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', fontSize: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  ⚡
+                <span style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Zap className="w-4 h-4 text-[#FEDC00]" />
                 </span>
                 <span style={{ fontSize: '13.5px', fontWeight: 600 }}>Get direct owner contacts instantly</span>
               </div>
               <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-                <span style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', fontSize: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  🛡️
+                <span style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <ShieldCheck className="w-4 h-4 text-[#FEDC00]" />
                 </span>
                 <span style={{ fontSize: '13.5px', fontWeight: 600 }}>100% Phone &amp; Title Deed Verified Listings</span>
               </div>
               <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-                <span style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', fontSize: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  💰
+                <span style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Coins className="w-4 h-4 text-[#FEDC00]" />
                 </span>
                 <span style={{ fontSize: '13.5px', fontWeight: 600 }}>Save ₹1.5 Lac to ₹4 Lac in Brokerage Fees</span>
               </div>
@@ -289,9 +290,14 @@ export default function AuthContent({ defaultMode }: { defaultMode?: 'login' | '
                     fontSize: '12px',
                     fontWeight: 700,
                     cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '4px',
                   }}
                 >
-                  🏠 Buyer/Tenant
+                  <Home className="w-3.5 h-3.5 text-[#522AB0]" />
+                  <span>Buyer/Tenant</span>
                 </button>
                 <button
                   type="button"
@@ -305,9 +311,14 @@ export default function AuthContent({ defaultMode }: { defaultMode?: 'login' | '
                     fontSize: '12px',
                     fontWeight: 700,
                     cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '4px',
                   }}
                 >
-                  🔑 Owner
+                  <Key className="w-3.5 h-3.5 text-[#522AB0]" />
+                  <span>Owner</span>
                 </button>
                 <button
                   type="button"
@@ -321,9 +332,14 @@ export default function AuthContent({ defaultMode }: { defaultMode?: 'login' | '
                     fontSize: '12px',
                     fontWeight: 700,
                     cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '4px',
                   }}
                 >
-                  🏢 Agent/Builder
+                  <Building2 className="w-3.5 h-3.5 text-[#522AB0]" />
+                  <span>Agent/Builder</span>
                 </button>
               </div>
             </div>

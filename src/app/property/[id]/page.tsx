@@ -12,6 +12,7 @@ import LocationSearchInput from '@/components/common/LocationSearchInput';
 import { NO_PHOTO_PLACEHOLDER, isNoPhotoPlaceholder } from '@/shared/utils/photoPlaceholder';
 import { formatPostedOn } from '@/shared/utils/dateUtils';
 import { extractLocationParts } from '@/shared/utils/locationUtils';
+import { Building2, MapPin } from 'lucide-react';
 
 const cmsData = cmsDataRaw as unknown as CmsData;
 
@@ -231,12 +232,14 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
           </div>
           <div className="dsum dhead">
             <b className="big" id="dtitle">{property.title}</b>
-            <span id="daddr" style={{ display: 'flex', flexDirection: 'column', gap: '3px', marginTop: '6px' }}>
-              <span style={{ color: '#522ab0', fontSize: '14px', fontWeight: 800 }}>
-                🏢 Scheme / Society: {property.societyName}
+            <span id="daddr" style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '6px' }}>
+              <span style={{ color: '#522ab0', fontSize: '14px', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <Building2 className="w-4 h-4 text-[#522AB0]" />
+                <span>Scheme / Society: {property.societyName}</span>
               </span>
-              <span style={{ color: 'var(--muted)', fontSize: '13px' }}>
-                📍 Location: {property.address}
+              <span style={{ color: 'var(--muted)', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <MapPin className="w-4 h-4 text-[#6D28D9]" />
+                <span>Location: {property.address}</span>
               </span>
             </span>
           </div>

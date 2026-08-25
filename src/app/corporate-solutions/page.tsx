@@ -3,6 +3,22 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
+import {
+  Home,
+  FileText,
+  Truck,
+  Paintbrush,
+  Sparkles,
+  Wind,
+  Building2,
+  Hammer,
+  ShieldCheck,
+  Box,
+  CheckCircle2,
+  ArrowRight,
+  Building
+} from 'lucide-react';
+
 export default function CorporateSolutionsPage() {
   const [activeTab, setActiveTab] = useState<'employees' | 'office'>('employees');
   const [showModal, setShowModal] = useState(false);
@@ -27,21 +43,21 @@ export default function CorporateSolutionsPage() {
   };
 
   const employeeServices = [
-    { title: 'House Search', desc: 'Direct owner property listings with zero brokerage fees for employees.', icon: '🏡', img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Rental Agreement', desc: 'Doorstep legal E-Stamp agreement delivery & biometric verification.', icon: '📄', img: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Packers & Movers', desc: 'Safe, insured relocation with dedicated vehicle & hassle-free setup.', icon: '🚛', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Home Painting', desc: 'Professional eco-friendly painting with 1-year warranty & dust-free process.', icon: '🎨', img: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Home Deep Cleaning', desc: 'Sanitized deep cleaning for move-in ready homes & apartments.', icon: '🧹', img: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80' },
-    { title: 'AC Servicing & Repair', desc: 'Certified HVAC technicians for instant repair & preventive servicing.', icon: '❄️', img: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80' },
+    { title: 'House Search', desc: 'Direct owner property listings with zero brokerage fees for employees.', icon: <Home className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Rental Agreement', desc: 'Doorstep legal E-Stamp agreement delivery & biometric verification.', icon: <FileText className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Packers & Movers', desc: 'Safe, insured relocation with dedicated vehicle & hassle-free setup.', icon: <Truck className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Home Painting', desc: 'Professional eco-friendly painting with 1-year warranty & dust-free process.', icon: <Paintbrush className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Home Deep Cleaning', desc: 'Sanitized deep cleaning for move-in ready homes & apartments.', icon: <Sparkles className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80' },
+    { title: 'AC Servicing & Repair', desc: 'Certified HVAC technicians for instant repair & preventive servicing.', icon: <Wind className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80' },
   ];
 
   const officeServices = [
-    { title: 'Office Interiors & Fit-outs', desc: 'Custom workspace interior design, ergonomic furniture & acoustic setup.', icon: '🏢', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Office Renovation', desc: 'Turnkey renovation services to modernize corporate office layouts.', icon: '🏗️', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Commercial Painting', desc: 'High-durability corporate wall painting with low-VOC non-toxic paints.', icon: '🖌️', img: 'https://images.unsplash.com/photo-1562664377-709f2c337eb2?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Commercial Deep Cleaning', desc: 'Scheduled deep sanitation & carpet shampooing for office premises.', icon: '✨', img: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Visitor Management', desc: 'Digital QR-based gate pass & visitor tracking systems for office security.', icon: '🛂', img: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80' },
-    { title: 'Asset & Office Relocation', desc: 'End-to-end IT hardware packing, server transport & office equipment setup.', icon: '📦', img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Office Interiors & Fit-outs', desc: 'Custom workspace interior design, ergonomic furniture & acoustic setup.', icon: <Building2 className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Office Renovation', desc: 'Turnkey renovation services to modernize corporate office layouts.', icon: <Hammer className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Commercial Painting', desc: 'High-durability corporate wall painting with low-VOC non-toxic paints.', icon: <Paintbrush className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1562664377-709f2c337eb2?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Commercial Deep Cleaning', desc: 'Scheduled deep sanitation & carpet shampooing for office premises.', icon: <Sparkles className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Visitor Management', desc: 'Digital QR-based gate pass & visitor tracking systems for office security.', icon: <ShieldCheck className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80' },
+    { title: 'Asset & Office Relocation', desc: 'End-to-end IT hardware packing, server transport & office equipment setup.', icon: <Box className="w-5 h-5 text-[#522AB0]" />, img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80' },
   ];
 
   const clientLogos = [
@@ -55,8 +71,9 @@ export default function CorporateSolutionsPage() {
       <section style={{ background: 'linear-gradient(135deg, #3A1C82 0%, #522AB0 60%, #41208C 100%)', color: '#fff', padding: '60px 20px 80px', position: 'relative', overflow: 'hidden' }}>
         <div className="wrap" style={{ maxWidth: '1180px', textAlign: 'center', position: 'relative', zIndex: 2 }}>
           
-          <div style={{ display: 'inline-block', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', fontSize: '12.5px', fontWeight: 800, padding: '5px 16px', borderRadius: '999px', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '16px' }}>
-            🏢 GujjuProperty B2B Corporate Solutions
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', fontSize: '12.5px', fontWeight: 800, padding: '5px 16px', borderRadius: '999px', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '16px' }}>
+            <Building2 className="w-4 h-4 text-[#FEDC00]" />
+            <span>GujjuProperty B2B Corporate Solutions</span>
           </div>
 
           <h1 style={{ fontSize: '38px', fontWeight: 800, margin: '0 0 16px', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
@@ -127,12 +144,12 @@ export default function CorporateSolutionsPage() {
           <h2 style={{ fontSize: '28px', fontWeight: 800, color: 'var(--ink)', margin: '0 0 10px' }}>
             Explore Our Corporate Solutions
           </h2>
-          <p style={{ fontSize: '15px', color: 'var(--body)', margin: 0 }}>
+          <p style={{ fontSize: '15px', color: 'var(--body)', margin: '0 0 24px' }}>
             Customized plans designed specifically for your employees and office workspace requirements.
           </p>
 
-          {/* Tab Switcher */}
-          <div style={{ display: 'inline-flex', gap: '8px', background: '#fff', padding: '6px', borderRadius: '12px', border: '1px solid var(--line)', marginTop: '24px', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
+          {/* TAB TOGGLE SELECTOR */}
+          <div style={{ display: 'inline-flex', gap: '8px', background: '#fff', padding: '6px', borderRadius: '12px', boxShadow: '0 8px 30px rgba(0,0,0,0.06)', border: '1px solid #EBE6F7' }}>
             <button
               type="button"
               onClick={() => setActiveTab('employees')}
@@ -146,9 +163,13 @@ export default function CorporateSolutionsPage() {
                 fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
               }}
             >
-              👥 For Employees
+              <Home className="w-4 h-4" />
+              <span>For Employees</span>
             </button>
 
             <button
@@ -164,9 +185,13 @@ export default function CorporateSolutionsPage() {
                 fontWeight: 800,
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
               }}
             >
-              🏢 For Office Space
+              <Building2 className="w-4 h-4" />
+              <span>For Office Space</span>
             </button>
           </div>
         </div>
@@ -180,7 +205,9 @@ export default function CorporateSolutionsPage() {
               <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                    <span style={{ fontSize: '22px' }}>{service.icon}</span>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: '#EFE9FB', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      {service.icon}
+                    </div>
                     <h3 style={{ fontSize: '18px', fontWeight: 800, color: 'var(--ink)', margin: 0 }}>{service.title}</h3>
                   </div>
 

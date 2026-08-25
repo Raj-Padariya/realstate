@@ -4,6 +4,25 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useProperties } from '@/shared/context/PropertyContext';
+import {
+  Building2,
+  Home,
+  Castle,
+  Landmark,
+  Store,
+  Warehouse,
+  Factory,
+  Laptop,
+  Ruler,
+  Wheat,
+  Building,
+  Sparkles,
+  ShieldCheck,
+  Zap,
+  CheckCircle2,
+  Phone,
+  Tag
+} from 'lucide-react';
 
 const CITIES = ['Mumbai', 'Pune', 'Bengaluru', 'Hyderabad', 'Delhi NCR', 'Ahmedabad', 'Dholera SIR', 'Surat', 'Vadodara', 'Rajkot'];
 
@@ -13,26 +32,26 @@ const AD_TYPES: Record<string, string[]> = {
   land: ['Sale', 'Lease', 'Joint Venture'],
 };
 
-const SUB_PROPERTY_TYPES: Record<string, { label: string; icon: string }[]> = {
+const SUB_PROPERTY_TYPES: Record<string, { label: string; icon: React.ReactNode }[]> = {
   residential: [
-    { label: 'Apartment / Flat', icon: '🏢' },
-    { label: 'Independent Villa / House', icon: '🏡' },
-    { label: 'Gated Community Villa', icon: '🏰' },
-    { label: 'Builder Floor', icon: '🏠' },
+    { label: 'Apartment / Flat', icon: <Building2 className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Independent Villa / House', icon: <Home className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Gated Community Villa', icon: <Castle className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Builder Floor', icon: <Home className="w-5 h-5 text-[#522ab0]" /> },
   ],
   commercial: [
-    { label: 'Office Space', icon: '🏢' },
-    { label: 'Shop & Showroom', icon: '🏬' },
-    { label: 'Warehouse / Godown', icon: '🏭' },
-    { label: 'Industrial Shed / Building', icon: '⚙️' },
-    { label: 'Coworking Space', icon: '💻' },
+    { label: 'Office Space', icon: <Building2 className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Shop & Showroom', icon: <Store className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Warehouse / Godown', icon: <Warehouse className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Industrial Shed / Building', icon: <Factory className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Coworking Space', icon: <Laptop className="w-5 h-5 text-[#522ab0]" /> },
   ],
   land: [
-    { label: 'Residential Plot (NA Approved)', icon: '📐' },
-    { label: 'Agricultural Land', icon: '🌾' },
-    { label: 'Commercial Land', icon: '🏗️' },
-    { label: 'Industrial Plot', icon: '🏭' },
-    { label: 'Dholera SIR Investment Region', icon: '🌟' },
+    { label: 'Residential Plot (NA Approved)', icon: <Ruler className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Agricultural Land', icon: <Wheat className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Commercial Land', icon: <Building className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Industrial Plot', icon: <Factory className="w-5 h-5 text-[#522ab0]" /> },
+    { label: 'Dholera SIR Investment Region', icon: <Sparkles className="w-5 h-5 text-[#522ab0]" /> },
   ],
 };
 

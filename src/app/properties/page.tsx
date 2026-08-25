@@ -11,6 +11,7 @@ import LocationSearchInput from '@/components/common/LocationSearchInput';
 import PropertyMap from '@/components/common/PropertyMap';
 import PropertyInteractiveMap from '@/components/common/PropertyInteractiveMap';
 import { extractLocationParts } from '@/shared/utils/locationUtils';
+import { Building2, Home, Key, Store, Landmark, Sparkles } from 'lucide-react';
 
 const cmsData = cmsDataRaw as unknown as CmsData;
 
@@ -347,11 +348,11 @@ function PropertiesContent() {
           {/* CATEGORY SELECTOR TABS */}
           <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', overflowX: 'auto', paddingBottom: '4px' }}>
             {[
-              { id: 'All', label: 'All Listings', icon: '🏢' },
-              { id: 'Buy', label: 'Buy / Resale', icon: '🏠' },
-              { id: 'Rent', label: 'For Rent', icon: '🔑' },
-              { id: 'Commercial', label: 'Commercial', icon: '🏬' },
-              { id: 'Plot', label: 'Plots / Land', icon: '📐' },
+              { id: 'All', label: 'All Listings', icon: <Building2 className="w-3.5 h-3.5" /> },
+              { id: 'Buy', label: 'Buy / Resale', icon: <Home className="w-3.5 h-3.5" /> },
+              { id: 'Rent', label: 'For Rent', icon: <Key className="w-3.5 h-3.5" /> },
+              { id: 'Commercial', label: 'Commercial', icon: <Store className="w-3.5 h-3.5" /> },
+              { id: 'Plot', label: 'Plots / Land', icon: <Landmark className="w-3.5 h-3.5" /> },
             ].map((cat) => (
               <button
                 key={cat.id}
@@ -371,10 +372,11 @@ function PropertiesContent() {
                   alignItems: 'center',
                   gap: '6px',
                   boxShadow: categoryFilter === cat.id ? '0 2px 8px rgba(82,42,176,0.25)' : 'none',
-                  transition: 'all 0.15s ease'
+                  transition: 'all 0.2s ease'
                 }}
               >
-                <span>{cat.icon}</span> {cat.label}
+                {cat.icon}
+                <span>{cat.label}</span>
               </button>
             ))}
           </div>

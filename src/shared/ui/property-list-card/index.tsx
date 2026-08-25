@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { PropertyListingItem } from '@/shared/types/cms';
+import { Building2 } from 'lucide-react';
 
 export interface PropertyListCardProps {
   listing: PropertyListingItem & { photos?: string[] };
@@ -149,7 +150,7 @@ export function PropertyListCard({
         </h3>
         {((listing as any).societyName || (listing as any).buildingName) && (
           <div style={{ fontSize: '12px', fontWeight: 700, color: '#522ab0', marginBottom: '3px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            🏢 Scheme: {(listing as any).societyName || (listing as any).buildingName}
+            <Building2 className="w-3.5 h-3.5 text-[#522AB0]" /> Scheme: {(listing as any).societyName || (listing as any).buildingName}
           </div>
         )}
         <div className="raddr">{listing.address}</div>

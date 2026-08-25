@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SearchBarData, StateItem } from '@/shared/types/cms';
 import LocationSearchInput from '@/components/common/LocationSearchInput';
+import { Search, MapPin, Building, Coins, Home, Key, Building2, Landmark, Sparkles } from 'lucide-react';
 
 export interface SearchBarProps {
   searchBarData: SearchBarData;
@@ -17,100 +18,136 @@ export function SearchBar({ searchBarData, states }: SearchBarProps) {
   const [locationQuery, setLocationQuery] = useState('');
   const [selectedBudget, setSelectedBudget] = useState(searchBarData.budgetOptions[0]?.value || 'any');
 
+  const tabIcons: Record<string, React.ReactNode> = {
+    buy: <Home className="w-4 h-4" />,
+    rent: <Key className="w-4 h-4" />,
+    commercial: <Building2 className="w-4 h-4" />,
+    plots: <Landmark className="w-4 h-4" />,
+    projects: <Building className="w-4 h-4" />,
+  };
+
+  const popularCities = ['Ahmedabad', 'Dholera SIR', 'Surat', 'Vadodara', 'GIFT City', 'Rajkot', 'Mumbai', 'Pune'];
+
   const handleSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     const params = new URLSearchParams();
     if (locationQuery.trim()) params.set('q', locationQuery.trim());
     if (activeTab) params.set('type', activeTab);
     if (selectedBudget && selectedBudget !== 'any') params.set('budget', selectedBudget);
+    if (selectedState && selectedState !== searchBarData.stateDefaultOption) params.set('state', selectedState);
 
     const queryString = params.toString();
     router.push(`/properties${queryString ? `?${queryString}` : ''}`);
   };
 
-  const handleChipClick = (chip: string) => {
-    setLocationQuery(chip);
-    router.push(`/properties?q=${encodeURIComponent(chip)}`);
+  const handleCityClick = (city: string) => {
+    setLocationQuery(city);
+    router.push(`/properties?q=${encodeURIComponent(city)}`);
   };
 
   return (
-    <div className="searchbox">
-      <div className="tabs" role="tablist">
-        {searchBarData.tabs.map((tab) => (
-          <button
-            key={tab.id}
-            className="tab"
-            type="button"
-            role="tab"
-            aria-selected={activeTab === tab.id}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            {tab.label}
-          </button>
-        ))}
+    <div className="redbus-search-card">
+      {/* Tab Navigation */}
+      <div className="redbus-tabs-nav" role="tablist">
+        {searchBarData.tabs.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              className={`redbus-tab-item ${isActive ? 'active' : ''}`}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tabIcons[tab.id] || <Sparkles className="w-4 h-4" />}
+              <span>{tab.label}</span>
+            </button>
+          );
+        })}
       </div>
 
-      <form onSubmit={handleSearch} className="srow">
-        <div className="fld">
-          <label htmlFor="state-select">{searchBarData.stateLabel}</label>
-          <select
-            id="state-select"
-            value={selectedState}
-            onChange={(e) => setSelectedState(e.target.value)}
-          >
-            <option value={searchBarData.stateDefaultOption}>{searchBarData.stateDefaultOption}</option>
-            {states.map((st, idx) => (
-              <option key={idx} value={st.name}>
-                {st.name}
-              </option>
-            ))}
-          </select>
+      {/* Main Search Inputs Row */}
+      <form onSubmit={handleSearch} className="redbus-search-form">
+        {/* State Select */}
+        <div className="redbus-input-box">
+          <label htmlFor="state-select">{searchBarData.stateLabel || 'State / Region'}</label>
+          <div className="redbus-field-wrap">
+            <Building2 className="w-4 h-4 text-[#6D28D9] flex-shrink-0" />
+            <select
+              id="state-select"
+              value={selectedState}
+              onChange={(e) => setSelectedState(e.target.value)}
+            >
+              <option value={searchBarData.stateDefaultOption}>{searchBarData.stateDefaultOption}</option>
+              {states.map((st, idx) => (
+                <option key={idx} value={st.name}>
+                  {st.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <div className="fld" style={{ flex: 1.5, position: 'relative' }}>
-          <label htmlFor="location-input">{searchBarData.locationLabel}</label>
-          <LocationSearchInput
-            value={locationQuery}
-            onChange={(val) => setLocationQuery(val)}
-            onSelectLocation={(locName) => {
-              setLocationQuery(locName);
-              router.push(`/properties?q=${encodeURIComponent(locName)}`);
-            }}
-            placeholder={searchBarData.locationPlaceholder}
-          />
+        {/* Location Search Field */}
+        <div className="redbus-input-box" style={{ flex: '2 1 280px' }}>
+          <label htmlFor="location-input">{searchBarData.locationLabel || 'City, Locality or Landmark'}</label>
+          <div className="redbus-field-wrap">
+            <MapPin className="w-4 h-4 text-[#6D28D9] flex-shrink-0" />
+            <div style={{ width: '100%' }}>
+              <LocationSearchInput
+                value={locationQuery}
+                onChange={(val) => setLocationQuery(val)}
+                onSelectLocation={(locName) => {
+                  setLocationQuery(locName);
+                  router.push(`/properties?q=${encodeURIComponent(locName)}`);
+                }}
+                placeholder={searchBarData.locationPlaceholder || 'Enter city or locality (e.g. S.G. Highway)'}
+              />
+            </div>
+          </div>
         </div>
 
-        <div className="fld">
-          <label htmlFor="budget-select">{searchBarData.budgetLabel}</label>
-          <select
-            id="budget-select"
-            value={selectedBudget}
-            onChange={(e) => setSelectedBudget(e.target.value)}
-          >
-            {searchBarData.budgetOptions.map((opt, idx) => (
-              <option key={idx} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+        {/* Budget Dropdown */}
+        <div className="redbus-input-box">
+          <label htmlFor="budget-select">{searchBarData.budgetLabel || 'Budget Range'}</label>
+          <div className="redbus-field-wrap">
+            <Coins className="w-4 h-4 text-[#6D28D9] flex-shrink-0" />
+            <select
+              id="budget-select"
+              value={selectedBudget}
+              onChange={(e) => setSelectedBudget(e.target.value)}
+            >
+              {searchBarData.budgetOptions.map((opt, idx) => (
+                <option key={idx} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <div className="gobox">
-          <button type="submit" className="btn gobtn">
-            {searchBarData.searchBtnText}
-          </button>
-        </div>
+        {/* Search Submit CTA Button */}
+        <button type="submit" className="redbus-search-btn">
+          <Search className="w-5 h-5" />
+          <span>{searchBarData.searchBtnText || 'SEARCH'}</span>
+        </button>
       </form>
 
-      <div className="chips" style={{ padding: '0 0 16px 0' }}>
-        {searchBarData.quickChips.map((chip, idx) => (
+      {/* Popular City Location Chips */}
+      <div className="redbus-city-pills">
+        <span style={{ fontSize: '12px', fontWeight: 700, color: '#6B7280', marginRight: '4px' }}>
+          POPULAR CITIES:
+        </span>
+        {popularCities.map((city, idx) => (
           <button
             key={idx}
             type="button"
-            className="chip"
-            onClick={() => handleChipClick(chip)}
+            className="redbus-city-pill"
+            onClick={() => handleCityClick(city)}
           >
-            {chip}
+            <MapPin className="w-3 h-3 text-[#6D28D9]" />
+            <span>{city}</span>
           </button>
         ))}
       </div>

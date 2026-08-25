@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { ProjectsSectionData } from '@/shared/types/cms';
 import ProjectCard from '@/shared/ui/project-card';
-import { ArrowRight, Sparkles, MapPin, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Sparkles, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export interface ProjectsSectionProps {
   data: ProjectsSectionData;
@@ -12,6 +12,7 @@ export interface ProjectsSectionProps {
 
 export function ProjectsSection({ data }: ProjectsSectionProps) {
   const [selectedFilter, setSelectedFilter] = useState('all');
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   const filterTabs = [
     { id: 'all', label: 'All Developments' },
@@ -24,6 +25,13 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
   const filteredProjects = selectedFilter === 'all'
     ? data.projects
     : data.projects.filter((p) => (p.city || p.location).toLowerCase().includes(selectedFilter.toLowerCase()));
+
+  const handleSlide = (direction: 'left' | 'right') => {
+    if (sliderRef.current) {
+      const scrollAmount = direction === 'left' ? -380 : 380;
+      sliderRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   return (
     <section
@@ -75,27 +83,96 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
             </p>
           </div>
 
-          <Link
-            href={data.allProjectsHref || '/properties'}
-            style={{
-              fontSize: '14px',
-              fontWeight: 750,
-              color: '#FEDC00',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(12px)',
-              padding: '10px 22px',
-              borderRadius: '24px',
-              border: '1.5px solid rgba(254, 220, 0, 0.35)',
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
-              transition: 'all 0.2s ease',
-            }}
-          >
-            <span>{data.allProjectsText || 'View all projects'}</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          {/* Right Action: Slider Navigation Arrows + View All Link */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <Link
+              href={data.allProjectsHref || '/properties'}
+              style={{
+                fontSize: '13.5px',
+                fontWeight: 750,
+                color: '#FEDC00',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(12px)',
+                padding: '9px 18px',
+                borderRadius: '24px',
+                border: '1.5px solid rgba(254, 220, 0, 0.35)',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <span>{data.allProjectsText || 'View all'}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            {/* Slider Left Arrow */}
+            <button
+              type="button"
+              onClick={() => handleSlide('left')}
+              aria-label="Previous Projects"
+              style={{
+                width: '44px',
+                height: '44px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(12px)',
+                border: '1.5px solid rgba(255, 255, 255, 0.25)',
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#FEDC00';
+                e.currentTarget.style.color = '#12062B';
+                e.currentTarget.style.borderColor = '#FEDC00';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                e.currentTarget.style.color = '#ffffff';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+              }}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {/* Slider Right Arrow */}
+            <button
+              type="button"
+              onClick={() => handleSlide('right')}
+              aria-label="Next Projects"
+              style={{
+                width: '44px',
+                height: '44px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(12px)',
+                border: '1.5px solid rgba(255, 255, 255, 0.25)',
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#FEDC00';
+                e.currentTarget.style.color = '#12062B';
+                e.currentTarget.style.borderColor = '#FEDC00';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                e.currentTarget.style.color = '#ffffff';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+              }}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Integrated Frosted Glass Filter Segmented Bar */}
@@ -157,14 +234,33 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
           </div>
         </div>
 
-        {/* 3-Column Balanced Full-Width Grid */}
-        <div className="projects-grid-3col">
+        {/* Horizontal Smooth Slider Container */}
+        <div
+          ref={sliderRef}
+          style={{
+            display: 'flex',
+            gap: '24px',
+            overflowX: 'auto',
+            scrollSnapType: 'x mandatory',
+            scrollbarWidth: 'none',
+            paddingBottom: '16px',
+            scrollBehavior: 'smooth',
+          }}
+        >
           {filteredProjects.map((proj) => (
-            <ProjectCard
+            <div
               key={proj.id}
-              project={proj}
-              viewProjectText={data.viewProjectText || 'View Project Details'}
-            />
+              style={{
+                flex: '0 0 360px',
+                scrollSnapAlign: 'start',
+                minWidth: '280px',
+              }}
+            >
+              <ProjectCard
+                project={proj}
+                viewProjectText={data.viewProjectText || 'View Project Details'}
+              />
+            </div>
           ))}
         </div>
       </div>

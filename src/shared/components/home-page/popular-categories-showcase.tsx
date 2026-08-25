@@ -4,130 +4,107 @@ import React, { useRef } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, ArrowUpRight, Sparkles, Home, Building2, Landmark, Store, Hotel, Trees } from 'lucide-react';
 
-export interface CategoryItem {
+export interface CategoryCard {
   id: string;
   title: string;
   count: string;
   tagline: string;
   href: string;
   icon: React.ReactNode;
-  bgGradient: string;
+  headerBg: string;
+  badgeBg: string;
+  badgeColor: string;
   accentColor: string;
-  imageSvg: React.ReactNode;
+  imageUrl: string;
 }
 
 export function PopularCategoriesShowcase() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const categories: CategoryItem[] = [
+  const categories: CategoryCard[] = [
     {
       id: 'plots',
       title: 'Residential Land & Plots',
       count: '880+ Properties',
-      tagline: 'Clear Title, NA + NOC Investment Plots',
+      tagline: 'NA + NOC Clear Title Plots',
       href: '/properties?category=Plots',
-      icon: <Landmark className="w-6 h-6 text-[#FEDC00]" />,
-      bgGradient: 'linear-gradient(180deg, rgba(254, 220, 0, 0.15) 0%, rgba(20, 10, 45, 0.9) 100%)',
-      accentColor: '#FEDC00',
-      imageSvg: (
-        <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 160L70 90L150 130L230 70L300 160H0Z" fill="#10B981" opacity="0.25" />
-          <path d="M40 160L120 80L200 120L300 60V160H40Z" fill="#059669" opacity="0.35" />
-          <rect x="90" y="110" width="30" height="50" rx="3" fill="#FEDC00" opacity="0.6" />
-          <line x1="105" y1="90" x2="105" y2="110" stroke="#FEDC00" strokeWidth="3" />
-        </svg>
-      ),
+      icon: <Landmark className="w-5 h-5 text-[#047857]" />,
+      headerBg: 'linear-gradient(135deg, #D1FAE5 0%, #ECFDF5 100%)',
+      badgeBg: '#10B981',
+      badgeColor: '#ffffff',
+      accentColor: '#059669',
+      imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80',
     },
     {
       id: 'apartments',
       title: 'Flats & Apartments',
       count: '1,240+ Properties',
-      tagline: '1, 2, 3 & 4 BHK Gated Community Homes',
+      tagline: '1, 2, 3 & 4 BHK Gated Homes',
       href: '/properties?category=Apartments',
-      icon: <Home className="w-6 h-6 text-[#A78BFA]" />,
-      bgGradient: 'linear-gradient(180deg, rgba(167, 139, 250, 0.15) 0%, rgba(20, 10, 45, 0.9) 100%)',
-      accentColor: '#A78BFA',
-      imageSvg: (
-        <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="50" y="40" width="80" height="120" rx="6" fill="#6D28D9" opacity="0.4" />
-          <rect x="150" y="20" width="100" height="140" rx="6" fill="#8B5CF6" opacity="0.5" />
-          <rect x="70" y="60" width="16" height="20" rx="2" fill="#E0E7FF" opacity="0.7" />
-          <rect x="94" y="60" width="16" height="20" rx="2" fill="#E0E7FF" opacity="0.7" />
-          <rect x="170" y="40" width="20" height="24" rx="2" fill="#FEDC00" opacity="0.8" />
-          <rect x="210" y="40" width="20" height="24" rx="2" fill="#FEDC00" opacity="0.8" />
-        </svg>
-      ),
+      icon: <Home className="w-5 h-5 text-[#6D28D9]" />,
+      headerBg: 'linear-gradient(135deg, #EDE9FE 0%, #F5F3FF 100%)',
+      badgeBg: '#6D28D9',
+      badgeColor: '#ffffff',
+      accentColor: '#6D28D9',
+      imageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80',
     },
     {
       id: 'builder-floors',
-      title: 'Builder Floor & Penthouses',
+      title: 'Builder Floors & Penthouses',
       count: '340+ Properties',
-      tagline: 'Independent Low-Rise Luxury Floors',
+      tagline: 'Independent Low-Rise Residences',
       href: '/properties?category=Builder+Floor',
-      icon: <Building2 className="w-6 h-6 text-[#34D399]" />,
-      bgGradient: 'linear-gradient(180deg, rgba(52, 211, 153, 0.15) 0%, rgba(20, 10, 45, 0.9) 100%)',
-      accentColor: '#34D399',
-      imageSvg: (
-        <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="60" y="50" width="180" height="110" rx="8" fill="#059669" opacity="0.3" />
-          <path d="M40 50L150 10L260 50H40Z" fill="#10B981" opacity="0.45" />
-          <rect x="130" y="100" width="40" height="60" rx="4" fill="#FEDC00" opacity="0.7" />
-        </svg>
-      ),
+      icon: <Building2 className="w-5 h-5 text-[#B45309]" />,
+      headerBg: 'linear-gradient(135deg, #FEF3C7 0%, #FFFBEB 100%)',
+      badgeBg: '#D97706',
+      badgeColor: '#ffffff',
+      accentColor: '#D97706',
+      imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
     },
     {
       id: 'villas',
       title: 'Villas & Bungalows',
       count: '210+ Properties',
-      tagline: 'Private Garden & Luxury Lifestyle',
+      tagline: 'Private Lawn & Luxury Lifestyle',
       href: '/properties?category=Villas',
-      icon: <Trees className="w-6 h-6 text-[#F472B6]" />,
-      bgGradient: 'linear-gradient(180deg, rgba(244, 114, 182, 0.15) 0%, rgba(20, 10, 45, 0.9) 100%)',
-      accentColor: '#F472B6',
-      imageSvg: (
-        <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M30 70L120 20L210 70V160H30V70Z" fill="#EC4899" opacity="0.3" />
-          <circle cx="240" cy="110" r="30" fill="#10B981" opacity="0.5" />
-          <rect x="235" y="130" width="10" height="30" fill="#78350F" />
-        </svg>
-      ),
+      icon: <Trees className="w-5 h-5 text-[#BE185D]" />,
+      headerBg: 'linear-gradient(135deg, #FCE7F3 0%, #FDF2F8 100%)',
+      badgeBg: '#DB2777',
+      badgeColor: '#ffffff',
+      accentColor: '#DB2777',
+      imageUrl: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=80',
     },
     {
       id: 'commercial',
       title: 'Commercial Shops & Offices',
       count: '410+ Properties',
-      tagline: 'Retail Stores, Warehouses & Office Spaces',
+      tagline: 'Retail Outlets & Workspaces',
       href: '/properties?category=Commercial',
-      icon: <Store className="w-6 h-6 text-[#FBBF24]" />,
-      bgGradient: 'linear-gradient(180deg, rgba(251, 191, 36, 0.15) 0%, rgba(20, 10, 45, 0.9) 100%)',
-      accentColor: '#FBBF24',
-      imageSvg: (
-        <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="40" y="30" width="220" height="130" rx="8" fill="#D97706" opacity="0.35" />
-          <rect x="70" y="60" width="160" height="40" rx="4" fill="#FEDC00" opacity="0.8" />
-        </svg>
-      ),
+      icon: <Store className="w-5 h-5 text-[#1D4ED8]" />,
+      headerBg: 'linear-gradient(135deg, #DBEAFE 0%, #EFF6FF 100%)',
+      badgeBg: '#2563EB',
+      badgeColor: '#ffffff',
+      accentColor: '#2563EB',
+      imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
     },
     {
       id: 'studio',
-      title: 'Studio & 1 RK Apartments',
+      title: '1 RK / Studio Apartments',
       count: '95+ Properties',
-      tagline: 'Compact & High Yield Rental Options',
+      tagline: 'Compact & High Yield Rental Units',
       href: '/properties?category=Studio',
-      icon: <Hotel className="w-6 h-6 text-[#60A5FA]" />,
-      bgGradient: 'linear-gradient(180deg, rgba(96, 165, 250, 0.15) 0%, rgba(20, 10, 45, 0.9) 100%)',
-      accentColor: '#60A5FA',
-      imageSvg: (
-        <svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="70" y="40" width="160" height="120" rx="8" fill="#2563EB" opacity="0.35" />
-        </svg>
-      ),
+      icon: <Hotel className="w-5 h-5 text-[#4338CA]" />,
+      headerBg: 'linear-gradient(135deg, #E0E7FF 0%, #EEF2FF 100%)',
+      badgeBg: '#4F46E5',
+      badgeColor: '#ffffff',
+      accentColor: '#4F46E5',
+      imageUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80',
     },
   ];
 
   const handleScroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -340 : 340;
+      const scrollAmount = direction === 'left' ? -350 : 350;
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -135,44 +112,25 @@ export function PopularCategoriesShowcase() {
   return (
     <section
       style={{
-        background: 'linear-gradient(140deg, #1A0B3B 0%, #2A125E 45%, #41208C 100%)',
-        padding: '60px 0',
+        background: '#FAF9FD',
+        padding: '64px 0',
         position: 'relative',
-        overflow: 'hidden',
-        color: '#ffffff',
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        borderTop: '1px solid #EFE9FB',
+        borderBottom: '1px solid #EFE9FB',
       }}
     >
-      {/* Background Ambient Glow Circles */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '-100px',
-          right: '-100px',
-          width: '350px',
-          height: '350px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, rgba(0,0,0,0) 70%)',
-          pointerEvents: 'none',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '-120px',
-          left: '-80px',
-          width: '400px',
-          height: '400px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(254, 220, 0, 0.15) 0%, rgba(0,0,0,0) 70%)',
-          pointerEvents: 'none',
-        }}
-      />
-
       <div className="wrap">
-        {/* Section Header with Left Content & Right Carousel Arrows */}
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '32px', flexWrap: 'wrap', gap: '20px' }}>
+        {/* Section Header */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
+            marginBottom: '36px',
+            flexWrap: 'wrap',
+            gap: '20px',
+          }}
+        >
           <div>
             <span
               style={{
@@ -183,50 +141,52 @@ export function PopularCategoriesShowcase() {
                 fontWeight: 800,
                 letterSpacing: '1px',
                 textTransform: 'uppercase',
-                color: '#FEDC00',
-                background: 'rgba(254, 220, 0, 0.12)',
-                border: '1px solid rgba(254, 220, 0, 0.25)',
-                padding: '4px 12px',
+                color: '#522AB0',
+                background: '#EFE9FB',
+                padding: '5px 14px',
                 borderRadius: '20px',
                 marginBottom: '10px',
               }}
             >
-              <Sparkles className="w-3.5 h-3.5" /> PROPERTY CATEGORIES
+              <Sparkles className="w-3.5 h-3.5" /> EXPLORE BY CATEGORY
             </span>
-            <h2 style={{ fontSize: '30px', fontWeight: 800, color: '#ffffff', margin: 0, letterSpacing: '-0.5px' }}>
+            <h2 style={{ fontSize: '30px', fontWeight: 800, color: '#1F2937', margin: 0, letterSpacing: '-0.5px' }}>
               Apartments, Villas, Land &amp; More
             </h2>
-            <p style={{ fontSize: '15px', color: '#D1D5DB', margin: '6px 0 0 0', fontWeight: 400 }}>
-              Explore verified zero-brokerage listings by property category across Gujarat &amp; Top Cities
+            <p style={{ fontSize: '15px', color: '#4B5563', margin: '6px 0 0 0', fontWeight: 500 }}>
+              Discover verified zero-brokerage properties organized by category across Gujarat
             </p>
           </div>
 
-          {/* Navigation Controls */}
+          {/* Carousel Navigation Buttons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <button
               type="button"
               onClick={() => handleScroll('left')}
               aria-label="Scroll left"
               style={{
-                width: '44px',
-                height: '44px',
+                width: '46px',
+                height: '46px',
                 borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.1)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                color: '#ffffff',
+                background: '#ffffff',
+                border: '1.5px solid #E5E7EB',
+                color: '#374151',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#FEDC00';
-                e.currentTarget.style.color = '#1A0B3B';
+                e.currentTarget.style.background = '#522AB0';
+                e.currentTarget.style.color = '#ffffff';
+                e.currentTarget.style.borderColor = '#522AB0';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                e.currentTarget.style.color = '#ffffff';
+                e.currentTarget.style.background = '#ffffff';
+                e.currentTarget.style.color = '#374151';
+                e.currentTarget.style.borderColor = '#E5E7EB';
               }}
             >
               <ChevronLeft className="w-5 h-5" />
@@ -236,25 +196,28 @@ export function PopularCategoriesShowcase() {
               onClick={() => handleScroll('right')}
               aria-label="Scroll right"
               style={{
-                width: '44px',
-                height: '44px',
+                width: '46px',
+                height: '46px',
                 borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.1)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                color: '#ffffff',
+                background: '#ffffff',
+                border: '1.5px solid #E5E7EB',
+                color: '#374151',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#FEDC00';
-                e.currentTarget.style.color = '#1A0B3B';
+                e.currentTarget.style.background = '#522AB0';
+                e.currentTarget.style.color = '#ffffff';
+                e.currentTarget.style.borderColor = '#522AB0';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                e.currentTarget.style.color = '#ffffff';
+                e.currentTarget.style.background = '#ffffff';
+                e.currentTarget.style.color = '#374151';
+                e.currentTarget.style.borderColor = '#E5E7EB';
               }}
             >
               <ChevronRight className="w-5 h-5" />
@@ -262,16 +225,16 @@ export function PopularCategoriesShowcase() {
           </div>
         </div>
 
-        {/* Horizontal Scrollable Category Cards Container */}
+        {/* Horizontal Scrollable Category Cards */}
         <div
           ref={scrollContainerRef}
           style={{
             display: 'flex',
-            gap: '22px',
+            gap: '24px',
             overflowX: 'auto',
             scrollSnapType: 'x mandatory',
             scrollbarWidth: 'none',
-            paddingBottom: '12px',
+            paddingBottom: '16px',
             scrollBehavior: 'smooth',
           }}
         >
@@ -280,46 +243,50 @@ export function PopularCategoriesShowcase() {
               key={cat.id}
               href={cat.href}
               style={{
-                flex: '0 0 310px',
+                flex: '0 0 320px',
                 scrollSnapAlign: 'start',
-                borderRadius: '20px',
-                background: cat.bgGradient,
-                border: '1px solid rgba(255, 255, 255, 0.14)',
-                boxShadow: '0 12px 30px rgba(0, 0, 0, 0.25)',
+                borderRadius: '22px',
+                background: '#ffffff',
+                border: '1px solid #E5E7EB',
+                boxShadow: '0 10px 28px rgba(82, 42, 176, 0.07)',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
-                height: '360px',
+                height: '380px',
                 textDecoration: 'none',
                 position: 'relative',
                 overflow: 'hidden',
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.boxShadow = `0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px ${cat.accentColor}33`;
+                e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(82, 42, 176, 0.16)';
                 e.currentTarget.style.borderColor = cat.accentColor;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.25)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.14)';
+                e.currentTarget.style.boxShadow = '0 10px 28px rgba(82, 42, 176, 0.07)';
+                e.currentTarget.style.borderColor = '#E5E7EB';
               }}
             >
-              {/* Top Text Header Info */}
-              <div style={{ padding: '24px 24px 0 24px', zIndex: 2 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              {/* Top Colored Header Info */}
+              <div
+                style={{
+                  background: cat.headerBg,
+                  padding: '24px 22px 20px 22px',
+                  borderBottom: '1px solid rgba(0,0,0,0.04)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
                   <div
                     style={{
-                      width: '46px',
-                      height: '46px',
+                      width: '42px',
+                      height: '42px',
                       borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      backdropFilter: 'blur(8px)',
+                      background: '#ffffff',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      border: `1px solid ${cat.accentColor}44`,
                     }}
                   >
                     {cat.icon}
@@ -328,59 +295,80 @@ export function PopularCategoriesShowcase() {
                     style={{
                       fontSize: '12px',
                       fontWeight: 800,
-                      color: cat.accentColor,
-                      background: 'rgba(0, 0, 0, 0.4)',
-                      padding: '4px 10px',
-                      borderRadius: '14px',
-                      border: `1px solid ${cat.accentColor}33`,
+                      color: cat.badgeColor,
+                      background: cat.badgeBg,
+                      padding: '4px 12px',
+                      borderRadius: '16px',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                     }}
                   >
                     {cat.count}
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#ffffff', margin: '0 0 6px 0', lineHeight: 1.3 }}>
+                <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#1F2937', margin: '0 0 4px 0', lineHeight: 1.3 }}>
                   {cat.title}
                 </h3>
-                <p style={{ fontSize: '13px', color: '#9CA3AF', margin: 0, fontWeight: 500, lineHeight: 1.4 }}>
+                <p style={{ fontSize: '13px', color: '#4B5563', margin: 0, fontWeight: 600 }}>
                   {cat.tagline}
                 </p>
               </div>
 
-              {/* Bottom Visual SVG Vector Background */}
+              {/* Bottom Real Property Image Container */}
               <div
                 style={{
-                  width: '100%',
-                  height: '160px',
                   position: 'relative',
-                  marginTop: 'auto',
-                  display: 'flex',
-                  alignItems: 'flex-end',
-                  justifyContent: 'center',
+                  flex: 1,
+                  overflow: 'hidden',
+                  width: '100%',
                 }}
               >
-                {cat.imageSvg}
-              </div>
+                <img
+                  src={cat.imageUrl}
+                  alt={cat.title}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    transition: 'transform 0.5s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                />
 
-              {/* Hover Action Arrow */}
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '16px',
-                  right: '16px',
-                  width: '38px',
-                  height: '38px',
-                  borderRadius: '50%',
-                  background: cat.accentColor,
-                  color: '#1A0B3B',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                  zIndex: 3,
-                }}
-              >
-                <ArrowUpRight className="w-5 h-5" />
+                {/* Subtle Image Overlay Gradient */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.3) 100%)',
+                  }}
+                />
+
+                {/* Floating Arrow Pill */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '16px',
+                    right: '16px',
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    background: '#ffffff',
+                    color: '#1F2937',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.2)',
+                    transition: 'transform 0.2s ease, background 0.2s ease, color 0.2s ease',
+                  }}
+                >
+                  <ArrowUpRight className="w-5 h-5" />
+                </div>
               </div>
             </Link>
           ))}

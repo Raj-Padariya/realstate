@@ -64,70 +64,28 @@ export const Header: React.FC<HeaderProps> = ({ topBarData, headerData }) => {
 
                   {isMega && item.categories && (
                     <div className="mega">
-                      <div className="wrap" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '36px', padding: '24px 28px' }}>
-                        <div style={{ display: 'flex', gap: '36px', flex: 1, minWidth: 0, flexWrap: 'wrap' }}>
-                          {item.categories.map((cat, idx) => (
-                            <div key={idx} className="mcol" style={{ minWidth: '170px', maxWidth: '240px' }}>
-                              <h4>{cat.title}</h4>
-                              {cat.links.map((link, lIdx) => (
-                                <Link key={lIdx} href={link.href}>
-                                  {link.label}
-                                </Link>
-                              ))}
-                            </div>
-                          ))}
-                        </div>
+                      <div className="wrap megagrid">
+                        {item.categories.map((cat, idx) => (
+                          <div key={idx} className="mcol">
+                            <h4>{cat.title}</h4>
+                            {cat.links.map((link, lIdx) => (
+                              <Link key={lIdx} href={link.href}>
+                                {link.label}
+                              </Link>
+                            ))}
+                          </div>
+                        ))}
 
-                        {(() => {
-                          const showcase = {
-                            builderName: 'Mahadev Group',
-                            builderLogo: 'MG',
-                            builderSubtitle: 'View Projects',
-                            projectTitle: 'Mahadev Glory',
-                            location: 'Bopal, Ahmedabad',
-                            price: 'Price on Request',
-                            specs: '2, 3 BHK Apartments',
-                            image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80',
-                            ctaText: 'Contact',
-                            ctaHref: '/properties?city=ahmedabad',
-                          };
-                          return (
-                            <Link
-                              href={showcase.ctaHref}
-                              className="mpromo-showcase"
-                              onClick={() => setOpenMenuId(null)}
-                              style={{ width: '480px', flexShrink: 0 }}
-                            >
-                              <div className="mpromo-info">
-                                <div className="mpromo-builder">
-                                  <div className="mpromo-logo">
-                                    {showcase.builderLogo}
-                                  </div>
-                                  <div className="mpromo-builder-text">
-                                    <b>{showcase.builderName}</b>
-                                    <span>{showcase.builderSubtitle}</span>
-                                  </div>
-                                </div>
-
-                                <div className="mpromo-title">{showcase.projectTitle}</div>
-                                <div className="mpromo-loc">📍 {showcase.location}</div>
-                                <div className="mpromo-price">{showcase.price}</div>
-                                <div className="mpromo-specs">{showcase.specs}</div>
-
-                                <span className="mpromo-btn">
-                                  {showcase.ctaText}
-                                </span>
-                              </div>
-
-                              <div className="mpromo-imgbox">
-                                <img
-                                  src={showcase.image}
-                                  alt={showcase.projectTitle}
-                                />
-                              </div>
+                        {item.promo && (
+                          <div className="mpromo">
+                            <span className="mk">{item.promo.badge}</span>
+                            <b>{item.promo.title}</b>
+                            <p>{item.promo.description}</p>
+                            <Link href={item.promo.ctaHref} className="mcta">
+                              {item.promo.ctaText}
                             </Link>
-                          );
-                        })()}
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
@@ -152,7 +110,7 @@ export const Header: React.FC<HeaderProps> = ({ topBarData, headerData }) => {
               {headerData.loginBtnText}
             </Button>
           </Link>
-          <Button size="sm">
+          <Button size="sm" badgeText={headerData.postBadgeText}>
             {headerData.postBtnText}
           </Button>
           <button

@@ -11,7 +11,7 @@ import LocationSearchInput from '@/components/common/LocationSearchInput';
 import PropertyMap from '@/components/common/PropertyMap';
 import PropertyInteractiveMap from '@/components/common/PropertyInteractiveMap';
 import { extractLocationParts } from '@/shared/utils/locationUtils';
-import { Building2, Home, Key, Store, Landmark, Sparkles, Map, List } from 'lucide-react';
+import { Building2, Home, Key, Store, Landmark, Sparkles } from 'lucide-react';
 
 const cmsData = cmsDataRaw as unknown as CmsData;
 
@@ -47,39 +47,31 @@ function PropertiesContent() {
   const searchParams = useSearchParams();
   const urlQuery = searchParams ? searchParams.get('q') : null;
   const rentQuery = searchParams ? searchParams.get('rent') : null;
-  const urlCity = searchParams ? searchParams.get('city') : null;
-  const urlState = searchParams ? searchParams.get('state') : null;
-  const urlSearch = searchParams ? searchParams.get('search') : null;
-  const urlDeal = searchParams ? searchParams.get('deal') : null;
-  const urlType = searchParams ? searchParams.get('type') : null;
-  const urlCategory = searchParams ? searchParams.get('category') : null;
-
-  const initialSearch = urlQuery || urlSearch || (urlCity ? urlCity.charAt(0).toUpperCase() + urlCity.slice(1).replace('-', ' ') : '') || (urlState ? urlState.charAt(0).toUpperCase() + urlState.slice(1).replace('-', ' ') : '') || rentQuery || '';
 
   const { properties } = useProperties();
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
   const [filterTab, setFilterTab] = useState<'basic' | 'premium'>('basic');
-  const [searchTag, setSearchTag] = useState(listingData.searchTag || '');
-  const [searchInput, setSearchInput] = useState(initialSearch);
+  const [searchTag, setSearchTag] = useState(listingData.searchTag);
+  const [searchInput, setSearchInput] = useState(urlQuery || rentQuery || '');
 
+  const urlType = searchParams ? searchParams.get('type') : null;
   const [categoryFilter, setCategoryFilter] = useState<'All' | 'Buy' | 'Rent' | 'Commercial' | 'Plot'>('All');
 
   React.useEffect(() => {
-    const activeSearch = urlQuery || urlSearch || (urlCity ? urlCity.charAt(0).toUpperCase() + urlCity.slice(1).replace('-', ' ') : '') || (urlState ? urlState.charAt(0).toUpperCase() + urlState.slice(1).replace('-', ' ') : '') || rentQuery || '';
-    if (activeSearch) {
-      setSearchInput(activeSearch);
-    }
-    
-    if (rentQuery !== null || urlDeal === 'rent' || urlType === 'rent') {
+    if (urlQuery !== null) {
+      setSearchInput(urlQuery);
+    } else if (rentQuery !== null) {
+      setSearchInput(rentQuery);
       setCategoryFilter('Rent');
-    } else if (urlDeal === 'sale' || urlType === 'buy' || urlType === 'resale') {
-      setCategoryFilter('Buy');
-    } else if (urlDeal === 'commercial' || urlType === 'commercial' || urlCategory === 'commercial') {
-      setCategoryFilter('Commercial');
-    } else if (urlDeal === 'plot' || urlType === 'plot' || urlType === 'land' || urlCategory === 'plots') {
-      setCategoryFilter('Plot');
     }
-  }, [urlQuery, urlSearch, urlCity, urlState, rentQuery, urlDeal, urlType, urlCategory]);
+    if (urlType !== null) {
+      const lower = urlType.toLowerCase();
+      if (lower === 'rent') setCategoryFilter('Rent');
+      else if (lower === 'resale' || lower === 'buy') setCategoryFilter('Buy');
+      else if (lower === 'commercial') setCategoryFilter('Commercial');
+      else if (lower === 'land' || lower === 'plot') setCategoryFilter('Plot');
+    }
+  }, [urlQuery, rentQuery, urlType]);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activePin, setActivePin] = useState<number | null>(null);
@@ -324,23 +316,15 @@ function PropertiesContent() {
       <div className="wrap">
         <nav className="crumbs" aria-label="Breadcrumb">
           {(() => {
-            const currentSearch = searchInput.trim();
-            const loc = currentSearch ? extractLocationParts(currentSearch, filteredListings[0]?.address) : null;
+            const currentSearch = searchInput || searchTag;
+            const loc = extractLocationParts(currentSearch, filteredListings[0]?.address);
             return (
               <>
                 <Link href="/">Home</Link> ›{' '}
-                {loc && (loc.city || loc.state) ? (
+                {currentSearch ? (
                   <>
-                    {loc.state && (
-                      <>
-                        <Link href={`/properties?q=${encodeURIComponent(loc.state)}`}>{loc.state}</Link> ›{' '}
-                      </>
-                    )}
-                    {loc.city && (
-                      <>
-                        <Link href={`/properties?q=${encodeURIComponent(loc.city)}`}>{loc.city}</Link>
-                      </>
-                    )}
+                    <Link href={`/properties?q=${encodeURIComponent(loc.state)}`}>{loc.state}</Link> ›{' '}
+                    <Link href={`/properties?q=${encodeURIComponent(loc.city)}`}>{loc.city}</Link>
                     {loc.locality && loc.locality.toLowerCase() !== loc.city.toLowerCase() && (
                       <>
                         {' › '}<span>{loc.locality}</span>
@@ -475,138 +459,36 @@ function PropertiesContent() {
             </button>
           </div>
 
-          {(() => {
-            const rawQuery = (searchInput || searchTag || filteredListings[0]?.address || 'Ahmedabad').toLowerCase();
-            let lat = 23.0225;
-            let lng = 72.5714;
-            let cityName = 'Ahmedabad';
-
-            if (rawQuery.includes('pune') || rawQuery.includes('baner') || rawQuery.includes('wakad') || rawQuery.includes('hinjewadi')) {
-              lat = 18.5204;
-              lng = 73.8567;
-              cityName = 'Pune';
-            } else if (rawQuery.includes('mumbai') || rawQuery.includes('bandra') || rawQuery.includes('andheri')) {
-              lat = 19.0760;
-              lng = 72.8777;
-              cityName = 'Mumbai';
-            } else if (rawQuery.includes('dholera')) {
-              lat = 22.2510;
-              lng = 72.1930;
-              cityName = 'Dholera SIR';
-            } else if (rawQuery.includes('surat')) {
-              lat = 21.1702;
-              lng = 72.8311;
-              cityName = 'Surat';
-            } else if (rawQuery.includes('vadodara')) {
-              lat = 22.3072;
-              lng = 73.1812;
-              cityName = 'Vadodara';
-            } else if (rawQuery.includes('rajkot')) {
-              lat = 22.3039;
-              lng = 70.8022;
-              cityName = 'Rajkot';
-            } else if (rawQuery.includes('bengaluru') || rawQuery.includes('bangalore')) {
-              lat = 12.9716;
-              lng = 77.5946;
-              cityName = 'Bengaluru';
-            } else if (rawQuery.includes('hyderabad')) {
-              lat = 17.3850;
-              lng = 78.4867;
-              cityName = 'Hyderabad';
-            } else if (rawQuery.includes('delhi') || rawQuery.includes('noida') || rawQuery.includes('gurugram')) {
-              lat = 28.6139;
-              lng = 77.2090;
-              cityName = 'Delhi NCR';
-            }
-
-            const bbox = `${(lng - 0.05).toFixed(4)}%2C${(lat - 0.035).toFixed(4)}%2C${(lng + 0.05).toFixed(4)}%2C${(lat + 0.035).toFixed(4)}`;
-            const iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
-
-            return (
-              <div className="rcardbox" style={{ border: '1px solid var(--line)', borderRadius: '12px', overflow: 'hidden' }}>
-                <div
-                  className="mapbox"
-                  style={{
-                    position: 'relative',
-                    height: '210px',
-                    overflow: 'hidden',
-                    cursor: 'pointer',
-                    background: '#e5e3df',
-                  }}
-                  onClick={() => setViewMode(viewMode === 'map' ? 'list' : 'map')}
-                >
-                  <iframe
-                    src={iframeSrc}
-                    title="Live City Map Preview"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      border: 'none',
-                      pointerEvents: 'none',
-                      display: 'block',
-                    }}
-                    loading="lazy"
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 100%)',
-                      pointerEvents: 'none',
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '10px',
-                      left: '10px',
-                      background: 'rgba(255, 255, 255, 0.95)',
-                      color: 'var(--ink)',
-                      padding: '4px 10px',
-                      borderRadius: '6px',
-                      fontSize: '11px',
-                      fontWeight: 700,
-                      boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                    }}
-                  >
-                    📍 <span>{cityName}</span>
-                  </div>
-                  <button
-                    type="button"
-                    className="btn sm mapbtn"
-                    style={{
-                      position: 'absolute',
-                      bottom: '12px',
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      background: 'var(--pp)',
-                      color: '#fff',
-                      fontWeight: 700,
-                      fontSize: '12.5px',
-                      padding: '8px 16px',
-                      borderRadius: '8px',
-                      boxShadow: '0 4px 12px rgba(82, 42, 176, 0.4)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      zIndex: 5,
-                      whiteSpace: 'nowrap',
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setViewMode(viewMode === 'map' ? 'list' : 'map');
-                    }}
-                  >
-                    <Map className="w-3.5 h-3.5" />
-                    {viewMode === 'map' ? 'Switch to list view' : `View ${filteredListings.length} on map`}
-                  </button>
-                </div>
-              </div>
-            );
-          })()}
+          <div className="rcardbox">
+            <div className="mapbox">
+              <svg viewBox="0 0 276 190" aria-hidden="true">
+                <rect width="276" height="190" fill="#EFE9FB" />
+                <g stroke="#D6C9F2" strokeWidth="12" fill="none">
+                  <path d="M-10 66h300M-10 136h300M78 -10v210M190 -10v210" />
+                </g>
+                <g fill="#C9B9EE">
+                  <rect x="14" y="14" width="50" height="38" rx="4" />
+                  <rect x="96" y="12" width="76" height="40" rx="4" />
+                  <rect x="206" y="16" width="56" height="36" rx="4" />
+                  <rect x="16" y="82" width="46" height="42" rx="4" />
+                  <rect x="98" y="80" width="72" height="44" rx="4" />
+                  <rect x="204" y="84" width="58" height="40" rx="4" />
+                </g>
+                <g fill="#522AB0">
+                  <circle cx="126" cy="96" r="13" />
+                  <circle cx="52" cy="52" r="10" />
+                  <circle cx="222" cy="112" r="10" />
+                </g>
+              </svg>
+              <button
+                className="btn sm mapbtn"
+                type="button"
+                onClick={() => setViewMode('map')}
+              >
+                View {filteredListings.length} on map
+              </button>
+            </div>
+          </div>
 
           <div className="fcard">
             <div className="ftabs" role="tablist">
@@ -823,53 +705,7 @@ function PropertiesContent() {
                 <b id="rcount">{filteredListings.length}</b> {listingData.resultsSubTitle}
               </div>
             </div>
-            <div className="rtools" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              {/* Segmented View Switcher */}
-              <div style={{ display: 'inline-flex', background: '#F3F0FA', padding: '3px', borderRadius: '8px', border: '1px solid var(--line)' }}>
-                <button
-                  type="button"
-                  onClick={() => setViewMode('list')}
-                  style={{
-                    padding: '6px 12px',
-                    fontSize: '12.5px',
-                    fontWeight: 600,
-                    borderRadius: '6px',
-                    border: 'none',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '5px',
-                    background: viewMode === 'list' ? '#fff' : 'transparent',
-                    color: viewMode === 'list' ? 'var(--pp)' : 'var(--muted)',
-                    boxShadow: viewMode === 'list' ? '0 2px 6px rgba(0,0,0,0.08)' : 'none',
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  <List className="w-3.5 h-3.5" /> List
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setViewMode('map')}
-                  style={{
-                    padding: '6px 12px',
-                    fontSize: '12.5px',
-                    fontWeight: 600,
-                    borderRadius: '6px',
-                    border: 'none',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '5px',
-                    background: viewMode === 'map' ? '#fff' : 'transparent',
-                    color: viewMode === 'map' ? 'var(--pp)' : 'var(--muted)',
-                    boxShadow: viewMode === 'map' ? '0 2px 6px rgba(0,0,0,0.08)' : 'none',
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  <Map className="w-3.5 h-3.5" /> Map ({filteredListings.length})
-                </button>
-              </div>
-
+            <div className="rtools">
               <button
                 className="fbtnmob"
                 type="button"

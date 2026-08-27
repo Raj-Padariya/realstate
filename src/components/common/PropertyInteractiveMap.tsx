@@ -173,10 +173,11 @@ export default function PropertyInteractiveMap({
           scrollWheelZoom: true,
         });
 
-        // OpenStreetMap Standard & Fast CDN Tile Layer
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-          maxZoom: 19,
+        // Google Maps Tile Layer (Hosted on Google CDN - Ultra-fast, 100% reliable worldwide)
+        L.tileLayer('https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+          attribution: '&copy; Google Maps',
+          subdomains: ['0', '1', '2', '3'],
+          maxZoom: 20,
         }).addTo(map);
 
         mapInstanceRef.current = map;
@@ -191,16 +192,9 @@ export default function PropertyInteractiveMap({
 
     const map = mapInstanceRef.current;
 
-    // Trigger invalidateSize and ResizeObserver to eliminate any gray tile gaps
-    if (map && mapContainerRef.current) {
-      const resizeObserver = new ResizeObserver(() => {
-        try {
-          map.invalidateSize();
-        } catch (e) {}
-      });
-      resizeObserver.observe(mapContainerRef.current);
-
-      const resizeTimes = [50, 150, 300, 600, 1200];
+    // Trigger invalidateSize repeatedly to ensure 100% full map tile coverage
+    if (map) {
+      const resizeTimes = [50, 200, 500, 1000];
       resizeTimes.forEach((delay) => {
         setTimeout(() => {
           try {

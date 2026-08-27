@@ -27,7 +27,7 @@ export function OffersSection() {
       badgeColor: '#34D399',
     },
     {
-      badge: 'FREE RENTAL AGREEMENT',
+      badge: 'DOORSTEP RENTAL AGREEMENT',
       title: 'E-Stamped Paperwork',
       desc: 'Get your official rent agreement drafted & delivered to your doorstep with the Relax Owner Plan.',
       icon: <FileCheck className="w-7 h-7 text-[#A78BFA]" />,

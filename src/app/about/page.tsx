@@ -92,7 +92,7 @@ export default function AboutUsPage() {
               <Search className="w-4 h-4" /> Browse Owner Properties
             </Link>
             <Link href="/post-property" style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', padding: '14px 28px', borderRadius: '12px', fontWeight: 800, fontSize: '15px', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-              <Home className="w-4 h-4" /> Post Property Free
+              <Home className="w-4 h-4" /> Post Property
             </Link>
           </div>
         </div>

@@ -6,7 +6,7 @@
   "topBar": {
     "highlightText": "ZERO BROKERAGE PLATFORM",
     "middleText": "Connect directly with verified property owners across India.",
-    "endText": "Post property FREE →"
+    "endText": "Post property →"
   },
   "header": {
     "logoMark": "GP",
@@ -143,7 +143,7 @@
       }
     },
     "forOwnersLinks": [
-      { "title": "Post property FREE", "href": "/post-property" },
+      { "title": "Post property", "href": "/post-property" },
       { "title": "Owner Plans", "href": "/tenant-plans?tab=owner" },
       { "title": "Tenant Plans", "href": "/tenant-plans" },
       { "title": "Rental Agreement", "href": "/rent-agreement" },
@@ -151,7 +151,7 @@
     ],
     "loginBtnText": "Log in",
     "postPropertyBtnText": "Post property",
-    "postPropertyBadgeText": "FREE"
+    "postPropertyBadgeText": ""
   },
   "hero": {
     "newBadgeText": "New",
@@ -332,8 +332,8 @@
       "Free title check badge on document upload",
       "Instant WhatsApp lead alerts"
     ],
-    "badgeText": "FREE LISTING",
-    "buttonText": "Post Property FREE →"
+    "badgeText": "VERIFIED LISTING",
+    "buttonText": "Post Property →"
   },
   "servicesSection": {
     "title": "End-to-End Home Buying & Renting Services",
@@ -383,7 +383,7 @@
           "Upload up to 15 photos",
           "Zero brokerage fees"
         ],
-        "buttonText": "Post Property FREE",
+        "buttonText": "Post Property",
         "finePrint": "Ideal for self-managed owners"
       },
       {
@@ -573,7 +573,7 @@
     "ctaSubtitle": "Over 248 owner listed flats waiting for direct buyers.",
     "ctaSearchBtnText": "Search Properties Now",
     "ctaListBtnText": "Post Property",
-    "ctaListBadgeText": "FREE"
+    "ctaListBadgeText": ""
   },
   "testimonialsSection": {
     "title": "Trusted by Thousands of Buyers & Owners",
@@ -657,7 +657,7 @@
       {
         "title": "For Owners",
         "links": [
-          { "label": "Post a Property FREE", "href": "/post-property" },
+          { "label": "Post a Property", "href": "/post-property" },
           { "label": "Owner Plans & Pricing", "href": "/plans" },
           { "label": "Tenant Verification", "href": "/services/tenant-verification" },
           { "label": "NRI Desk", "href": "/nri" }
@@ -682,7 +682,7 @@
       { "label": "Maharashtra", "href": "/maharashtra" },
       { "label": "Pune", "href": "/pune" }
     ],
-    "searchTag": "Baner, Pune",
+    "searchTag": "",
     "searchPlaceholder": "Add another locality or project...",
     "totalResultsCount": 248,
     "resultsSubTitle": "owner properties · within 2 km · updated today",

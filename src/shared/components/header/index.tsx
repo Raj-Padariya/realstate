@@ -13,6 +13,62 @@ export interface HeaderProps {
   headerData: HeaderData;
 }
 
+const PROMO_SHOWCASES: Record<string, {
+  badge: string;
+  headline: string;
+  subtitle: string;
+  caption: string;
+  image: string;
+  ctaText: string;
+  ctaHref: string;
+}> = {
+  buy: {
+    badge: '#1 NEW RELEASE',
+    headline: 'MAKE EVERY MOVE COUNT.',
+    subtitle: 'Mahadev Glory, Bopal · 2 & 3 BHK from ₹45 L',
+    caption: 'Mahadev Glory · Bopal',
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80',
+    ctaText: 'EXPLORE RAINMAKER',
+    ctaHref: '/properties?city=ahmedabad',
+  },
+  rent: {
+    badge: 'ZERO BROKERAGE',
+    headline: 'RENT DIRECT FROM OWNERS.',
+    subtitle: 'Godrej Garden City · Furnished 2 & 3 BHK Homes',
+    caption: 'Godrej Garden City · SG Highway',
+    image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80',
+    ctaText: 'BROWSE RENTALS',
+    ctaHref: '/properties?deal=rent&city=ahmedabad',
+  },
+  commercial: {
+    badge: 'GRADE A HUBS',
+    headline: 'SCALE YOUR BUSINESS.',
+    subtitle: 'Mondeal Heights, SG Highway · Retail & Offices',
+    caption: 'Mondeal Heights · SG Highway',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
+    ctaText: 'EXPLORE SPACES',
+    ctaHref: '/properties?type=commercial',
+  },
+  newProjects: {
+    badge: 'RERA VERIFIED',
+    headline: 'FUTURE OF LUXURY LIVING.',
+    subtitle: 'Adani Shantigram · 600-Acre Golf Township',
+    caption: 'Adani Shantigram · Ahmedabad',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
+    ctaText: 'VIEW LAUNCHES',
+    ctaHref: '/projects',
+  },
+  services: {
+    badge: 'DOORSTEP EXPRESS',
+    headline: 'LEGAL MADE SIMPLE.',
+    subtitle: 'Government Verified E-Stamp & Rental Agreement in 24h',
+    caption: 'Govt E-Stamp Verified',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80',
+    ctaText: 'GET AGREEMENT',
+    ctaHref: '/services',
+  },
+};
+
 export function Header({ topBarData, headerData }: HeaderProps) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -77,7 +133,7 @@ export function Header({ topBarData, headerData }: HeaderProps) {
         <div style={{ width: '100%', maxWidth: '100%', padding: '0 28px', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '32px', textAlign: 'center' }}>
           <span>
             <b>{topBarData?.highlightText || 'ZERO BROKERAGE PLATFORM'}</b> &nbsp;|&nbsp; {topBarData?.middleText || 'Connect directly with verified property owners.'}{' '}
-            &nbsp;|&nbsp; {topBarData?.endText || 'Post property FREE →'}
+            &nbsp;|&nbsp; {topBarData?.endText || 'Post property →'}
           </span>
         </div>
       </div>
@@ -147,28 +203,77 @@ export function Header({ topBarData, headerData }: HeaderProps) {
                           : undefined
                       }
                     >
-                      <div className="wrap megagrid">
-                        {menu.data?.columns?.map((col, cIdx) => (
-                          <div key={cIdx} className="mcol">
-                            <h4>{col.title}</h4>
-                            {col.links?.map((link, lIdx) => (
-                              <Link key={lIdx} href={link.href} onClick={() => setOpenMenu(null)}>
-                                {link.title || (link as any).label}
-                              </Link>
+                      <div className="wrap" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'stretch', gap: '36px', padding: '26px 32px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', flex: 1, minWidth: 0 }}>
+                          {/* Link Columns */}
+                          <div style={{ display: 'flex', gap: '36px', flexWrap: 'wrap' }}>
+                            {menu.data?.columns?.map((col, cIdx) => (
+                              <div key={cIdx} className="mcol" style={{ minWidth: '170px', maxWidth: '240px' }}>
+                                <h4>{col.title}</h4>
+                                {col.links?.map((link, lIdx) => (
+                                  <Link key={lIdx} href={link.href} onClick={() => setOpenMenu(null)}>
+                                    {link.title || (link as any).label}
+                                  </Link>
+                                ))}
+                              </div>
                             ))}
                           </div>
-                        ))}
 
-                        {menu.data?.promo && (
-                          <div className="mpromo">
-                            <span className="mk">{menu.data.promo.badge}</span>
-                            <b>{menu.data.promo.title}</b>
-                            <p>{menu.data.promo.description}</p>
-                            <Link href={menu.data.promo.ctaHref || '/properties'} className="mcta" onClick={() => setOpenMenu(null)}>
-                              {menu.data.promo.ctaText}
-                            </Link>
+                          {/* DOWNLOAD APP STRIP */}
+                          <div style={{ borderTop: '1px solid var(--line)', paddingTop: '14px', marginTop: 'auto' }}>
+                            <div style={{ fontSize: '10.5px', fontWeight: 800, letterSpacing: '0.08em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '8px' }}>
+                              Download the GujjuProperty App:
+                            </div>
+                            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                              <a href="https://apple.com/app-store" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', height: '32px' }}>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" style={{ height: '32px', width: 'auto' }} />
+                              </a>
+                              <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', height: '32px' }}>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style={{ height: '32px', width: 'auto' }} />
+                              </a>
+                            </div>
                           </div>
-                        )}
+                        </div>
+
+                        {(() => {
+                          const showcase = PROMO_SHOWCASES[menu.key] || PROMO_SHOWCASES.buy;
+                          return (
+                            <Link
+                              href={showcase.ctaHref}
+                              className="mpromo-cinematic"
+                              onClick={() => setOpenMenu(null)}
+                              style={{ width: '520px', flexShrink: 0 }}
+                            >
+                              <div className="mpromo-neon-badge">
+                                {showcase.badge}
+                              </div>
+
+                              <div className="mpromo-visual">
+                                <img
+                                  src={showcase.image}
+                                  alt={showcase.headline}
+                                />
+                                <div className="mpromo-visual-overlay">
+                                  <span className="mpromo-visual-caption">
+                                    {showcase.caption}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="mpromo-cinematic-body">
+                                <h4 className="mpromo-cinematic-headline">
+                                  {showcase.headline}
+                                </h4>
+                                <p className="mpromo-cinematic-sub">
+                                  {showcase.subtitle}
+                                </p>
+                                <span className="mpromo-cinematic-btn">
+                                  {showcase.ctaText} →
+                                </span>
+                              </div>
+                            </Link>
+                          );
+                        })()}
                       </div>
                     </div>
                   </li>
@@ -282,7 +387,7 @@ export function Header({ topBarData, headerData }: HeaderProps) {
               </Button>
             </Link>
             <Link href="/post-property">
-              <Button size="sm" badgeText={headerData.postPropertyBadgeText}>
+              <Button size="sm">
                 {headerData.postPropertyBtnText}
               </Button>
             </Link>
@@ -307,6 +412,12 @@ export function Header({ topBarData, headerData }: HeaderProps) {
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         headerData={headerData}
+      />
+
+      {/* BLURRY SCRIM BACKDROP FOR WEBPAGE ONLY */}
+      <div
+        className={`mega-backdrop ${openMenu ? 'open' : ''}`}
+        onClick={() => setOpenMenu(null)}
       />
     </>
   );

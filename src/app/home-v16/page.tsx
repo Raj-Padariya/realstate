@@ -12,11 +12,11 @@ import ProjectsSection from '@/shared/components/home-page/projects-section';
 import BlogsSection from '@/shared/components/home-page/blogs-section';
 import AppDownload from '@/shared/components/home-page/app-download';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import './home-v16/v16.css';
+import './v16.css';
 
 const cmsData = cmsDataRaw as unknown as CmsData;
 
-export default function HomePage() {
+export default function HomeV16Page() {
   const router = useRouter();
   const { properties } = useProperties();
 
@@ -233,6 +233,11 @@ export default function HomePage() {
         </defs>
       </svg>
 
+      {/* Top Banner indicating preview version */}
+      <div style={{ background: '#FEDC00', color: '#1A0B3B', padding: '10px 20px', textAlign: 'center', fontSize: '13.5px', fontWeight: 800 }}>
+        ⚡ Home Page (v16 Integrated Live Version) · Real Data &amp; Sections Sandbox · <Link href="/" style={{ textDecoration: 'underline', marginLeft: '6px' }}>Go to Main Home Page (v1)</Link>
+      </div>
+
       {/* HERO SECTION */}
       <section className="v16-hero">
         <div className="v16-wrap">
@@ -347,7 +352,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* EXCLUSIVE OFFERS SECTION */}
+      {/* EXCLUSIVE OFFERS SECTION (From Current App) */}
       <OffersSection />
 
       {/* TRUST STRIP */}
@@ -566,7 +571,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED PROPERTIES */}
+      {/* FEATURED PROPERTIES (With Real Dynamic Data & 16:10 standard cards) */}
       <section className="v16-sec" id="listings">
         <div className="v16-wrap">
           <div className="v16-sec-head v16-sec-head--row">
@@ -604,7 +609,7 @@ export default function HomePage() {
               <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><use href="#i-check" /></svg> Every enquiry lands on WhatsApp the moment it comes in</li>
             </ul>
             <div className="v16-band-cta">
-              <Link className="v16-btn v16-btn-y" href="/post-property">Post your property</Link>
+              <Link className="v16-btn v16-btn-y" href="/post-property">Post your property free</Link>
               <Link className="v16-btn v16-btn-w" href="/tenant-plans?tab=owner">Compare owner plans</Link>
             </div>
           </div>
@@ -756,10 +761,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* REAL ESTATE BLOGS & GUIDES */}
+      {/* REAL ESTATE BLOGS & GUIDES (From Current App) */}
       <BlogsSection />
 
-      {/* MOBILE APP DOWNLOAD SECTION */}
+      {/* MOBILE APP DOWNLOAD SECTION (From Current App) */}
       <AppDownload data={cmsData.appDownload} />
 
       {/* SEO LINK FARM */}

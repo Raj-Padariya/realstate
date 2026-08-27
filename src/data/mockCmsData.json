@@ -13,7 +13,7 @@
     "logoSuffix": "Property",
     "loginBtnText": "Log in",
     "postBtnText": "Post property",
-    "postBadgeText": "FREE",
+    "postBadgeText": "",
     "menuItems": [
       {
         "id": "buy",
@@ -427,7 +427,7 @@
       "You choose who gets your number"
     ],
     "buttonText": "Post property",
-    "badgeText": "FREE"
+    "badgeText": ""
   },
   "servicesSection": {
     "title": "Services after the deal",
@@ -595,7 +595,7 @@
     "ctaSubtitle": "Browsing needs no sign-up. 3,140 owners listed a property this month.",
     "ctaSearchBtnText": "Start searching",
     "ctaListBtnText": "List your property",
-    "ctaListBadgeText": "FREE"
+    "ctaListBadgeText": ""
   },
   "testimonialsSection": {
     "title": "What our users say",

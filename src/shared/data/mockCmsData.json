@@ -335,6 +335,20 @@
     "badgeText": "VERIFIED LISTING",
     "buttonText": "Post Property →"
   },
+"propertyTypes": {
+    "title": "Flats, plots, villas and workspaces",
+    "description": "Verified owner listings sorted by what you are actually looking for.",
+    "seeAllText": "See all listings →",
+    "seeAllHref": "/properties",
+    "types": [
+      { "art": "flat", "count": "1,240 listings", "title": "Flats & apartments", "description": "1, 2, 3 and 4 BHK in gated societies.", "href": "/properties?category=apartments" },
+      { "art": "plot", "count": "880 listings", "title": "Residential plots", "description": "NA and NOC cleared land with title papers.", "href": "/properties?category=plots" },
+      { "art": "villa", "count": "210 listings", "title": "Villas & bungalows", "description": "Independent homes with private outdoor space.", "href": "/properties?category=villas" },
+      { "art": "comm", "count": "410 listings", "title": "Shops & offices", "description": "Retail frontage and Grade A workspace.", "href": "/properties?category=commercial" },
+      { "art": "studio", "count": "95 listings", "title": "1 RK & studios", "description": "Compact units that rent out quickly.", "href": "/properties?category=studio" },
+      { "art": "floor", "count": "340 listings", "title": "Builder floors", "description": "Low-rise independent floors, whole-floor privacy.", "href": "/properties?category=builder-floor" }
+    ]
+  },
   "servicesSection": {
     "title": "End-to-End Home Buying & Renting Services",
     "description": "Optional value-added services to make your property deal smooth, legal and hassle-free.",

@@ -1,88 +1,154 @@
-import React from 'react';
-import { HeroSectionData, SearchBarData, StateItem } from '@/shared/types/cms';
-import SearchBar from './search-bar';
+'use client';
 
-export interface HeroSectionProps {
-  heroData: HeroSectionData;
-  searchBarData: SearchBarData;
-  states: StateItem[];
-}
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import BrokerageMeter from './brokerage-meter';
+import { Search } from 'lucide-react';
 
-export function HeroSection({ heroData, searchBarData, states }: HeroSectionProps) {
+export function HeroSection() {
+  const router = useRouter();
+  const [deal, setDeal] = useState('sale');
+  const [city, setCity] = useState('Pune');
+  const [locality, setLocality] = useState('');
+  const [budget, setBudget] = useState('Any');
+
+  function handleSearch(e?: React.FormEvent) {
+    if (e) e.preventDefault();
+    const c = city.toLowerCase().replace(/\s+/g, '-');
+    const q = locality.trim();
+    router.push(`/properties?deal=${deal}&city=${c}${q ? `&q=${encodeURIComponent(q)}` : ''}`);
+  }
+
   return (
-    <div className="hero">
+    <section className="hero">
       <div className="wrap">
-        <div className="herotop">
-          <div>
-            <span className="newbadge">
-              <span className="n">{heroData.newBadgeText}</span> {heroData.newBadgeMessage}
-            </span>
-            <h1>
-              {heroData.headingPrefix}
-              <em>{heroData.headingHighlight}</em>
-              {heroData.headingSuffix}
-            </h1>
-            <p className="sub">{heroData.subtitle}</p>
-            <div className="hnote">
-              <span className="st">{heroData.ratingStars}</span>{' '}
-              <span>
-                <b>{heroData.ratingScore}</b> {heroData.ratingCount} · {heroData.ratingOwnerCount}
-              </span>
+        <div>
+          <div className="hero-tag">
+            <span>NEW</span> Dholera SIR plots now listed
+          </div>
+          <h1>
+            Buy, rent or sell property <span className="hl">without a broker</span> in between.
+          </h1>
+          <p className="hero-sub">
+            Every listing comes from a verified owner with clear title papers. You call them, you visit, you decide. Nobody takes a cut.
+          </p>
+
+          <div className="sp">
+            <div className="sp-tabs" role="tablist">
+              <button
+                className="sp-tab"
+                role="tab"
+                aria-selected={deal === 'sale'}
+                onClick={() => setDeal('sale')}
+                type="button"
+              >
+                Buy
+              </button>
+              <button
+                className="sp-tab"
+                role="tab"
+                aria-selected={deal === 'rent'}
+                onClick={() => setDeal('rent')}
+                type="button"
+              >
+                Rent
+              </button>
+              <button
+                className="sp-tab"
+                role="tab"
+                aria-selected={deal === 'commercial'}
+                onClick={() => setDeal('commercial')}
+                type="button"
+              >
+                Commercial
+              </button>
+              <button
+                className="sp-tab"
+                role="tab"
+                aria-selected={deal === 'plot'}
+                onClick={() => setDeal('plot')}
+                type="button"
+              >
+                Plots &amp; land
+              </button>
+              <button
+                className="sp-tab"
+                role="tab"
+                aria-selected={deal === 'project'}
+                onClick={() => setDeal('project')}
+                type="button"
+              >
+                New projects
+              </button>
             </div>
+            <form onSubmit={handleSearch} className="sp-body">
+              <div className="fld">
+                <label htmlFor="fCity">City</label>
+                <select id="fCity" value={city} onChange={(e) => setCity(e.target.value)}>
+                  <option>Pune</option>
+                  <option>Mumbai</option>
+                  <option>Ahmedabad</option>
+                  <option>Bengaluru</option>
+                  <option>Hyderabad</option>
+                  <option>Delhi NCR</option>
+                  <option>Surat</option>
+                  <option>Dholera SIR</option>
+                </select>
+              </div>
+              <div className="fld">
+                <label htmlFor="fLoc">Locality or project</label>
+                <input
+                  id="fLoc"
+                  type="text"
+                  placeholder="e.g. Baner, Kharadi, Rohan Abhilasha"
+                  value={locality}
+                  onChange={(e) => setLocality(e.target.value)}
+                />
+              </div>
+              <div className="fld">
+                <label htmlFor="fBud">Budget</label>
+                <select id="fBud" value={budget} onChange={(e) => setBudget(e.target.value)}>
+                  <option>Any</option>
+                  <option>Up to ₹50 L</option>
+                  <option>₹50 L – ₹1 Cr</option>
+                  <option>₹1 Cr – ₹2 Cr</option>
+                  <option>Above ₹2 Cr</option>
+                </select>
+              </div>
+              <button type="submit" className="btn btn-p" id="goSearch">
+                <Search className="w-[17px] h-[17px]" />
+                Search
+              </button>
+            </form>
           </div>
 
-          <div className="herovis">
-            <div className="hstack">
-              <span className="hchip a">{heroData.heroCard.chipAText}</span>
-              <div className="hcard">
-                <div className="pic">
-                  <svg viewBox="0 0 260 130" aria-hidden="true">
-                    <rect x="14" y="52" width="52" height="62" rx="4" fill="#522AB0" opacity=".55" />
-                    <rect x="196" y="64" width="50" height="50" rx="4" fill="#522AB0" opacity=".4" />
-                    <path d="M78 62 130 24l52 38v52H78z" fill="#522AB0" />
-                    <path d="M130 18 190 62h-12l-48-35-48 35H70z" fill="#41208C" />
-                    <rect x="116" y="84" width="28" height="30" rx="2" fill="#FEDC00" />
-                    <rect x="92" y="72" width="18" height="16" rx="2" fill="#EFE9FB" />
-                    <rect x="150" y="72" width="18" height="16" rx="2" fill="#EFE9FB" />
-                    <g fill="#522AB0" opacity=".55">
-                      <rect x="24" y="62" width="12" height="10" rx="2" />
-                      <rect x="44" y="62" width="12" height="10" rx="2" />
-                      <rect x="24" y="80" width="12" height="10" rx="2" />
-                      <rect x="44" y="80" width="12" height="10" rx="2" />
-                    </g>
-                    <g fill="#522AB0" opacity=".4">
-                      <rect x="206" y="74" width="12" height="10" rx="2" />
-                      <rect x="224" y="74" width="12" height="10" rx="2" />
-                      <rect x="206" y="92" width="12" height="10" rx="2" />
-                    </g>
-                    <rect x="0" y="114" width="260" height="16" fill="#41208C" opacity=".18" />
-                  </svg>
-                </div>
-                <div className="hb">
-                  <div className="hp">{heroData.heroCard.price}</div>
-                  <div className="ht">{heroData.heroCard.title}</div>
-                  <div className="ha">{heroData.heroCard.location}</div>
-                  <div className="hm">
-                    {heroData.heroCard.specs.map((spec, idx) => (
-                      <span key={idx}>{spec}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <span className="hchip b">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 3l7.4 2.9v5.4c0 4.6-3.1 8-7.4 9.6-4.3-1.6-7.4-5-7.4-9.6V5.9z" />
-                  <path d="M8.9 12.1l2.2 2.2 4.2-4.5" />
-                </svg>{' '}
-                {heroData.heroCard.chipBText}
-              </span>
-            </div>
+          <div className="chips">
+            <b>Popular</b>
+            <a className="chip" href="/properties?deal=sale&city=pune&q=baner">
+              Baner, Pune
+            </a>
+            <a className="chip" href="/properties?deal=sale&city=pune&q=kharadi">
+              Kharadi
+            </a>
+            <a className="chip" href="/properties?deal=sale&city=ahmedabad&q=sg-highway">
+              SG Highway
+            </a>
+            <a className="chip" href="/properties?deal=sale&city=dholera-sir">
+              Dholera SIR
+            </a>
+            <a className="chip" href="/properties?deal=sale&city=ahmedabad&q=gift-city">
+              GIFT City
+            </a>
+            <a className="chip" href="/properties?deal=rent&city=pune&q=hinjewadi">
+              Rent in Hinjewadi
+            </a>
           </div>
         </div>
 
-        <SearchBar searchBarData={searchBarData} states={states} />
+        {/* SIGNATURE: Brokerage Meter */}
+        <BrokerageMeter />
       </div>
-    </div>
+    </section>
   );
 }
 

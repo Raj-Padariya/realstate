@@ -64,6 +64,10 @@ export default function PostPropertyLandingPage() {
   const [selectedAdType, setSelectedAdType] = useState<string>('Rent');
   const [selectedSubtype, setSelectedSubtype] = useState<string>('Apartment / Flat');
   const [whatsappUpdates, setWhatsappUpdates] = useState<boolean>(true);
+  const [village, setVillage] = useState<string>('');
+  const [linearType, setLinearType] = useState<string>('Linear');
+  const [zone, setZone] = useState<string>('');
+  const [tpScheme, setTpScheme] = useState<string>('');
 
   const handleStartPosting = () => {
     const sub = encodeURIComponent(selectedSubtype);
@@ -269,6 +273,53 @@ export default function PostPropertyLandingPage() {
                   />
                 </button>
               </div>
+
+              {/* Land/Plot Extra Fields — only when Land tab active */}
+              {activeCategory === 'land' && (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '22px', maxWidth: '560px', marginLeft: 'auto', marginRight: 'auto' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>Village</label>
+                    <select value={village} onChange={(e) => setVillage(e.target.value)} style={{ width: '100%', padding: '11px 12px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', background: '#FFF8E1' }}>
+                      <option value="">Village</option>
+                      <option>Piplaj</option>
+                      <option>Adhelai</option>
+                      <option>Navagam</option>
+                      <option>Hebatpur</option>
+                      <option>Vautha</option>
+                      <option>Songadh</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>Linear / Non-Linear</label>
+                    <select value={linearType} onChange={(e) => setLinearType(e.target.value)} style={{ width: '100%', padding: '11px 12px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', background: '#FFF8E1' }}>
+                      <option>Linear</option>
+                      <option>Non-Linear</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>Zone</label>
+                    <select value={zone} onChange={(e) => setZone(e.target.value)} style={{ width: '100%', padding: '11px 12px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', background: '#FFF8E1' }}>
+                      <option value="">Zone</option>
+                      <option>Residential</option>
+                      <option>Commercial</option>
+                      <option>Industrial</option>
+                      <option>Agricultural</option>
+                      <option>Mixed Use</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>TP</label>
+                    <select value={tpScheme} onChange={(e) => setTpScheme(e.target.value)} style={{ width: '100%', padding: '11px 12px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', background: '#FFF8E1' }}>
+                      <option value="">TP</option>
+                      <option>TP 1 (Dholera)</option>
+                      <option>TP 2 (Ahmedabad)</option>
+                      <option>TP 3 (Surat)</option>
+                      <option>TP 4 (Vadodara)</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+                </div>
+              )}
 
               {/* Property Type Tabs */}
               <span style={{ display: 'block', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '10px' }}>

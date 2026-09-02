@@ -185,7 +185,6 @@ export function FeaturedProperties() {
           }
         }
       `}</style>
-      <span>wdwe</span>
     </section>
   );
 }

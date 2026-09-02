@@ -136,32 +136,107 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
       isVerified: true,
       note: 'You are contacting the owner directly. GujjuProperty charges no brokerage on this listing.',
     },
-    specs: [
-      { key: 'No. of bedrooms', value: matchedListing?.bhk || '3 BHK', icon: 'bed' },
-      { key: 'Posted on', value: formatPostedOn((matchedListing as any)?.createdAt || matchedListing?.postedTime || 'Just now'), icon: 'cal' },
-      { key: 'No. of bathrooms', value: matchedListing?.bathrooms || '2 Bath', icon: 'bath' },
-      { key: 'Possession', value: matchedListing?.possessionStatus || 'Ready to move', icon: 'key' },
-      { key: 'Balcony', value: matchedListing?.balconies || '2 Balcony', icon: 'balcony' },
-      { key: 'Built-up area', value: matchedListing?.areaSqFt || '1,420 sq.ft', icon: 'area' },
-      { key: 'Parking', value: matchedListing?.parking || 'Covered parking', icon: 'car' },
-      { key: 'Power backup', value: 'Full backup', icon: 'power' },
-      { key: 'Floor', value: matchedListing?.floorInfo || 'Ground / 4', icon: 'floor' },
-      { key: 'Facing', value: matchedListing?.facing || 'East', icon: 'facing' },
-      { key: 'Furnishing', value: matchedListing?.furnishing || matchedListing?.chips?.[0] || 'Semi-furnished', icon: 'sofa' },
-      { key: 'Age of property', value: matchedListing?.age || 'New launch', icon: 'clock' },
-    ],
-    overview: [
-      { label: 'Super built-up area', value: matchedListing?.areaSqFt || '1,420 sq.ft' },
-      { label: 'Carpet area', value: matchedListing?.carpetArea || matchedListing?.areaSqFt || '1,080 sq.ft' },
-      { label: 'Bedrooms', value: matchedListing?.bhk || '3 BHK' },
-      { label: 'Bathrooms', value: matchedListing?.bathrooms || '2 Bath' },
-      { label: 'Balconies', value: matchedListing?.balconies || '2 Balconies' },
-      { label: 'Floor', value: matchedListing?.floorInfo || 'Ground / 4' },
-      { label: 'Facing', value: matchedListing?.facing || 'East facing' },
-      { label: 'Property age', value: matchedListing?.age || '1-3 years' },
-      { label: 'Possession', value: matchedListing?.possessionStatus || 'Immediate' },
-      { label: 'Parking', value: matchedListing?.parking || 'Covered' },
-    ],
+    specs: (() => {
+      const isPlot = matchedListing?.listingCategory === 'Plot';
+      const isCommercial = matchedListing?.listingCategory === 'Commercial';
+      const postedOn = formatPostedOn((matchedListing as any)?.createdAt || matchedListing?.postedTime || 'Just now');
+
+      if (isPlot) {
+        const plotAreaVal = matchedListing?.areaSqFt || (matchedListing as any)?.plotArea || 'Plot area';
+        return [
+          { key: 'Plot / Land', value: matchedListing?.bhk || 'Plot', icon: 'tile' },
+          { key: 'Posted on', value: postedOn, icon: 'cal' },
+          { key: 'Plot Area', value: plotAreaVal, icon: 'area' },
+          { key: 'Possession', value: matchedListing?.possessionStatus || 'Ready to Register', icon: 'key' },
+          { key: 'Title Status', value: (matchedListing as any)?.titleStatus || matchedListing?.floorInfo || 'Clear Title', icon: 'shield' },
+          { key: 'Facing', value: matchedListing?.facing || 'East', icon: 'facing' },
+          { key: 'Road Width', value: (matchedListing as any)?.roadWidth || '40 ft Road', icon: 'floor' },
+          { key: 'Village / Locality', value: (matchedListing as any)?.locality || matchedListing?.address?.split(',')[0] || '—', icon: 'facing' },
+          { key: 'Zone', value: (matchedListing as any)?.zone || '—', icon: 'tile' },
+          { key: 'TP Scheme', value: (matchedListing as any)?.tpScheme || '—', icon: 'build' },
+          { key: 'Linear / Non-Linear', value: (matchedListing as any)?.linearType || '—', icon: 'build' },
+          { key: 'Age of property', value: matchedListing?.age || 'New launch', icon: 'clock' },
+        ];
+      }
+
+      if (isCommercial) {
+        return [
+          { key: 'Type', value: matchedListing?.bhk || 'Commercial', icon: 'build' },
+          { key: 'Posted on', value: postedOn, icon: 'cal' },
+          { key: 'Built-up area', value: matchedListing?.areaSqFt || '—', icon: 'area' },
+          { key: 'Carpet area', value: matchedListing?.carpetArea || matchedListing?.areaSqFt || '—', icon: 'carpet' },
+          { key: 'Possession', value: matchedListing?.possessionStatus || 'Ready to move', icon: 'key' },
+          { key: 'Parking', value: matchedListing?.parking || 'Available', icon: 'car' },
+          { key: 'Floor', value: matchedListing?.floorInfo || 'Ground', icon: 'floor' },
+          { key: 'Facing', value: matchedListing?.facing || 'East', icon: 'facing' },
+          { key: 'Power backup', value: 'Full backup', icon: 'power' },
+          { key: 'Furnishing', value: matchedListing?.furnishing || matchedListing?.chips?.[0] || 'Bare shell', icon: 'sofa' },
+          { key: 'Age of property', value: matchedListing?.age || 'New launch', icon: 'clock' },
+        ];
+      }
+
+      return [
+        { key: 'No. of bedrooms', value: matchedListing?.bhk || '3 BHK', icon: 'bed' },
+        { key: 'Posted on', value: postedOn, icon: 'cal' },
+        { key: 'No. of bathrooms', value: matchedListing?.bathrooms || '2 Bath', icon: 'bath' },
+        { key: 'Possession', value: matchedListing?.possessionStatus || 'Ready to move', icon: 'key' },
+        { key: 'Balcony', value: matchedListing?.balconies || '2 Balcony', icon: 'balcony' },
+        { key: 'Built-up area', value: matchedListing?.areaSqFt || '1,420 sq.ft', icon: 'area' },
+        { key: 'Parking', value: matchedListing?.parking || 'Covered parking', icon: 'car' },
+        { key: 'Power backup', value: 'Full backup', icon: 'power' },
+        { key: 'Floor', value: matchedListing?.floorInfo || 'Ground / 4', icon: 'floor' },
+        { key: 'Facing', value: matchedListing?.facing || 'East', icon: 'facing' },
+        { key: 'Furnishing', value: matchedListing?.furnishing || matchedListing?.chips?.[0] || 'Semi-furnished', icon: 'sofa' },
+        { key: 'Age of property', value: matchedListing?.age || 'New launch', icon: 'clock' },
+      ];
+    })(),
+    overview: (() => {
+      const isPlot = matchedListing?.listingCategory === 'Plot';
+      const isCommercial = matchedListing?.listingCategory === 'Commercial';
+
+      if (isPlot) {
+        return [
+          { label: 'Plot / Land Type', value: matchedListing?.bhk || 'Plot' },
+          { label: 'Plot Area', value: matchedListing?.areaSqFt || (matchedListing as any)?.plotArea || '—' },
+          { label: 'Village / Locality', value: (matchedListing as any)?.locality || matchedListing?.address?.split(',')[0] || '—' },
+          { label: 'Zone', value: (matchedListing as any)?.zone || '—' },
+          { label: 'TP Scheme', value: (matchedListing as any)?.tpScheme || '—' },
+          { label: 'Linear / Non-Linear', value: (matchedListing as any)?.linearType || '—' },
+          { label: 'Title Status', value: (matchedListing as any)?.titleStatus || matchedListing?.floorInfo || 'Clear Title' },
+          { label: 'Facing', value: matchedListing?.facing || 'East facing' },
+          { label: 'Road Width', value: (matchedListing as any)?.roadWidth || '40 ft Road' },
+          { label: 'Possession', value: matchedListing?.possessionStatus || 'Immediate' },
+        ];
+      }
+
+      if (isCommercial) {
+        return [
+          { label: 'Type', value: matchedListing?.bhk || 'Commercial' },
+          { label: 'Super built-up area', value: matchedListing?.areaSqFt || '—' },
+          { label: 'Carpet area', value: matchedListing?.carpetArea || matchedListing?.areaSqFt || '—' },
+          { label: 'Floor', value: matchedListing?.floorInfo || 'Ground' },
+          { label: 'Facing', value: matchedListing?.facing || 'East facing' },
+          { label: 'Furnishing', value: matchedListing?.furnishing || 'Bare shell' },
+          { label: 'Property age', value: matchedListing?.age || 'New' },
+          { label: 'Possession', value: matchedListing?.possessionStatus || 'Immediate' },
+          { label: 'Parking', value: matchedListing?.parking || 'Available' },
+          { label: 'Power backup', value: 'Full backup' },
+        ];
+      }
+
+      return [
+        { label: 'Super built-up area', value: matchedListing?.areaSqFt || '1,420 sq.ft' },
+        { label: 'Carpet area', value: matchedListing?.carpetArea || matchedListing?.areaSqFt || '1,080 sq.ft' },
+        { label: 'Bedrooms', value: matchedListing?.bhk || '3 BHK' },
+        { label: 'Bathrooms', value: matchedListing?.bathrooms || '2 Bath' },
+        { label: 'Balconies', value: matchedListing?.balconies || '2 Balconies' },
+        { label: 'Floor', value: matchedListing?.floorInfo || 'Ground / 4' },
+        { label: 'Facing', value: matchedListing?.facing || 'East facing' },
+        { label: 'Property age', value: matchedListing?.age || '1-3 years' },
+        { label: 'Possession', value: matchedListing?.possessionStatus || 'Immediate' },
+        { label: 'Parking', value: matchedListing?.parking || 'Covered' },
+      ];
+    })(),
     amenities: matchedListing?.amenities && matchedListing.amenities.length > 0
       ? matchedListing.amenities
       : ['Lift', 'Power backup', 'Covered parking', 'Gated security', '24×7 water', 'Clubhouse'],

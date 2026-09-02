@@ -210,7 +210,8 @@ function RentalPostContent() {
   };
 
   const canSubmitCurrent = isStepValid();
-  const pct = activeStep === 0 ? 5 : activeStep === 6 ? 100 : Math.round((activeStep / 5) * 100);
+  const progressPct: number = activeStep === 6 ? 100 : Math.round((activeStep / 6) * 100);
+  const pct = progressPct;
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh', paddingBottom: '60px' }}>

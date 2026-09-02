@@ -143,7 +143,7 @@ function ResalePostContent() {
   const stepsList = [
     { title: 'Property details', icon: 'M4 20V9.5l8-5.5 8 5.5V20z M9.5 20v-5.5h5V20' },
     { title: 'Locality details', icon: 'M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z M12 12.4a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8z' },
-    { title: 'Resale price & terms', icon: 'M5 21V6.5l7-3.5 7 3.5V21M9 21v-4.5h6V21M8.5 9.5h2M13.5 9.5h2M8.5 13h2M13.5 13h2' },
+    { title: 'Sale details', icon: 'M5 21V6.5l7-3.5 7 3.5V21M9 21v-4.5h6V21M8.5 9.5h2M13.5 9.5h2M8.5 13h2M13.5 13h2' },
     { title: 'Amenities', icon: 'M3.5 20.5V11a8.5 8.5 0 0 1 17 0v9.5z M3.5 15.5h17M8.5 11v9.5M15.5 11v9.5' },
     { title: 'Gallery', icon: 'M3.5 7.5h4l2-3h5l2 3h4v12h-17z M12 16.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8z' },
     { title: 'Schedule', icon: 'M4.5 6.5h15v13h-15z M4.5 10.5h15M8.5 3.5v4M15.5 3.5v4M9 14.5h2M13 14.5h2' },
@@ -297,7 +297,7 @@ function ResalePostContent() {
               {/* STEP 0: Property Details */}
               {activeStep === 0 && (
                 <section className="wizpanel on">
-                  <h2>Resale Property details</h2>
+                  <h2>Property details</h2>
                   <div className="frow">
                     <div className="fld2">
                       <label>Property type <i>*</i></label>
@@ -441,7 +441,7 @@ function ResalePostContent() {
               {/* STEP 2: Resale price & terms */}
               {activeStep === 2 && (
                 <section className="wizpanel on">
-                  <h2>Resale price & terms</h2>
+                  <h2>Sale details</h2>
                   <div className="frow one">
                     <div className="fld2">
                       <label>Expected Price (₹) <i>*</i></label>
@@ -735,8 +735,8 @@ function ResalePostContent() {
             {/* Right Assistance Rail matching Screenshot */}
             <aside className="wizrail">
               <div className="rcard2">
-                <h4>Rent agreement</h4>
-                <div className="sub">E-stamped, delivered home</div>
+                <h4>Owner plans</h4>
+                <div className="sub">Reach genuine buyers faster</div>
                 <div className="art">
                   <svg viewBox="0 0 240 130" aria-hidden="true" style={{ width: '100%', height: 'auto', display: 'block' }}>
                     <rect width="240" height="130" fill="#EFE9FB"/>
@@ -747,8 +747,25 @@ function ResalePostContent() {
                     <g fill="#41208C"><circle cx="194" cy="52" r="11"/><path d="M180 96c0-9 6-15 14-15s14 6 14 15z"/></g>
                   </svg>
                 </div>
-                <p>No visit to the sub-registrar office. Signed and delivered in 48 hours.</p>
-                <button className="btn" type="button" style={{ width: '100%', background: '#522AB0', color: '#fff' }}>Get it now</button>
+                <p>Get premium visibility, verified buyer leads and a dedicated relationship manager.</p>
+                <button className="btn line" type="button" style={{ width: '100%', borderColor: '#522AB0', color: '#522AB0', background: '#fff' }}>See owner plans</button>
+              </div>
+
+              <div className="rcard2">
+                <h4>Get legal assistance</h4>
+                <div className="sub">Title check, sale deed &amp; registration</div>
+                <div className="art">
+                  <svg viewBox="0 0 240 130" aria-hidden="true" style={{ width: '100%', height: 'auto', display: 'block' }}>
+                    <rect width="240" height="130" fill="#EFE9FB"/>
+                    <rect x="86" y="34" width="68" height="62" rx="5" fill="#fff" stroke="#522AB0" strokeWidth="3"/>
+                    <g stroke="#C9B9EE" strokeWidth="4" strokeLinecap="round"><path d="M98 50h44M98 62h44M98 74h28"/></g>
+                    <circle cx="140" cy="86" r="9" fill="#FEDC00"/>
+                    <g fill="#522AB0"><circle cx="46" cy="52" r="11"/><path d="M32 96c0-9 6-15 14-15s14 6 14 15z"/></g>
+                    <g fill="#41208C"><circle cx="194" cy="52" r="11"/><path d="M180 96c0-9 6-15 14-15s14 6 14 15z"/></g>
+                  </svg>
+                </div>
+                <p>End-to-end support from our legal partners — title verification, sale deed drafting and registration.</p>
+                <button className="btn" type="button" style={{ width: '100%', background: '#522AB0', color: '#fff' }}>Talk to a lawyer</button>
               </div>
 
               <div className="rcard2">

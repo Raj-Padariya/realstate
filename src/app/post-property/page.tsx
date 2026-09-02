@@ -75,7 +75,11 @@ export default function PostPropertyLandingPage() {
     const type = encodeURIComponent(selectedAdType);
 
     if (activeCategory === 'land') {
-      router.push(`/post-property/land?city=${city}&type=${type}&subtype=${sub}`);
+      const v = encodeURIComponent(village);
+      const l = encodeURIComponent(linearType);
+      const z = encodeURIComponent(zone);
+      const tp = encodeURIComponent(tpScheme);
+      router.push(`/post-property/land?city=${city}&type=${type}&subtype=${sub}&village=${v}&linear=${l}&zone=${z}&tp=${tp}`);
     } else if (activeCategory === 'commercial') {
       router.push(`/post-property/commercial?city=${city}&type=${type}&subtype=${sub}`);
     } else if (selectedAdType.toLowerCase() === 'rent' || selectedAdType.toLowerCase().includes('pg') || selectedAdType.toLowerCase().includes('flatmate')) {

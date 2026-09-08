@@ -1,151 +1,189 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import mockCmsData from '@/shared/data/mockCmsData.json';
-
-
-const W = 400;
-const H = 200;
-
-function frame(inner: React.ReactNode) {
-  return (
-    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
-      <rect width={W} height={H} fill="#EFE9FB" />
-      {inner}
-    </svg>
-  );
-}
-
-function win(x: number, y: number, w: number, hh: number, lit: boolean) {
-  return <rect key={`${x}-${y}`} x={x} y={y} width={w} height={hh} fill={lit ? '#FEDC00' : '#6b45c9'} />;
-}
-
-function lit(seed: number) {
-  return (seed * 7) % 5 < 2;
-}
-
-const ART: Record<string, React.ReactNode> = {
-  flat: frame(
-    <>
-      <rect x="52" y="46" width="86" height="132" fill="#522AB0" />
-      <rect x="150" y="72" width="74" height="106" fill="#5E33C4" />
-      <rect x="236" y="30" width="96" height="148" fill="#41208C" />
-      {[0, 1, 2, 3, 4].map((r) =>
-        [0, 1, 2].map((c) => win(64 + c * 24, 60 + r * 24, 14, 14, lit(r * 3 + c)))
-      )}
-      {[0, 1, 2, 3].map((r) =>
-        [0, 1].map((c) => win(162 + c * 26, 86 + r * 24, 14, 14, lit(r * 2 + c + 1)))
-      )}
-      {[0, 1, 2, 3, 4, 5].map((r) =>
-        [0, 1, 2].map((c) => win(248 + c * 28, 44 + r * 23, 15, 14, lit(r * 3 + c + 2)))
-      )}
-      <rect x="0" y="178" width="400" height="22" fill="#41208C" />
-    </>
-  ),
-  plot: frame(
-    <>
-      <path d="M0 130 L400 96 L400 200 L0 200Z" fill="#dcd3f3" />
-      <path d="M52 152 L196 128 L258 152 L114 178Z" fill="#522AB0" />
-      <path d="M208 126 L330 106 L382 128 L260 148Z" fill="#5E33C4" />
-      <path d="M52 152 L196 128 M208 126 L330 106" stroke="#FEDC00" strokeWidth="3" />
-      <circle cx="196" cy="128" r="5" fill="#FEDC00" />
-      <circle cx="330" cy="106" r="5" fill="#FEDC00" />
-      <circle cx="52" cy="152" r="5" fill="#FEDC00" />
-      <circle cx="208" cy="126" r="5" fill="#FEDC00" />
-      <path d="M0 118 L400 84" stroke="#41208C" strokeWidth="11" />
-      <path d="M0 101 L400 67" stroke="#8f74e0" strokeWidth="2" strokeDasharray="14 12" />
-    </>
-  ),
-  villa: frame(
-    <>
-      <rect x="0" y="150" width="400" height="50" fill="#dcd3f3" />
-      <path d="M96 92 L200 40 L304 92Z" fill="#41208C" />
-      <rect x="118" y="92" width="164" height="70" fill="#522AB0" />
-      {win(140, 110, 34, 30, true)}
-      {win(186, 110, 34, 30, false)}
-      <rect x="232" y="110" width="30" height="52" fill="#41208C" />
-      <rect x="60" y="140" width="46" height="22" fill="#5E33C4" />
-      <circle cx="330" cy="132" r="20" fill="#5E33C4" />
-      <rect x="327" y="132" width="6" height="30" fill="#41208C" />
-    </>
-  ),
-  comm: frame(
-    <>
-      <rect x="44" y="34" width="120" height="144" fill="#41208C" />
-      <rect x="176" y="62" width="88" height="116" fill="#522AB0" />
-      <rect x="276" y="20" width="84" height="158" fill="#5E33C4" />
-      {[0, 1, 2, 3, 4, 5].map((r) => win(56, 46 + r * 22, 96, 10, lit(r + 1)))}
-      {[0, 1, 2, 3, 4].map((r) => win(186, 74 + r * 21, 68, 9, lit(r * 2)))}
-      {[0, 1, 2, 3, 4, 5, 6].map((r) => win(286, 32 + r * 21, 64, 9, lit(r * 3 + 1)))}
-      <rect x="0" y="178" width="400" height="22" fill="#41208C" />
-    </>
-  ),
-  studio: frame(
-    <>
-      <rect x="96" y="44" width="208" height="134" fill="#522AB0" />
-      {win(118, 66, 76, 52, true)}
-      {win(208, 66, 76, 52, false)}
-      <rect x="118" y="130" width="166" height="48" fill="#41208C" />
-      <rect x="150" y="146" width="46" height="32" fill="#5E33C4" />
-      <rect x="0" y="178" width="400" height="22" fill="#41208C" />
-    </>
-  ),
-  floor: frame(
-    <>
-      <rect x="70" y="52" width="260" height="126" fill="#522AB0" />
-      <rect x="70" y="52" width="260" height="26" fill="#41208C" />
-      <rect x="70" y="104" width="260" height="4" fill="#EFE9FB" />
-      <rect x="70" y="140" width="260" height="4" fill="#EFE9FB" />
-      {win(92, 84, 40, 14, true)}
-      {win(150, 84, 40, 14, false)}
-      {win(208, 84, 40, 14, true)}
-      {win(92, 118, 40, 14, false)}
-      {win(150, 118, 40, 14, true)}
-      {win(266, 118, 40, 14, false)}
-      <rect x="0" y="178" width="400" height="22" fill="#41208C" />
-    </>
-  ),
-};
-
-const propertyTypesData = mockCmsData.propertyTypes;
-
-const TYPES = propertyTypesData.types.map((type) => ({
-  k: type.art,
-  n: type.count,
-  t: type.title,
-  d: type.description,
-  h: type.href,
-}));
+import { useProperties } from '@/shared/context/PropertyContext';
+import PropertyCard from '@/shared/ui/property-card';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 export function PopularCategoriesShowcase() {
+  const { properties } = useProperties();
+  const [activeTab, setActiveTab] = useState<'All' | 'Buy' | 'Rent' | 'Plot'>('All');
+
+  // Filter live properties according to selected tab
+  const filteredListings = useMemo(() => {
+    if (!properties || properties.length === 0) return [];
+
+    let list = properties;
+    if (activeTab === 'Rent') {
+      list = properties.filter((p) => {
+        const cat = (p.listingCategory || '').toLowerCase();
+        const price = (p.price || '').toLowerCase();
+        const title = (p.title || '').toLowerCase();
+        return cat === 'rent' || price.includes('/mo') || price.includes('rent') || title.includes('rent');
+      });
+    } else if (activeTab === 'Buy') {
+      list = properties.filter((p) => {
+        const cat = (p.listingCategory || '').toLowerCase();
+        const price = (p.price || '').toLowerCase();
+        const isRent = cat === 'rent' || price.includes('/mo') || price.includes('rent');
+        const isPlot = (p.bhk || '').toLowerCase().includes('plot') || (p.title || '').toLowerCase().includes('plot') || (p.title || '').toLowerCase().includes('land');
+        return !isRent && !isPlot;
+      });
+    } else if (activeTab === 'Plot') {
+      list = properties.filter((p) => {
+        const bhk = (p.bhk || '').toLowerCase();
+        const title = (p.title || '').toLowerCase();
+        const cat = (p.listingCategory || '').toLowerCase();
+        return bhk.includes('plot') || bhk.includes('land') || title.includes('plot') || title.includes('land') || cat === 'plot';
+      });
+    }
+
+    // Prioritize properties with images, then take top 6
+    const withImages = list.filter((p) => p.image && !p.image.startsWith('data:image/svg'));
+    const others = list.filter((p) => !p.image || p.image.startsWith('data:image/svg'));
+    return [...withImages, ...others].slice(0, 6);
+  }, [properties, activeTab]);
+
   return (
-    <section className="sec">
+    <section className="sec" style={{ background: '#F8FAFC', borderTop: '1px solid #EEF2F6', borderBottom: '1px solid #EEF2F6' }}>
       <div className="wrap">
-        <div className="sec-head sec-head--row">
+        {/* Section Header */}
+        <div className="sec-head sec-head--row" style={{ alignItems: 'flex-end', marginBottom: '24px' }}>
           <div>
-            <span className="eyebrow">Browse by type</span>
-            <h2>Flats, plots, villas and workspaces</h2>
-            <p>Verified owner listings sorted by what you are actually looking for.</p>
+            <span
+              className="eyebrow"
+              style={{
+                background: '#EDE9FE',
+                color: '#522AB0',
+                padding: '6px 14px',
+                borderRadius: '999px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontSize: '11.5px',
+                fontWeight: 800,
+                letterSpacing: '0.05em',
+              }}
+            >
+              <Sparkles className="w-3.5 h-3.5" /> LIVE OWNER LISTINGS
+            </span>
+            <h2 style={{ marginTop: '12px', marginBottom: '6px', fontSize: 'clamp(24px, 2.8vw, 32px)', fontWeight: 800 }}>
+              Fresh Verified Properties Directly From Owners
+            </h2>
+            <p style={{ margin: 0, color: '#64748B', fontSize: '15px' }}>
+              Real-time zero-brokerage listings across Gujarat and Pune with verified documents.
+            </p>
           </div>
-          <Link className="seeall" href="/properties">
-            See all listings &rarr;
-          </Link>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <Link
+              href="/properties"
+              className="seeall"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontWeight: 700,
+                color: '#522AB0',
+                textDecoration: 'none',
+                fontSize: '14.5px',
+              }}
+            >
+              View all {properties?.length || 23} listings <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
 
-        <div className="types">
-          {TYPES.map((t) => (
-            <Link key={t.k} className="type" href={t.h}>
-              <div className="type-art">{ART[t.k]}</div>
-              <div className="type-ct">
-                <div className="type-n">{t.n}</div>
-                <h3>{t.t}</h3>
-                <p>{t.d}</p>
-              </div>
-            </Link>
-          ))}
+        {/* Filter Pills */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '10px',
+            marginBottom: '26px',
+            flexWrap: 'wrap',
+          }}
+        >
+          {(['All', 'Buy', 'Rent', 'Plot'] as const).map((tab) => {
+            const isActive = activeTab === tab;
+            return (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveTab(tab)}
+                style={{
+                  padding: '8px 18px',
+                  borderRadius: '999px',
+                  fontSize: '13.5px',
+                  fontWeight: isActive ? 750 : 600,
+                  cursor: 'pointer',
+                  border: isActive ? '1.5px solid #522AB0' : '1px solid #E2E8F0',
+                  background: isActive ? '#522AB0' : '#FFFFFF',
+                  color: isActive ? '#FFFFFF' : '#475569',
+                  transition: 'all 0.18s ease',
+                  boxShadow: isActive ? '0 4px 12px rgba(82, 42, 176, 0.22)' : '0 1px 3px rgba(0,0,0,0.04)',
+                }}
+              >
+                {tab === 'All' && '🌟 All Live Properties'}
+                {tab === 'Buy' && '🏡 Homes for Sale'}
+                {tab === 'Rent' && '🔑 Rental Homes'}
+                {tab === 'Plot' && '🌾 Land & Plots'}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Live Properties 6-Card Grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+            gap: '24px',
+            alignItems: 'stretch',
+          }}
+          className="live-properties-grid"
+        >
+          {filteredListings.length > 0 ? (
+            filteredListings.map((listing) => (
+              <PropertyCard
+                key={listing.id}
+                listing={listing}
+                ownerListedText={listing.ownerRole || 'Owner Verified'}
+                ctaText="View Details"
+              />
+            ))
+          ) : (
+            <div
+              style={{
+                gridColumn: '1 / -1',
+                padding: '48px 20px',
+                textAlign: 'center',
+                background: '#fff',
+                borderRadius: '16px',
+                border: '1px dashed #CBD5E1',
+                color: '#64748B',
+              }}
+            >
+              No properties found in this category.
+            </div>
+          )}
         </div>
       </div>
+
+      <style jsx>{`
+        @media (max-width: 1024px) {
+          .live-properties-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 18px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .live-properties-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

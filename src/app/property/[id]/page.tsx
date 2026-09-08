@@ -12,7 +12,7 @@ import LocationSearchInput from '@/components/common/LocationSearchInput';
 import { NO_PHOTO_PLACEHOLDER, isNoPhotoPlaceholder } from '@/shared/utils/photoPlaceholder';
 import { formatPostedOn } from '@/shared/utils/dateUtils';
 import { extractLocationParts } from '@/shared/utils/locationUtils';
-import { Building2, MapPin } from 'lucide-react';
+import { Building2, MapPin, Home, LandPlot, Check, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const cmsData = cmsDataRaw as unknown as CmsData;
 
@@ -296,58 +296,128 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
       </div>
 
       <div className="wrap detail" id="detailview">
-        {/* SUMMARY STRIP */}
-        <div className="dsummary">
-          <div className="dtag">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 20V9.5l8-5.5 8 5.5V20z M9.5 20v-5.5h5V20" />
-              <path d="M10 10.5h4M12 10.5v3" />
-            </svg>
-            <b>{isRentListing ? 'For Rent' : matchedListing?.listingCategory === 'Commercial' ? 'Commercial' : matchedListing?.listingCategory === 'Plot' ? 'Plot' : 'Resale'}</b>
-          </div>
-          <div className="dsum dhead">
-            <b className="big" id="dtitle">{property.title}</b>
-            <span id="daddr" style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '6px' }}>
-              <span style={{ color: '#522ab0', fontSize: '14px', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <Building2 className="w-4 h-4 text-[#522AB0]" />
-                <span>Scheme / Society: {property.societyName}</span>
-              </span>
-              <span style={{ color: 'var(--muted)', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <MapPin className="w-4 h-4 text-[#6D28D9]" />
-                <span>Location: {property.address}</span>
-              </span>
-            </span>
-          </div>
-          <div className="dsum">
-            <b className="big" id="dprice1">{property.price}</b>
-            <span id="dpsf">{property.pricePerSqFt || (isRentListing ? 'Included in rent' : 'Standard')} · <span className="neg">Negotiable</span></span>
-          </div>
-          {isRentListing ? (
-            <div className="dsum">
-              <b className="big" id="ddeposit">2 Months Rent</b>
-              <span>Security Deposit · Refundable</span>
+        {/* REFINED PREMIUM PROPERTY SUMMARY HEADER */}
+        <div className="prop-summary-card">
+          {/* Top Section: Badges, Title, Location & Price */}
+          <div className="prop-summary-top">
+            <div className="prop-summary-main">
+              {/* Badges Row */}
+              <div className="prop-badge-row">
+                <span className="prop-type-badge">
+                  {isRentListing ? (
+                    <>
+                      <Home className="w-3.5 h-3.5" /> For Rent
+                    </>
+                  ) : matchedListing?.listingCategory === 'Commercial' ? (
+                    <>
+                      <Building2 className="w-3.5 h-3.5" /> Commercial
+                    </>
+                  ) : matchedListing?.listingCategory === 'Plot' ? (
+                    <>
+                      <LandPlot className="w-3.5 h-3.5" /> Plot / Land
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5" /> For Sale / Resale
+                    </>
+                  )}
+                </span>
+
+                <span className="prop-verified-badge">
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  {matchedListing?.badgeText || 'Owner Verified'}
+                </span>
+
+                {property.societyName && (
+                  <span className="prop-society-badge">
+                    <Building2 className="w-3.5 h-3.5 text-purple-600" />
+                    <span>Society: <b>{property.societyName}</b></span>
+                  </span>
+                )}
+              </div>
+
+              {/* Title */}
+              <h1 className="prop-title" id="dtitle">
+                {property.title}
+              </h1>
+
+              {/* Location */}
+              <div className="prop-location">
+                <MapPin className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                <span>{property.address}</span>
+              </div>
             </div>
-          ) : (
-            <div className="dsum">
-              <b className="big" id="demi">{property.estimatedEmi}</b>
-              <span>Estimated EMI · 80% loan, 20 yr @ 8.5%</span>
+
+            {/* Price Column */}
+            <div className="prop-price-col">
+              <div className="prop-price-val" id="dprice1">
+                {property.price}
+              </div>
+              <div className="prop-price-sub" id="dpsf">
+                {property.pricePerSqFt || (isRentListing ? 'Rent per month' : 'Inclusive of all charges')} · <span className="prop-neg">Negotiable</span>
+              </div>
             </div>
-          )}
-          <div className="dsum">
-            <b className="big" id="dbuilt">{property.builtUpArea}</b>
-            <span>Built-up area</span>
           </div>
-          {isRentListing ? (
-            <div className="dloan">
-              <span>Rent Agreement?</span>
-              <button className="btn" type="button">Draft agreement</button>
+
+          {/* Bottom Section: Key Specs & Quick Action Cards */}
+          <div className="prop-summary-bottom">
+            <div className="prop-stat-pill">
+              <div className="prop-stat-icon">📐</div>
+              <div>
+                <div className="prop-stat-val" id="dbuilt">{property.builtUpArea || '2,345 sq.ft'}</div>
+                <div className="prop-stat-lbl">Built-up area</div>
+              </div>
             </div>
-          ) : (
-            <div className="dloan">
-              <span>Need a home loan?</span>
-              <button className="btn" type="button">Apply for loan</button>
+
+            <div className="prop-stat-pill">
+              <div className="prop-stat-icon">🛏️</div>
+              <div>
+                <div className="prop-stat-val">{matchedListing?.bhk || property.title.match(/\d\s*BHK/i)?.[0] || 'Independent Layout'}</div>
+                <div className="prop-stat-lbl">Configuration</div>
+              </div>
             </div>
-          )}
+
+            {isRentListing ? (
+              <div className="prop-stat-pill">
+                <div className="prop-stat-icon">🛡️</div>
+                <div>
+                  <div className="prop-stat-val" id="ddeposit">2 Months Rent</div>
+                  <div className="prop-stat-lbl">Refundable Deposit</div>
+                </div>
+              </div>
+            ) : (
+              <div className="prop-stat-pill">
+                <div className="prop-stat-icon">💳</div>
+                <div>
+                  <div className="prop-stat-val" id="demi">{property.estimatedEmi || '₹42,500/mo'}</div>
+                  <div className="prop-stat-lbl">Estimated EMI</div>
+                </div>
+              </div>
+            )}
+
+            {/* Quick Action Pill */}
+            {isRentListing ? (
+              <div className="prop-action-pill">
+                <div>
+                  <div className="prop-action-title">Rent Agreement?</div>
+                  <div className="prop-action-sub">Instant legal e-draft</div>
+                </div>
+                <Link href="/rent-agreement" className="prop-action-btn">
+                  Draft agreement <ArrowRight className="w-3.5 h-3.5 inline ml-1" />
+                </Link>
+              </div>
+            ) : (
+              <div className="prop-action-pill">
+                <div>
+                  <div className="prop-action-title">Need a Home Loan?</div>
+                  <div className="prop-action-sub">Low rates from 8.35%</div>
+                </div>
+                <button type="button" className="prop-action-btn">
+                  Apply loan <ArrowRight className="w-3.5 h-3.5 inline ml-1" />
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {(() => {

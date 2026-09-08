@@ -65,15 +65,15 @@ export default function StatesDirectoryPage() {
           </p>
 
           {/* Quick Search */}
-          <div style={{ maxWidth: '540px', margin: '0 auto', position: 'relative' }}>
+          <div style={{ maxWidth: '540px', margin: '0 auto', position: 'relative', display: 'flex', alignItems: 'center' }}>
+            <Search style={{ position: 'absolute', left: '16px', width: '20px', height: '20px', color: '#522AB0', pointerEvents: 'none' }} />
             <input
               type="text"
               placeholder="Search state or city (e.g. Maharashtra, Bengaluru, Dholera)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              style={{ width: '100%', padding: '14px 20px 14px 44px', borderRadius: '12px', border: 'none', fontSize: '14.5px', outline: 'none', background: '#fff', color: 'var(--ink)', boxShadow: '0 8px 24px rgba(0,0,0,0.15)' }}
+              style={{ width: '100%', padding: '14px 20px 14px 46px', borderRadius: '12px', border: 'none', fontSize: '14.5px', outline: 'none', background: '#fff', color: 'var(--ink)', boxShadow: '0 8px 24px rgba(0,0,0,0.15)' }}
             />
-            <Search className="w-5 h-5 text-[#522AB0] absolute left-4 top-1/2 -translate-y-1/2" />
           </div>
         </div>
       </div>

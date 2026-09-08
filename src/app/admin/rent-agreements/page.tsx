@@ -103,14 +103,14 @@ export default function AdminRentAgreementsPage() {
 
       {/* Filter Bar */}
       <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center', background: '#fff', padding: '16px 20px', borderRadius: '14px', border: '1px solid #EBE6F7' }}>
-        <div style={{ flex: 1, minWidth: '220px', position: 'relative' }}>
+        <div style={{ flex: 1, minWidth: '220px', position: 'relative', display: 'flex', alignItems: 'center' }}>
+          <Search style={{ position: 'absolute', left: '12px', width: '16px', height: '16px', color: '#9CA3AF', pointerEvents: 'none' }} />
           <input
             placeholder="Search by tenant, owner, or address..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ width: '100%', padding: '10px 14px 10px 38px', borderRadius: '8px', border: '1px solid #EBE6F7', fontSize: '13.5px', outline: 'none' }}
+            style={{ width: '100%', padding: '10px 14px 10px 38px', borderRadius: '8px', border: '1px solid #EBE6F7', fontSize: '13.5px', outline: 'none', background: '#fff', color: '#1E1B4B' }}
           />
-          <Search className="w-4 h-4 text-[#9CA3AF] absolute left-3 top-1/2 -translate-y-1/2" />
         </div>
 
         <div>

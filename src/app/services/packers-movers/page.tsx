@@ -4,8 +4,12 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Tag, Package, ShieldCheck, Truck, CheckCircle2 } from 'lucide-react';
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function PackersMoversServicePage() {
+  const { addLead } = useLeads();
   const [shiftType, setShiftType] = useState('2 BHK');
+  const [name, setName] = useState('');
   const [fromLoc, setFromLoc] = useState('');
   const [toLoc, setToLoc] = useState('');
   const [phone, setPhone] = useState('');
@@ -13,6 +17,18 @@ export default function PackersMoversServicePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    addLead({
+      name: name || 'Moving Inquiry',
+      phone: phone,
+      city: `${fromLoc} ➔ ${toLoc}`,
+      type: 'packers-movers',
+      source: 'Packers & Movers Page',
+      details: {
+        'Home/Office Type': shiftType,
+        'Pickup Location': fromLoc,
+        'Destination': toLoc,
+      }
+    });
     setSubmitted(true);
   };
 
@@ -119,6 +135,18 @@ export default function PackersMoversServicePage() {
                 </div>
               </div>
 
+              <div>
+                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: 'var(--ink)', marginBottom: '6px' }}>Your Name *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Full Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none', background: '#FAF9FD' }}
+                />
+              </div>
+
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: 'var(--ink)', marginBottom: '6px' }}>Moving From (Pickup City/Locality) *</label>
@@ -153,7 +181,7 @@ export default function PackersMoversServicePage() {
                   placeholder="10-digit mobile number"
                   maxLength={10}
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, ''))}
+                  onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
                   style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none', background: '#FAF9FD' }}
                 />
               </div>

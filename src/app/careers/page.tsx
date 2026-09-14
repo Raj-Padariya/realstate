@@ -3,9 +3,33 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function CareersPage() {
+  const { addLead } = useLeads();
   const [selectedDept, setSelectedDept] = useState('All');
   const [appliedRole, setAppliedRole] = useState<string | null>(null);
+  const [candidate, setCandidate] = useState({ name: '', email: '', phone: '', portfolio: '' });
+
+  const handleJobSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addLead({
+      name: candidate.name,
+      phone: candidate.phone,
+      email: candidate.email,
+      city: 'India',
+      type: 'careers',
+      source: 'Careers Job Application',
+      details: {
+        'Applied Role': appliedRole || 'General Application',
+        'Work Email': candidate.email,
+        'Portfolio / LinkedIn': candidate.portfolio || 'Not provided',
+      }
+    });
+    alert(`Application successfully submitted for ${appliedRole}! Our talent acquisition team will reach out.`);
+    setAppliedRole(null);
+    setCandidate({ name: '', email: '', phone: '', portfolio: '' });
+  };
 
   const departments = ['All', 'Technology & Product', 'Sales & Business', 'Legal & Operations', 'Customer Delight'];
 
@@ -139,11 +163,37 @@ export default function CareersPage() {
               Fill in your details to apply for this opening. Our Talent Acquisition team will get back to you within 24 hours.
             </p>
 
-            <form onSubmit={(e) => { e.preventDefault(); alert(`Application submitted for ${appliedRole}!`); setAppliedRole(null); }} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              <input required placeholder="Your Full Name" style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }} />
-              <input required type="email" placeholder="Email Address" style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }} />
-              <input required type="tel" placeholder="Mobile Number" style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }} />
-              <input placeholder="LinkedIn / Portfolio URL" style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }} />
+            <form onSubmit={handleJobSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <input
+                required
+                placeholder="Your Full Name"
+                value={candidate.name}
+                onChange={(e) => setCandidate({ ...candidate, name: e.target.value })}
+                style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }}
+              />
+              <input
+                required
+                type="email"
+                placeholder="Email Address"
+                value={candidate.email}
+                onChange={(e) => setCandidate({ ...candidate, email: e.target.value })}
+                style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }}
+              />
+              <input
+                required
+                type="tel"
+                placeholder="10-digit Mobile Number"
+                maxLength={10}
+                value={candidate.phone}
+                onChange={(e) => setCandidate({ ...candidate, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
+                style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }}
+              />
+              <input
+                placeholder="LinkedIn / Portfolio URL"
+                value={candidate.portfolio}
+                onChange={(e) => setCandidate({ ...candidate, portfolio: e.target.value })}
+                style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }}
+              />
 
               <button type="submit" style={{ padding: '12px', background: '#0F9D58', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 800, fontSize: '14px', cursor: 'pointer', marginTop: '6px' }}>
                 Submit Job Application →

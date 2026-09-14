@@ -428,7 +428,7 @@ export default function AuthContent({ defaultMode }: { defaultMode?: 'login' | '
                     placeholder="10-digit phone number"
                     maxLength={10}
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, ''))}
+                    onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
                     required
                     style={{ flex: 1, padding: '12px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none' }}
                   />

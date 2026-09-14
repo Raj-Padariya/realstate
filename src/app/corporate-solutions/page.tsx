@@ -19,7 +19,10 @@ import {
   Building
 } from 'lucide-react';
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function CorporateSolutionsPage() {
+  const { addLead } = useLeads();
   const [activeTab, setActiveTab] = useState<'employees' | 'office'>('employees');
   const [showModal, setShowModal] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -33,13 +36,52 @@ export default function CorporateSolutionsPage() {
     employeesCount: '50-200 Employees',
   });
 
+  const [modalData, setModalData] = useState({
+    name: '',
+    company: '',
+    phone: '',
+    email: '',
+  });
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.email) {
       alert('Please fill out all required fields.');
       return;
     }
+    addLead({
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      city: formData.city,
+      type: 'corporate',
+      source: 'Corporate Solutions B2B Page',
+      details: {
+        'Company Name': formData.company,
+        'Work Email': formData.email,
+        'Employees Count': formData.employeesCount,
+      }
+    });
     setIsSubmitted(true);
+  };
+
+  const handleModalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addLead({
+      name: modalData.name,
+      phone: modalData.phone,
+      email: modalData.email,
+      city: 'Ahmedabad',
+      type: 'corporate',
+      source: 'Corporate Consultation Modal',
+      details: {
+        'Company Name': modalData.company,
+        'Work Email': modalData.email,
+      }
+    });
+    alert('Inquiry submitted! Our corporate representative will call you shortly.');
+    setShowModal(false);
+    setModalData({ name: '', company: '', phone: '', email: '' });
   };
 
   const employeeServices = [
@@ -346,8 +388,9 @@ export default function CorporateSolutionsPage() {
                     required
                     type="tel"
                     placeholder="10-digit mobile number"
+                    maxLength={10}
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
                     style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', background: '#FAF9FD' }}
                   />
                 </div>
@@ -432,11 +475,38 @@ export default function CorporateSolutionsPage() {
               Submit your work details and our corporate desk will contact you within 15 minutes.
             </p>
 
-            <form onSubmit={(e) => { e.preventDefault(); alert('Inquiry submitted! Our representative will call you.'); setShowModal(false); }} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              <input required placeholder="Your Name" style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }} />
-              <input required placeholder="Company Name" style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }} />
-              <input required type="tel" placeholder="Mobile Number" style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }} />
-              <input required type="email" placeholder="Work Email" style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }} />
+            <form onSubmit={handleModalSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <input
+                required
+                placeholder="Your Name"
+                value={modalData.name}
+                onChange={(e) => setModalData({ ...modalData, name: e.target.value })}
+                style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }}
+              />
+              <input
+                required
+                placeholder="Company Name"
+                value={modalData.company}
+                onChange={(e) => setModalData({ ...modalData, company: e.target.value })}
+                style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }}
+              />
+              <input
+                required
+                type="tel"
+                placeholder="10-digit Mobile Number"
+                maxLength={10}
+                value={modalData.phone}
+                onChange={(e) => setModalData({ ...modalData, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
+                style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }}
+              />
+              <input
+                required
+                type="email"
+                placeholder="Work Email"
+                value={modalData.email}
+                onChange={(e) => setModalData({ ...modalData, email: e.target.value })}
+                style={{ width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '13.5px' }}
+              />
               
               <button type="submit" style={{ padding: '12px', background: '#522AB0', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 800, fontSize: '14px', cursor: 'pointer', marginTop: '6px' }}>
                 Submit Request →

@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Landmark, Calculator, Coins, Building2, CreditCard, CheckCircle2 } from 'lucide-react';
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function HomeLoanServicePage() {
+  const { addLead } = useLeads();
   const [loanAmount, setLoanAmount] = useState(5000000); // 50 Lakhs
   const [tenureYears, setTenureYears] = useState(20);
   const [interestRate, setInterestRate] = useState(8.5);
@@ -26,6 +29,19 @@ export default function HomeLoanServicePage() {
 
   const handleLoanSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    addLead({
+      name: applicantName,
+      phone: applicantPhone,
+      city: 'Gujarat / India',
+      type: 'home-loan',
+      source: 'Home Loan Assistance Desk',
+      details: {
+        'Desired Loan Amount': `₹${(loanAmount / 100000).toFixed(1)} Lakhs`,
+        'Tenure': `${tenureYears} Years`,
+        'Interest Rate': `${interestRate}%`,
+        'Calculated EMI': `₹${emi.toLocaleString('en-IN')}/mo`,
+      }
+    });
     setSubmitted(true);
   };
 
@@ -219,7 +235,7 @@ export default function HomeLoanServicePage() {
                   placeholder="10-digit mobile number"
                   maxLength={10}
                   value={applicantPhone}
-                  onChange={(e) => setApplicantPhone(e.target.value.replace(/[^0-9]/g, ''))}
+                  onChange={(e) => setApplicantPhone(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
                   style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none', background: '#FAF9FD' }}
                 />
               </div>

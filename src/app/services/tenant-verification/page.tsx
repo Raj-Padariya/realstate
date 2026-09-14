@@ -81,7 +81,10 @@ const FAQS = [
   },
 ];
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function TenantVerificationPage() {
+  const { addLead } = useLeads();
   const [selectedPkg, setSelectedPkg] = useState('police');
   const [formData, setFormData] = useState({
     ownerName: '',
@@ -98,6 +101,19 @@ export default function TenantVerificationPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    addLead({
+      name: formData.ownerName,
+      phone: formData.ownerPhone,
+      city: formData.city,
+      type: 'tenant-verification',
+      source: 'Tenant Police Verification Page',
+      details: {
+        'Package': PACKAGES.find(p => p.id === selectedPkg)?.name || selectedPkg,
+        'Tenant Name': formData.tenantName,
+        'Tenant Phone': formData.tenantPhone,
+        'Property Type': formData.propertyType,
+      }
+    });
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -296,8 +312,9 @@ export default function TenantVerificationPage() {
                     <input
                       type="tel"
                       required
+                      maxLength={10}
                       value={formData.ownerPhone}
-                      onChange={(e) => setFormData({ ...formData, ownerPhone: e.target.value })}
+                      onChange={(e) => setFormData({ ...formData, ownerPhone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
                       placeholder="10-digit mobile"
                       style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px', outline: 'none' }}
                     />
@@ -325,8 +342,9 @@ export default function TenantVerificationPage() {
                     <input
                       type="tel"
                       required
+                      maxLength={10}
                       value={formData.tenantPhone}
-                      onChange={(e) => setFormData({ ...formData, tenantPhone: e.target.value })}
+                      onChange={(e) => setFormData({ ...formData, tenantPhone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
                       placeholder="Tenant phone"
                       style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px', outline: 'none' }}
                     />

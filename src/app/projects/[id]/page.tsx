@@ -309,7 +309,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailProps) {
                       placeholder="10-digit number"
                       maxLength={10}
                       value={visitorPhone}
-                      onChange={(e) => setVisitorPhone(e.target.value.replace(/[^0-9]/g, ''))}
+                      onChange={(e) => setVisitorPhone(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
                       style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none', background: '#FAF9FD' }}
                     />
                   </div>

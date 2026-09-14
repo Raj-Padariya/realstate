@@ -19,7 +19,10 @@ import {
   Send,
 } from 'lucide-react';
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function ReferEarnPage() {
+  const { addLead } = useLeads();
   const [copied, setCopied] = useState(false);
   const [referralCode, setReferralCode] = useState('GUJJU-7829');
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -49,6 +52,20 @@ export default function ReferEarnPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    addLead({
+      name: formData.referrerName,
+      phone: formData.referrerPhone,
+      city: formData.city,
+      type: 'refer-earn',
+      source: 'Refer & Earn Rewards Page',
+      details: {
+        'Referrer UPI': formData.referrerUpi || 'Not provided',
+        'Referred Friend Name': formData.friendName,
+        'Referred Friend Phone': formData.friendPhone,
+        'Property Interest': formData.propertyType,
+        'Locality': formData.locality || 'Not specified',
+      }
+    });
     setFormSubmitted(true);
   };
 
@@ -251,9 +268,10 @@ export default function ReferEarnPage() {
                   <input
                     type="tel"
                     required
-                    placeholder="+91 98XXX XXXXX"
+                    placeholder="10-digit mobile number"
+                    maxLength={10}
                     value={formData.friendPhone}
-                    onChange={(e) => setFormData({ ...formData, friendPhone: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, friendPhone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
                     style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
                   />
                 </div>

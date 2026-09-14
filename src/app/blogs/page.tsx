@@ -2,16 +2,18 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { INITIAL_BLOGS, BlogPost } from './blogsData';
+import { useBlogs } from '@/shared/context/BlogsContext';
+import { BlogPost } from './blogsData';
 export type { BlogPost };
 
 export default function BlogsPage() {
+  const { blogs } = useBlogs();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const categories = ['All', 'Market Insights', 'Rental Tips', 'Legal & Title Advice', 'Buyer Guides'];
 
-  const filteredBlogs = INITIAL_BLOGS.filter((blog) => {
+  const filteredBlogs = blogs.filter((blog) => {
     const matchesCat = selectedCategory === 'All' || blog.category === selectedCategory;
     const matchesSearch =
       blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -19,7 +21,7 @@ export default function BlogsPage() {
     return matchesCat && matchesSearch;
   });
 
-  const featuredBlog = INITIAL_BLOGS.find((b) => b.isFeatured) || INITIAL_BLOGS[0];
+  const featuredBlog = blogs.find((b) => b.isFeatured) || blogs[0];
 
   return (
     <div style={{ background: '#F8F9FC', minHeight: '100vh', paddingBottom: '80px' }}>
@@ -95,9 +97,12 @@ export default function BlogsPage() {
               <p style={{ fontSize: '14.5px', color: '#4B5563', lineHeight: 1.6, margin: '0 0 24px' }}>
                 {featuredBlog.excerpt}
               </p>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ fontSize: '13px', color: '#374151' }}>
-                  By <strong>{featuredBlog.author}</strong> ({featuredBlog.authorRole})
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+                <div style={{ fontSize: '13px', color: '#374151', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span>By <strong>{featuredBlog.author}</strong> ({featuredBlog.authorRole})</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: '#ECFDF5', color: '#059669', padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: 800 }}>
+                    👍 {featuredBlog.likes || 0} Helpful
+                  </span>
                 </div>
                 <Link href={`/blogs/${featuredBlog.id}`} style={{ background: '#522AB0', color: '#fff', padding: '10px 20px', borderRadius: '10px', fontWeight: 800, fontSize: '13px', textDecoration: 'none' }}>
                   Read Article →
@@ -119,7 +124,12 @@ export default function BlogsPage() {
               </div>
               <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
-                  <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '8px' }}>{blog.date} • {blog.readTime}</div>
+                  <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span>{blog.date} • {blog.readTime}</span>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: '#059669', fontWeight: 700, fontSize: '11.5px', background: '#ECFDF5', padding: '2px 8px', borderRadius: '999px' }}>
+                      👍 {blog.likes || 0}
+                    </span>
+                  </div>
                   <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#111827', margin: '0 0 10px', lineHeight: 1.35 }}>
                     <Link href={`/blogs/${blog.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                       {blog.title}

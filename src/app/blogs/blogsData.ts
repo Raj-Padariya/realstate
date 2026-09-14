@@ -27,10 +27,15 @@ export interface BlogPost {
   readTime: string;
   image: string;
   isFeatured?: boolean;
+  status?: 'Published' | 'Draft';
+  tags?: string[];
+  slug?: string;
   toc?: { id: string; title: string }[];
   sections?: BlogSection[];
   keyTakeaways?: string[];
   faqs?: BlogFAQ[];
+  likes?: number;
+  dislikes?: number;
 }
 
 export const INITIAL_BLOGS: BlogPost[] = [
@@ -48,6 +53,8 @@ Whether you are a first-time homebuyer looking for end-use residential apartment
     readTime: '6 min read',
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
     isFeatured: true,
+    likes: 142,
+    dislikes: 4,
     toc: [
       { id: 'overview', title: '1. Executive Summary & 2026 Market Landscape' },
       { id: 'pune-hotspots', title: '2. Top Pune Real Estate Hotspots (Baner & Wakad)' },
@@ -139,6 +146,8 @@ With the Government of Gujarat digitizing revenue land records on the AnyRoR por
     date: '10 Feb 2026',
     readTime: '8 min read',
     image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1200&q=80',
+    likes: 98,
+    dislikes: 2,
     toc: [
       { id: 'overview', title: '1. Why Title Inspection is Mandatory' },
       { id: 'anyror-guide', title: '2. Step-by-Step AnyRoR Gujarat Inspection' },
@@ -195,6 +204,8 @@ Direct owner platforms eliminate middleman commissions completely by verifying o
     date: '02 Feb 2026',
     readTime: '5 min read',
     image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80',
+    likes: 215,
+    dislikes: 6,
     keyTakeaways: [
       'Save 100% brokerage fees by connecting directly with verified owners.',
       'Get automated online E-Stamp rental agreements delivered to your doorstep within 48 hours.',

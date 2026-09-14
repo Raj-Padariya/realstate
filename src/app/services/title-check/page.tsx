@@ -11,7 +11,10 @@ const verificationFeatures = [
   { title: 'Advocate Signed Legal Opinion', desc: 'Official legal search report issued by experienced High Court advocates before token payment.' },
 ];
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function TitleCheckServicePage() {
+  const { addLead } = useLeads();
   const [selectedPackage, setSelectedPackage] = useState('full');
   const [formData, setFormData] = useState({
     name: '',
@@ -27,6 +30,18 @@ export default function TitleCheckServicePage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    addLead({
+      name: formData.name,
+      phone: formData.phone,
+      city: formData.city,
+      type: 'title-check',
+      source: 'Title & 7/12 Check Page',
+      details: {
+        'Package': selectedPackage === 'basic' ? '7/12 & NA Audit (₹1,999)' : '30-Yr Advocate Report (₹3,999)',
+        'Property Type': formData.propertyType,
+        'Survey / Block No': formData.surveyNo || 'Not specified',
+      }
+    });
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
@@ -170,7 +185,7 @@ export default function TitleCheckServicePage() {
                     placeholder="10-digit number"
                     maxLength={10}
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^0-9]/g, '') })}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
                     style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none', background: '#FAF9FD' }}
                   />
                 </div>

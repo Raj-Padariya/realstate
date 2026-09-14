@@ -3,8 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { MessageCircle, Home, Gem, FileText, PhoneCall, KeyRound, Mail, Clock, Building2, Building, ChevronDown, Send, CheckCircle2, Zap, MapPin, Phone } from 'lucide-react';
+import { useLeads } from '@/shared/context/LeadsContext';
 
 export default function ContactUsPage() {
+  const { addLead } = useLeads();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -25,6 +27,19 @@ export default function ContactUsPage() {
     }
 
     setIsSubmitting(true);
+
+    addLead({
+      type: 'contact',
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      source: 'Contact Us Form',
+      details: {
+        category: formData.category,
+        message: formData.message,
+      },
+    });
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSuccessNotice('🎉 Thank you! Your message has been received. Our team will call you back within 15 minutes.');
@@ -284,7 +299,7 @@ export default function ContactUsPage() {
                     placeholder="10-digit number"
                     maxLength={10}
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^0-9]/g, '') })}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
                     style={{ width: '100%', padding: '12px 14px', borderRadius: '10px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none', background: '#FAF9FD' }}
                   />
                 </div>

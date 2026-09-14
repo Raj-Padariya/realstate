@@ -11,7 +11,10 @@ const managementPillars = [
   { title: 'Maintenance &amp; Repairs', desc: 'On-demand electrical, plumbing, painting, and deep cleaning with transparent vendor invoices.' },
 ];
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function PropertyManagementServicePage() {
+  const { addLead } = useLeads();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -24,6 +27,17 @@ export default function PropertyManagementServicePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    addLead({
+      name: formData.name,
+      phone: formData.phone,
+      city: formData.propertyCity,
+      type: 'property-management',
+      source: 'Property Management & NRI Care Page',
+      details: {
+        'Property Type': formData.propertyType,
+        'Property City': formData.propertyCity,
+      }
+    });
     setSubmitted(true);
   };
 
@@ -117,9 +131,10 @@ export default function PropertyManagementServicePage() {
                   <input
                     type="tel"
                     required
-                    placeholder="Mobile number"
+                    placeholder="10-digit mobile number"
+                    maxLength={10}
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
                     style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none', background: '#FAF9FD' }}
                   />
                 </div>

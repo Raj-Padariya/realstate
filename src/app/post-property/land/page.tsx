@@ -229,12 +229,27 @@ function LandPostContent() {
                   </div>
 
                   <div className="frow" style={{ marginTop: '24px' }}>
-                    <div style={{ display: 'flex', gap: '12px', width: '100%' }}>
-                      <button type="button" disabled style={{ padding: '14px 20px', background: '#f0f0f0', border: '1px solid var(--line)', borderRadius: '8px', fontWeight: 700, cursor: 'not-allowed', opacity: 0.6 }}>
-                        ← Back
-                      </button>
-                      <button type="button" onClick={handleNext} disabled={!canSubmitCurrent} className="btn" style={{ flex: 1 }}>
-                        Continue →
+                    <div style={{ display: 'flex', gap: '12px', width: '100%', alignItems: 'center' }}>
+                      <button
+                        type="button"
+                        onClick={handleNext}
+                        disabled={!canSubmitCurrent}
+                        className="btn"
+                        style={{
+                          width: '100%',
+                          minHeight: '46px',
+                          height: '46px',
+                          borderRadius: '8px',
+                          fontWeight: 700,
+                          fontSize: '15px',
+                          opacity: canSubmitCurrent ? 1 : 0.6,
+                          cursor: canSubmitCurrent ? 'pointer' : 'not-allowed',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        Continue to Locality Details →
                       </button>
                     </div>
                   </div>
@@ -304,12 +319,35 @@ function LandPostContent() {
                   </div>
 
                   <div className="frow" style={{ marginTop: '24px' }}>
-                    <div style={{ display: 'flex', gap: '12px', width: '100%' }}>
-                      <button type="button" onClick={() => setActiveStep(0)} className="btn grey">
+                    <div style={{ display: 'flex', gap: '12px', width: '100%', alignItems: 'center' }}>
+                      <button
+                        type="button"
+                        onClick={() => setActiveStep(0)}
+                        className="btn grey"
+                        style={{ minWidth: '100px', minHeight: '46px', height: '46px', borderRadius: '8px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+                      >
                         ← Back
                       </button>
-                      <button type="button" onClick={handleNext} disabled={!canSubmitCurrent} className="btn" style={{ flex: 1 }}>
-                        Continue →
+                      <button
+                        type="button"
+                        onClick={handleNext}
+                        disabled={!canSubmitCurrent}
+                        className="btn"
+                        style={{
+                          flex: 1,
+                          minHeight: '46px',
+                          height: '46px',
+                          borderRadius: '8px',
+                          fontWeight: 700,
+                          fontSize: '15px',
+                          opacity: canSubmitCurrent ? 1 : 0.6,
+                          cursor: canSubmitCurrent ? 'pointer' : 'not-allowed',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        Continue to Pricing →
                       </button>
                     </div>
                   </div>
@@ -372,12 +410,35 @@ function LandPostContent() {
                   </div>
 
                   <div className="frow" style={{ marginTop: '24px' }}>
-                    <div style={{ display: 'flex', gap: '12px', width: '100%' }}>
-                      <button type="button" onClick={() => setActiveStep(1)} className="btn grey">
+                    <div style={{ display: 'flex', gap: '12px', width: '100%', alignItems: 'center' }}>
+                      <button
+                        type="button"
+                        onClick={() => setActiveStep(1)}
+                        className="btn grey"
+                        style={{ minWidth: '100px', minHeight: '46px', height: '46px', borderRadius: '8px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+                      >
                         ← Back
                       </button>
-                      <button type="button" onClick={handleNext} disabled={!canSubmitCurrent} className="btn" style={{ flex: 1 }}>
-                        Continue →
+                      <button
+                        type="button"
+                        onClick={handleNext}
+                        disabled={!canSubmitCurrent}
+                        className="btn"
+                        style={{
+                          flex: 1,
+                          minHeight: '46px',
+                          height: '46px',
+                          borderRadius: '8px',
+                          fontWeight: 700,
+                          fontSize: '15px',
+                          opacity: canSubmitCurrent ? 1 : 0.6,
+                          cursor: canSubmitCurrent ? 'pointer' : 'not-allowed',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        Continue to Gallery →
                       </button>
                     </div>
                   </div>
@@ -400,12 +461,32 @@ function LandPostContent() {
                   />
 
                   <div className="frow" style={{ marginTop: '24px' }}>
-                    <div style={{ display: 'flex', gap: '12px', width: '100%' }}>
-                      <button type="button" onClick={() => setActiveStep(2)} className="btn grey">
+                    <div style={{ display: 'flex', gap: '12px', width: '100%', alignItems: 'center' }}>
+                      <button
+                        type="button"
+                        onClick={() => setActiveStep(2)}
+                        className="btn grey"
+                        style={{ minWidth: '100px', minHeight: '46px', height: '46px', borderRadius: '8px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+                      >
                         ← Back
                       </button>
-                      <button type="button" onClick={handleNext} className="btn" style={{ flex: 1 }}>
-                        Continue →
+                      <button
+                        type="button"
+                        onClick={handleNext}
+                        className="btn"
+                        style={{
+                          flex: 1,
+                          minHeight: '46px',
+                          height: '46px',
+                          borderRadius: '8px',
+                          fontWeight: 700,
+                          fontSize: '15px',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        Continue to Contact →
                       </button>
                     </div>
                   </div>
@@ -429,18 +510,61 @@ function LandPostContent() {
                       <label>Mobile phone number <i>*</i></label>
                       <div className="prefix">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 16, height: 16 }}><path d="M22 16.92V21a1 1 0 0 1-1.1 1A19 19 0 0 1 2 4.1 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg>
-                        <input className="inp" type="tel" value={ownerPhone} onChange={(e) => setOwnerPhone(e.target.value)} placeholder="+91 XXXXX XXXXX" />
+                        <input className="inp" type="tel" maxLength={10} value={ownerPhone} onChange={(e) => setOwnerPhone(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))} placeholder="10-digit mobile number" />
                       </div>
                     </div>
                   </div>
 
+                  <div style={{ background: '#F8F5FE', border: '1px solid #E4DCFA', borderRadius: '10px', padding: '12px 16px', marginTop: '16px', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                    <span style={{ fontSize: '18px', lineHeight: 1 }}>🔒</span>
+                    <div style={{ fontSize: '12.5px', color: '#522AB0', lineHeight: 1.5 }}>
+                      <strong>GujjuProperty Privacy Shield:</strong> Your direct phone number will never be exposed publicly. Interested genuine buyers submit verified inquiries through our concierge desk before you are contacted, protecting you from broker disturbance and spam.
+                    </div>
+                  </div>
+
                   <div className="frow" style={{ marginTop: '24px' }}>
-                    <div style={{ display: 'flex', gap: '12px', width: '100%' }}>
-                      <button type="button" onClick={() => setActiveStep(3)} className="btn grey">
+                    <div style={{ display: 'flex', gap: '12px', width: '100%', alignItems: 'center' }}>
+                      <button
+                        type="button"
+                        onClick={() => setActiveStep(3)}
+                        className="btn grey"
+                        style={{
+                          minWidth: '100px',
+                          minHeight: '46px',
+                          height: '46px',
+                          borderRadius: '8px',
+                          fontWeight: 700,
+                          fontSize: '14.5px',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
                         ← Back
                       </button>
-                      <button type="button" onClick={handleSubmit} disabled={!canSubmitCurrent} className="btn" style={{ flex: 1, boxShadow: '0 4px 14px rgba(82,42,176,0.3)' }}>
-                        🚀 Publish Land &amp; Plot Listing Now
+                      <button
+                        type="button"
+                        onClick={handleSubmit}
+                        disabled={!canSubmitCurrent}
+                        className="btn"
+                        style={{
+                          flex: 1,
+                          minHeight: '46px',
+                          height: '46px',
+                          borderRadius: '8px',
+                          fontWeight: 700,
+                          fontSize: '14.5px',
+                          whiteSpace: 'nowrap',
+                          boxShadow: '0 4px 14px rgba(82,42,176,0.3)',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px',
+                          opacity: canSubmitCurrent ? 1 : 0.6,
+                          cursor: canSubmitCurrent ? 'pointer' : 'not-allowed',
+                        }}
+                      >
+                        🚀 Publish Plot Listing
                       </button>
                     </div>
                   </div>

@@ -18,12 +18,32 @@ const plotListings = [
   { tp: 'TP-1 High Street', size: '450 sq.yd', price: 'Rs. 28 Lakhs', type: 'Industrial / Warehouse', status: 'Limited' },
 ];
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function DholeraSirPage() {
+  const { addLead } = useLeads();
   const [investorName, setInvestorName] = useState('');
   const [investorPhone, setInvestorPhone] = useState('');
   const [investorEmail, setInvestorEmail] = useState('');
   const [budget, setBudget] = useState('Rs. 11 L - 15 L');
   const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addLead({
+      type: 'site-visit',
+      name: investorName,
+      phone: investorPhone,
+      email: investorEmail,
+      city: 'Dholera SIR',
+      source: 'Dholera SIR Investment Form',
+      details: {
+        budget,
+        interest: 'Dholera Smart City Land & Industrial Investment',
+      },
+    });
+    setSubmitted(true);
+  };
 
   return (
     <div style={{ background: '#F4F5F8', minHeight: '100vh', paddingBottom: '80px' }}>
@@ -150,7 +170,7 @@ export default function DholeraSirPage() {
               </p>
             </div>
           ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: 'var(--ink)', marginBottom: '6px' }}>Your Name *</label>
@@ -172,7 +192,7 @@ export default function DholeraSirPage() {
                     placeholder="10-digit number"
                     maxLength={10}
                     value={investorPhone}
-                    onChange={(e) => setInvestorPhone(e.target.value.replace(/[^0-9]/g, ''))}
+                    onChange={(e) => setInvestorPhone(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
                     style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none', background: '#FAF9FD' }}
                   />
                 </div>

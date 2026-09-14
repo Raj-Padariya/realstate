@@ -620,7 +620,7 @@ function CommercialPostContent() {
                     </div>
                     <div className="fld2">
                       <label>Mobile Number <i>*</i></label>
-                      <input className="inp" type="tel" value={ownerPhone} onChange={(e) => setOwnerPhone(e.target.value)} placeholder="Mobile Number" />
+                      <input className="inp" type="tel" maxLength={10} value={ownerPhone} onChange={(e) => setOwnerPhone(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))} placeholder="10-digit mobile number" />
                     </div>
                   </div>
                 </section>

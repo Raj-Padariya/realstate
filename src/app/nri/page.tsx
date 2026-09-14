@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Video, Search, Building2, KeyRound, Globe, CheckCircle2 } from 'lucide-react';
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function NriDeskPage() {
+  const { addLead } = useLeads();
   const [formState, setFormState] = useState({
     name: '',
     country: 'United States (EST/PST)',
@@ -20,6 +23,19 @@ export default function NriDeskPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    addLead({
+      name: formState.name,
+      phone: formState.phone,
+      email: formState.email,
+      city: formState.country,
+      type: 'property-management',
+      source: 'NRI Desk Consultation Form',
+      details: {
+        'Country / Timezone': formState.country,
+        'Interest / Requirement': formState.interest,
+        'Message': formState.message || 'No additional notes',
+      }
+    });
     setTimeout(() => {
       setIsSubmitting(false);
       setSuccessMsg('🎉 Request Received! Our NRI Desk Specialist will contact you via WhatsApp / Zoom within 12 hours matching your timezone.');
@@ -188,9 +204,10 @@ export default function NriDeskPage() {
                 <input
                   type="tel"
                   required
+                  maxLength={15}
                   placeholder="Include country code (e.g. +1 415...)"
                   value={formState.phone}
-                  onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
+                  onChange={(e) => setFormState({ ...formState, phone: e.target.value.replace(/[^0-9+]/g, '').slice(0, 15) })}
                   style={{ width: '100%', padding: '12px 14px', borderRadius: '10px', border: '1px solid var(--line)', fontSize: '14px', outline: 'none', background: '#FAF9FD' }}
                 />
               </div>

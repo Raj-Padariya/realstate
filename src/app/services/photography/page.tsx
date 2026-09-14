@@ -79,7 +79,10 @@ const FAQS = [
   },
 ];
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function PhotographyServicePage() {
+  const { addLead } = useLeads();
   const [selectedPkg, setSelectedPkg] = useState('premium');
   const [formData, setFormData] = useState({
     name: '',
@@ -96,6 +99,19 @@ export default function PhotographyServicePage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    addLead({
+      name: formData.name,
+      phone: formData.phone,
+      city: formData.city,
+      type: 'photography',
+      source: 'Photography & 360° Tours Page',
+      details: {
+        'Package': PACKAGES.find(p => p.id === selectedPkg)?.name || selectedPkg,
+        'Property Type': formData.propertyType,
+        'Preferred Date': formData.preferredDate || 'Not specified',
+        'Preferred Time': formData.preferredTime,
+      }
+    });
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -289,8 +305,9 @@ export default function PhotographyServicePage() {
                     <input
                       type="tel"
                       required
+                      maxLength={10}
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
                       placeholder="10-digit mobile"
                       style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px', outline: 'none' }}
                     />

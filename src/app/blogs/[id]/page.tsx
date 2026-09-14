@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { useBlogs } from '@/shared/context/BlogsContext';
 import { INITIAL_BLOGS, BlogPost } from '../blogsData';
 import {
   Calendar,
@@ -20,18 +21,29 @@ import {
   ChevronRight,
   Copy,
   Check,
+  Tag,
 } from 'lucide-react';
 
 export default function BlogDetailPage() {
   const params = useParams();
   const blogId = params?.id as string;
+  const { blogs, getBlogById, voteBlog, getUserVote } = useBlogs();
 
   const [copied, setCopied] = useState(false);
-  const [feedback, setFeedback] = useState<'yes' | 'no' | null>(null);
 
-  const article: BlogPost = INITIAL_BLOGS.find((b) => b.id === blogId) || INITIAL_BLOGS[0];
-  const relatedArticles = INITIAL_BLOGS.filter((b) => b.id !== article.id).slice(0, 3);
-  const trendingArticles = INITIAL_BLOGS.slice(0, 3);
+  const article: BlogPost = getBlogById(blogId) || blogs.find((b) => b.id === blogId) || INITIAL_BLOGS[0];
+  const relatedArticles = blogs.filter((b) => b.id !== article.id).slice(0, 3);
+  const trendingArticles = blogs.slice(0, 3);
+
+  const currentVote = getUserVote(article.id);
+  const likesCount = article.likes ?? 0;
+  const dislikesCount = article.dislikes ?? 0;
+  const totalVotes = likesCount + dislikesCount;
+  const helpfulPercentage = totalVotes > 0 ? Math.round((likesCount / totalVotes) * 100) : 100;
+
+  const handleVote = (type: 'like' | 'dislike') => {
+    voteBlog(article.id, type);
+  };
 
   const handleCopyLink = () => {
     if (typeof window !== 'undefined') {
@@ -115,6 +127,31 @@ export default function BlogDetailPage() {
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-[#0f9d58]" /> : <Copy className="w-3.5 h-3.5 text-[#522AB0]" />}
                 {copied ? 'Link Copied!' : 'Copy Link'}
+              </button>
+
+              {/* Quick Top Reaction Button */}
+              <button
+                type="button"
+                onClick={() => handleVote('like')}
+                style={{
+                  background: currentVote === 'like' ? '#ECFDF5' : '#fff',
+                  border: currentVote === 'like' ? '1.5px solid #10B981' : '1px solid #D1D5DB',
+                  color: currentVote === 'like' ? '#047857' : '#374151',
+                  padding: '7px 14px',
+                  borderRadius: '8px',
+                  fontWeight: 700,
+                  fontSize: '12.5px',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  transition: 'all 0.15s ease',
+                  boxShadow: currentVote === 'like' ? '0 2px 8px rgba(16,185,129,0.2)' : 'none',
+                }}
+                title={currentVote === 'like' ? 'You marked this helpful' : 'Mark as helpful'}
+              >
+                <ThumbsUp className={`w-3.5 h-3.5 ${currentVote === 'like' ? 'fill-current text-[#10B981]' : 'text-[#522AB0]'}`} />
+                <span>Helpful ({likesCount})</span>
               </button>
             </div>
           </div>
@@ -273,31 +310,150 @@ export default function BlogDetailPage() {
               </div>
             )}
 
+            {/* TAGS / FOCUS TOPICS */}
+            {article.tags && article.tags.length > 0 && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '32px', background: '#fff', borderRadius: '16px', border: '1px solid #EBE6F7', padding: '16px 20px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#6B7280', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                  <Tag className="w-4 h-4 text-[#522AB0]" /> Focus Topics:
+                </span>
+                {article.tags.map((tag, tIdx) => (
+                  <span
+                    key={tIdx}
+                    style={{ background: '#EFE9FB', color: '#522AB0', padding: '4px 12px', borderRadius: '999px', fontSize: '12px', fontWeight: 700 }}
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
+
             {/* ARTICLE HELPFUL FEEDBACK BOX */}
-            <div style={{ background: '#fff', borderRadius: '20px', border: '1px solid #EBE6F7', padding: '28px', marginBottom: '32px', textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
-              <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#111827', margin: '0 0 12px' }}>
+            <div
+              style={{
+                background: '#fff',
+                borderRadius: '20px',
+                border: '1.5px solid #EBE6F7',
+                padding: '32px 28px',
+                marginBottom: '32px',
+                textAlign: 'center',
+                boxShadow: '0 4px 24px rgba(82, 42, 176, 0.04)',
+              }}
+            >
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#EFE9FB', color: '#522AB0', padding: '4px 12px', borderRadius: '999px', fontSize: '11.5px', fontWeight: 800, textTransform: 'uppercase', marginBottom: '10px' }}>
+                Reader Community Feedback
+              </div>
+              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#111827', margin: '0 0 6px' }}>
                 Was this real estate guide helpful?
               </h3>
-              {feedback ? (
-                <div style={{ color: '#0f9d58', fontWeight: 800, fontSize: '14.5px' }}>
-                  🎉 Thank you for your feedback! We continuously update our guides to serve home buyers across Western India.
+              <p style={{ fontSize: '13.5px', color: '#64748B', margin: '0 0 20px' }}>
+                Your response is counted in real-time to help us deliver accurate, broker-free real estate advice.
+              </p>
+
+              {/* REACTION BUTTONS */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  onClick={() => handleVote('like')}
+                  style={{
+                    background: currentVote === 'like' ? '#ECFDF5' : '#fff',
+                    color: currentVote === 'like' ? '#047857' : '#1E293B',
+                    border: currentVote === 'like' ? '2px solid #10B981' : '1.5px solid #CBD5E1',
+                    padding: '12px 24px',
+                    borderRadius: '999px',
+                    fontWeight: 800,
+                    fontSize: '14px',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    boxShadow: currentVote === 'like' ? '0 4px 14px rgba(16, 185, 129, 0.25)' : '0 2px 6px rgba(0,0,0,0.03)',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  <ThumbsUp className={`w-4 h-4 ${currentVote === 'like' ? 'fill-current text-[#10B981]' : 'text-[#059669]'}`} />
+                  <span>Yes, Very Helpful</span>
+                  <span
+                    style={{
+                      background: currentVote === 'like' ? '#10B981' : '#F1F5F9',
+                      color: currentVote === 'like' ? '#fff' : '#475569',
+                      padding: '2px 8px',
+                      borderRadius: '999px',
+                      fontSize: '12px',
+                      fontWeight: 800,
+                    }}
+                  >
+                    {likesCount}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleVote('dislike')}
+                  style={{
+                    background: currentVote === 'dislike' ? '#FEF2F2' : '#fff',
+                    color: currentVote === 'dislike' ? '#B91C1C' : '#1E293B',
+                    border: currentVote === 'dislike' ? '2px solid #EF4444' : '1.5px solid #CBD5E1',
+                    padding: '12px 24px',
+                    borderRadius: '999px',
+                    fontWeight: 800,
+                    fontSize: '14px',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    boxShadow: currentVote === 'dislike' ? '0 4px 14px rgba(239, 68, 68, 0.25)' : '0 2px 6px rgba(0,0,0,0.03)',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  <ThumbsDown className={`w-4 h-4 ${currentVote === 'dislike' ? 'fill-current text-[#EF4444]' : 'text-[#DC2626]'}`} />
+                  <span>Needs Improvement</span>
+                  <span
+                    style={{
+                      background: currentVote === 'dislike' ? '#EF4444' : '#F1F5F9',
+                      color: currentVote === 'dislike' ? '#fff' : '#475569',
+                      padding: '2px 8px',
+                      borderRadius: '999px',
+                      fontSize: '12px',
+                      fontWeight: 800,
+                    }}
+                  >
+                    {dislikesCount}
+                  </span>
+                </button>
+              </div>
+
+              {/* DYNAMIC CONFIRMATION FEEDBACK */}
+              {currentVote === 'like' && (
+                <div style={{ marginTop: '18px', color: '#059669', fontWeight: 700, fontSize: '13.5px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                  🎉 Thank you! Glad this guide helped your property search. (Click again to remove vote)
                 </div>
-              ) : (
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', marginTop: '14px' }}>
-                  <button
-                    type="button"
-                    onClick={() => setFeedback('yes')}
-                    style={{ background: '#E6F4EA', color: '#137333', border: '1px solid #CEEAD6', padding: '10px 24px', borderRadius: '999px', fontWeight: 800, fontSize: '14px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-                  >
-                    <ThumbsUp className="w-4 h-4" /> Yes, Very Helpful
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFeedback('no')}
-                    style={{ background: '#F3F4F6', color: '#374151', border: '1px solid #D1D5DB', padding: '10px 24px', borderRadius: '999px', fontWeight: 800, fontSize: '14px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-                  >
-                    <ThumbsDown className="w-4 h-4" /> Needs Improvement
-                  </button>
+              )}
+              {currentVote === 'dislike' && (
+                <div style={{ marginTop: '18px', color: '#DC2626', fontWeight: 700, fontSize: '13.5px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                  🙏 Thank you for your honest feedback! Our research team will review and update this article. (Click again to remove vote)
+                </div>
+              )}
+              {!currentVote && (
+                <div style={{ marginTop: '16px', color: '#64748B', fontSize: '12.5px' }}>
+                  Click a button above to submit your reaction. You can change or remove your vote anytime.
+                </div>
+              )}
+
+              {/* SENTIMENT SCORE & COMMUNITY SOCIAL PROOF BAR */}
+              {totalVotes > 0 && (
+                <div style={{ marginTop: '22px', paddingTop: '18px', borderTop: '1px solid #F1F5F9', maxWidth: '440px', margin: '22px auto 0' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12.5px', color: '#475569', marginBottom: '8px' }}>
+                    <span style={{ fontWeight: 700, color: '#059669' }}>
+                      ⭐ {helpfulPercentage}% Readers Found This Helpful
+                    </span>
+                    <span style={{ color: '#64748B' }}>
+                      {totalVotes} total responses
+                    </span>
+                  </div>
+                  <div style={{ width: '100%', height: '8px', background: '#F1F5F9', borderRadius: '999px', overflow: 'hidden', display: 'flex' }}>
+                    <div style={{ width: `${helpfulPercentage}%`, background: '#10B981', transition: 'width 0.3s ease' }} />
+                    <div style={{ width: `${100 - helpfulPercentage}%`, background: '#EF4444', transition: 'width 0.3s ease' }} />
+                  </div>
                 </div>
               )}
             </div>

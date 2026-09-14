@@ -19,14 +19,16 @@ import {
   Search,
   UserCheck,
 } from 'lucide-react';
+import { useLeads } from '@/shared/context/LeadsContext';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { stats } = useLeads();
 
   const navItems = [
     { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { label: 'Leads & Users', href: '/admin/leads', icon: Users, badge: '5' },
+    { label: 'Leads & Users', href: '/admin/leads', icon: Users, badge: stats.newCount > 0 ? String(stats.newCount) : undefined },
     { label: 'All Properties', href: '/admin/properties', icon: Building2 },
     { label: 'Add New Listing', href: '/admin/properties/new', icon: PlusCircle },
     { label: 'Subscription Plans', href: '/admin/plans', icon: CreditCard },

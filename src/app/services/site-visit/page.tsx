@@ -63,7 +63,10 @@ const FAQS = [
   },
 ];
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function SiteVisitPage() {
+  const { addLead } = useLeads();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -83,6 +86,23 @@ export default function SiteVisitPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    addLead({
+      type: 'site-visit',
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      city: formData.targetCity,
+      source: 'Assisted Site Visit Form',
+      details: {
+        propertyType: formData.propertyType,
+        budget: formData.budget,
+        visitDate: formData.visitDate,
+        visitTime: formData.visitTime,
+        pickupAddress: formData.pickupAddress,
+      },
+    });
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -243,8 +263,9 @@ export default function SiteVisitPage() {
                     <input
                       type="tel"
                       required
+                      maxLength={10}
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
                       placeholder="10-digit mobile"
                       style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px', outline: 'none' }}
                     />

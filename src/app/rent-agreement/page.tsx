@@ -16,10 +16,18 @@ const POPULAR_CITIES = [
   'Bangalore', 'Mumbai', 'Chennai', 'Pune', 'Hyderabad', 'Gurgaon', 'Delhi', 'Ahmedabad'
 ];
 
+import { useLeads } from '@/shared/context/LeadsContext';
+
 export default function RentAgreementPage() {
+  const { addLead } = useLeads();
   const [selectedCity, setSelectedCity] = useState<string>('Bangalore');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [cityFilter, setCityFilter] = useState<string>('');
+
+  // Lead Generation Modal State
+  const [agreementModalOpen, setAgreementModalOpen] = useState<boolean>(false);
+  const [clientLead, setClientLead] = useState({ name: '', phone: '', role: 'Landlord' });
+  const [agreementSubmitted, setAgreementSubmitted] = useState<boolean>(false);
 
   // Calculator State
   const [monthlyRent, setMonthlyRent] = useState<string>('15000');
@@ -57,6 +65,26 @@ export default function RentAgreementPage() {
     if (val) {
       setSelectedDuration(parseInt(val, 10));
     }
+  };
+
+  const handleAgreementLeadSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addLead({
+      name: clientLead.name,
+      phone: clientLead.phone,
+      city: selectedCity,
+      type: 'rent-agreement',
+      source: 'Online Rent Agreement Calculator',
+      details: {
+        'Party Role': clientLead.role,
+        'Property City': selectedCity,
+        'Monthly Rent': `₹${monthlyRent}`,
+        'Deposit Amount': `₹${depositAmount}`,
+        'Agreement Duration': `${selectedDuration} Months`,
+        'Estimated Cost': `₹${calculatedTotal.toLocaleString('en-IN')}`,
+      }
+    });
+    setAgreementSubmitted(true);
   };
 
   return (
@@ -343,7 +371,10 @@ export default function RentAgreementPage() {
             </div>
             <button
               type="button"
-              onClick={() => alert(`Starting Rent Agreement process for ${selectedCity} (Rent: ₹${monthlyRent}, Duration: ${selectedDuration} Months)!`)}
+              onClick={() => {
+                setAgreementSubmitted(false);
+                setAgreementModalOpen(true);
+              }}
               style={{
                 width: '100%',
                 background: '#522AB0',
@@ -588,6 +619,201 @@ export default function RentAgreementPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Rent Agreement Lead Capture Modal */}
+      {agreementModalOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(20, 10, 40, 0.55)',
+            display: 'grid',
+            placeItems: 'center',
+            padding: '20px',
+            zIndex: 350,
+            backdropFilter: 'blur(4px)',
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setAgreementModalOpen(false);
+          }}
+        >
+          <div
+            style={{
+              background: '#fff',
+              borderRadius: '20px',
+              maxWidth: '480px',
+              width: '100%',
+              padding: '30px',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+              position: 'relative',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <h3 style={{ margin: 0, fontSize: '19px', fontWeight: 800, color: '#41208C' }}>
+                Create Rent Agreement
+              </h3>
+              <button
+                type="button"
+                onClick={() => setAgreementModalOpen(false)}
+                style={{ background: 'none', border: 'none', fontSize: '22px', cursor: 'pointer', color: '#64748B' }}
+              >
+                &times;
+              </button>
+            </div>
+
+            {/* Quick Summary Pill */}
+            <div style={{ background: '#FAF9FD', border: '1px solid #EBE6F7', borderRadius: '12px', padding: '12px 16px', marginBottom: '20px', fontSize: '12.5px', color: '#41208C' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                <span style={{ color: '#64748B' }}>Location:</span>
+                <strong>{selectedCity}</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                <span style={{ color: '#64748B' }}>Monthly Rent:</span>
+                <strong>₹{Number(monthlyRent || 0).toLocaleString('en-IN')}</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#64748B' }}>Est. Total Fee:</span>
+                <strong style={{ color: '#059669', fontSize: '13.5px' }}>₹{calculatedTotal.toLocaleString('en-IN')}</strong>
+              </div>
+            </div>
+
+            {agreementSubmitted ? (
+              <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', borderRadius: '14px', padding: '24px', textAlign: 'center' }}>
+                <div style={{ fontSize: '32px', marginBottom: '8px' }}>📄</div>
+                <h4 style={{ margin: '0 0 6px', fontSize: '17px', fontWeight: 800, color: '#065F46' }}>
+                  Request Received!
+                </h4>
+                <p style={{ margin: '0 0 16px', fontSize: '13px', color: '#047857', lineHeight: 1.5 }}>
+                  Our legal coordinator will call you at <strong>{clientLead.phone}</strong> with the draft E-stamp agreement format within 30 minutes.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAgreementModalOpen(false);
+                    setAgreementSubmitted(false);
+                    setClientLead({ name: '', phone: '', role: 'Landlord' });
+                  }}
+                  style={{
+                    padding: '10px 24px',
+                    borderRadius: '8px',
+                    background: '#059669',
+                    color: '#fff',
+                    border: 'none',
+                    fontSize: '13.5px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Done
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleAgreementLeadSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '6px' }}>
+                    I am the *
+                  </label>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setClientLead({ ...clientLead, role: 'Landlord / Property Owner' })}
+                      style={{
+                        padding: '10px',
+                        borderRadius: '8px',
+                        border: clientLead.role.includes('Landlord') ? '2px solid #522AB0' : '1px solid #E2E8F0',
+                        background: clientLead.role.includes('Landlord') ? '#EFE9FB' : '#fff',
+                        color: clientLead.role.includes('Landlord') ? '#522AB0' : '#475569',
+                        fontSize: '13px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Landlord / Owner
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setClientLead({ ...clientLead, role: 'Tenant' })}
+                      style={{
+                        padding: '10px',
+                        borderRadius: '8px',
+                        border: clientLead.role === 'Tenant' ? '2px solid #522AB0' : '1px solid #E2E8F0',
+                        background: clientLead.role === 'Tenant' ? '#EFE9FB' : '#fff',
+                        color: clientLead.role === 'Tenant' ? '#522AB0' : '#475569',
+                        fontSize: '13px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Tenant
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#1E293B', marginBottom: '6px' }}>
+                    Full Name *
+                  </label>
+                  <input
+                    required
+                    placeholder="e.g. Priyank Patel"
+                    value={clientLead.name}
+                    onChange={(e) => setClientLead({ ...clientLead, name: e.target.value })}
+                    style={{
+                      width: '100%',
+                      padding: '12px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #CBD5E1',
+                      fontSize: '14px',
+                      outline: 'none',
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#1E293B', marginBottom: '6px' }}>
+                    WhatsApp / Mobile Number *
+                  </label>
+                  <input
+                    required
+                    type="tel"
+                    placeholder="10-digit mobile number"
+                    maxLength={10}
+                    value={clientLead.phone}
+                    onChange={(e) => setClientLead({ ...clientLead, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
+                    style={{
+                      width: '100%',
+                      padding: '12px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #CBD5E1',
+                      fontSize: '14px',
+                      outline: 'none',
+                    }}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  style={{
+                    width: '100%',
+                    padding: '14px',
+                    borderRadius: '10px',
+                    background: '#522AB0',
+                    color: '#fff',
+                    border: 'none',
+                    fontSize: '15px',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    marginTop: '4px',
+                    boxShadow: '0 4px 14px rgba(82, 42, 176, 0.25)',
+                  }}
+                >
+                  Request Agreement Draft & Callback →
+                </button>
+              </form>
+            )}
           </div>
         </div>
       )}

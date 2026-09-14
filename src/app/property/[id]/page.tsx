@@ -12,7 +12,8 @@ import LocationSearchInput from '@/components/common/LocationSearchInput';
 import { NO_PHOTO_PLACEHOLDER, isNoPhotoPlaceholder } from '@/shared/utils/photoPlaceholder';
 import { formatPostedOn } from '@/shared/utils/dateUtils';
 import { extractLocationParts } from '@/shared/utils/locationUtils';
-import { Building2, MapPin, Home, LandPlot, Check, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Building2, MapPin, Home, LandPlot, Check, CheckCircle2, ArrowRight, ShieldCheck, Phone, User, Mail, X, Sparkles, Clock, Lock, Calendar } from 'lucide-react';
+import { useLeads } from '@/shared/context/LeadsContext';
 
 const cmsData = cmsDataRaw as unknown as CmsData;
 
@@ -267,6 +268,82 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
       router.push(`/properties?q=${encodeURIComponent(target)}`);
     }
   };
+
+  const { addLead } = useLeads();
+  const [visitModalOpen, setVisitModalOpen] = useState(false);
+  const [visitForm, setVisitForm] = useState({ name: '', phone: '', date: '', time: 'Morning (10 AM - 1 PM)' });
+  const [visitSubmitted, setVisitSubmitted] = useState(false);
+
+  const handleVisitSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addLead({
+      name: visitForm.name,
+      phone: visitForm.phone,
+      city: property.address?.split(',').slice(-1)[0]?.trim() || 'Gujarat / India',
+      type: 'site-visit',
+      source: `Property Detail #${property.id}`,
+      details: {
+        'Property Title': property.title,
+        'Price': property.price,
+        'Address': property.address,
+        'Preferred Date': visitForm.date || 'Earliest available',
+        'Time Slot': visitForm.time,
+      }
+    });
+    setVisitSubmitted(true);
+  };
+
+  // OWNER CONCIERGE CONNECT MODAL STATE
+  const [connectModalOpen, setConnectModalOpen] = useState(false);
+  const [connectForm, setConnectForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    intent: 'Immediate Purchase (Ready Funds / Loan)',
+    message: '',
+  });
+  const [connectSubmitted, setConnectSubmitted] = useState(false);
+  const [submittedLeadId, setSubmittedLeadId] = useState<string>('');
+
+  const handleConnectSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!connectForm.name.trim() || !connectForm.phone.trim()) return;
+
+    const newLead = addLead({
+      type: 'owner-connect',
+      name: connectForm.name,
+      phone: connectForm.phone,
+      email: connectForm.email,
+      city: property.address?.split(',').slice(-1)[0]?.trim() || 'Gujarat / India',
+      source: `Direct Owner Connect Desk (${property.title})`,
+      details: {
+        buyerIntent: connectForm.intent,
+        buyerMessage: connectForm.message || 'Direct owner connection requested.',
+        ownerName: property.ownerInfo.name || 'Verified Owner',
+        ownerPhone: property.ownerInfo.phone || '+91 98765 43210',
+        propertyId: property.id,
+        propertyTitle: property.title,
+        propertyPrice: property.price,
+        propertyLocation: property.address,
+        propertyType: (property as any).type || 'Residential',
+      },
+      notes: `Buyer ${connectForm.name} requested direct contact with owner ${property.ownerInfo.name}.`,
+    });
+
+    setSubmittedLeadId(newLead.id);
+    setConnectSubmitted(true);
+  };
+
+  // LOCK BACKGROUND BODY SCROLL WHEN ANY MODAL IS OPEN
+  useEffect(() => {
+    if (connectModalOpen || visitModalOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow || '';
+      };
+    }
+  }, [connectModalOpen, visitModalOpen]);
 
   return (
     <>
@@ -781,37 +858,173 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
             </div>
           </section>
 
-          {/* OWNER BLOCK */}
-          <section className="ownerblock">
-            <div className="oav">{property.ownerInfo.avatarInitial}</div>
-            <div className="obinfo">
-              <h3>{property.ownerInfo.name}</h3>
-              <div className="orole">{property.ownerInfo.role}</div>
-              {property.ownerInfo.isVerified && (
-                <span className="overified">
-                  <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-                  Identity verified
+          {/* GUJJUPROPERTY VERIFIED DIRECT CONCIERGE CARD */}
+          <section
+            style={{
+              background: '#FFFFFF',
+              border: '1.5px solid #E4DCFA',
+              borderRadius: '16px',
+              padding: '20px',
+              boxShadow: '0 8px 24px -6px rgba(82, 42, 176, 0.08)',
+              marginBottom: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '14px',
+            }}
+          >
+            {/* Header: GujjuProperty Branding & Shield */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div
+                style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, #522AB0 0%, #7C3AED 100%)',
+                  color: '#FFFFFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 4px 12px rgba(82, 42, 176, 0.25)',
+                  flexShrink: 0,
+                }}
+              >
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                  <h3 style={{ margin: 0, fontSize: '15.5px', fontWeight: 800, color: '#1E1B4B' }}>
+                    GujjuProperty Concierge
+                  </h3>
+                  <span
+                    style={{
+                      background: '#ECFDF5',
+                      color: '#047857',
+                      fontSize: '10.5px',
+                      fontWeight: 800,
+                      padding: '2px 7px',
+                      borderRadius: '4px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '3px',
+                      border: '1px solid #A7F3D0',
+                    }}
+                  >
+                    ✓ Verified Owner
+                  </span>
+                </div>
+                <div style={{ fontSize: '12px', color: '#64748B', marginTop: '2px', fontWeight: 600 }}>
+                  Direct Owner Listing · Zero Brokerage
+                </div>
+              </div>
+            </div>
+
+            {/* Privacy Protection Strip */}
+            <div
+              style={{
+                background: '#FAF9FE',
+                border: '1px solid #EBE6F7',
+                borderRadius: '10px',
+                padding: '10px 14px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Lock className="w-4 h-4 text-[#522AB0]" />
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#334155' }}>
+                  Owner Contact:
                 </span>
-              )}
-            </div>
-            <div className="obact">
-              <div className="ophone" id="ophone">
-                {phoneRevealed ? property.ownerInfo.phone : 'Tap to reveal'}
               </div>
-              <div className="obrow">
-                <button
-                  className="btn"
-                  type="button"
-                  onClick={() => setPhoneRevealed(true)}
-                >
-                  {phoneRevealed ? 'Call owner' : 'Get owner details'}
-                </button>
-                <button className="btn line" type="button">
-                  Schedule a visit
-                </button>
-              </div>
+              <span
+                style={{
+                  fontFamily: 'monospace',
+                  fontWeight: 800,
+                  fontSize: '12.5px',
+                  color: '#522AB0',
+                  background: '#EFE9FB',
+                  padding: '3px 8px',
+                  borderRadius: '6px',
+                }}
+              >
+                🔒 Protected by Gujju
+              </span>
             </div>
-            <p className="obnote">{property.ownerInfo.note}</p>
+
+            {/* Action Buttons */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setConnectSubmitted(false);
+                  setConnectModalOpen(true);
+                }}
+                style={{
+                  width: '100%',
+                  background: 'linear-gradient(135deg, #522AB0 0%, #6D28D9 100%)',
+                  color: '#FFFFFF',
+                  fontWeight: 800,
+                  fontSize: '14px',
+                  padding: '12px 18px',
+                  borderRadius: '10px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(82, 42, 176, 0.28)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                }}
+              >
+                <Phone className="w-4 h-4" /> Get Owner Details &amp; Callback
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setVisitSubmitted(false);
+                  setVisitModalOpen(true);
+                }}
+                style={{
+                  width: '100%',
+                  background: '#FFFFFF',
+                  color: '#1E1B4B',
+                  fontWeight: 700,
+                  fontSize: '13px',
+                  padding: '10px 16px',
+                  borderRadius: '10px',
+                  border: '1.5px solid #CBD5E1',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                }}
+              >
+                <Calendar className="w-4 h-4 text-[#522AB0]" /> Schedule a Site Visit
+              </button>
+            </div>
+
+            {/* Assurance footer */}
+            <div
+              style={{
+                background: '#F0FDF4',
+                border: '1px solid #BBF7D0',
+                borderRadius: '8px',
+                padding: '8px 12px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '11.5px',
+                color: '#166534',
+                lineHeight: 1.4,
+              }}
+            >
+              <ShieldCheck className="w-4 h-4 text-[#16A34A] shrink-0" />
+              <span>
+                <strong>Zero Brokerage Guarantee:</strong> GujjuProperty coordinates with the verified owner without any middleman fees.
+              </span>
+            </div>
           </section>
 
           {/* REPORT CARD */}
@@ -840,13 +1053,17 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
           <div className="railpromo">
             <b>Want us to handle the visit?</b>
             <p>A property expert visits on your behalf, sends a video and negotiates. ₹2,499 one time.</p>
-            <button className="btn line" type="button">See the Relax plan</button>
+            <Link href="/services/site-visit" className="btn line" style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
+              See the Relax plan
+            </Link>
           </div>
 
           <div className="railpromo" style={{ background: '#fff', borderColor: 'var(--line)' }}>
             <b>Check the papers first</b>
             <p>Title and 7/12 verification by an advocate before you pay any token amount.</p>
-            <button className="btn line" type="button">Book title check</button>
+            <Link href="/services/title-check" className="btn line" style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
+              Book title check
+            </Link>
           </div>
 
           {/* SIMILAR PROPERTIES */}
@@ -876,9 +1093,399 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
       </div>
 
       <div className="mobibar">
-        <button className="btn line" type="button">Schedule visit</button>
-        <button className="btn" type="button" onClick={() => setPhoneRevealed(true)}>Get owner details</button>
+        <button
+          className="btn line"
+          type="button"
+          onClick={() => {
+            setVisitSubmitted(false);
+            setVisitModalOpen(true);
+          }}
+        >
+          Schedule visit
+        </button>
+        <button
+          className="btn"
+          type="button"
+          onClick={() => {
+            setConnectSubmitted(false);
+            setConnectModalOpen(true);
+          }}
+        >
+          Get owner details
+        </button>
       </div>
+
+      {/* SCHEDULE VISIT MODAL */}
+      {visitModalOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(20, 10, 40, 0.65)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px',
+            zIndex: 500,
+            backdropFilter: 'blur(5px)',
+            overflowY: 'auto',
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setVisitModalOpen(false);
+          }}
+        >
+          <div
+            style={{
+              background: '#fff',
+              borderRadius: '20px',
+              maxWidth: '460px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              padding: '28px',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+              <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#41208C' }}>
+                Schedule a Property Visit
+              </h3>
+              <button
+                type="button"
+                onClick={() => setVisitModalOpen(false)}
+                style={{ background: 'none', border: 'none', fontSize: '22px', cursor: 'pointer', color: '#64748B' }}
+              >
+                &times;
+              </button>
+            </div>
+
+            <div style={{ background: '#FAF9FD', border: '1px solid #EBE6F7', borderRadius: '10px', padding: '10px 14px', marginBottom: '18px', fontSize: '12.5px', color: '#41208C' }}>
+              <div style={{ fontWeight: 800 }}>{property.title}</div>
+              <div style={{ color: '#64748B', marginTop: '2px' }}>{property.price} · {property.address}</div>
+            </div>
+
+            {visitSubmitted ? (
+              <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', borderRadius: '12px', padding: '22px', textAlign: 'center' }}>
+                <div style={{ fontSize: '32px', marginBottom: '8px' }}>📅</div>
+                <h4 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 800, color: '#065F46' }}>
+                  Visit Scheduled!
+                </h4>
+                <p style={{ margin: '0 0 14px', fontSize: '13px', color: '#047857', lineHeight: 1.5 }}>
+                  The owner / field associate will coordinate with you at <strong>{visitForm.phone}</strong> for your site inspection.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setVisitModalOpen(false);
+                    setVisitSubmitted(false);
+                    setVisitForm({ name: '', phone: '', date: '', time: 'Morning (10 AM - 1 PM)' });
+                  }}
+                  style={{
+                    padding: '9px 20px',
+                    borderRadius: '8px',
+                    background: '#059669',
+                    color: '#fff',
+                    border: 'none',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleVisitSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                    Your Full Name *
+                  </label>
+                  <input
+                    required
+                    placeholder="Enter your name"
+                    value={visitForm.name}
+                    onChange={(e) => setVisitForm({ ...visitForm, name: e.target.value })}
+                    style={{ width: '100%', padding: '11px 13px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                    Mobile / WhatsApp Number *
+                  </label>
+                  <input
+                    required
+                    type="tel"
+                    placeholder="10-digit mobile number"
+                    maxLength={10}
+                    value={visitForm.phone}
+                    onChange={(e) => setVisitForm({ ...visitForm, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
+                    style={{ width: '100%', padding: '11px 13px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
+                  />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                      Preferred Date
+                    </label>
+                    <input
+                      type="date"
+                      value={visitForm.date}
+                      onChange={(e) => setVisitForm({ ...visitForm, date: e.target.value })}
+                      style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13px' }}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                      Time Slot
+                    </label>
+                    <select
+                      value={visitForm.time}
+                      onChange={(e) => setVisitForm({ ...visitForm, time: e.target.value })}
+                      style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13px' }}
+                    >
+                      <option value="Morning (10 AM - 1 PM)">Morning (10 AM - 1 PM)</option>
+                      <option value="Afternoon (1 PM - 4 PM)">Afternoon (1 PM - 4 PM)</option>
+                      <option value="Evening (4 PM - 7 PM)">Evening (4 PM - 7 PM)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  style={{
+                    width: '100%',
+                    padding: '13px',
+                    borderRadius: '10px',
+                    background: '#522AB0',
+                    color: '#fff',
+                    border: 'none',
+                    fontSize: '14.5px',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    marginTop: '4px',
+                    boxShadow: '0 4px 12px rgba(82, 42, 176, 0.25)',
+                  }}
+                >
+                  Confirm Free Visit Booking →
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* OWNER CONCIERGE CONNECT MODAL */}
+      {connectModalOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(20, 10, 40, 0.65)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px',
+            zIndex: 500,
+            backdropFilter: 'blur(5px)',
+            overflowY: 'auto',
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setConnectModalOpen(false);
+          }}
+        >
+          <div
+            style={{
+              background: '#fff',
+              borderRadius: '24px',
+              maxWidth: '500px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              padding: '28px',
+              boxShadow: '0 25px 60px -12px rgba(82, 42, 176, 0.35)',
+              border: '1px solid #E4DCFA',
+            }}
+          >
+            {/* Modal Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+              <div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#EFE9FB', color: '#522AB0', padding: '4px 12px', borderRadius: '999px', fontSize: '11.5px', fontWeight: 800, textTransform: 'uppercase', marginBottom: '6px' }}>
+                  <ShieldCheck className="w-3.5 h-3.5" /> GujjuProperty Direct Concierge
+                </div>
+                <h3 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#1E1B4B' }}>
+                  Connect with Property Owner
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setConnectModalOpen(false)}
+                style={{ background: '#F1F5F9', border: 'none', borderRadius: '50%', width: '32px', height: '32px', display: 'grid', placeItems: 'center', fontSize: '16px', cursor: 'pointer', color: '#64748B' }}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Property Mini Banner */}
+            <div style={{ background: '#FAF9FD', border: '1px solid #EBE6F7', borderRadius: '12px', padding: '12px 16px', marginBottom: '18px' }}>
+              <div style={{ fontSize: '11.5px', fontWeight: 700, color: '#522AB0', textTransform: 'uppercase' }}>
+                Listing: {(property as any).type || 'Residential Property'}
+              </div>
+              <div style={{ fontWeight: 800, color: '#1E1B4B', fontSize: '14px', marginTop: '2px', lineHeight: 1.35 }}>
+                {property.title}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px', fontSize: '12.5px', color: '#64748B' }}>
+                <span style={{ fontWeight: 700, color: '#059669' }}>{property.price}</span>
+                <span>Verification: <strong style={{ color: '#522AB0' }}>Verified Direct Owner</strong></span>
+              </div>
+            </div>
+
+            {connectSubmitted ? (
+              <div style={{ background: '#ECFDF5', border: '1.5px solid #10B981', borderRadius: '16px', padding: '26px 20px', textAlign: 'center' }}>
+                <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: '#D1FAE5', color: '#059669', display: 'grid', placeItems: 'center', margin: '0 auto 14px', fontSize: '24px' }}>
+                  ✓
+                </div>
+                <span style={{ background: '#10B981', color: '#fff', fontSize: '11px', fontWeight: 800, padding: '3px 10px', borderRadius: '999px', textTransform: 'uppercase' }}>
+                  Ref: {submittedLeadId}
+                </span>
+                <h4 style={{ margin: '12px 0 6px', fontSize: '18px', fontWeight: 800, color: '#065F46' }}>
+                  Connect Request Registered!
+                </h4>
+                <p style={{ margin: '0 0 16px', fontSize: '13.5px', color: '#047857', lineHeight: 1.55 }}>
+                  Your inquiry to connect with the <strong>Verified Property Owner</strong> has been logged. Our GujjuProperty Relationship Desk will verify your details and connect you directly with the owner without any middleman fees.
+                </p>
+                <div style={{ background: '#fff', borderRadius: '10px', padding: '10px 14px', border: '1px solid #A7F3D0', fontSize: '12px', color: '#065F46', marginBottom: '18px', textAlign: 'left' }}>
+                  <div>📞 We will reach you on: <strong>+91 {connectForm.phone}</strong></div>
+                  <div>⏱️ Estimated Callback: <strong>Within 15 - 30 minutes</strong></div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setConnectModalOpen(false);
+                    setConnectSubmitted(false);
+                    setConnectForm({ name: '', phone: '', email: '', intent: 'Immediate Purchase (Ready Funds / Loan)', message: '' });
+                  }}
+                  style={{
+                    padding: '11px 24px',
+                    borderRadius: '10px',
+                    background: '#059669',
+                    color: '#fff',
+                    border: 'none',
+                    fontSize: '14px',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    width: '100%',
+                    boxShadow: '0 4px 12px rgba(5, 150, 105, 0.25)',
+                  }}
+                >
+                  Done
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleConnectSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: '10px', padding: '8px 12px', fontSize: '12px', color: '#92400E', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span>🔒</span>
+                  <span><strong>Zero Brokerage Assurance:</strong> We verify prospective buyers to protect both you and the owner from unauthorized dealer spam.</span>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                    Your Full Name *
+                  </label>
+                  <input
+                    required
+                    placeholder="Enter your name"
+                    value={connectForm.name}
+                    onChange={(e) => setConnectForm({ ...connectForm, name: e.target.value })}
+                    style={{ width: '100%', padding: '11px 13px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
+                  />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '10px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                      Mobile / WhatsApp Number *
+                    </label>
+                    <input
+                      required
+                      type="tel"
+                      placeholder="10-digit mobile number"
+                      maxLength={10}
+                      value={connectForm.phone}
+                      onChange={(e) => setConnectForm({ ...connectForm, phone: e.target.value.replace(/[^0-9]/g, '').slice(0, 10) })}
+                      style={{ width: '100%', padding: '11px 13px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                      Email (Optional)
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="you@email.com"
+                      value={connectForm.email}
+                      onChange={(e) => setConnectForm({ ...connectForm, email: e.target.value })}
+                      style={{ width: '100%', padding: '11px 13px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                    Your Buying / Renting Intent *
+                  </label>
+                  <select
+                    value={connectForm.intent}
+                    onChange={(e) => setConnectForm({ ...connectForm, intent: e.target.value })}
+                    style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13px' }}
+                  >
+                    <option value="Immediate Purchase (Ready Funds / Loan)">Immediate Purchase (Ready Funds / Loan)</option>
+                    <option value="Planning to Buy within 30-60 Days">Planning to Buy within 30-60 Days</option>
+                    <option value="Schedule Direct Physical Site Visit">Schedule Direct Physical Site Visit</option>
+                    <option value="Discuss Price Negotiation / Token Offer">Discuss Price Negotiation / Token Offer</option>
+                    <option value="Need Land Revenue Title Check / 7/12 Support">Need Land Revenue Title Check / 7/12 Support</option>
+                    <option value="Rental Move-in Inquiry">Rental Move-in Inquiry</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                    Note for Owner / GujjuProperty Desk <span style={{ color: '#94A3B8', fontWeight: 500 }}>(Optional)</span>
+                  </label>
+                  <textarea
+                    rows={2}
+                    placeholder="e.g. Interested in booking after title verification..."
+                    value={connectForm.message}
+                    onChange={(e) => setConnectForm({ ...connectForm, message: e.target.value })}
+                    style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13px', resize: 'vertical' }}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  style={{
+                    width: '100%',
+                    padding: '13px',
+                    borderRadius: '10px',
+                    background: '#522AB0',
+                    color: '#fff',
+                    border: 'none',
+                    fontSize: '14.5px',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    marginTop: '4px',
+                    boxShadow: '0 4px 14px rgba(82, 42, 176, 0.3)',
+                  }}
+                >
+                  🚀 Request Owner Call &amp; Details
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 }

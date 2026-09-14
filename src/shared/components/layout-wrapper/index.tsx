@@ -6,6 +6,8 @@ import Header from '@/shared/components/header';
 import Footer from '@/shared/components/footer';
 import { TopBarData, HeaderData, FooterData } from '@/shared/types/cms';
 import { PropertyProvider } from '@/shared/context/PropertyContext';
+import { LeadsProvider } from '@/shared/context/LeadsContext';
+import { BlogsProvider } from '@/shared/context/BlogsContext';
 
 export interface ClientLayoutWrapperProps {
   topBarData: TopBarData;
@@ -36,16 +38,24 @@ export default function ClientLayoutWrapper({
   if (isAdmin) {
     return (
       <PropertyProvider>
-        <main style={{ width: '100%', minHeight: '100vh', background: '#f4f6f9' }}>{children}</main>
+        <LeadsProvider>
+          <BlogsProvider>
+            <main style={{ width: '100%', minHeight: '100vh', background: '#f4f6f9' }}>{children}</main>
+          </BlogsProvider>
+        </LeadsProvider>
       </PropertyProvider>
     );
   }
 
   return (
     <PropertyProvider>
-      <Header topBarData={topBarData} headerData={headerData} />
-      <main>{children}</main>
-      <Footer footerData={footerData} headerData={headerData} />
+      <LeadsProvider>
+        <BlogsProvider>
+          <Header topBarData={topBarData} headerData={headerData} />
+          <main>{children}</main>
+          <Footer footerData={footerData} headerData={headerData} />
+        </BlogsProvider>
+      </LeadsProvider>
     </PropertyProvider>
   );
 }

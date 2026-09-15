@@ -63,34 +63,38 @@ export function PropertyListCard({
   return (
     <article
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        display: 'flex',
+        flexDirection: 'row',
         background: '#FFFFFF',
         border: '1.5px solid #E2E8F0',
-        borderRadius: '20px',
+        borderRadius: '16px',
         overflow: 'hidden',
-        transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-        boxShadow: '0 4px 18px rgba(0, 0, 0, 0.04)',
+        transition: 'all 0.2s ease',
+        boxShadow: '0 2px 12px rgba(0, 0, 0, 0.04)',
         position: 'relative',
+        minHeight: '210px',
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-4px)';
+        e.currentTarget.style.transform = 'translateY(-2px)';
         e.currentTarget.style.borderColor = '#C4B5FD';
-        e.currentTarget.style.boxShadow = '0 16px 36px rgba(82, 42, 176, 0.12)';
+        e.currentTarget.style.boxShadow = '0 12px 28px rgba(82, 42, 176, 0.1)';
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = 'translateY(0)';
         e.currentTarget.style.borderColor = '#E2E8F0';
-        e.currentTarget.style.boxShadow = '0 4px 18px rgba(0, 0, 0, 0.04)';
+        e.currentTarget.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.04)';
       }}
     >
-      {/* LEFT IMAGE CONTAINER */}
+      {/* LEFT IMAGE CONTAINER (Fixed 240px width) */}
       <div
         style={{
           position: 'relative',
-          minHeight: '250px',
+          width: '240px',
+          minWidth: '240px',
+          maxWidth: '240px',
           background: '#F1ECFB',
           overflow: 'hidden',
+          flexShrink: 0,
         }}
       >
         {currentImgUrl ? (
@@ -119,44 +123,32 @@ export function PropertyListCard({
               color: '#522AB0',
             }}
           >
-            <Home style={{ width: 48, height: 48, opacity: 0.5 }} />
+            <Home style={{ width: 44, height: 44, opacity: 0.4 }} />
           </div>
         )}
-
-        {/* Subtle Vignette Overlay at bottom of image */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: '60px',
-            background: 'linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 100%)',
-            pointerEvents: 'none',
-          }}
-        />
 
         {/* TOP-LEFT VERIFIED BADGE */}
         <span
           style={{
             position: 'absolute',
-            top: '12px',
-            left: '12px',
+            top: '10px',
+            left: '10px',
             background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(8px)',
+            backdropFilter: 'blur(6px)',
             color: listing.isAmberBadge ? '#D97706' : '#059669',
             fontSize: '11px',
             fontWeight: 800,
-            padding: '5px 10px',
-            borderRadius: '8px',
+            padding: '4px 9px',
+            borderRadius: '6px',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '5px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+            gap: '4px',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.12)',
             zIndex: 3,
+            whiteSpace: 'nowrap',
           }}
         >
-          <Check style={{ width: 13, height: 13, strokeWidth: 3 }} />
+          <Check style={{ width: 12, height: 12, strokeWidth: 3 }} />
           {listing.badgeText || 'Verified Owner'}
         </span>
 
@@ -171,19 +163,19 @@ export function PropertyListCard({
           }}
           style={{
             position: 'absolute',
-            top: '12px',
-            right: '12px',
-            width: '34px',
-            height: '34px',
+            top: '10px',
+            right: '10px',
+            width: '32px',
+            height: '32px',
             borderRadius: '50%',
             background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(8px)',
+            backdropFilter: 'blur(6px)',
             border: 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
             zIndex: 3,
             transition: 'transform 0.15s ease',
           }}
@@ -192,8 +184,8 @@ export function PropertyListCard({
         >
           <Heart
             style={{
-              width: 17,
-              height: 17,
+              width: 16,
+              height: 16,
               color: isFav ? '#E11D48' : '#4B5563',
               fill: isFav ? '#E11D48' : 'none',
               transition: 'all 0.15s ease',
@@ -211,10 +203,10 @@ export function PropertyListCard({
               style={{
                 position: 'absolute',
                 top: '50%',
-                left: '8px',
+                left: '6px',
                 transform: 'translateY(-50%)',
-                width: '30px',
-                height: '30px',
+                width: '28px',
+                height: '28px',
                 borderRadius: '50%',
                 background: 'rgba(255, 255, 255, 0.9)',
                 border: 'none',
@@ -222,12 +214,12 @@ export function PropertyListCard({
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
                 zIndex: 4,
                 color: '#1E293B',
               }}
             >
-              <ChevronLeft style={{ width: 18, height: 18 }} />
+              <ChevronLeft style={{ width: 16, height: 16 }} />
             </button>
             <button
               type="button"
@@ -236,10 +228,10 @@ export function PropertyListCard({
               style={{
                 position: 'absolute',
                 top: '50%',
-                right: '8px',
+                right: '6px',
                 transform: 'translateY(-50%)',
-                width: '30px',
-                height: '30px',
+                width: '28px',
+                height: '28px',
                 borderRadius: '50%',
                 background: 'rgba(255, 255, 255, 0.9)',
                 border: 'none',
@@ -247,12 +239,12 @@ export function PropertyListCard({
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
                 zIndex: 4,
                 color: '#1E293B',
               }}
             >
-              <ChevronRight style={{ width: 18, height: 18 }} />
+              <ChevronRight style={{ width: 16, height: 16 }} />
             </button>
           </>
         )}
@@ -261,105 +253,71 @@ export function PropertyListCard({
         <span
           style={{
             position: 'absolute',
-            bottom: '10px',
-            left: '10px',
+            bottom: '8px',
+            left: '8px',
             background: 'rgba(15, 23, 42, 0.75)',
             backdropFilter: 'blur(4px)',
             color: '#FFFFFF',
-            fontSize: '11px',
+            fontSize: '10.5px',
             fontWeight: 700,
-            padding: '3px 8px',
-            borderRadius: '6px',
+            padding: '2px 7px',
+            borderRadius: '5px',
             zIndex: 3,
           }}
         >
           {hasRealPhotos ? `📸 ${activePhotoIdx + 1} / ${totalPhotos}` : 'No Photos'}
         </span>
-
-        {/* BOTTOM-RIGHT SLIDER DOTS */}
-        {totalPhotos > 1 && (
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '12px',
-              right: '10px',
-              display: 'flex',
-              gap: '4px',
-              zIndex: 3,
-            }}
-          >
-            {photosList.slice(0, 5).map((_, idx) => (
-              <span
-                key={idx}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setActivePhotoIdx(idx);
-                }}
-                style={{
-                  width: idx === activePhotoIdx ? '16px' : '6px',
-                  height: '6px',
-                  borderRadius: '999px',
-                  background: idx === activePhotoIdx ? '#FEDC00' : 'rgba(255, 255, 255, 0.6)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
-              />
-            ))}
-          </div>
-        )}
       </div>
 
       {/* RIGHT BODY CONTAINER */}
       <div
         style={{
-          padding: '20px 22px',
+          padding: '16px 20px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          gap: '12px',
+          gap: '10px',
           flex: 1,
+          minWidth: 0,
         }}
       >
         <div>
-          {/* PRICE + ZERO BROKERAGE HEADER */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '10px', marginBottom: '6px' }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                <span style={{ fontSize: '24px', fontWeight: 900, color: '#0F172A', letterSpacing: '-0.4px' }}>
-                  {listing.price}
+          {/* TOP ROW: PRICE (Single Line) + ZERO BROKERAGE BADGE */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'nowrap' }}>
+              <span style={{ fontSize: '22px', fontWeight: 900, color: '#0F172A', letterSpacing: '-0.3px', whiteSpace: 'nowrap' }}>
+                {listing.price}
+              </span>
+              {listing.pricePerSqFt && (
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#64748B', whiteSpace: 'nowrap' }}>
+                  {listing.pricePerSqFt}
                 </span>
-                {listing.pricePerSqFt && (
-                  <span style={{ fontSize: '13px', fontWeight: 650, color: '#64748B' }}>
-                    {listing.pricePerSqFt}
-                  </span>
-                )}
-              </div>
+              )}
             </div>
 
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '5px',
+                gap: '4px',
                 background: '#ECFDF5',
                 border: '1px solid #A7F3D0',
                 color: '#059669',
-                padding: '4px 10px',
-                borderRadius: '8px',
+                padding: '3px 9px',
+                borderRadius: '6px',
                 fontSize: '11.5px',
                 fontWeight: 800,
-                letterSpacing: '0.02em',
                 flexShrink: 0,
+                whiteSpace: 'nowrap',
               }}
             >
-              <ShieldCheck style={{ width: 14, height: 14 }} />
+              <ShieldCheck style={{ width: 13, height: 13 }} />
               <span>₹0 Brokerage</span>
             </div>
           </div>
 
           {/* TITLE */}
-          <h3 style={{ margin: '0 0 6px 0', fontSize: '17px', fontWeight: 800, lineHeight: 1.35 }}>
+          <h3 style={{ margin: '0 0 4px 0', fontSize: '16px', fontWeight: 800, lineHeight: 1.35 }}>
             <Link
               href={`/property/${listing.id}`}
               style={{ color: '#1E293B', textDecoration: 'none', transition: 'color 0.15s ease' }}
@@ -374,100 +332,100 @@ export function PropertyListCard({
           {((listing as any).societyName || (listing as any).buildingName) && (
             <div
               style={{
-                fontSize: '12.5px',
-                fontWeight: 750,
+                fontSize: '12px',
+                fontWeight: 700,
                 color: '#522AB0',
-                marginBottom: '6px',
+                marginBottom: '4px',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '5px',
-                background: '#F5F3FF',
-                padding: '3px 9px',
-                borderRadius: '6px',
-                border: '1px solid #DDD6FE',
+                gap: '4px',
               }}
             >
-              <Building2 style={{ width: 13, height: 13 }} />
+              <Building2 style={{ width: 12, height: 12 }} />
               <span>Scheme: {(listing as any).societyName || (listing as any).buildingName}</span>
             </div>
           )}
 
           {/* ADDRESS */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '13.5px', color: '#64748B', marginBottom: '14px' }}>
-            <MapPin style={{ width: 14, height: 14, color: '#522AB0', flexShrink: 0 }} />
-            <span>{listing.address}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '13px', color: '#64748B', marginBottom: '10px' }}>
+            <MapPin style={{ width: 13, height: 13, color: '#522AB0', flexShrink: 0 }} />
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{listing.address}</span>
           </div>
 
-          {/* SLEEK INTEGRATED SPECS GRID */}
+          {/* HORIZONTAL INLINE SPECS BAR */}
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
               background: '#F8FAFC',
               border: '1px solid #EEF2F6',
-              borderRadius: '12px',
-              padding: '10px 14px',
-              marginBottom: '12px',
+              borderRadius: '10px',
+              padding: '8px 14px',
+              marginBottom: '10px',
+              flexWrap: 'wrap',
             }}
           >
-            {/* BHK / Type */}
-            <div>
-              <span style={{ display: 'block', fontSize: '11px', fontWeight: 650, color: '#94A3B8', textTransform: 'uppercase' }}>
-                Config
+            {/* Config / BHK */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <Home style={{ width: 13, height: 13, color: '#522AB0', flexShrink: 0 }} />
+              <span style={{ fontSize: '13px', fontWeight: 750, color: '#1E293B' }}>
+                {listing.bhk || 'Plot/Land'}
               </span>
-              <b style={{ fontSize: '13.5px', fontWeight: 800, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-                <Home style={{ width: 13, height: 13, color: '#522AB0' }} />
-                <span>{listing.bhk || 'Plot/Land'}</span>
-              </b>
             </div>
 
             {/* Built-up Area */}
-            <div>
-              <span style={{ display: 'block', fontSize: '11px', fontWeight: 650, color: '#94A3B8', textTransform: 'uppercase' }}>
-                Built-Up
-              </span>
-              <b style={{ fontSize: '13.5px', fontWeight: 800, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-                <Ruler style={{ width: 13, height: 13, color: '#522AB0' }} />
-                <span>{listing.areaSqFt || 'N/A'}</span>
-              </b>
-            </div>
+            {listing.areaSqFt && (
+              <>
+                <div style={{ width: '1px', height: '14px', background: '#CBD5E1' }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <Ruler style={{ width: 13, height: 13, color: '#522AB0', flexShrink: 0 }} />
+                  <span style={{ fontSize: '13px', fontWeight: 750, color: '#1E293B' }}>
+                    {listing.areaSqFt}
+                  </span>
+                </div>
+              </>
+            )}
 
             {/* Floor Info */}
-            <div>
-              <span style={{ display: 'block', fontSize: '11px', fontWeight: 650, color: '#94A3B8', textTransform: 'uppercase' }}>
-                Floor
-              </span>
-              <b style={{ fontSize: '13.5px', fontWeight: 800, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-                <Layers style={{ width: 13, height: 13, color: '#522AB0' }} />
-                <span>{listing.floorInfo || 'Ground'}</span>
-              </b>
-            </div>
+            {listing.floorInfo && (
+              <>
+                <div style={{ width: '1px', height: '14px', background: '#CBD5E1' }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <Layers style={{ width: 13, height: 13, color: '#522AB0', flexShrink: 0 }} />
+                  <span style={{ fontSize: '13px', fontWeight: 750, color: '#1E293B' }}>
+                    {listing.floorInfo}
+                  </span>
+                </div>
+              </>
+            )}
 
-            {/* Facing / Status */}
-            <div>
-              <span style={{ display: 'block', fontSize: '11px', fontWeight: 650, color: '#94A3B8', textTransform: 'uppercase' }}>
-                Facing
-              </span>
-              <b style={{ fontSize: '13.5px', fontWeight: 800, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-                <Compass style={{ width: 13, height: 13, color: '#522AB0' }} />
-                <span>{listing.facing || 'East Facing'}</span>
-              </b>
-            </div>
+            {/* Facing */}
+            {listing.facing && (
+              <>
+                <div style={{ width: '1px', height: '14px', background: '#CBD5E1' }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <Compass style={{ width: 13, height: 13, color: '#522AB0', flexShrink: 0 }} />
+                  <span style={{ fontSize: '13px', fontWeight: 750, color: '#1E293B' }}>
+                    {listing.facing}
+                  </span>
+                </div>
+              </>
+            )}
           </div>
 
-          {/* HIGHLIGHT CHIPS */}
+          {/* CHIPS */}
           {listing.chips && listing.chips.length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
-              {listing.chips.map((chip, i) => (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              {listing.chips.slice(0, 4).map((chip, i) => (
                 <span
                   key={i}
                   style={{
                     background: '#F1F5F9',
                     border: '1px solid #E2E8F0',
-                    borderRadius: '6px',
-                    padding: '3px 8px',
-                    fontSize: '11.5px',
+                    borderRadius: '5px',
+                    padding: '2px 7px',
+                    fontSize: '11px',
                     fontWeight: 650,
                     color: '#475569',
                   }}
@@ -479,7 +437,7 @@ export function PropertyListCard({
           )}
         </div>
 
-        {/* CARD FOOTER: POSTED DATE + CTA */}
+        {/* CARD FOOTER */}
         <div
           style={{
             display: 'flex',
@@ -487,12 +445,12 @@ export function PropertyListCard({
             justifyContent: 'space-between',
             gap: '12px',
             borderTop: '1px solid #F1F5F9',
-            paddingTop: '14px',
+            paddingTop: '10px',
             marginTop: 'auto',
           }}
         >
           <span style={{ fontSize: '12px', color: '#94A3B8', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-            <Clock style={{ width: 13, height: 13 }} />
+            <Clock style={{ width: 12, height: 12 }} />
             {formatPostedOn((listing as any).createdAt || listing.postedTime)}
           </span>
 
@@ -501,28 +459,29 @@ export function PropertyListCard({
             style={{
               background: 'linear-gradient(135deg, #522AB0 0%, #41208C 100%)',
               color: '#FFFFFF',
-              padding: '10px 20px',
-              borderRadius: '10px',
-              fontSize: '13.5px',
+              padding: '9px 18px',
+              borderRadius: '9px',
+              fontSize: '13px',
               fontWeight: 750,
               textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              boxShadow: '0 4px 14px rgba(82, 42, 176, 0.25)',
-              transition: 'all 0.2s ease',
+              boxShadow: '0 3px 10px rgba(82, 42, 176, 0.25)',
+              transition: 'all 0.15s ease',
+              whiteSpace: 'nowrap',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 6px 20px rgba(82, 42, 176, 0.4)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(82, 42, 176, 0.4)';
               e.currentTarget.style.transform = 'translateX(2px)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 4px 14px rgba(82, 42, 176, 0.25)';
+              e.currentTarget.style.boxShadow = '0 3px 10px rgba(82, 42, 176, 0.25)';
               e.currentTarget.style.transform = 'translateX(0)';
             }}
           >
             <span>{ownerDetailsBtnText}</span>
-            <ArrowRight style={{ width: 14, height: 14 }} />
+            <ArrowRight style={{ width: 13, height: 13 }} />
           </Link>
         </div>
       </div>

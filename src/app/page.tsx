@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import HeroSection from '@/shared/components/home-page/hero-section';
 import TrustSection from '@/shared/components/home-page/trust-section';
+import BrokerageCalculatorSection from '@/shared/components/home-page/brokerage-calculator-section';
 import OffersSection from '@/shared/components/home-page/offers-section';
 import PopularCategoriesShowcase from '@/shared/components/home-page/popular-categories-showcase';
 import ExploreByCategorySection from '@/shared/components/home-page/explore-by-category-section';
@@ -28,6 +29,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <TrustSection />
+      <BrokerageCalculatorSection />
       <OffersSection />
       <PopularCategoriesShowcase />
       <ExploreByCategorySection />

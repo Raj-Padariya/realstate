@@ -869,29 +869,15 @@ function PropertiesContent() {
 
                 {/* PRICE RANGE */}
                 <div className="fgrp" style={{ marginBottom: '20px', borderBottom: '1px solid #F1F5F9', paddingBottom: '18px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                     <h5 style={{ margin: 0, fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', letterSpacing: '0.05em' }}>
                       Price Range
                     </h5>
-                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A' }}>
+                    <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#522AB0', background: '#F5F3FF', padding: '3px 9px', borderRadius: '6px', border: '1px solid #DDD6FE' }}>
                       ₹0 – ₹{maxPriceLakhs >= 100 ? (maxPriceLakhs / 100).toFixed(2) + ' Cr' : maxPriceLakhs + ' L'}
                     </span>
                   </div>
-                  <div className="rng" style={{ marginTop: '10px', marginBottom: '8px' }}>
-                    <div className="rngtrack" style={{ height: '6px', background: '#E2E8F0', borderRadius: '999px', position: 'relative' }}>
-                      <div
-                        className="rngfill"
-                        id="rngfill"
-                        style={{
-                          position: 'absolute',
-                          left: '0%',
-                          width: `${Math.min(100, (maxPriceLakhs / 300) * 100)}%`,
-                          height: '100%',
-                          background: 'linear-gradient(90deg, #522AB0, #7C3AED)',
-                          borderRadius: '999px',
-                        }}
-                      />
-                    </div>
+                  <div style={{ padding: '6px 0 8px' }}>
                     <input
                       type="range"
                       min="50"
@@ -900,10 +886,21 @@ function PropertiesContent() {
                       value={maxPriceLakhs}
                       onChange={(e) => setMaxPriceLakhs(Number(e.target.value))}
                       aria-label="Maximum price"
-                      style={{ width: '100%', marginTop: '8px', cursor: 'pointer', accentColor: '#522AB0' }}
+                      style={{
+                        width: '100%',
+                        height: '6px',
+                        borderRadius: '999px',
+                        background: `linear-gradient(to right, #522AB0 0%, #522AB0 ${(maxPriceLakhs / 300) * 100}%, #E2E8F0 ${(maxPriceLakhs / 300) * 100}%, #E2E8F0 100%)`,
+                        appearance: 'none',
+                        WebkitAppearance: 'none',
+                        outline: 'none',
+                        cursor: 'pointer',
+                        accentColor: '#522AB0',
+                        margin: 0,
+                      }}
                     />
                   </div>
-                  <div className="rngends" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11.5px', color: '#94A3B8', fontWeight: 650 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11.5px', color: '#94A3B8', fontWeight: 650 }}>
                     <span>₹0</span>
                     <span>₹3 Cr+</span>
                   </div>

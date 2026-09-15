@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { HeaderData, TopBarData } from '@/types/cms';
 import { Button } from '../common/Button';
 import { MobileDrawer } from './MobileDrawer';
+import { useProperties } from '@/shared/context/PropertyContext';
+import { ShortlistDrawer } from '../common/ShortlistDrawer';
+import { Heart } from 'lucide-react';
 
 export interface HeaderProps {
   topBarData: TopBarData;
@@ -14,10 +17,19 @@ export interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ topBarData, headerData }) => {
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isShortlistOpen, setIsShortlistOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { savedIds } = useProperties();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMenu = (id: string) => {
     setOpenMenuId((prev) => (prev === id ? null : id));
   };
+
+  const hasSaved = mounted && savedIds.length > 0;
 
   return (
     <>
@@ -147,6 +159,71 @@ export const Header: React.FC<HeaderProps> = ({ topBarData, headerData }) => {
           </ul>
 
           <span className="grow"></span>
+
+          {/* Shortlist Heart Button */}
+          <button
+            type="button"
+            onClick={() => setIsShortlistOpen(true)}
+            aria-label="Shortlisted Properties"
+            title="View Shortlisted Properties"
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '40px',
+              height: '40px',
+              borderRadius: '10px',
+              border: '1.5px solid #E2E8F0',
+              background: hasSaved ? '#FAF5FF' : '#FFFFFF',
+              color: hasSaved ? '#E11D48' : '#64748B',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              marginRight: '8px',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#C4B5FD';
+              e.currentTarget.style.background = '#F5F3FF';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = '#E2E8F0';
+              e.currentTarget.style.background = hasSaved ? '#FAF5FF' : '#FFFFFF';
+            }}
+          >
+            <Heart
+              style={{
+                width: 20,
+                height: 20,
+                fill: hasSaved ? '#E11D48' : 'none',
+                color: hasSaved ? '#E11D48' : '#64748B',
+                transition: 'all 0.2s ease',
+              }}
+            />
+            {hasSaved && (
+              <span
+                style={{
+                  position: 'absolute',
+                  top: '-5px',
+                  right: '-5px',
+                  background: '#E11D48',
+                  color: '#FFFFFF',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 2px 6px rgba(225, 29, 72, 0.4)',
+                  lineHeight: 1,
+                }}
+              >
+                {savedIds.length}
+              </span>
+            )}
+          </button>
+
           <Link href="/login">
             <Button variant="grey" size="sm">
               {headerData.loginBtnText}
@@ -173,6 +250,11 @@ export const Header: React.FC<HeaderProps> = ({ topBarData, headerData }) => {
         headerData={headerData}
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
+      />
+
+      <ShortlistDrawer
+        isOpen={isShortlistOpen}
+        onClose={() => setIsShortlistOpen(false)}
       />
     </>
   );

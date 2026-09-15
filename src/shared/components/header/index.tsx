@@ -6,7 +6,9 @@ import { usePathname } from 'next/navigation';
 import { HeaderData, TopBarData } from '@/shared/types/cms';
 import Button from '@/shared/ui/button';
 import HeaderMobile from './header-mobile';
-import { Building2, Ruler, Factory, Search, Calendar, ChevronDown } from 'lucide-react';
+import { Building2, Ruler, Factory, Search, Calendar, ChevronDown, Heart } from 'lucide-react';
+import { useProperties } from '@/shared/context/PropertyContext';
+import ShortlistDrawer from '@/components/common/ShortlistDrawer';
 
 export interface HeaderProps {
   topBarData: TopBarData;
@@ -72,8 +74,17 @@ const PROMO_SHOWCASES: Record<string, {
 export function Header({ topBarData, headerData }: HeaderProps) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isShortlistOpen, setIsShortlistOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const { savedIds } = useProperties();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const hasSaved = mounted && savedIds.length > 0;
 
   const toggleMenu = (menuKey: string) => {
     setOpenMenu((prev) => (prev === menuKey ? null : menuKey));
@@ -381,6 +392,69 @@ export function Header({ topBarData, headerData }: HeaderProps) {
 
           {/* ACTION BUTTONS - EXTREME RIGHT */}
           <div style={{ flex: '0 0 auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {/* Shortlist Heart Button */}
+            <button
+              type="button"
+              onClick={() => setIsShortlistOpen(true)}
+              aria-label="Shortlisted Properties"
+              title="View Shortlisted Properties"
+              style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '38px',
+                height: '38px',
+                borderRadius: '10px',
+                border: '1.5px solid #E2E8F0',
+                background: hasSaved ? '#FAF5FF' : '#FFFFFF',
+                color: hasSaved ? '#E11D48' : '#64748B',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#C4B5FD';
+                e.currentTarget.style.background = '#F5F3FF';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E2E8F0';
+                e.currentTarget.style.background = hasSaved ? '#FAF5FF' : '#FFFFFF';
+              }}
+            >
+              <Heart
+                style={{
+                  width: 19,
+                  height: 19,
+                  fill: hasSaved ? '#E11D48' : 'none',
+                  color: hasSaved ? '#E11D48' : '#64748B',
+                  transition: 'all 0.2s ease',
+                }}
+              />
+              {hasSaved && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: '-5px',
+                    right: '-5px',
+                    background: '#E11D48',
+                    color: '#FFFFFF',
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    width: '19px',
+                    height: '19px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 6px rgba(225, 29, 72, 0.4)',
+                    lineHeight: 1,
+                  }}
+                >
+                  {savedIds.length}
+                </span>
+              )}
+            </button>
+
             <Link href="/login">
               <Button variant="grey" size="sm">
                 {headerData.loginBtnText}
@@ -412,6 +486,11 @@ export function Header({ topBarData, headerData }: HeaderProps) {
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         headerData={headerData}
+      />
+
+      <ShortlistDrawer
+        isOpen={isShortlistOpen}
+        onClose={() => setIsShortlistOpen(false)}
       />
 
       {/* BLURRY SCRIM BACKDROP FOR WEBPAGE ONLY */}

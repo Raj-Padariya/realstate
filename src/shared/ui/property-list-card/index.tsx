@@ -23,6 +23,8 @@ import {
 import { NO_PHOTO_PLACEHOLDER, isNoPhotoPlaceholder } from '@/shared/utils/photoPlaceholder';
 import { formatPostedOn } from '@/shared/utils/dateUtils';
 
+import { useProperties } from '@/shared/context/PropertyContext';
+
 export interface PropertyListCardProps {
   listing: PropertyListingItem & { photos?: string[] };
   ownerDetailsBtnText?: string;
@@ -32,7 +34,8 @@ export function PropertyListCard({
   listing,
   ownerDetailsBtnText = 'Get Owner Details',
 }: PropertyListCardProps) {
-  const [isFav, setIsFav] = useState(false);
+  const { isPropertySaved, toggleSaveProperty } = useProperties();
+  const isFav = isPropertySaved(listing.id);
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
 
   const hasRealPhotos = Boolean(
@@ -155,11 +158,11 @@ export function PropertyListCard({
         {/* TOP-RIGHT HEART SHORTLIST BUTTON */}
         <button
           type="button"
-          aria-label="Save Property"
+          aria-label={isFav ? 'Remove from Shortlist' : 'Save Property'}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            setIsFav(!isFav);
+            toggleSaveProperty(listing.id);
           }}
           style={{
             position: 'absolute',

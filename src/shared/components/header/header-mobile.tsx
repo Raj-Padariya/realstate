@@ -20,8 +20,10 @@ import {
   Mail,
   Clock,
   Briefcase,
-  ChevronDown
+  ChevronDown,
+  Heart,
 } from 'lucide-react';
+import { useProperties } from '@/shared/context/PropertyContext';
 
 export interface HeaderMobileProps {
   headerData: HeaderData;
@@ -30,6 +32,7 @@ export interface HeaderMobileProps {
 }
 
 export function HeaderMobile({ headerData, isOpen, onClose }: HeaderMobileProps) {
+  const { savedIds } = useProperties();
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     contact: true, // Contact Us open by default as in screenshot
   });
@@ -107,6 +110,43 @@ export function HeaderMobile({ headerData, isOpen, onClose }: HeaderMobileProps)
         </div>
 
         <div className="dbody-menu">
+          {/* Shortlisted Properties Link */}
+          <Link
+            href="/saved-properties"
+            onClick={onClose}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '12px 16px',
+              background: '#FAF5FF',
+              borderRadius: '12px',
+              border: '1.5px solid #E9D8FD',
+              margin: '12px 16px 8px 16px',
+              textDecoration: 'none',
+              color: '#522AB0',
+              fontWeight: 750,
+              fontSize: '14.5px',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Heart style={{ width: 18, height: 18, fill: '#522AB0', color: '#522AB0' }} />
+              <span>Shortlisted Properties</span>
+            </div>
+            <span
+              style={{
+                background: '#522AB0',
+                color: '#FFFFFF',
+                fontSize: '11px',
+                fontWeight: 800,
+                padding: '2px 8px',
+                borderRadius: '999px',
+              }}
+            >
+              {savedIds.length}
+            </span>
+          </Link>
+
           {menuItems.map((item, idx) => {
             if (item.hasDropdown) {
               const isExpanded = !!expandedSections[item.key!];

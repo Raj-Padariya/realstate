@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { HeaderData } from '@/types/cms';
 import { Button } from '../common/Button';
+import { useProperties } from '@/shared/context/PropertyContext';
+import { Heart } from 'lucide-react';
 
 export interface MobileDrawerProps {
   headerData: HeaderData;
@@ -13,6 +15,7 @@ export interface MobileDrawerProps {
 
 export const MobileDrawer: React.FC<MobileDrawerProps> = ({ headerData, isOpen, onClose }) => {
   const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>({});
+  const { savedIds } = useProperties();
 
   const toggleAccordion = (id: string) => {
     setOpenAccordions((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -36,6 +39,43 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ headerData, isOpen, 
         </div>
 
         <div className="dbody">
+          {/* Direct Shortlist Link */}
+          <Link
+            href="/saved-properties"
+            onClick={onClose}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '12px 16px',
+              background: '#FAF5FF',
+              borderRadius: '12px',
+              border: '1px solid #E9D8FD',
+              marginBottom: '12px',
+              textDecoration: 'none',
+              color: '#522AB0',
+              fontWeight: 750,
+              fontSize: '14.5px',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Heart style={{ width: 18, height: 18, fill: '#522AB0', color: '#522AB0' }} />
+              <span>Shortlisted Properties</span>
+            </div>
+            <span
+              style={{
+                background: '#522AB0',
+                color: '#FFFFFF',
+                fontSize: '11px',
+                fontWeight: 800,
+                padding: '2px 8px',
+                borderRadius: '999px',
+              }}
+            >
+              {savedIds.length}
+            </span>
+          </Link>
+
           {headerData.menuItems.map((item) => {
             const isAccOpen = !!openAccordions[item.id];
             return (

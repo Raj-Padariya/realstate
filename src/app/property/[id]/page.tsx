@@ -12,7 +12,7 @@ import LocationSearchInput from '@/components/common/LocationSearchInput';
 import { NO_PHOTO_PLACEHOLDER, isNoPhotoPlaceholder } from '@/shared/utils/photoPlaceholder';
 import { formatPostedOn } from '@/shared/utils/dateUtils';
 import { extractLocationParts } from '@/shared/utils/locationUtils';
-import { Building2, MapPin, Home, LandPlot, Check, CheckCircle2, ArrowRight, ShieldCheck, Phone, User, Mail, X, Sparkles, Clock, Lock, Calendar } from 'lucide-react';
+import { Building2, MapPin, Home, LandPlot, Check, CheckCircle2, ArrowRight, ShieldCheck, Phone, User, Mail, X, Sparkles, Clock, Lock, Calendar, Heart } from 'lucide-react';
 import { useLeads } from '@/shared/context/LeadsContext';
 
 const cmsData = cmsDataRaw as unknown as CmsData;
@@ -75,7 +75,7 @@ const AMEN_ICONS: Record<string, string> = {
 
 export default function PropertyDetailPage({ params }: { params: { id: string } }) {
   const propertyId = params?.id || 'prop-1';
-  const { getPropertyById } = useProperties();
+  const { getPropertyById, isPropertySaved, toggleSaveProperty } = useProperties();
 
   const [asyncFetched, setAsyncFetched] = useState<any>(null);
   const matchedListing = getPropertyById(propertyId) || asyncFetched;
@@ -425,10 +425,56 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
               </div>
             </div>
 
-            {/* Price Column */}
+            {/* Price & Shortlist Column */}
             <div className="prop-price-col">
-              <div className="prop-price-val" id="dprice1">
-                {property.price}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '10px', flexWrap: 'wrap' }}>
+                <div className="prop-price-val" id="dprice1">
+                  {property.price}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => toggleSaveProperty(property.id)}
+                  aria-label={isPropertySaved(property.id) ? "Remove from Shortlist" : "Save to Shortlist"}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '7px 14px',
+                    borderRadius: '10px',
+                    border: '1.5px solid',
+                    borderColor: isPropertySaved(property.id) ? '#FDA4AF' : '#E2E8F0',
+                    background: isPropertySaved(property.id) ? '#FFF1F2' : '#FFFFFF',
+                    color: isPropertySaved(property.id) ? '#E11D48' : '#475569',
+                    fontSize: '13px',
+                    fontWeight: 750,
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isPropertySaved(property.id)) {
+                      e.currentTarget.style.borderColor = '#C4B5FD';
+                      e.currentTarget.style.background = '#FAF5FF';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isPropertySaved(property.id)) {
+                      e.currentTarget.style.borderColor = '#E2E8F0';
+                      e.currentTarget.style.background = '#FFFFFF';
+                    }
+                  }}
+                >
+                  <Heart
+                    style={{
+                      width: 16,
+                      height: 16,
+                      fill: isPropertySaved(property.id) ? '#E11D48' : 'none',
+                      color: isPropertySaved(property.id) ? '#E11D48' : 'currentColor',
+                      transition: 'all 0.15s ease',
+                    }}
+                  />
+                  <span>{isPropertySaved(property.id) ? 'Shortlisted' : 'Shortlist'}</span>
+                </button>
               </div>
               <div className="prop-price-sub" id="dpsf">
                 {property.pricePerSqFt || (isRentListing ? 'Rent per month' : 'Inclusive of all charges')} · <span className="prop-neg">Negotiable</span>

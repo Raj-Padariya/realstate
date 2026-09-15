@@ -15,6 +15,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import mockCmsData from '@/shared/data/mockCmsData.json';
+import { useProperties } from '@/shared/context/PropertyContext';
 
 type FeaturedListing = (typeof mockCmsData.featuredProperties.listings)[number];
 
@@ -22,12 +23,12 @@ const data = mockCmsData.featuredProperties;
 const listings: FeaturedListing[] = data.listings;
 
 export function FeaturedProperties() {
-  const [savedIds, setSavedIds] = useState<Record<string, boolean>>({});
+  const { isPropertySaved, toggleSaveProperty } = useProperties();
 
   const toggleSave = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setSavedIds((prev) => ({ ...prev, [id]: !prev[id] }));
+    toggleSaveProperty(id);
   };
 
   return (
@@ -92,7 +93,7 @@ export function FeaturedProperties() {
           }}
         >
           {listings.map((p) => {
-            const isSaved = !!savedIds[p.id];
+            const isSaved = isPropertySaved(p.id);
 
             return (
               <article

@@ -26,14 +26,21 @@ export interface FullPropertyItem extends PropertyListingItem {
   createdAt?: string | Date;
 }
 
+export const SHORTLIST_STORAGE_KEY = 'gujjuproperty_shortlist_ids_v1';
+
 interface PropertyContextType {
   properties: FullPropertyItem[];
+  savedIds: string[];
+  savedProperties: FullPropertyItem[];
   addProperty: (property: Partial<FullPropertyItem>) => FullPropertyItem;
   updateProperty: (id: string, updatedFields: Partial<FullPropertyItem>) => void;
   deleteProperty: (id: string) => void;
   toggleVerification: (id: string) => void;
   getPropertyById: (id: string) => FullPropertyItem | undefined;
   refetchFromDb: () => Promise<void>;
+  toggleSaveProperty: (id: string) => void;
+  isPropertySaved: (id: string) => boolean;
+  clearAllSaved: () => void;
 }
 
 const PropertyContext = createContext<PropertyContextType | undefined>(undefined);
@@ -41,6 +48,22 @@ const PropertyContext = createContext<PropertyContextType | undefined>(undefined
 export const LOCAL_STORAGE_KEY = 'gujjuproperty_listings_v10_live';
 
 export function PropertyProvider({ children }: { children: React.ReactNode }) {
+  const [savedIds, setSavedIds] = useState<string[]>([]);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(SHORTLIST_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          setSavedIds(parsed);
+        }
+      }
+    } catch (e) {}
+    setIsHydrated(true);
+  }, []);
+
   const [properties, setProperties] = useState<FullPropertyItem[]>(() => {
     const MOCK_BUILDINGS = [
       'Magnet Lavish',
@@ -82,7 +105,6 @@ export function PropertyProvider({ children }: { children: React.ReactNode }) {
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            // Merge default items so newly added default listings (like Ahmedabad) are included
             const existingIds = new Set(parsed.map((p: any) => p.id));
             const missingDefaults = defaultItems.filter((d) => !existingIds.has(d.id));
             return [...missingDefaults, ...parsed];
@@ -94,6 +116,29 @@ export function PropertyProvider({ children }: { children: React.ReactNode }) {
     return defaultItems;
   });
 
+  const toggleSaveProperty = (id: string) => {
+    setSavedIds((prev) => {
+      const next = prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id];
+      try {
+        localStorage.setItem(SHORTLIST_STORAGE_KEY, JSON.stringify(next));
+      } catch (e) {}
+      return next;
+    });
+  };
+
+  const isPropertySaved = (id: string) => {
+    return savedIds.includes(id);
+  };
+
+  const clearAllSaved = () => {
+    setSavedIds([]);
+    try {
+      localStorage.removeItem(SHORTLIST_STORAGE_KEY);
+    } catch (e) {}
+  };
+
+  const savedProperties = properties.filter((p) => savedIds.includes(p.id));
+
   const refetchFromDb = async () => {
     try {
       await fetch('/api/seed').catch(() => null);
@@ -102,7 +147,6 @@ export function PropertyProvider({ children }: { children: React.ReactNode }) {
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
           setProperties((prev) => {
-            // Merge DB items with existing local items so user posted items aren't overwritten
             const existingIds = new Set(data.map((d: any) => d.id));
             const localOnly = prev.filter((p) => !existingIds.has(p.id));
             const merged = [...data, ...localOnly];
@@ -118,7 +162,6 @@ export function PropertyProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // On mount, load from SQL Database API
   useEffect(() => {
     refetchFromDb();
   }, []);
@@ -171,7 +214,6 @@ export function PropertyProvider({ children }: { children: React.ReactNode }) {
     const updated = [fullProp, ...properties];
     saveProperties(updated);
 
-    // Async persist to SQL DB API
     fetch('/api/properties', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -195,7 +237,6 @@ export function PropertyProvider({ children }: { children: React.ReactNode }) {
     });
     saveProperties(updated);
 
-    // Async persist to SQL DB API
     fetch(`/api/properties/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -207,7 +248,6 @@ export function PropertyProvider({ children }: { children: React.ReactNode }) {
     const updated = properties.filter((p) => p.id !== id);
     saveProperties(updated);
 
-    // Async persist to SQL DB API
     fetch(`/api/properties/${id}`, {
       method: 'DELETE',
     }).catch((err) => console.error('SQL DB API DELETE error:', err));
@@ -218,7 +258,6 @@ export function PropertyProvider({ children }: { children: React.ReactNode }) {
       if (p.id === id) {
         const isVer = p.badgeText === 'Owner verified';
         const newBadge = isVer ? 'Title checked' : 'Owner verified';
-        // Async update to DB
         fetch(`/api/properties/${id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -243,12 +282,17 @@ export function PropertyProvider({ children }: { children: React.ReactNode }) {
     <PropertyContext.Provider
       value={{
         properties,
+        savedIds,
+        savedProperties,
         addProperty,
         updateProperty,
         deleteProperty,
         toggleVerification,
         getPropertyById,
         refetchFromDb,
+        toggleSaveProperty,
+        isPropertySaved,
+        clearAllSaved,
       }}
     >
       {children}

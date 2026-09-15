@@ -7,6 +7,12 @@ import { useProperties, FullPropertyItem } from '@/shared/context/PropertyContex
 import Button from '@/shared/ui/button';
 import ImageUploader from '@/shared/ui/image-uploader';
 import PropertyMap from '@/components/common/PropertyMap';
+import {
+  DHOLERA_VILLAGES,
+  DHOLERA_LINEAR_TYPES,
+  DHOLERA_ZONES,
+  DHOLERA_TP_SCHEMES,
+} from '@/shared/data/dholeraData';
 
 const CITIES = ['Dholera SIR', 'Ahmedabad', 'Surat', 'Vadodara', 'Rajkot', 'Mumbai', 'Pune', 'Bengaluru'];
 
@@ -280,27 +286,43 @@ function LandPostContent() {
 
                   <div className="frow">
                     <div className="fld2">
-                      <label>Village / Town <span style={{ textTransform: 'none', fontWeight: 600, color: 'var(--muted)' }}>(optional)</span></label>
-                      <input className="inp" type="text" value={village} onChange={(e) => setVillage(e.target.value)} placeholder="e.g. Bavla" />
+                      <label>Village / Town ({DHOLERA_VILLAGES.length}) <span style={{ textTransform: 'none', fontWeight: 600, color: 'var(--muted)' }}>(optional)</span></label>
+                      <select className="sel" value={village} onChange={(e) => setVillage(e.target.value)}>
+                        <option value="">Select Village ({DHOLERA_VILLAGES.length})</option>
+                        {DHOLERA_VILLAGES.map((v) => (
+                          <option key={v} value={v}>{v}</option>
+                        ))}
+                      </select>
                     </div>
                     <div className="fld2">
-                      <label>Plot Layout</label>
+                      <label>Plot Layout (Linear / Non-Linear)</label>
                       <select className="sel" value={linearType} onChange={(e) => setLinearType(e.target.value)}>
-                        <option value="Linear">Linear</option>
-                        <option value="Non-Linear">Non-Linear</option>
-                        <option value="Irregular">Irregular</option>
+                        <option value="">Select Layout</option>
+                        {DHOLERA_LINEAR_TYPES.map((l) => (
+                          <option key={l} value={l}>{l}</option>
+                        ))}
                       </select>
                     </div>
                   </div>
 
                   <div className="frow">
                     <div className="fld2">
-                      <label>Zone <span style={{ textTransform: 'none', fontWeight: 600, color: 'var(--muted)' }}>(optional)</span></label>
-                      <input className="inp" type="text" value={zone} onChange={(e) => setZone(e.target.value)} placeholder="e.g. Residential Zone" />
+                      <label>Zone ({DHOLERA_ZONES.length}) <span style={{ textTransform: 'none', fontWeight: 600, color: 'var(--muted)' }}>(optional)</span></label>
+                      <select className="sel" value={zone} onChange={(e) => setZone(e.target.value)}>
+                        <option value="">Select Zone ({DHOLERA_ZONES.length})</option>
+                        {DHOLERA_ZONES.map((z) => (
+                          <option key={z} value={z}>{z}</option>
+                        ))}
+                      </select>
                     </div>
                     <div className="fld2">
-                      <label>TP Scheme <span style={{ textTransform: 'none', fontWeight: 600, color: 'var(--muted)' }}>(optional)</span></label>
-                      <input className="inp" type="text" value={tpScheme} onChange={(e) => setTpScheme(e.target.value)} placeholder="e.g. TP Scheme No. 5" />
+                      <label>TP Scheme ({DHOLERA_TP_SCHEMES.length}) <span style={{ textTransform: 'none', fontWeight: 600, color: 'var(--muted)' }}>(optional)</span></label>
+                      <select className="sel" value={tpScheme} onChange={(e) => setTpScheme(e.target.value)}>
+                        <option value="">Select TP Scheme ({DHOLERA_TP_SCHEMES.length})</option>
+                        {DHOLERA_TP_SCHEMES.map((tp) => (
+                          <option key={tp} value={tp}>{tp}</option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 

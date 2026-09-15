@@ -21,8 +21,14 @@ import {
   Zap,
   CheckCircle2,
   Phone,
-  Tag
+  Tag,
 } from 'lucide-react';
+import {
+  DHOLERA_VILLAGES,
+  DHOLERA_LINEAR_TYPES,
+  DHOLERA_ZONES,
+  DHOLERA_TP_SCHEMES,
+} from '@/shared/data/dholeraData';
 
 const CITIES = ['Mumbai', 'Pune', 'Bengaluru', 'Hyderabad', 'Delhi NCR', 'Ahmedabad', 'Dholera SIR', 'Surat', 'Vadodara', 'Rajkot'];
 
@@ -284,42 +290,37 @@ export default function PostPropertyLandingPage() {
                   <div>
                     <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>Village</label>
                     <select value={village} onChange={(e) => setVillage(e.target.value)} style={{ width: '100%', padding: '11px 12px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', background: '#FFF8E1' }}>
-                      <option value="">Village</option>
-                      <option>Piplaj</option>
-                      <option>Adhelai</option>
-                      <option>Navagam</option>
-                      <option>Hebatpur</option>
-                      <option>Vautha</option>
-                      <option>Songadh</option>
+                      <option value="">Select Village ({DHOLERA_VILLAGES.length})</option>
+                      {DHOLERA_VILLAGES.map((v) => (
+                        <option key={v} value={v}>{v}</option>
+                      ))}
                     </select>
                   </div>
                   <div>
                     <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>Linear / Non-Linear</label>
                     <select value={linearType} onChange={(e) => setLinearType(e.target.value)} style={{ width: '100%', padding: '11px 12px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', background: '#FFF8E1' }}>
-                      <option>Linear</option>
-                      <option>Non-Linear</option>
+                      <option value="">Select Layout</option>
+                      {DHOLERA_LINEAR_TYPES.map((l) => (
+                        <option key={l} value={l}>{l}</option>
+                      ))}
                     </select>
                   </div>
                   <div>
                     <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>Zone</label>
                     <select value={zone} onChange={(e) => setZone(e.target.value)} style={{ width: '100%', padding: '11px 12px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', background: '#FFF8E1' }}>
-                      <option value="">Zone</option>
-                      <option>Residential</option>
-                      <option>Commercial</option>
-                      <option>Industrial</option>
-                      <option>Agricultural</option>
-                      <option>Mixed Use</option>
+                      <option value="">Select Zone ({DHOLERA_ZONES.length})</option>
+                      {DHOLERA_ZONES.map((z) => (
+                        <option key={z} value={z}>{z}</option>
+                      ))}
                     </select>
                   </div>
                   <div>
                     <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>TP</label>
                     <select value={tpScheme} onChange={(e) => setTpScheme(e.target.value)} style={{ width: '100%', padding: '11px 12px', borderRadius: '8px', border: '1px solid var(--line)', fontSize: '14px', background: '#FFF8E1' }}>
-                      <option value="">TP</option>
-                      <option>TP 1 (Dholera)</option>
-                      <option>TP 2 (Ahmedabad)</option>
-                      <option>TP 3 (Surat)</option>
-                      <option>TP 4 (Vadodara)</option>
-                      <option>Not Applicable</option>
+                      <option value="">Select TP ({DHOLERA_TP_SCHEMES.length})</option>
+                      {DHOLERA_TP_SCHEMES.map((tp) => (
+                        <option key={tp} value={tp}>{tp}</option>
+                      ))}
                     </select>
                   </div>
                 </div>

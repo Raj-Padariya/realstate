@@ -2,7 +2,15 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Plane, Navigation, Building2, FileCheck, Zap, Building, Car, CheckCircle } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Plane, Navigation, Building2, FileCheck, Zap, Building, Car, CheckCircle, Search } from 'lucide-react';
+import {
+  DHOLERA_VILLAGES,
+  DHOLERA_LINEAR_TYPES,
+  DHOLERA_ZONES,
+  DHOLERA_TP_SCHEMES,
+} from '@/shared/data/dholeraData';
+import { useLeads } from '@/shared/context/LeadsContext';
 
 const highlights = [
   { title: 'Dholera International Airport', desc: 'Under-construction greenfield airport located 12km from Activation Zone.' },
@@ -18,15 +26,31 @@ const plotListings = [
   { tp: 'TP-1 High Street', size: '450 sq.yd', price: 'Rs. 28 Lakhs', type: 'Industrial / Warehouse', status: 'Limited' },
 ];
 
-import { useLeads } from '@/shared/context/LeadsContext';
-
 export default function DholeraSirPage() {
+  const router = useRouter();
   const { addLead } = useLeads();
   const [investorName, setInvestorName] = useState('');
   const [investorPhone, setInvestorPhone] = useState('');
   const [investorEmail, setInvestorEmail] = useState('');
   const [budget, setBudget] = useState('Rs. 11 L - 15 L');
   const [submitted, setSubmitted] = useState(false);
+
+  // Dholera Search Card State
+  const [selectedVillage, setSelectedVillage] = useState('');
+  const [selectedLinear, setSelectedLinear] = useState('');
+  const [selectedZone, setSelectedZone] = useState('');
+  const [selectedTp, setSelectedTp] = useState('');
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    params.set('city', 'Dholera SIR');
+    if (selectedVillage) params.set('village', selectedVillage);
+    if (selectedLinear) params.set('linear', selectedLinear);
+    if (selectedZone) params.set('zone', selectedZone);
+    if (selectedTp) params.set('tp', selectedTp);
+    router.push(`/properties?${params.toString()}`);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,27 +88,177 @@ export default function DholeraSirPage() {
       </div>
 
       {/* HERO SECTION */}
-      <div style={{ background: 'linear-gradient(135deg, #1C0A3F 0%, #321670 50%, #522AB0 100%)', color: '#fff', padding: '64px 20px', textAlign: 'center', position: 'relative' }}>
+      <div style={{ background: 'linear-gradient(135deg, #1C0A3F 0%, #321670 50%, #522AB0 100%)', color: '#fff', padding: '56px 20px 72px', textAlign: 'center', position: 'relative' }}>
         <div className="wrap" style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', fontSize: '12px', fontWeight: 800, padding: '6px 16px', borderRadius: '999px', textTransform: 'uppercase', marginBottom: '20px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(254, 220, 0, 0.2)', color: '#FEDC00', fontSize: '12px', fontWeight: 800, padding: '6px 16px', borderRadius: '999px', textTransform: 'uppercase', marginBottom: '16px' }}>
             <Building className="w-3.5 h-3.5" /> Special Investment Region (SIR)
           </div>
 
-          <h1 style={{ fontSize: '36px', fontWeight: 800, margin: '0 0 16px', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: '36px', fontWeight: 800, margin: '0 0 14px', lineHeight: 1.25 }}>
             Invest in Dholera Smart City NA Plots - Starting Rs. 11 Lakhs
           </h1>
 
-          <p style={{ fontSize: '16.5px', color: '#d9cdf2', margin: '0 0 36px', lineHeight: 1.6, maxWidth: '780px', marginLeft: 'auto', marginRight: 'auto' }}>
+          <p style={{ fontSize: '16px', color: '#d9cdf2', margin: '0 0 28px', lineHeight: 1.6, maxWidth: '780px', marginLeft: 'auto', marginRight: 'auto' }}>
             Clear title, Collector NA approved, 55ft DP road facing plots inside India premier semiconductor &amp; industrial hub.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', fontSize: '14px', fontWeight: 700 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', fontSize: '13.5px', fontWeight: 700, marginBottom: '36px' }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><CheckCircle className="w-4 h-4 text-[#FEDC00]" /> Clear Title + NOC</span>
             <span>•</span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><CheckCircle className="w-4 h-4 text-[#FEDC00]" /> Near Expressway &amp; Airport</span>
             <span>•</span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><CheckCircle className="w-4 h-4 text-[#FEDC00]" /> Free Site Visit Cab from Ahmedabad</span>
           </div>
+
+          {/* LOOKING FOR INVESTMENT IN DHOLERA ? FORM CARD */}
+          <div style={{
+            background: '#ffffff',
+            borderRadius: '20px',
+            padding: '32px 28px 28px',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.25)',
+            border: '2px solid rgba(254, 220, 0, 0.4)',
+            maxWidth: '680px',
+            margin: '0 auto',
+            textAlign: 'left',
+            color: 'var(--ink)',
+          }}>
+            <div style={{ marginBottom: '22px' }}>
+              <h2 style={{ fontSize: '22px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.3px', margin: '0 0 4px', color: '#1c1f23' }}>
+                LOOKING FOR INVESTMENT IN <span style={{ background: '#FEDC00', padding: '2px 8px', borderRadius: '4px', color: '#1c1f23' }}>DHOLERA</span> ?
+              </h2>
+              <p style={{ fontSize: '13px', color: 'var(--muted)', margin: 0 }}>
+                Filter plots by official Village, Zone, Linear layout and Town Planning Scheme
+              </p>
+            </div>
+
+            <form onSubmit={handleSearchSubmit}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px', marginBottom: '20px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>
+                    Village <span style={{ color: 'var(--muted)', fontWeight: 500 }}>({DHOLERA_VILLAGES.length})</span>
+                  </label>
+                  <select
+                    value={selectedVillage}
+                    onChange={(e) => setSelectedVillage(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '11px 12px',
+                      borderRadius: '8px',
+                      border: '1px solid #e3e6ea',
+                      fontSize: '13.5px',
+                      background: '#FFFDF5',
+                      color: '#1c1f23',
+                      outline: 'none',
+                    }}
+                  >
+                    <option value="">Village</option>
+                    {DHOLERA_VILLAGES.map((v) => (
+                      <option key={v} value={v}>{v}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>
+                    Linear / Non-Linear
+                  </label>
+                  <select
+                    value={selectedLinear}
+                    onChange={(e) => setSelectedLinear(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '11px 12px',
+                      borderRadius: '8px',
+                      border: '1px solid #e3e6ea',
+                      fontSize: '13.5px',
+                      background: '#FFFDF5',
+                      color: '#1c1f23',
+                      outline: 'none',
+                    }}
+                  >
+                    <option value="">Linear / Non - Linear</option>
+                    {DHOLERA_LINEAR_TYPES.map((l) => (
+                      <option key={l} value={l}>{l}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>
+                    Zone <span style={{ color: 'var(--muted)', fontWeight: 500 }}>({DHOLERA_ZONES.length})</span>
+                  </label>
+                  <select
+                    value={selectedZone}
+                    onChange={(e) => setSelectedZone(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '11px 12px',
+                      borderRadius: '8px',
+                      border: '1px solid #e3e6ea',
+                      fontSize: '13.5px',
+                      background: '#FFFDF5',
+                      color: '#1c1f23',
+                      outline: 'none',
+                    }}
+                  >
+                    <option value="">Zone</option>
+                    {DHOLERA_ZONES.map((z) => (
+                      <option key={z} value={z}>{z}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, marginBottom: '6px', color: 'var(--ink)' }}>
+                    TP <span style={{ color: 'var(--muted)', fontWeight: 500 }}>({DHOLERA_TP_SCHEMES.length})</span>
+                  </label>
+                  <select
+                    value={selectedTp}
+                    onChange={(e) => setSelectedTp(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '11px 12px',
+                      borderRadius: '8px',
+                      border: '1px solid #e3e6ea',
+                      fontSize: '13.5px',
+                      background: '#FFFDF5',
+                      color: '#1c1f23',
+                      outline: 'none',
+                    }}
+                  >
+                    <option value="">TP</option>
+                    {DHOLERA_TP_SCHEMES.map((tp) => (
+                      <option key={tp} value={tp}>{tp}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                style={{
+                  width: '100%',
+                  padding: '13px 20px',
+                  borderRadius: '10px',
+                  background: '#FEDC00',
+                  color: '#1C0A3F',
+                  border: 'none',
+                  fontSize: '15px',
+                  fontWeight: 900,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  boxShadow: '0 4px 14px rgba(254, 220, 0, 0.4)',
+                  transition: 'transform 0.15s, background 0.15s',
+                }}
+              >
+                <Search className="w-4 h-4" /> Search Now
+              </button>
+            </form>
+          </div>
+
         </div>
       </div>
 

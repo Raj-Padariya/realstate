@@ -321,35 +321,51 @@ function PropertiesContent() {
   return (
     <>
       {/* BREADCRUMB */}
-      <div className="wrap">
-        <nav className="crumbs" aria-label="Breadcrumb">
+      <div className="wrap" style={{ paddingTop: '16px', paddingBottom: '8px' }}>
+        <nav
+          className="crumbs"
+          aria-label="Breadcrumb"
+          style={{
+            fontSize: '13px',
+            color: '#64748B',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            flexWrap: 'wrap',
+          }}
+        >
           {(() => {
             const currentSearch = searchInput.trim();
             const loc = currentSearch ? extractLocationParts(currentSearch, filteredListings[0]?.address) : null;
             return (
               <>
-                <Link href="/">Home</Link> ›{' '}
+                <Link href="/" style={{ color: '#522AB0', fontWeight: 600, textDecoration: 'none' }}>Home</Link>
+                <span style={{ color: '#CBD5E1' }}>/</span>
                 {loc && (loc.city || loc.state) ? (
                   <>
                     {loc.state && (
                       <>
-                        <Link href={`/properties?q=${encodeURIComponent(loc.state)}`}>{loc.state}</Link> ›{' '}
+                        <Link href={`/properties?q=${encodeURIComponent(loc.state)}`} style={{ color: '#522AB0', fontWeight: 600, textDecoration: 'none' }}>{loc.state}</Link>
+                        <span style={{ color: '#CBD5E1' }}>/</span>
                       </>
                     )}
                     {loc.city && (
                       <>
-                        <Link href={`/properties?q=${encodeURIComponent(loc.city)}`}>{loc.city}</Link>
+                        <Link href={`/properties?q=${encodeURIComponent(loc.city)}`} style={{ color: '#522AB0', fontWeight: 600, textDecoration: 'none' }}>{loc.city}</Link>
                       </>
                     )}
                     {loc.locality && loc.locality.toLowerCase() !== loc.city.toLowerCase() && (
                       <>
-                        {' › '}<span>{loc.locality}</span>
+                        <span style={{ color: '#CBD5E1' }}>/</span>
+                        <span style={{ color: '#1E293B', fontWeight: 700 }}>{loc.locality}</span>
                       </>
                     )}
                   </>
                 ) : (
                   <>
-                    <Link href="/properties">India</Link> › <span>All Properties</span>
+                    <Link href="/properties" style={{ color: '#522AB0', fontWeight: 600, textDecoration: 'none' }}>India</Link>
+                    <span style={{ color: '#CBD5E1' }}>/</span>
+                    <span style={{ color: '#1E293B', fontWeight: 700 }}>All Properties</span>
                   </>
                 )}
               </>
@@ -358,91 +374,182 @@ function PropertiesContent() {
         </nav>
       </div>
 
-      {/* STICKY SEARCH + FILTERS */}
-      <div className="filterbar">
+      {/* STICKY SEARCH + FILTERS BAR */}
+      <div
+        className="filterbar"
+        style={{
+          background: '#FFFFFF',
+          borderBottom: '1px solid #E2E8F0',
+          position: 'sticky',
+          top: 0,
+          zIndex: 40,
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
+          padding: '14px 0',
+        }}
+      >
         <div className="wrap" style={{ paddingBottom: 0 }}>
           {/* CATEGORY SELECTOR TABS */}
-          <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', overflowX: 'auto', paddingBottom: '4px' }}>
+          <div
+            style={{
+              display: 'flex',
+              gap: '8px',
+              marginBottom: '12px',
+              overflowX: 'auto',
+              paddingBottom: '4px',
+              scrollbarWidth: 'none',
+            }}
+          >
             {[
               { id: 'All', label: 'All Listings', icon: <Building2 className="w-3.5 h-3.5" /> },
               { id: 'Buy', label: 'Buy / Resale', icon: <Home className="w-3.5 h-3.5" /> },
               { id: 'Rent', label: 'For Rent', icon: <Key className="w-3.5 h-3.5" /> },
               { id: 'Commercial', label: 'Commercial', icon: <Store className="w-3.5 h-3.5" /> },
               { id: 'Plot', label: 'Plots / Land', icon: <Landmark className="w-3.5 h-3.5" /> },
-            ].map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setCategoryFilter(cat.id as any)}
-                style={{
-                  padding: '7px 16px',
-                  borderRadius: '99px',
-                  border: categoryFilter === cat.id ? '2px solid #522ab0' : '1px solid var(--line)',
-                  background: categoryFilter === cat.id ? '#522ab0' : '#fff',
-                  color: categoryFilter === cat.id ? '#fff' : 'var(--ink)',
-                  fontWeight: 700,
-                  fontSize: '13px',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  boxShadow: categoryFilter === cat.id ? '0 2px 8px rgba(82,42,176,0.25)' : 'none',
-                  transition: 'all 0.2s ease'
-                }}
-              >
-                {cat.icon}
-                <span>{cat.label}</span>
-              </button>
-            ))}
+            ].map((cat) => {
+              const active = categoryFilter === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setCategoryFilter(cat.id as any)}
+                  style={{
+                    padding: '8px 18px',
+                    borderRadius: '999px',
+                    border: active ? '1.5px solid #522AB0' : '1.5px solid #E2E8F0',
+                    background: active
+                      ? 'linear-gradient(135deg, #522AB0 0%, #41208C 100%)'
+                      : '#FFFFFF',
+                    color: active ? '#FFFFFF' : '#475569',
+                    fontWeight: active ? 800 : 650,
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    boxShadow: active ? '0 4px 12px rgba(82, 42, 176, 0.25)' : 'none',
+                    transition: 'all 0.15s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!active) {
+                      e.currentTarget.style.borderColor = '#C4B5FD';
+                      e.currentTarget.style.color = '#522AB0';
+                      e.currentTarget.style.background = '#FAF9FD';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!active) {
+                      e.currentTarget.style.borderColor = '#E2E8F0';
+                      e.currentTarget.style.color = '#475569';
+                      e.currentTarget.style.background = '#FFFFFF';
+                    }
+                  }}
+                >
+                  {cat.icon}
+                  <span>{cat.label}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
-        <div className="wrap fbrow">
-          <LocationSearchInput
-            value={searchInput}
-            onChange={(val) => setSearchInput(val)}
-            onSelectLocation={(selectedLoc) => {
-              setSearchTag(selectedLoc);
-              setSearchInput(selectedLoc);
-            }}
-            placeholder="Type city, locality, village or landmark across All India…"
-            searchTag={searchTag}
-            onRemoveTag={() => setSearchTag('')}
-          />
 
-          <button className="savesearch" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 4h12a1 1 0 0 1 1 1v15l-7-4-7 4V5a1 1 0 0 1 1-1z" />
-            </svg>
-            Save <span>search</span>
+        <div className="wrap fbrow" style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: '280px' }}>
+            <LocationSearchInput
+              value={searchInput}
+              onChange={(val) => setSearchInput(val)}
+              onSelectLocation={(selectedLoc) => {
+                setSearchTag(selectedLoc);
+                setSearchInput(selectedLoc);
+              }}
+              placeholder="Type city, locality, village or landmark across All India…"
+              searchTag={searchTag}
+              onRemoveTag={() => setSearchTag('')}
+            />
+          </div>
+
+          <button
+            className="savesearch"
+            type="button"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '10px 16px',
+              borderRadius: '12px',
+              border: '1.5px solid #E2D9F3',
+              background: '#FAF9FD',
+              color: '#522AB0',
+              fontWeight: 750,
+              fontSize: '13px',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#F1ECFB';
+              e.currentTarget.style.borderColor = '#522AB0';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#FAF9FD';
+              e.currentTarget.style.borderColor = '#E2D9F3';
+            }}
+          >
+            <Sparkles style={{ width: 15, height: 15, color: '#522AB0' }} />
+            <span>Save Search</span>
           </button>
 
-          <span className="grow" />
-
-          <div className="segview" role="group" aria-label="View">
+          {/* Segmented List/Map Toggle */}
+          <div
+            style={{
+              display: 'inline-flex',
+              background: '#F1F5F9',
+              padding: '4px',
+              borderRadius: '12px',
+              border: '1px solid #E2E8F0',
+            }}
+          >
             <button
-              className={`seg ${viewMode === 'list' ? 'on' : ''}`}
-              id="vlist"
               type="button"
               onClick={() => setViewMode('list')}
-              aria-pressed={viewMode === 'list'}
+              style={{
+                padding: '7px 14px',
+                borderRadius: '8px',
+                border: 'none',
+                background: viewMode === 'list' ? '#FFFFFF' : 'transparent',
+                color: viewMode === 'list' ? '#522AB0' : '#64748B',
+                fontWeight: viewMode === 'list' ? 800 : 600,
+                fontSize: '13px',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: viewMode === 'list' ? '0 2px 8px rgba(0,0,0,0.08)' : 'none',
+                transition: 'all 0.15s ease',
+              }}
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              <List style={{ width: 15, height: 15 }} />
               <span>List</span>
             </button>
             <button
-              className={`seg ${viewMode === 'map' ? 'on' : ''}`}
-              id="vmap"
               type="button"
               onClick={() => setViewMode('map')}
-              aria-pressed={viewMode === 'map'}
+              style={{
+                padding: '7px 14px',
+                borderRadius: '8px',
+                border: 'none',
+                background: viewMode === 'map' ? '#FFFFFF' : 'transparent',
+                color: viewMode === 'map' ? '#522AB0' : '#64748B',
+                fontWeight: viewMode === 'map' ? 800 : 600,
+                fontSize: '13px',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: viewMode === 'map' ? '0 2px 8px rgba(0,0,0,0.08)' : 'none',
+                transition: 'all 0.15s ease',
+              }}
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M9 3 3 5.5v15L9 18l6 3 6-2.5v-15L15 6z" />
-                <path d="M9 3v15M15 6v15" />
-              </svg>
+              <Map style={{ width: 15, height: 15 }} />
               <span>Map</span>
             </button>
           </div>
@@ -464,7 +571,7 @@ function PropertiesContent() {
           aria-label="Filters"
         >
           <div className="sbhead">
-            <b>Filters</b>
+            <b style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>Filters</b>
             <button
               className="sbclose"
               type="button"
@@ -523,7 +630,15 @@ function PropertiesContent() {
             const iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
 
             return (
-              <div className="rcardbox" style={{ border: '1px solid var(--line)', borderRadius: '12px', overflow: 'hidden' }}>
+              <div
+                className="rcardbox"
+                style={{
+                  border: '1.5px solid #E2E8F0',
+                  borderRadius: '18px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
+                }}
+              >
                 <div
                   className="mapbox"
                   style={{
@@ -551,22 +666,23 @@ function PropertiesContent() {
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      background: 'linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 100%)',
+                      background: 'linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%)',
                       pointerEvents: 'none',
                     }}
                   />
                   <div
                     style={{
                       position: 'absolute',
-                      top: '10px',
-                      left: '10px',
+                      top: '12px',
+                      left: '12px',
                       background: 'rgba(255, 255, 255, 0.95)',
-                      color: 'var(--ink)',
-                      padding: '4px 10px',
-                      borderRadius: '6px',
-                      fontSize: '11px',
-                      fontWeight: 700,
-                      boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                      backdropFilter: 'blur(8px)',
+                      color: '#0F172A',
+                      padding: '5px 12px',
+                      borderRadius: '8px',
+                      fontSize: '11.5px',
+                      fontWeight: 800,
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '4px',
@@ -582,25 +698,27 @@ function PropertiesContent() {
                       bottom: '12px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      background: 'var(--pp)',
+                      background: 'linear-gradient(135deg, #522AB0 0%, #41208C 100%)',
                       color: '#fff',
-                      fontWeight: 700,
+                      fontWeight: 750,
                       fontSize: '12.5px',
-                      padding: '8px 16px',
-                      borderRadius: '8px',
-                      boxShadow: '0 4px 12px rgba(82, 42, 176, 0.4)',
+                      padding: '9px 18px',
+                      borderRadius: '10px',
+                      boxShadow: '0 4px 14px rgba(82, 42, 176, 0.4)',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '6px',
                       zIndex: 5,
                       whiteSpace: 'nowrap',
+                      border: 'none',
+                      cursor: 'pointer',
                     }}
                     onClick={(e) => {
                       e.stopPropagation();
                       setViewMode(viewMode === 'map' ? 'list' : 'map');
                     }}
                   >
-                    <Map className="w-3.5 h-3.5" />
+                    <Map style={{ width: 14, height: 14 }} />
                     {viewMode === 'map' ? 'Switch to list view' : `View ${filteredListings.length} on map`}
                   </button>
                 </div>
@@ -608,14 +726,43 @@ function PropertiesContent() {
             );
           })()}
 
-          <div className="fcard">
-            <div className="ftabs" role="tablist">
+          <div
+            className="fcard"
+            style={{
+              background: '#FFFFFF',
+              border: '1.5px solid #E2E8F0',
+              borderRadius: '20px',
+              padding: '22px',
+              boxShadow: '0 4px 18px rgba(0, 0, 0, 0.03)',
+            }}
+          >
+            <div
+              className="ftabs"
+              role="tablist"
+              style={{
+                display: 'flex',
+                borderBottom: '1px solid #EEF2F6',
+                marginBottom: '18px',
+                gap: '8px',
+              }}
+            >
               <button
                 className={`ftab ${filterTab === 'basic' ? 'on' : ''}`}
                 role="tab"
                 aria-selected={filterTab === 'basic'}
                 type="button"
                 onClick={() => setFilterTab('basic')}
+                style={{
+                  padding: '8px 14px',
+                  border: 'none',
+                  background: filterTab === 'basic' ? '#EDE9FE' : 'transparent',
+                  color: filterTab === 'basic' ? '#522AB0' : '#64748B',
+                  fontWeight: 800,
+                  fontSize: '13.5px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
               >
                 Filters
               </button>
@@ -625,56 +772,124 @@ function PropertiesContent() {
                 aria-selected={filterTab === 'premium'}
                 type="button"
                 onClick={() => setFilterTab('premium')}
+                style={{
+                  padding: '8px 14px',
+                  border: 'none',
+                  background: filterTab === 'premium' ? '#EDE9FE' : 'transparent',
+                  color: filterTab === 'premium' ? '#522AB0' : '#64748B',
+                  fontWeight: 800,
+                  fontSize: '13.5px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  transition: 'all 0.15s ease',
+                }}
               >
-                Premium <span className="newpill">New</span>
+                <span>Premium</span>
+                <span
+                  style={{
+                    background: '#FEDC00',
+                    color: '#1C0A3F',
+                    fontSize: '9.5px',
+                    fontWeight: 900,
+                    padding: '1px 6px',
+                    borderRadius: '999px',
+                  }}
+                >
+                  NEW
+                </span>
               </button>
             </div>
 
             {filterTab === 'basic' ? (
               <div className="fbody" id="tab-basic">
-                <div className="frow">
+                <div className="frow" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '14px' }}>
                   <button
                     className="freset"
                     type="button"
                     onClick={resetFilters}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: '#522AB0',
+                      fontSize: '12.5px',
+                      fontWeight: 750,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
                   >
-                    <svg viewBox="0 0 24 24">
+                    <svg viewBox="0 0 24 24" style={{ width: 13, height: 13, fill: 'none', stroke: 'currentColor', strokeWidth: 2.2 }}>
                       <path d="M4 5v6h6" />
                       <path d="M4.5 11a8 8 0 1 1 1.6 6" />
                     </svg>
-                    Reset
+                    Reset Filters
                   </button>
                 </div>
 
-                <div className="fgrp">
-                  <h5>BHK type</h5>
-                  <div className="opts">
+                {/* BHK TYPE */}
+                <div className="fgrp" style={{ marginBottom: '20px', borderBottom: '1px solid #F1F5F9', paddingBottom: '18px' }}>
+                  <h5 style={{ margin: '0 0 10px 0', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', letterSpacing: '0.05em' }}>
+                    BHK Configuration
+                  </h5>
+                  <div className="opts" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
                     {['1 RK', '1 BHK', '2 BHK', '3 BHK', '4 BHK', '4+ BHK'].map(
-                      (bhk) => (
-                        <button
-                          key={bhk}
-                          className={`opt ${selectedBhks.includes(bhk) ? 'sel' : ''}`}
-                          type="button"
-                          onClick={() => toggleBhk(bhk)}
-                        >
-                          {bhk}
-                        </button>
-                      )
+                      (bhk) => {
+                        const sel = selectedBhks.includes(bhk);
+                        return (
+                          <button
+                            key={bhk}
+                            className={`opt ${sel ? 'sel' : ''}`}
+                            type="button"
+                            onClick={() => toggleBhk(bhk)}
+                            style={{
+                              padding: '8px 4px',
+                              borderRadius: '10px',
+                              border: sel ? '1.5px solid #522AB0' : '1px solid #E2E8F0',
+                              background: sel ? '#522AB0' : '#F8FAFC',
+                              color: sel ? '#FFFFFF' : '#334155',
+                              fontWeight: sel ? 800 : 650,
+                              fontSize: '12.5px',
+                              cursor: 'pointer',
+                              textAlign: 'center',
+                              transition: 'all 0.15s ease',
+                              boxShadow: sel ? '0 2px 8px rgba(82, 42, 176, 0.25)' : 'none',
+                            }}
+                          >
+                            {bhk}
+                          </button>
+                        );
+                      }
                     )}
                   </div>
                 </div>
 
-                <div className="fgrp">
-                  <h5>Price range</h5>
-                  <div className="rngval" id="rngval">
-                    ₹0 – ₹{maxPriceLakhs >= 100 ? (maxPriceLakhs / 100).toFixed(2) + ' Cr' : maxPriceLakhs + ' L'}
+                {/* PRICE RANGE */}
+                <div className="fgrp" style={{ marginBottom: '20px', borderBottom: '1px solid #F1F5F9', paddingBottom: '18px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <h5 style={{ margin: 0, fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', letterSpacing: '0.05em' }}>
+                      Price Range
+                    </h5>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A' }}>
+                      ₹0 – ₹{maxPriceLakhs >= 100 ? (maxPriceLakhs / 100).toFixed(2) + ' Cr' : maxPriceLakhs + ' L'}
+                    </span>
                   </div>
-                  <div className="rng">
-                    <div className="rngtrack">
+                  <div className="rng" style={{ marginTop: '10px', marginBottom: '8px' }}>
+                    <div className="rngtrack" style={{ height: '6px', background: '#E2E8F0', borderRadius: '999px', position: 'relative' }}>
                       <div
                         className="rngfill"
                         id="rngfill"
-                        style={{ left: '0%', width: `${Math.min(100, (maxPriceLakhs / 300) * 100)}%` }}
+                        style={{
+                          position: 'absolute',
+                          left: '0%',
+                          width: `${Math.min(100, (maxPriceLakhs / 300) * 100)}%`,
+                          height: '100%',
+                          background: 'linear-gradient(90deg, #522AB0, #7C3AED)',
+                          borderRadius: '999px',
+                        }}
                       />
                     </div>
                     <input
@@ -685,112 +900,133 @@ function PropertiesContent() {
                       value={maxPriceLakhs}
                       onChange={(e) => setMaxPriceLakhs(Number(e.target.value))}
                       aria-label="Maximum price"
+                      style={{ width: '100%', marginTop: '8px', cursor: 'pointer', accentColor: '#522AB0' }}
                     />
                   </div>
-                  <div className="rngends">
+                  <div className="rngends" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11.5px', color: '#94A3B8', fontWeight: 650 }}>
                     <span>₹0</span>
                     <span>₹3 Cr+</span>
                   </div>
                 </div>
 
-                <div className="fgrp">
-                  <h5>Property status</h5>
-                  <div className="inline">
-                    <label className="chk">
-                      <input
-                        type="radio"
-                        name="pstatus"
-                        checked={statusFilter === 'All'}
-                        onChange={() => setStatusFilter('All')}
-                      />{' '}
-                      All
-                    </label>
-                    <label className="chk">
-                      <input
-                        type="radio"
-                        name="pstatus"
-                        checked={statusFilter === 'Ready to move'}
-                        onChange={() => setStatusFilter('Ready to move')}
-                      />{' '}
-                      Ready to move
-                    </label>
-                    <label className="chk">
-                      <input
-                        type="radio"
-                        name="pstatus"
-                        checked={statusFilter === 'Under construction'}
-                        onChange={() => setStatusFilter('Under construction')}
-                      />{' '}
-                      Under construction
-                    </label>
-                  </div>
-                </div>
-
-                <div className="fgrp">
-                  <h5>Furnishing</h5>
-                  <div className="inline">
-                    {['Full', 'Semi-furnished', 'Unfurnished'].map((f) => (
-                      <label key={f} className="chk">
+                {/* PROPERTY STATUS */}
+                <div className="fgrp" style={{ marginBottom: '20px', borderBottom: '1px solid #F1F5F9', paddingBottom: '18px' }}>
+                  <h5 style={{ margin: '0 0 10px 0', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', letterSpacing: '0.05em' }}>
+                    Possession Status
+                  </h5>
+                  <div className="inline" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {[
+                      { id: 'All', label: 'All Statuses' },
+                      { id: 'Ready to move', label: 'Ready to Move In' },
+                      { id: 'Under construction', label: 'Under Construction' },
+                    ].map((st) => (
+                      <label key={st.id} className="chk" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 650, color: '#334155', cursor: 'pointer' }}>
                         <input
-                          type="checkbox"
-                          checked={furnishingFilter.includes(f)}
-                          onChange={() => toggleFurnishing(f)}
-                        />{' '}
-                        {f}
+                          type="radio"
+                          name="pstatus"
+                          checked={statusFilter === st.id}
+                          onChange={() => setStatusFilter(st.id)}
+                          style={{ accentColor: '#522AB0', width: '15px', height: '15px' }}
+                        />
+                        <span>{st.label}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
-                <div className="fgrp">
-                  <h5>Property type</h5>
-                  {listingData.propertyTypes.map((pt, idx) => {
-                    const dynamicCount = getPropTypeCount(pt.name);
-                    return (
-                      <label key={idx} className="chk">
+                {/* FURNISHING */}
+                <div className="fgrp" style={{ marginBottom: '20px', borderBottom: '1px solid #F1F5F9', paddingBottom: '18px' }}>
+                  <h5 style={{ margin: '0 0 10px 0', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', letterSpacing: '0.05em' }}>
+                    Furnishing
+                  </h5>
+                  <div className="inline" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {['Full', 'Semi-furnished', 'Unfurnished'].map((f) => (
+                      <label key={f} className="chk" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 650, color: '#334155', cursor: 'pointer' }}>
                         <input
                           type="checkbox"
-                          checked={selectedPropTypes.includes(pt.name)}
-                          onChange={() => togglePropType(pt.name)}
-                        />{' '}
-                        {pt.name} <span className="cnt">{dynamicCount}</span>
+                          checked={furnishingFilter.includes(f)}
+                          onChange={() => toggleFurnishing(f)}
+                          style={{ accentColor: '#522AB0', width: '15px', height: '15px' }}
+                        />
+                        <span>{f === 'Full' ? 'Fully Furnished' : f}</span>
                       </label>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
 
-                <div className="fgrp">
-                  <h5>Listed by</h5>
-                  <div className="inline">
-                    <label className="chk">
+                {/* PROPERTY TYPE */}
+                <div className="fgrp" style={{ marginBottom: '20px', borderBottom: '1px solid #F1F5F9', paddingBottom: '18px' }}>
+                  <h5 style={{ margin: '0 0 10px 0', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', letterSpacing: '0.05em' }}>
+                    Property Type
+                  </h5>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {listingData.propertyTypes.map((pt, idx) => {
+                      const dynamicCount = getPropTypeCount(pt.name);
+                      return (
+                        <label key={idx} className="chk" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '13px', fontWeight: 650, color: '#334155', cursor: 'pointer' }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                            <input
+                              type="checkbox"
+                              checked={selectedPropTypes.includes(pt.name)}
+                              onChange={() => togglePropType(pt.name)}
+                              style={{ accentColor: '#522AB0', width: '15px', height: '15px' }}
+                            />
+                            <span>{pt.name}</span>
+                          </span>
+                          <span style={{ fontSize: '11px', fontWeight: 750, color: '#64748B', background: '#F1F5F9', padding: '2px 7px', borderRadius: '999px' }}>
+                            {dynamicCount}
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* LISTED BY */}
+                <div className="fgrp" style={{ marginBottom: '10px' }}>
+                  <h5 style={{ margin: '0 0 10px 0', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', letterSpacing: '0.05em' }}>
+                    Listed By
+                  </h5>
+                  <div className="inline" style={{ display: 'flex', gap: '14px' }}>
+                    <label className="chk" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 650, color: '#334155', cursor: 'pointer' }}>
                       <input
                         type="checkbox"
                         checked={listedByFilter.includes('Owner')}
                         onChange={() => toggleListedBy('Owner')}
-                      />{' '}
-                      Owner
+                        style={{ accentColor: '#522AB0', width: '15px', height: '15px' }}
+                      />
+                      <span>Owner (0% Brokerage)</span>
                     </label>
-                    <label className="chk">
+                    <label className="chk" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 650, color: '#334155', cursor: 'pointer' }}>
                       <input
                         type="checkbox"
                         checked={listedByFilter.includes('Builder')}
                         onChange={() => toggleListedBy('Builder')}
-                      />{' '}
-                      Builder
+                        style={{ accentColor: '#522AB0', width: '15px', height: '15px' }}
+                      />
+                      <span>Builder</span>
                     </label>
                   </div>
                 </div>
               </div>
             ) : (
               <div className="fbody" id="tab-premium">
-                <p style={{ margin: '0 0 14px', fontSize: '12.5px', color: 'var(--muted)', lineHeight: '1.55' }}>
-                  Narrow down to the listings that usually close fastest.
+                <p style={{ margin: '0 0 14px', fontSize: '13px', color: '#64748B', lineHeight: '1.55' }}>
+                  Filter only the highest quality verified zero-brokerage listings.
                 </p>
-                <div className="fgrp">
-                  <h5>Trust</h5>
-                  <label className="chk"><input type="checkbox" defaultChecked /> Owner verified only</label>
-                  <label className="chk"><input type="checkbox" /> Title &amp; 7/12 checked</label>
-                  <label className="chk"><input type="checkbox" /> RERA registered</label>
+                <div className="fgrp" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <label className="chk" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 650, color: '#334155', cursor: 'pointer' }}>
+                    <input type="checkbox" defaultChecked style={{ accentColor: '#522AB0', width: '15px', height: '15px' }} />
+                    <span>100% Direct Owner Verified</span>
+                  </label>
+                  <label className="chk" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 650, color: '#334155', cursor: 'pointer' }}>
+                    <input type="checkbox" defaultChecked style={{ accentColor: '#522AB0', width: '15px', height: '15px' }} />
+                    <span>Clear 7/12 Title &amp; NA NOC Checked</span>
+                  </label>
+                  <label className="chk" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 650, color: '#334155', cursor: 'pointer' }}>
+                    <input type="checkbox" style={{ accentColor: '#522AB0', width: '15px', height: '15px' }} />
+                    <span>RERA Approved Projects</span>
+                  </label>
                 </div>
               </div>
             )}
@@ -799,87 +1035,86 @@ function PropertiesContent() {
               className="btn applybtn"
               type="button"
               onClick={() => setIsFilterOpen(false)}
+              style={{
+                width: '100%',
+                marginTop: '16px',
+                background: 'linear-gradient(135deg, #522AB0 0%, #41208C 100%)',
+                color: '#FFFFFF',
+                padding: '11px',
+                borderRadius: '12px',
+                fontWeight: 750,
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 4px 14px rgba(82, 42, 176, 0.25)',
+              }}
             >
-              Apply filters
+              Apply Filters
             </button>
           </div>
         </aside>
 
         {/* RESULTS LIST & CENTER COLUMN */}
         <div>
-          <div className="rhead">
+          {/* RESULTS HEADER */}
+          <div
+            className="rhead"
+            style={{
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              gap: '16px',
+              flexWrap: 'wrap',
+              marginBottom: '20px',
+              background: '#FFFFFF',
+              padding: '18px 22px',
+              borderRadius: '16px',
+              border: '1.5px solid #E2E8F0',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+            }}
+          >
             <div>
-              <h1>
+              <h1 style={{ fontSize: 'clamp(20px, 2.4vw, 26px)', fontWeight: 850, color: '#0F172A', margin: 0, letterSpacing: '-0.3px' }}>
                 {categoryFilter === 'Rent'
-                  ? 'Properties for rent'
+                  ? 'Properties for Rent'
                   : categoryFilter === 'Commercial'
-                  ? 'Commercial properties'
+                  ? 'Commercial Properties'
                   : categoryFilter === 'Plot'
-                  ? 'Plots & Land for sale'
-                  : 'Properties & Flats for sale'}
+                  ? 'Plots & Land for Sale'
+                  : 'Properties & Flats for Sale'}
                 {searchInput ? ` in ${searchInput}` : ' in Baner, Pune'}
               </h1>
-              <div className="rsub">
-                <b id="rcount">{filteredListings.length}</b> {listingData.resultsSubTitle}
+              <div className="rsub" style={{ fontSize: '13.5px', color: '#64748B', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ color: '#059669', fontWeight: 800, background: '#ECFDF5', padding: '2px 8px', borderRadius: '6px', fontSize: '12px' }}>
+                  {filteredListings.length} Verified Properties
+                </span>
+                <span>• Within 5 km • Updated today</span>
               </div>
             </div>
-            <div className="rtools" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              {/* Segmented View Switcher */}
-              <div style={{ display: 'inline-flex', background: '#F3F0FA', padding: '3px', borderRadius: '8px', border: '1px solid var(--line)' }}>
-                <button
-                  type="button"
-                  onClick={() => setViewMode('list')}
-                  style={{
-                    padding: '6px 12px',
-                    fontSize: '12.5px',
-                    fontWeight: 600,
-                    borderRadius: '6px',
-                    border: 'none',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '5px',
-                    background: viewMode === 'list' ? '#fff' : 'transparent',
-                    color: viewMode === 'list' ? 'var(--pp)' : 'var(--muted)',
-                    boxShadow: viewMode === 'list' ? '0 2px 6px rgba(0,0,0,0.08)' : 'none',
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  <List className="w-3.5 h-3.5" /> List
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setViewMode('map')}
-                  style={{
-                    padding: '6px 12px',
-                    fontSize: '12.5px',
-                    fontWeight: 600,
-                    borderRadius: '6px',
-                    border: 'none',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '5px',
-                    background: viewMode === 'map' ? '#fff' : 'transparent',
-                    color: viewMode === 'map' ? 'var(--pp)' : 'var(--muted)',
-                    boxShadow: viewMode === 'map' ? '0 2px 6px rgba(0,0,0,0.08)' : 'none',
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  <Map className="w-3.5 h-3.5" /> Map ({filteredListings.length})
-                </button>
-              </div>
 
+            <div className="rtools" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <button
                 className="fbtnmob"
                 type="button"
                 onClick={() => setIsFilterOpen(true)}
+                style={{
+                  display: 'none',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 14px',
+                  borderRadius: '10px',
+                  border: '1.5px solid #522AB0',
+                  background: '#F5F3FF',
+                  color: '#522AB0',
+                  fontWeight: 750,
+                  fontSize: '13px',
+                }}
               >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
+                <svg viewBox="0 0 24 24" style={{ width: 15, height: 15, fill: 'none', stroke: 'currentColor', strokeWidth: 2 }}>
                   <path d="M3 6h18M6 12h12M10 18h4" />
                 </svg>
-                Filters{' '}
-                <span className="n">
+                <span>Filters</span>
+                <span style={{ background: '#522AB0', color: '#fff', borderRadius: '999px', padding: '1px 6px', fontSize: '11px' }}>
                   {selectedBhks.length +
                     (maxPriceLakhs < 300 ? 1 : 0) +
                     (statusFilter !== 'All' ? 1 : 0) +
@@ -888,19 +1123,35 @@ function PropertiesContent() {
                     (categoryFilter !== 'All' ? 1 : 0)}
                 </span>
               </button>
-              <select
-                aria-label="Sort results"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-              >
-                <option>Relevance</option>
-                <option>Price: low to high</option>
-                <option>Price: high to low</option>
-              </select>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '13px', color: '#64748B', fontWeight: 650 }}>Sort by:</span>
+                <select
+                  aria-label="Sort results"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: '10px',
+                    border: '1.5px solid #E2E8F0',
+                    background: '#FAF9FD',
+                    color: '#1E293B',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    outline: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <option>Relevance</option>
+                  <option>Price: low to high</option>
+                  <option>Price: high to low</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <div className="rlist" id="rlist">
+          {/* LISTINGS STREAM */}
+          <div className="rlist" id="rlist" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {paginatedListings.length > 0 ? (
               paginatedListings.map((item: PropertyListingItem, i: number) => (
                 <React.Fragment key={item.id}>
@@ -912,36 +1163,128 @@ function PropertiesContent() {
                     <PropertyListCard listing={item} />
                   </div>
 
-                  {/* INLINE PROMOS */}
+                  {/* MODERN INLINE ALERT PROMO BANNER */}
                   {i === 2 && (
-                    <div className="inlinepromo">
+                    <div
+                      className="inlinepromo"
+                      style={{
+                        background: 'linear-gradient(135deg, #1C0A3F 0%, #311166 100%)',
+                        color: '#FFFFFF',
+                        padding: '24px 28px',
+                        borderRadius: '20px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '18px',
+                        flexWrap: 'wrap',
+                        boxShadow: '0 10px 30px rgba(49, 17, 102, 0.25)',
+                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                      }}
+                    >
                       <div>
-                        <b>Get these results by email</b>
-                        <p>New matching owner listings in Baner, sent the day they go live. No broker spam.</p>
+                        <span style={{ fontSize: '11px', fontWeight: 800, color: '#FEDC00', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '4px' }}>
+                          <Sparkles style={{ width: 13, height: 13 }} /> INSTANT OWNER ALERTS
+                        </span>
+                        <b style={{ fontSize: '18px', fontWeight: 800, display: 'block', marginBottom: '4px' }}>
+                          Get New Verified Owner Listings in Your Inbox
+                        </b>
+                        <p style={{ margin: 0, fontSize: '13.5px', color: 'rgba(255, 255, 255, 0.82)', maxWidth: '500px' }}>
+                          Be the first to inspect genuine direct owner properties before other buyers. Zero broker spam.
+                        </p>
                       </div>
-                      <button className="btn" type="button">Create alert</button>
+                      <button
+                        className="btn"
+                        type="button"
+                        style={{
+                          background: '#FEDC00',
+                          color: '#1C0A3F',
+                          fontWeight: 800,
+                          fontSize: '13.5px',
+                          padding: '11px 22px',
+                          borderRadius: '12px',
+                          border: 'none',
+                          cursor: 'pointer',
+                          boxShadow: '0 4px 14px rgba(254, 220, 0, 0.4)',
+                          whiteSpace: 'nowrap',
+                          transition: 'transform 0.15s ease',
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                      >
+                        Create Instant Alert
+                      </button>
                     </div>
                   )}
                 </React.Fragment>
               ))
             ) : (
-              <div style={{ padding: '40px 20px', textAlign: 'center', background: '#fff', borderRadius: '12px', border: '1px solid var(--line)' }}>
-                <h3>No properties found matching your filters</h3>
-                <p style={{ color: 'var(--muted)', marginTop: '8px' }}>Try resetting or broadening your search criteria.</p>
-                <button className="btn line" type="button" style={{ marginTop: '16px' }} onClick={resetFilters}>
+              <div
+                style={{
+                  padding: '60px 20px',
+                  textAlign: 'center',
+                  background: '#FFFFFF',
+                  borderRadius: '20px',
+                  border: '1.5px solid #E2E8F0',
+                  boxShadow: '0 4px 18px rgba(0,0,0,0.03)',
+                }}
+              >
+                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#F1ECFB', color: '#522AB0', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                  <Building2 style={{ width: 30, height: 30 }} />
+                </div>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', margin: '0 0 6px 0' }}>
+                  No Properties Found Matching Your Filters
+                </h3>
+                <p style={{ color: '#64748B', fontSize: '14px', margin: '0 auto 20px', maxWidth: '420px' }}>
+                  Try adjusting your BHK selection, price range, or category filter to discover more verified owner properties.
+                </p>
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  style={{
+                    background: '#522AB0',
+                    color: '#FFFFFF',
+                    padding: '10px 22px',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontWeight: 750,
+                    border: 'none',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 14px rgba(82, 42, 176, 0.25)',
+                  }}
+                >
                   Reset All Filters
                 </button>
               </div>
             )}
           </div>
 
-          <div className="pager">
+          {/* PAGINATION */}
+          <div
+            className="pager"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              marginTop: '36px',
+            }}
+          >
             <button
               type="button"
               disabled={currentPage === 1}
               onClick={() => {
                 setCurrentPage((p) => Math.max(1, p - 1));
-                window.scrollTo({ top: 250, behavior: 'smooth' });
+                window.scrollTo({ top: 200, behavior: 'smooth' });
+              }}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '10px',
+                border: '1.5px solid #E2E8F0',
+                background: '#FFFFFF',
+                color: currentPage === 1 ? '#CBD5E1' : '#334155',
+                fontSize: '13px',
+                fontWeight: 750,
+                cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
               }}
             >
               ← Prev
@@ -953,7 +1296,20 @@ function PropertiesContent() {
                 type="button"
                 onClick={() => {
                   setCurrentPage(pageNum);
-                  window.scrollTo({ top: 250, behavior: 'smooth' });
+                  window.scrollTo({ top: 200, behavior: 'smooth' });
+                }}
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  border: currentPage === pageNum ? '1.5px solid #522AB0' : '1.5px solid #E2E8F0',
+                  background: currentPage === pageNum ? '#522AB0' : '#FFFFFF',
+                  color: currentPage === pageNum ? '#FFFFFF' : '#334155',
+                  fontSize: '13.5px',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  boxShadow: currentPage === pageNum ? '0 4px 12px rgba(82, 42, 176, 0.25)' : 'none',
+                  transition: 'all 0.15s ease',
                 }}
               >
                 {pageNum}
@@ -964,7 +1320,17 @@ function PropertiesContent() {
               disabled={currentPage === totalPages}
               onClick={() => {
                 setCurrentPage((p) => Math.min(totalPages, p + 1));
-                window.scrollTo({ top: 250, behavior: 'smooth' });
+                window.scrollTo({ top: 200, behavior: 'smooth' });
+              }}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '10px',
+                border: '1.5px solid #E2E8F0',
+                background: '#FFFFFF',
+                color: currentPage === totalPages ? '#CBD5E1' : '#334155',
+                fontSize: '13px',
+                fontWeight: 750,
+                cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
               }}
             >
               Next →
@@ -973,7 +1339,7 @@ function PropertiesContent() {
         </div>
 
         {/* MAP WRAP (MAP MODE) */}
-        <div className="mapwrap" id="mapwrap" style={{ position: 'relative', overflow: 'hidden', minHeight: '520px', borderRadius: '16px', border: '1px solid var(--line)' }}>
+        <div className="mapwrap" id="mapwrap" style={{ position: 'relative', overflow: 'hidden', minHeight: '520px', borderRadius: '20px', border: '1.5px solid #E2E8F0' }}>
           <PropertyInteractiveMap
             listings={filteredListings}
             address={searchInput || searchTag || filteredListings[0]?.address || 'Baner, Pune'}
@@ -990,17 +1356,53 @@ function PropertiesContent() {
         </div>
 
         {/* QUICK LINKS RAIL */}
-        <aside className="qrail" aria-label="Quick links">
+        <aside className="qrail" aria-label="Quick links" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {listingData.quickLinkCards.map((card, cIdx) => (
-            <div key={cIdx} className="qcard">
-              <h3 className="qtitle">{card.title}</h3>
+            <div
+              key={cIdx}
+              className="qcard"
+              style={{
+                background: '#FFFFFF',
+                border: '1.5px solid #E2E8F0',
+                borderRadius: '18px',
+                padding: '20px',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
+              }}
+            >
+              <h3 className="qtitle" style={{ fontSize: '15px', fontWeight: 800, color: '#0F172A', margin: '0 0 12px 0' }}>
+                {card.title}
+              </h3>
               {card.sections.map((sec, sIdx) => (
-                <div key={sIdx} className="qsec">
-                  <h4>{sec.title}</h4>
-                  <ul>
+                <div key={sIdx} className="qsec" style={{ marginBottom: '12px' }}>
+                  <h4 style={{ fontSize: '12.5px', fontWeight: 750, color: '#522AB0', margin: '0 0 8px 0' }}>
+                    {sec.title}
+                  </h4>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '7px' }}>
                     {sec.links.map((link, lIdx) => (
                       <li key={lIdx}>
-                        <Link href={link.href}>{link.label}</Link>
+                        <Link
+                          href={link.href}
+                          style={{
+                            fontSize: '13px',
+                            color: '#475569',
+                            textDecoration: 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            transition: 'all 0.15s ease',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = '#522AB0';
+                            e.currentTarget.style.transform = 'translateX(3px)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = '#475569';
+                            e.currentTarget.style.transform = 'translateX(0)';
+                          }}
+                        >
+                          <span style={{ color: '#522AB0', fontSize: '10px' }}>▪</span>
+                          <span>{link.label}</span>
+                        </Link>
                       </li>
                     ))}
                   </ul>

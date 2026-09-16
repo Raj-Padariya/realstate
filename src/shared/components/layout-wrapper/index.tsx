@@ -40,7 +40,7 @@ export default function ClientLayoutWrapper({
       <PropertyProvider>
         <LeadsProvider>
           <BlogsProvider>
-            <main style={{ width: '100%', minHeight: '100vh', background: '#f4f6f9' }}>{children}</main>
+            {children}
           </BlogsProvider>
         </LeadsProvider>
       </PropertyProvider>

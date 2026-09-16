@@ -35,7 +35,7 @@ export default function AdminEditPropertyPage({ params }: { params: { id: string
     badgeText: matched?.badgeText || 'Owner verified',
     description: matched?.description || 'Spacious verified property directly from owner.',
     ownerName: matched?.ownerName || 'Sandeep Kumar',
-    ownerPhone: matched?.ownerPhone || '+91 98765 43210',
+    ownerPhone: matched?.ownerPhone || '+971 54 246 7717',
   });
 
   const [photos, setPhotos] = useState<string[]>(
@@ -91,106 +91,112 @@ export default function AdminEditPropertyPage({ params }: { params: { id: string
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div style={{ maxWidth: '880px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '22px' }}>
       {/* Top back navigation */}
-      <div className="flex items-center justify-between">
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link
           href="/admin/properties"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 700, color: '#522AB0', textDecoration: 'none' }}
         >
-          <ArrowLeft className="w-3.5 h-3.5" /> Back to Properties Inventory
+          <ArrowLeft style={{ width: '14px', height: '14px' }} /> Back to Properties Inventory
         </Link>
         <Link
           href={`/property/${formData.id}`}
           target="_blank"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-indigo-600 dark:text-slate-400"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12.5px', fontWeight: 700, color: '#64748B', textDecoration: 'none' }}
         >
-          <ExternalLink className="w-3.5 h-3.5" /> View Public Page
+          <ExternalLink style={{ width: '13px', height: '13px' }} /> View Public Listing Page
         </Link>
       </div>
 
       {/* Header */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
-              Edit Listing
-            </h1>
-            <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-              #{formData.id}
-            </span>
-          </div>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Modify pricing, specifications, geo-coordinates, and high-resolution photo gallery.
-          </p>
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #1E1035 0%, #2A1454 60%, #170A30 100%)',
+          borderRadius: '18px',
+          padding: '24px 28px',
+          color: '#FFFFFF',
+          boxShadow: '0 8px 24px rgba(23, 10, 48, 0.2)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <h1 style={{ fontSize: '22px', fontWeight: 900, margin: 0 }}>
+            Edit Listing
+          </h1>
+          <span style={{ fontFamily: 'monospace', fontSize: '12px', fontWeight: 800, padding: '3px 10px', borderRadius: '6px', background: 'rgba(255,255,255,0.15)', color: '#FEDC00' }}>
+            #{formData.id}
+          </span>
         </div>
+        <p style={{ margin: '4px 0 0', fontSize: '13.5px', color: 'rgba(255, 255, 255, 0.8)' }}>
+          Modify pricing, specifications, geo-coordinates, and high-resolution photo gallery.
+        </p>
       </div>
 
       {/* Main Edit Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* 1. Basic Details */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
-          <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 pb-2 border-b border-slate-100 dark:border-slate-800">
+        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1.5px solid #E2E8F0', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+          <div style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', borderBottom: '1px solid #F1F5F9', paddingBottom: '8px' }}>
             1. Basic Property Information
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
                 Property Title *
               </label>
               <input
                 required
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
+                style={{ width: '100%', padding: '10px 14px', fontSize: '13.5px', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none' }}
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+            <div>
+              <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
                 Price Tag (₹) *
               </label>
               <input
                 required
                 value={formData.price}
                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                className="w-full px-3.5 py-2.5 text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500/20"
+                style={{ width: '100%', padding: '10px 14px', fontSize: '13.5px', fontWeight: 800, color: '#059669', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none' }}
               />
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+          <div>
+            <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
               Address &amp; Landmark
             </label>
             <input
               required
               value={formData.address}
               onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-indigo-500/20"
+              style={{ width: '100%', padding: '10px 14px', fontSize: '13.5px', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none', marginBottom: '12px' }}
             />
-          </div>
-
-          {/* Interactive Map Preview */}
-          <div className="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 mt-2">
-            <PropertyMap address={formData.address || 'Ahmedabad, Gujarat'} height="180px" showTitleBadge={true} />
+            {/* Interactive Map Preview */}
+            <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #E2E8F0' }}>
+              <PropertyMap address={formData.address || 'Ahmedabad, Gujarat'} height="180px" showTitleBadge={true} />
+            </div>
           </div>
         </div>
 
         {/* 2. Specifications */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
-          <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 pb-2 border-b border-slate-100 dark:border-slate-800">
+        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1.5px solid #E2E8F0', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+          <div style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', borderBottom: '1px solid #F1F5F9', paddingBottom: '8px' }}>
             2. Specifications &amp; Verification
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">BHK Type</label>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>BHK Type</label>
               <select
                 value={formData.bhk}
                 onChange={(e) => setFormData({ ...formData, bhk: e.target.value })}
-                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white outline-none"
+                style={{ width: '100%', padding: '10px 14px', fontSize: '13.5px', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none', background: '#fff' }}
               >
                 <option value="1 RK">1 RK</option>
                 <option value="1 BHK">1 BHK</option>
@@ -203,21 +209,21 @@ export default function AdminEditPropertyPage({ params }: { params: { id: string
               </select>
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Built-up Area</label>
+            <div>
+              <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>Built-up Area</label>
               <input
                 value={formData.areaSqFt}
                 onChange={(e) => setFormData({ ...formData, areaSqFt: e.target.value })}
-                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white outline-none"
+                style={{ width: '100%', padding: '10px 14px', fontSize: '13.5px', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none' }}
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Verification Status</label>
+            <div>
+              <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>Verification Status</label>
               <select
                 value={formData.badgeText}
                 onChange={(e) => setFormData({ ...formData, badgeText: e.target.value })}
-                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white outline-none"
+                style={{ width: '100%', padding: '10px 14px', fontSize: '13.5px', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none', background: '#fff' }}
               >
                 <option value="Owner verified">Owner verified</option>
                 <option value="Title checked">Title checked</option>
@@ -227,20 +233,20 @@ export default function AdminEditPropertyPage({ params }: { params: { id: string
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Property Description</label>
+          <div>
+            <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>Property Description</label>
             <textarea
               rows={3}
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white outline-none resize-none"
+              style={{ width: '100%', padding: '10px 14px', fontSize: '13.5px', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none', resize: 'vertical' }}
             />
           </div>
         </div>
 
         {/* 3. Photo Gallery */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
-          <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 pb-2 border-b border-slate-100 dark:border-slate-800">
+        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1.5px solid #E2E8F0', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+          <div style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', borderBottom: '1px solid #F1F5F9', paddingBottom: '8px' }}>
             3. Photo Gallery
           </div>
 
@@ -253,45 +259,56 @@ export default function AdminEditPropertyPage({ params }: { params: { id: string
         </div>
 
         {/* 4. Owner Details */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
-          <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 pb-2 border-b border-slate-100 dark:border-slate-800">
+        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1.5px solid #E2E8F0', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+          <div style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', borderBottom: '1px solid #F1F5F9', paddingBottom: '8px' }}>
             4. Owner Contact
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Owner Name</label>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>Owner Name</label>
               <input
                 value={formData.ownerName}
                 onChange={(e) => setFormData({ ...formData, ownerName: e.target.value })}
-                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white outline-none"
+                style={{ width: '100%', padding: '10px 14px', fontSize: '13.5px', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none' }}
               />
             </div>
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Owner Phone</label>
+            <div>
+              <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>Owner Phone</label>
               <input
                 value={formData.ownerPhone}
                 onChange={(e) => setFormData({ ...formData, ownerPhone: e.target.value })}
-                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white outline-none"
+                style={{ width: '100%', padding: '10px 14px', fontSize: '13.5px', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none' }}
               />
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-between bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#FFFFFF', padding: '18px 24px', borderRadius: '16px', border: '1.5px solid #E2E8F0', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
           <Link
             href="/admin/properties"
-            className="px-4 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 rounded-xl transition-all"
+            style={{ padding: '10px 20px', borderRadius: '8px', background: '#F1F5F9', color: '#334155', fontSize: '13px', fontWeight: 700, textDecoration: 'none' }}
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={saved}
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-black text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 rounded-xl shadow-md shadow-indigo-500/25 active:scale-[0.99] transition-all cursor-pointer"
+            style={{
+              padding: '12px 28px',
+              borderRadius: '10px',
+              background: 'linear-gradient(135deg, #522AB0 0%, #41208C 100%)',
+              color: '#FFFFFF',
+              fontSize: '14px',
+              fontWeight: 850,
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '0 4px 14px rgba(82, 42, 176, 0.3)',
+            }}
           >
-            <Save className="w-4 h-4" /> {saved ? 'Saving Changes...' : 'Save & Update Listing'}
+            <Save style={{ width: '15px', height: '15px', display: 'inline', marginRight: '6px', verticalAlign: '-2px' }} />
+            {saved ? 'Saving Changes...' : 'Save & Update Listing'}
           </button>
         </div>
       </form>

@@ -17,36 +17,80 @@ import {
   X,
   Bell,
   Search,
-  UserCheck,
+  ChevronRight,
+  Sparkles,
+  ChevronLeft,
+  Home,
+  CheckCircle2,
+  Lock,
 } from 'lucide-react';
 import { useLeads } from '@/shared/context/LeadsContext';
+
+interface NavGroup {
+  title: string;
+  items: {
+    label: string;
+    href: string;
+    icon: React.ElementType;
+    badge?: string;
+    isPrimary?: boolean;
+  }[];
+}
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const { stats } = useLeads();
 
-  const navItems = [
-    { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { label: 'Leads & Users', href: '/admin/leads', icon: Users, badge: stats.newCount > 0 ? String(stats.newCount) : undefined },
-    { label: 'All Properties', href: '/admin/properties', icon: Building2 },
-    { label: 'Add New Listing', href: '/admin/properties/new', icon: PlusCircle },
-    { label: 'Subscription Plans', href: '/admin/plans', icon: CreditCard },
-    { label: 'Rent Agreements', href: '/admin/rent-agreements', icon: FileText },
-    { label: 'News & Blogs CMS', href: '/admin/blogs', icon: Newspaper },
+  const navGroups: NavGroup[] = [
+    {
+      title: 'Overview',
+      items: [
+        { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+      ],
+    },
+    {
+      title: 'Property Manager',
+      items: [
+        { label: 'All Properties', href: '/admin/properties', icon: Building2 },
+        { label: 'Add New Property', href: '/admin/properties/new', icon: PlusCircle, isPrimary: true },
+      ],
+    },
+    {
+      title: 'CRM & Inquiries',
+      items: [
+        {
+          label: 'Leads & Inquiries',
+          href: '/admin/leads',
+          icon: Users,
+          badge: stats.newCount > 0 ? `${stats.newCount} New` : undefined,
+        },
+        { label: 'Rent Agreements', href: '/admin/rent-agreements', icon: FileText },
+      ],
+    },
+    {
+      title: 'Content & Monetization',
+      items: [
+        { label: 'News & Blogs Studio', href: '/admin/blogs', icon: Newspaper },
+        { label: 'Subscription Plans', href: '/admin/plans', icon: CreditCard },
+      ],
+    },
   ];
 
-  const getPageTitle = () => {
-    if (pathname === '/admin') return 'Admin Dashboard';
-    if (pathname === '/admin/leads') return 'Leads & User Management';
-    if (pathname === '/admin/properties') return 'Property Listings Manager';
-    if (pathname === '/admin/properties/new') return 'Create New Property Listing';
-    if (pathname?.startsWith('/admin/properties/edit')) return 'Edit Property Details';
-    if (pathname === '/admin/plans') return 'Subscription Plans Management';
-    if (pathname === '/admin/rent-agreements') return 'Rental Agreement Requests';
-    if (pathname === '/admin/blogs') return 'Real Estate Blogs & News CMS';
-    return 'Admin Control Panel';
+  const getBreadcrumbs = () => {
+    if (pathname === '/admin') return [{ label: 'Admin', href: '/admin' }, { label: 'Dashboard' }];
+    if (pathname === '/admin/properties') return [{ label: 'Admin', href: '/admin' }, { label: 'Properties' }];
+    if (pathname === '/admin/properties/new') return [{ label: 'Admin', href: '/admin' }, { label: 'Properties', href: '/admin/properties' }, { label: 'Create New' }];
+    if (pathname?.startsWith('/admin/properties/edit')) return [{ label: 'Admin', href: '/admin' }, { label: 'Properties', href: '/admin/properties' }, { label: 'Edit' }];
+    if (pathname === '/admin/leads') return [{ label: 'Admin', href: '/admin' }, { label: 'Leads & CRM' }];
+    if (pathname === '/admin/plans') return [{ label: 'Admin', href: '/admin' }, { label: 'Subscription Plans' }];
+    if (pathname === '/admin/rent-agreements') return [{ label: 'Admin', href: '/admin' }, { label: 'Rent Agreements' }];
+    if (pathname === '/admin/blogs') return [{ label: 'Admin', href: '/admin' }, { label: 'Blogs & News CMS' }];
+    return [{ label: 'Admin', href: '/admin' }, { label: 'Control Center' }];
   };
+
+  const breadcrumbs = getBreadcrumbs();
 
   return (
     <div
@@ -55,8 +99,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         height: '100vh',
         width: '100vw',
         overflow: 'hidden',
-        background: '#f4f6f9',
-        fontFamily: '"Open Sans", sans-serif',
+        background: '#0F172A',
+        fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       }}
     >
       {/* MOBILE BACKDROP */}
@@ -66,227 +110,448 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           style={{
             position: 'fixed',
             inset: 0,
-            background: 'rgba(0,0,0,0.5)',
-            backdropFilter: 'blur(4px)',
-            zIndex: 99,
+            background: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(6px)',
+            zIndex: 9998,
           }}
         />
       )}
 
-      {/* FIXED ADMIN SIDEBAR */}
+      {/* LUXURY DARK SIDEBAR */}
       <aside
         style={{
-          width: '260px',
+          width: isCollapsed ? '80px' : '270px',
           height: '100vh',
-          background: '#1A0B36',
-          color: '#fff',
+          background: 'linear-gradient(180deg, #110A26 0%, #0F091E 50%, #080412 100%)',
+          color: '#FFFFFF',
           display: 'flex',
           flexDirection: 'column',
           flexShrink: 0,
-          borderRight: '1px solid rgba(255,255,255,0.08)',
-          zIndex: 100,
-          transition: 'all 0.3s ease',
+          borderRight: '1px solid rgba(255, 255, 255, 0.08)',
+          zIndex: 9999,
+          transition: 'width 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+          position: 'relative',
         }}
       >
         {/* BRAND HEADER */}
         <div
           style={{
-            padding: '20px',
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
+            padding: isCollapsed ? '20px 14px' : '22px 20px',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.07)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: isCollapsed ? 'center' : 'space-between',
             flexShrink: 0,
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span
+          <Link href="/admin" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
+            <div
               style={{
-                width: '38px',
-                height: '38px',
-                background: 'linear-gradient(135deg, #522AB0, #41208C)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '12px',
+                background: 'linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%)',
                 color: '#FEDC00',
-                borderRadius: '10px',
-                display: 'grid',
-                placeItems: 'center',
-                fontWeight: '800',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 900,
                 fontSize: '18px',
-                boxShadow: '0 4px 12px rgba(82,42,176,0.5)',
+                boxShadow: '0 4px 16px rgba(124, 58, 237, 0.4)',
+                flexShrink: 0,
               }}
             >
               GP
-            </span>
-            <div>
-              <div style={{ fontWeight: '800', fontSize: '16px', lineHeight: '1.2', color: '#fff' }}>
-                GujjuProperty
-              </div>
-              <div style={{ fontSize: '11px', color: '#FEDC00', fontWeight: '700', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                Admin Control
-              </div>
             </div>
-          </div>
 
-          <button
-            type="button"
-            onClick={() => setIsMobileOpen(false)}
-            style={{
-              display: 'none',
-              background: 'none',
-              border: 'none',
-              color: '#fff',
-              cursor: 'pointer',
-            }}
-          >
-            <X className="w-5 h-5" />
-          </button>
+            {!isCollapsed && (
+              <div>
+                <div style={{ fontWeight: 900, fontSize: '16.5px', color: '#FFFFFF', letterSpacing: '-0.2px', lineHeight: 1.2 }}>
+                  Gujju<span style={{ color: '#FEDC00' }}>Property</span>
+                </div>
+                <div style={{ fontSize: '10.5px', color: '#A78BFA', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '2px' }}>
+                  ADMIN SUITE 2.0
+                </div>
+              </div>
+            )}
+          </Link>
         </div>
 
-        {/* NAVIGATION LINKS */}
-        <nav style={{ padding: '20px 12px', flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', padding: '0 12px 6px', letterSpacing: '0.5px' }}>
-            Main Menu
-          </div>
-
-          {navItems.map((item) => {
-            const IconComponent = item.icon;
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsMobileOpen(false)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '11px 14px',
-                  borderRadius: '10px',
-                  fontSize: '14px',
-                  fontWeight: isActive ? '800' : '600',
-                  color: isActive ? '#fff' : '#c3b7e0',
-                  background: isActive ? 'linear-gradient(135deg, #522AB0, #41208C)' : 'transparent',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s ease',
-                  boxShadow: isActive ? '0 4px 14px rgba(82,42,176,0.4)' : 'none',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <IconComponent className={`w-4 h-4 ${isActive ? 'text-[#FEDC00]' : 'text-[#a493cf]'}`} />
-                  <span>{item.label}</span>
+        {/* NAVIGATION STREAM */}
+        <nav
+          style={{
+            padding: isCollapsed ? '16px 8px' : '18px 14px',
+            flex: 1,
+            overflowY: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+          }}
+        >
+          {navGroups.map((group, gIdx) => (
+            <div key={gIdx}>
+              {!isCollapsed && (
+                <div
+                  style={{
+                    fontSize: '10px',
+                    fontWeight: 800,
+                    color: 'rgba(255, 255, 255, 0.38)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    padding: '0 10px 8px',
+                  }}
+                >
+                  {group.title}
                 </div>
-                {item.badge && (
-                  <span style={{ background: '#FEDC00', color: '#1A0B36', fontSize: '11px', fontWeight: 800, padding: '2px 8px', borderRadius: '999px' }}>
-                    {item.badge}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
+              )}
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                {group.items.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileOpen(false)}
+                      title={isCollapsed ? item.label : undefined}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: isCollapsed ? 'center' : 'space-between',
+                        padding: isCollapsed ? '12px' : '10px 14px',
+                        borderRadius: '10px',
+                        fontSize: '13.5px',
+                        fontWeight: isActive ? 800 : 650,
+                        color: isActive ? '#FFFFFF' : '#94A3B8',
+                        background: isActive
+                          ? 'linear-gradient(135deg, rgba(124, 58, 237, 0.9) 0%, rgba(91, 33, 182, 0.95) 100%)'
+                          : 'transparent',
+                        textDecoration: 'none',
+                        transition: 'all 0.15s ease',
+                        boxShadow: isActive ? '0 4px 14px rgba(124, 58, 237, 0.35)' : 'none',
+                        border: isActive ? '1px solid rgba(196, 181, 253, 0.3)' : '1px solid transparent',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                          e.currentTarget.style.color = '#FFFFFF';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.background = 'transparent';
+                          e.currentTarget.style.color = '#94A3B8';
+                        }
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <Icon
+                          style={{
+                            width: '18px',
+                            height: '18px',
+                            color: isActive ? '#FEDC00' : '#818CF8',
+                            flexShrink: 0,
+                          }}
+                        />
+                        {!isCollapsed && <span>{item.label}</span>}
+                      </div>
+
+                      {!isCollapsed && item.badge && (
+                        <span
+                          style={{
+                            background: '#EF4444',
+                            color: '#FFFFFF',
+                            fontSize: '10px',
+                            fontWeight: 900,
+                            padding: '2px 7px',
+                            borderRadius: '999px',
+                            boxShadow: '0 2px 6px rgba(239, 68, 68, 0.4)',
+                          }}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
 
-        {/* FOOTER LIVE SITE LINK */}
-        <div style={{ padding: '16px', borderTop: '1px solid rgba(255,255,255,0.08)', flexShrink: 0 }}>
+        {/* SIDEBAR BOTTOM FOOTER */}
+        <div
+          style={{
+            padding: '14px',
+            borderTop: '1px solid rgba(255, 255, 255, 0.07)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px',
+            flexShrink: 0,
+          }}
+        >
+          {/* Collapse/Expand button */}
+          <button
+            type="button"
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: isCollapsed ? 'center' : 'flex-start',
+              gap: '10px',
+              padding: '9px 12px',
+              borderRadius: '8px',
+              background: 'rgba(255, 255, 255, 0.04)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              color: '#94A3B8',
+              fontSize: '12.5px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#FFFFFF';
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#94A3B8';
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+            }}
+          >
+            {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+            {!isCollapsed && <span>Collapse Sidebar</span>}
+          </button>
+
+          {/* View Live Website Link */}
           <Link
             href="/"
             target="_blank"
             style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: isCollapsed ? 'center' : 'center',
               gap: '8px',
-              width: '100%',
-              padding: '12px',
-              borderRadius: '10px',
-              background: 'rgba(255,255,255,0.08)',
-              color: '#fff',
-              fontSize: '13px',
-              fontWeight: '700',
+              padding: '10px 14px',
+              borderRadius: '9px',
+              background: 'linear-gradient(135deg, rgba(82, 42, 176, 0.25) 0%, rgba(65, 32, 140, 0.35) 100%)',
+              border: '1px solid rgba(167, 139, 250, 0.3)',
+              color: '#FFFFFF',
+              fontSize: '12.5px',
+              fontWeight: 800,
               textDecoration: 'none',
-              transition: 'background 0.2s ease',
-              border: '1px solid rgba(255,255,255,0.12)',
+              transition: 'all 0.15s ease',
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#FEDC00')}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(167, 139, 250, 0.3)')}
           >
             <ExternalLink className="w-4 h-4 text-[#FEDC00]" />
-            <span>View Live Website</span>
+            {!isCollapsed && <span>View Live Site</span>}
           </Link>
         </div>
       </aside>
 
-      {/* MAIN CONTENT AREA */}
-      <main
+      {/* MAIN ADMIN WORKSPACE */}
+      <div
         style={{
           flex: 1,
           height: '100vh',
-          overflowY: 'auto',
           display: 'flex',
           flexDirection: 'column',
-          boxSizing: 'border-box',
-          background: '#F4F5F8',
+          overflow: 'hidden',
+          background: '#F8FAFC',
         }}
       >
-        {/* TOP BAR HEADER */}
+        {/* MODERN GLASSMORPHIC TOPBAR */}
         <header
           style={{
-            background: '#fff',
-            borderBottom: '1px solid #EBE6F7',
-            padding: '16px 36px',
+            background: 'rgba(255, 255, 255, 0.92)',
+            backdropFilter: 'blur(12px)',
+            borderBottom: '1px solid #E2E8F0',
+            padding: '14px 28px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexShrink: 0,
             gap: '16px',
+            zIndex: 10,
           }}
         >
+          {/* LEFT: BREADCRUMBS & MOBILE TRIGGER */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <button
               type="button"
               onClick={() => setIsMobileOpen(true)}
+              aria-label="Toggle menu"
               style={{
                 display: 'none',
-                background: '#FAF9FD',
-                border: '1px solid #EBE6F7',
+                background: '#FFFFFF',
+                border: '1.5px solid #E2E8F0',
                 borderRadius: '8px',
-                padding: '8px',
+                padding: '6px',
                 cursor: 'pointer',
               }}
             >
               <Menu className="w-5 h-5 text-[#522AB0]" />
             </button>
 
-            <div>
-              <h1 style={{ fontSize: '20px', fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.2 }}>
-                {getPageTitle()}
-              </h1>
-              <div style={{ fontSize: '12.5px', color: '#6B7280', marginTop: '2px' }}>
-                GujjuProperty Admin Portal • Pan-India System
-              </div>
+            {/* Breadcrumb Trail */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#64748B' }}>
+              <Home className="w-4 h-4 text-[#522AB0]" />
+              {breadcrumbs.map((b, idx) => (
+                <React.Fragment key={idx}>
+                  <ChevronRight className="w-3.5 h-3.5 text-[#CBD5E1]" />
+                  {b.href ? (
+                    <Link href={b.href} style={{ color: '#64748B', textDecoration: 'none', fontWeight: 650 }}>
+                      {b.label}
+                    </Link>
+                  ) : (
+                    <span style={{ color: '#0F172A', fontWeight: 800 }}>{b.label}</span>
+                  )}
+                </React.Fragment>
+              ))}
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            {/* System Status Pill */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#E6F4EA', padding: '6px 14px', borderRadius: '999px', fontSize: '12.5px', color: '#0F9D58', fontWeight: 700 }}>
-              <ShieldCheck className="w-4 h-4 text-[#0F9D58]" />
-              <span>System Live &amp; Healthy</span>
+          {/* RIGHT: LIVE STATUS, NOTIFICATIONS & ADMIN PROFILE */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            {/* Live System Badge */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: '#ECFDF5',
+                border: '1px solid #A7F3D0',
+                padding: '5px 12px',
+                borderRadius: '999px',
+                fontSize: '12px',
+                color: '#059669',
+                fontWeight: 800,
+              }}
+            >
+              <span
+                style={{
+                  width: '7px',
+                  height: '7px',
+                  borderRadius: '50%',
+                  background: '#10B981',
+                  boxShadow: '0 0 8px #10B981',
+                }}
+              />
+              <span>Production Live</span>
             </div>
 
-            {/* Admin Profile Pill */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#FAF9FD', border: '1px solid #EBE6F7', padding: '6px 14px', borderRadius: '999px' }}>
-              <div style={{ width: '28px', height: '28px', background: '#522AB0', color: '#fff', borderRadius: '50%', display: 'grid', placeItems: 'center', fontWeight: 800, fontSize: '12px' }}>
-                AD
+            {/* Quick Add Button */}
+            <Link
+              href="/admin/properties/new"
+              style={{
+                background: 'linear-gradient(135deg, #522AB0 0%, #41208C 100%)',
+                color: '#FFFFFF',
+                padding: '7px 14px',
+                borderRadius: '9px',
+                fontSize: '12.5px',
+                fontWeight: 750,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: '0 2px 8px rgba(82, 42, 176, 0.25)',
+              }}
+            >
+              <PlusCircle className="w-4 h-4 text-[#FEDC00]" />
+              <span>Add Property</span>
+            </Link>
+
+            {/* Notification Bell */}
+            <Link
+              href="/admin/leads"
+              title="Recent Inquiries"
+              style={{
+                position: 'relative',
+                width: '36px',
+                height: '36px',
+                borderRadius: '9px',
+                border: '1.5px solid #E2E8F0',
+                background: '#FFFFFF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#475569',
+                textDecoration: 'none',
+              }}
+            >
+              <Bell className="w-4 h-4" />
+              {stats.newCount > 0 && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: '-3px',
+                    right: '-3px',
+                    background: '#EF4444',
+                    color: '#FFFFFF',
+                    fontSize: '9px',
+                    fontWeight: 900,
+                    width: '16px',
+                    height: '16px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 6px rgba(239, 68, 68, 0.4)',
+                  }}
+                >
+                  {stats.newCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Admin Profile Chip */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '4px 10px 4px 6px',
+                borderRadius: '999px',
+                border: '1.5px solid #E2E8F0',
+                background: '#FFFFFF',
+              }}
+            >
+              <div
+                style={{
+                  width: '28px',
+                  height: '28px',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #7C3AED 0%, #522AB0 100%)',
+                  color: '#FEDC00',
+                  fontWeight: 900,
+                  fontSize: '11px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                SA
               </div>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#111827' }}>
-                Admin Officer
+              <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#0F172A' }}>
+                Super Admin
               </div>
             </div>
           </div>
         </header>
 
-        {/* PAGE BODY CONTENT */}
-        <div style={{ padding: '32px 36px', flex: 1 }}>
+        {/* SCROLLABLE MAIN CANVAS */}
+        <main
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            padding: '28px 32px',
+          }}
+        >
           {children}
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

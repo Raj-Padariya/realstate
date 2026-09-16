@@ -28,7 +28,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body style={{ margin: 0, padding: 0 }} className="m-0 p-0 antialiased">
         <ClientLayoutWrapper
           topBarData={cmsData.topBar}
           headerData={cmsData.header}

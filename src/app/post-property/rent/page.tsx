@@ -200,7 +200,7 @@ function RentalPostContent() {
       age: propertyAge || '1-3 years',
       description: description || 'Corner flat, excellent ventilation and covered parking.',
       ownerName: ownerName || 'Property Owner',
-      ownerPhone: ownerPhone || '9876543210',
+      ownerPhone: ownerPhone || '+971 54 246 7717',
       ownerRole: 'Individual Owner',
     };
 

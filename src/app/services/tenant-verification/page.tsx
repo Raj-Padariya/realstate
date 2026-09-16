@@ -467,7 +467,7 @@ export default function TenantVerificationPage() {
                 <p style={{ fontSize: '12px', color: '#6B21A8', margin: 0 }}>Talk directly to our legal desk expert.</p>
               </div>
               <a
-                href="tel:+919876543210"
+                href="tel:+971542467717"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',

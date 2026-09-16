@@ -147,8 +147,8 @@ export default function ContactUsPage() {
                   </div>
                   <div>
                     <div style={{ fontSize: '11px', color: '#FEDC00', fontWeight: 800, textTransform: 'uppercase' }}>Buyer & General Helpline</div>
-                    <a href="tel:+918900000000" style={{ fontSize: '16px', fontWeight: 800, color: '#fff', textDecoration: 'none', display: 'block', marginTop: '2px' }}>
-                      +91 89XXX XXXXX
+                    <a href="tel:+971542467717" style={{ fontSize: '16px', fontWeight: 800, color: '#fff', textDecoration: 'none', display: 'block', marginTop: '2px' }}>
+                      +971 54 246 7717
                     </a>
                   </div>
                 </div>
@@ -160,8 +160,8 @@ export default function ContactUsPage() {
                   </div>
                   <div>
                     <div style={{ fontSize: '11px', color: '#FEDC00', fontWeight: 800, textTransform: 'uppercase' }}>Owner Listing Helpline</div>
-                    <a href="tel:+918900000000" style={{ fontSize: '16px', fontWeight: 800, color: '#fff', textDecoration: 'none', display: 'block', marginTop: '2px' }}>
-                      +91 89XXX XXXXX
+                    <a href="tel:+971542467717" style={{ fontSize: '16px', fontWeight: 800, color: '#fff', textDecoration: 'none', display: 'block', marginTop: '2px' }}>
+                      +971 54 246 7717
                     </a>
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export default function ContactUsPage() {
             {/* WhatsApp Quick Pill */}
             <div style={{ marginTop: '36px', paddingTop: '24px', borderTop: '1px solid rgba(255,255,255,0.15)' }}>
               <a
-                href="https://wa.me/918905552444"
+                href="https://wa.me/971542467717"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

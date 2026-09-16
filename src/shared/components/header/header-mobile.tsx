@@ -217,7 +217,7 @@ export function HeaderMobile({ headerData, isOpen, onClose }: HeaderMobileProps)
               <div className="drawer-contact-body" style={{ padding: '16px 18px', background: '#fafbfc' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
                   <a
-                    href="tel:+919876543210"
+                    href="tel:+971542467717"
                     style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -235,7 +235,7 @@ export function HeaderMobile({ headerData, isOpen, onClose }: HeaderMobileProps)
                     </div>
                     <div>
                       <span style={{ display: 'block', fontSize: '10.5px', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Toll Free Helpline</span>
-                      <b style={{ fontSize: '13.5px', color: 'var(--brand)', fontWeight: 800 }}>+91 98765 43210</b>
+                      <b style={{ fontSize: '13.5px', color: 'var(--brand)', fontWeight: 800 }}>+971 54 246 7717</b>
                     </div>
                   </a>
 
@@ -344,7 +344,7 @@ export function HeaderMobile({ headerData, isOpen, onClose }: HeaderMobileProps)
 
                     {/* WhatsApp */}
                     <a
-                      href="https://wa.me/919876543210"
+                      href="https://wa.me/971542467717"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="social-circle"

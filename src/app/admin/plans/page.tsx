@@ -83,19 +83,33 @@ export default function AdminPlansPage() {
   const currentTabObj = tabsInfo.find(t => t.id === activeTab) || tabsInfo[0];
 
   return (
-    <div className="space-y-6 max-w-full">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '22px', maxWidth: '100%' }}>
       {/* HEADER SECTION */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #1E1035 0%, #2A1454 60%, #170A30 100%)',
+          borderRadius: '18px',
+          padding: '24px 28px',
+          color: '#FFFFFF',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px',
+          boxShadow: '0 8px 24px rgba(23, 10, 48, 0.2)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+        }}
+      >
         <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h1 style={{ fontSize: '22px', fontWeight: 900, margin: 0 }}>
               Subscription &amp; Monetization CMS
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-600 border border-amber-200/60 dark:bg-amber-950 dark:text-amber-400 dark:border-amber-800">
+            <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '11.5px', fontWeight: 800, background: 'rgba(254, 220, 0, 0.18)', color: '#FEDC00', border: '1px solid rgba(254, 220, 0, 0.35)' }}>
               Live Pricing
             </span>
           </div>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          <p style={{ margin: '4px 0 0', fontSize: '13.5px', color: 'rgba(255, 255, 255, 0.8)' }}>
             Configure tiered subscription plans, discounts, contact limits, and premium perks for buyers, owners, tenants, and sellers.
           </p>
         </div>
@@ -103,22 +117,34 @@ export default function AdminPlansPage() {
         <Link
           href={currentTabObj.targetUrl}
           target="_blank"
-          className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition-all self-start sm:self-auto"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '9px 16px',
+            fontSize: '13px',
+            fontWeight: 750,
+            color: '#FFFFFF',
+            background: 'rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '10px',
+            textDecoration: 'none',
+          }}
         >
-          <ExternalLink className="w-3.5 h-3.5 text-slate-500" /> Preview {currentTabObj.label} Frontend
+          <ExternalLink style={{ width: '14px', height: '14px', color: '#FEDC00' }} /> Preview {currentTabObj.label} Frontend
         </Link>
       </div>
 
       {/* SAVED TOAST ALERT */}
       {savedNotice && (
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-sm font-bold shadow-sm animate-in fade-in slide-in-from-top-2 duration-300">
-          <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '14px 18px', borderRadius: '12px', background: '#ECFDF5', border: '1px solid #A7F3D0', color: '#065F46', fontSize: '13.5px', fontWeight: 800 }}>
+          <CheckCircle2 style={{ width: '18px', height: '18px', color: '#059669', flexShrink: 0 }} />
           <span>{savedNotice}</span>
         </div>
       )}
 
       {/* CATEGORY SWITCHER TABS */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-slate-100/80 dark:bg-slate-800/60 p-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-800">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', background: '#FFFFFF', padding: '6px', borderRadius: '14px', border: '1.5px solid #E2E8F0' }}>
         {tabsInfo.map((tab) => {
           const isActive = activeTab === tab.id;
           const Icon = tab.icon;
@@ -127,13 +153,23 @@ export default function AdminPlansPage() {
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-black transition-all ${
-                isActive
-                  ? 'bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm border border-slate-200/80 dark:border-slate-700'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                padding: '10px 14px',
+                borderRadius: '10px',
+                border: isActive ? '1px solid #C4B5FD' : 'none',
+                background: isActive ? '#522AB0' : 'transparent',
+                color: isActive ? '#FFFFFF' : '#475569',
+                fontSize: '13px',
+                fontWeight: 800,
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
             >
-              <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400'}`} />
+              <Icon style={{ width: '15px', height: '15px', color: isActive ? '#FEDC00' : '#64748B' }} />
               <span>{tab.label}</span>
             </button>
           );
@@ -141,8 +177,8 @@ export default function AdminPlansPage() {
       </div>
 
       {/* PLANS FORM GRID */}
-      <form onSubmit={handleSaveChanges} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <form onSubmit={handleSaveChanges} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '18px' }}>
           {plans[activeTab].map((plan, idx) => {
             const numPrice = parseInt(plan.price.replace(/,/g, ''), 10) || 0;
             const numStrike = parseInt((plan.strikePrice || '').replace(/,/g, ''), 10) || 0;
@@ -151,49 +187,59 @@ export default function AdminPlansPage() {
             return (
               <div
                 key={plan.id}
-                className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative group"
+                style={{
+                  background: '#FFFFFF',
+                  border: '1.5px solid #E2E8F0',
+                  borderRadius: '16px',
+                  padding: '20px',
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  gap: '14px',
+                }}
               >
                 {/* Plan Header */}
                 <div>
-                  <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
-                    <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '10px', borderBottom: '1px solid #F1F5F9' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: '#522AB0', letterSpacing: '0.05em' }}>
                       Tier #{idx + 1}
                     </span>
                     {discountPercent && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-black bg-emerald-50 text-emerald-700 border border-emerald-200/60 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800">
-                        <Zap className="w-3 h-3 text-emerald-600" /> {discountPercent}% OFF
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: 800, background: '#ECFDF5', color: '#059669', border: '1px solid #A7F3D0' }}>
+                        <Zap style={{ width: '11px', height: '11px' }} /> {discountPercent}% OFF
                       </span>
                     )}
                   </div>
 
                   {/* Plan Name Field */}
-                  <div className="mt-3.5 space-y-1">
-                    <label className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                  <div style={{ marginTop: '12px' }}>
+                    <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 700, color: '#64748B', marginBottom: '4px' }}>
                       Plan Name
                     </label>
                     <input
                       type="text"
                       value={plan.name}
                       onChange={(e) => handlePlanChange(activeTab, idx, 'name', e.target.value)}
-                      className="w-full px-3 py-2 text-sm font-bold bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"
+                      style={{ width: '100%', padding: '8px 12px', fontSize: '13px', fontWeight: 800, borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none' }}
                     />
                   </div>
 
                   {/* Pricing Dual Fields */}
-                  <div className="grid grid-cols-2 gap-3 mt-3">
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '10px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 700, color: '#64748B', marginBottom: '4px' }}>
                         Price (₹)
                       </label>
                       <input
                         type="text"
                         value={plan.price}
                         onChange={(e) => handlePlanChange(activeTab, idx, 'price', e.target.value)}
-                        className="w-full px-3 py-2 text-sm font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/80 dark:border-emerald-800/60 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                        style={{ width: '100%', padding: '8px 12px', fontSize: '13.5px', fontWeight: 900, color: '#059669', borderRadius: '8px', border: '1px solid #A7F3D0', background: '#ECFDF5', outline: 'none' }}
                       />
                     </div>
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                    <div>
+                      <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 700, color: '#64748B', marginBottom: '4px' }}>
                         Strike Price (₹)
                       </label>
                       <input
@@ -201,92 +247,92 @@ export default function AdminPlansPage() {
                         placeholder="e.g. 4,499"
                         value={plan.strikePrice || ''}
                         onChange={(e) => handlePlanChange(activeTab, idx, 'strikePrice', e.target.value)}
-                        className="w-full px-3 py-2 text-sm text-slate-500 line-through bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                        style={{ width: '100%', padding: '8px 12px', fontSize: '13px', textDecoration: 'line-through', color: '#64748B', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none' }}
                       />
                     </div>
                   </div>
 
                   {/* Tagline */}
-                  <div className="mt-3 space-y-1">
-                    <label className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                  <div style={{ marginTop: '10px' }}>
+                    <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 700, color: '#64748B', marginBottom: '4px' }}>
                       Marketing Tagline
                     </label>
                     <textarea
                       rows={2}
                       value={plan.tagline}
                       onChange={(e) => handlePlanChange(activeTab, idx, 'tagline', e.target.value)}
-                      className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl text-slate-700 dark:text-slate-300 outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all resize-none"
+                      style={{ width: '100%', padding: '8px 10px', fontSize: '12px', borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none', resize: 'vertical' }}
                     />
                   </div>
 
                   {/* Contacts & Validity */}
-                  <div className="grid grid-cols-2 gap-3 mt-3">
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '10px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 700, color: '#64748B', marginBottom: '4px' }}>
                         Contacts Quota
                       </label>
                       <input
                         type="text"
                         value={plan.contacts}
                         onChange={(e) => handlePlanChange(activeTab, idx, 'contacts', e.target.value)}
-                        className="w-full px-3 py-2 text-xs font-bold bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl text-slate-900 dark:text-white outline-none"
+                        style={{ width: '100%', padding: '8px 10px', fontSize: '12px', fontWeight: 700, borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none' }}
                       />
                     </div>
-                    <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                    <div>
+                      <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 700, color: '#64748B', marginBottom: '4px' }}>
                         Validity Period
                       </label>
                       <input
                         type="text"
                         value={plan.validity || '30 Days'}
                         onChange={(e) => handlePlanChange(activeTab, idx, 'validity', e.target.value)}
-                        className="w-full px-3 py-2 text-xs font-bold bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-xl text-slate-900 dark:text-white outline-none"
+                        style={{ width: '100%', padding: '8px 10px', fontSize: '12px', fontWeight: 700, borderRadius: '8px', border: '1px solid #CBD5E1', outline: 'none' }}
                       />
                     </div>
                   </div>
 
                   {/* Feature Switches */}
-                  <div className="mt-4 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/50 space-y-2.5">
-                    <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  <div style={{ marginTop: '12px', padding: '12px', borderRadius: '10px', background: '#FAF8FE', border: '1px solid #EBE6F7', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ fontSize: '10.5px', fontWeight: 800, textTransform: 'uppercase', color: '#64748B' }}>
                       Included Perks
                     </div>
 
-                    <label className="flex items-center justify-between gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer select-none">
+                    <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12.5px', fontWeight: 700, color: '#334155', cursor: 'pointer' }}>
                       <span>Legal Consultation Support</span>
                       <input
                         type="checkbox"
                         checked={plan.legalSupport}
                         onChange={(e) => handlePlanChange(activeTab, idx, 'legalSupport', e.target.checked)}
-                        className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 rounded border-slate-300"
+                        style={{ width: '16px', height: '16px', cursor: 'pointer' }}
                       />
                     </label>
 
-                    <label className="flex items-center justify-between gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer select-none">
+                    <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12.5px', fontWeight: 700, color: '#334155', cursor: 'pointer' }}>
                       <span>Dedicated RM Manager</span>
                       <input
                         type="checkbox"
                         checked={plan.relationshipManager}
                         onChange={(e) => handlePlanChange(activeTab, idx, 'relationshipManager', e.target.checked)}
-                        className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 rounded border-slate-300"
+                        style={{ width: '16px', height: '16px', cursor: 'pointer' }}
                       />
                     </label>
 
-                    <label className="flex items-center justify-between gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer select-none">
+                    <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12.5px', fontWeight: 700, color: '#334155', cursor: 'pointer' }}>
                       <span>100% Money-Back Guarantee</span>
                       <input
                         type="checkbox"
                         checked={plan.moneybackGuarantee}
                         onChange={(e) => handlePlanChange(activeTab, idx, 'moneybackGuarantee', e.target.checked)}
-                        className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 rounded border-slate-300"
+                        style={{ width: '16px', height: '16px', cursor: 'pointer' }}
                       />
                     </label>
                   </div>
                 </div>
 
                 {/* Plan footer preview summary */}
-                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
-                  <span>Frontend Tag:</span>
-                  <span className="font-bold text-slate-800 dark:text-slate-200 font-mono">
+                <div style={{ paddingTop: '10px', borderTop: '1px solid #F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12px', color: '#64748B' }}>
+                  <span>Preview Tag:</span>
+                  <span style={{ fontWeight: 800, color: '#0F172A', fontFamily: 'monospace' }}>
                     ₹{plan.price} / {plan.validity || '30 Days'}
                   </span>
                 </div>
@@ -296,15 +342,28 @@ export default function AdminPlansPage() {
         </div>
 
         {/* Action Button */}
-        <div className="flex items-center justify-between bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
-          <div className="text-xs text-slate-500 dark:text-slate-400">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#FFFFFF', padding: '18px 24px', borderRadius: '16px', border: '1.5px solid #E2E8F0', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+          <div style={{ fontSize: '13px', color: '#64748B' }}>
             Changes saved here update the customer purchase tiers immediately across all frontend plan pages.
           </div>
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-black text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 rounded-xl shadow-md shadow-indigo-500/25 active:scale-[0.99] transition-all cursor-pointer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '12px 26px',
+              borderRadius: '10px',
+              background: 'linear-gradient(135deg, #522AB0 0%, #41208C 100%)',
+              color: '#FFFFFF',
+              fontSize: '14px',
+              fontWeight: 850,
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '0 4px 14px rgba(82, 42, 176, 0.3)',
+            }}
           >
-            <Save className="w-4 h-4" /> Save {activeTab.toUpperCase()} Changes
+            <Save style={{ width: '15px', height: '15px' }} /> Save {activeTab.toUpperCase()} Changes
           </button>
         </div>
       </form>
